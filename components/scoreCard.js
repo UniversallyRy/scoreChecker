@@ -4,13 +4,13 @@ import { Button, StyleSheet, Text, View, Dimensions } from 'react-native'
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const NBA = require("nba");
-const curry = NBA.findPlayer('Stephen Curry');
+const testing = NBA.teamStats();
 
 const ScoreCard = () => {
     return (
         <View style={styles.container}>
             <Text>Scorecard test</Text>
-            <Button style={styles.button} title='click' onClick={() => console.log(curry)}/>
+            <Button style={styles.button} title='click' onClick={() => console.log(testing)}/>
         </View> 
     )
 }
