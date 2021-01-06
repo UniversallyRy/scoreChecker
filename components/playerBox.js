@@ -9,14 +9,13 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 // NBA.stats.playerInfo({ PlayerID: curry.playerId }).then(console.log);
 
 
-const ScoreCard = () => {
+const PlayerBox = () => {
     const NBA = require("nba");
     const playerListing = {}
     const pickPlayer = (item) => {
-        
         console.log(item.player)
         const newPlayer = NBA.findPlayer(item.player);
-        NBA.stats.playerInfo({ PlayerID: newPlayer.playerId }).then(console.log(playerHeadlineStats));
+        NBA.stats.playerInfo({ PlayerID: newPlayer.playerId }).then(console.log);
         console.log(newPlayer);
     }
     
@@ -42,8 +41,6 @@ const ScoreCard = () => {
     )
 }
 
-export default ScoreCard
-
 const styles = StyleSheet.create({
     container : {
         width: windowWidth,
@@ -68,3 +65,5 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     }
 })
+
+export default PlayerBox;

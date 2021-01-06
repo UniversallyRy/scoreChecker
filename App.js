@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import ScoreCard from './components/scoreCard';
+import PlayerBox from './components/playerBox';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <ScoreCard/>
+      <PlayerBox/>
       <StatusBar style="auto" />
     </View>
   );
