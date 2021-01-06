@@ -1,17 +1,39 @@
-import React from 'react'
-import { Button, StyleSheet, Text, View, Dimensions } from 'react-native'
+import React from 'react';
+import { Button, StyleSheet, Text, TextInput, View, Dimensions, SafeAreaView } from 'react-native';
+import { Formik } from 'formik';
+
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const NBA = require("nba");
-const testing = NBA.teamStats();
+// NBA.stats.playerInfo({ PlayerID: curry.playerId }).then(console.log);
+
 
 const ScoreCard = () => {
+    const NBA = require("nba");
+
+    const pickPlayer = ( {item} ) => {
+        const newItem = NBA.findPlayer(item.toString());
+        console.log(newItem);
+    }
+    
     return (
-        <View style={styles.container}>
-            <Text>Scorecard test</Text>
-            <Button style={styles.button} title='click' onClick={() => console.log(testing)}/>
-        </View> 
+        <Formik
+            initialValues={{ player:  '' }}
+            onSubmit={values => pickPlayer(values)}
+        >
+            {({ handleChange, handleBlur, handleSubmit, values }) => (
+            <SafeAreaView style={{justifyContent: 'center', alignContent: 'center'}}>
+                <Text style={styles.title}>Find Player Stat's</Text>
+                <TextInput
+                onChangeText={handleChange('player')}
+                onBlur={handleBlur('player')}
+                value={values.player}
+                style={styles.textForm}
+                />
+                <Button style={styles.button} onPress={handleSubmit} title="Submit" />
+            </SafeAreaView>
+            )}
+        </Formik> 
     )
 }
 
@@ -28,7 +50,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     button: {
-        width: 100,
+        width: 250,
         height: 100,
+    },
+    textForm: {
+        margin: 40,
+        width: 250,
+        borderColor: 'black',
+        borderWidth: 0.3,
+    },
+    title: {
+        alignSelf: 'center',
+        fontSize: 30,
+        marginBottom: 10,
     }
 })
