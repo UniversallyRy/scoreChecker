@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, StyleSheet, Text, TextInput, View, Dimensions, SafeAreaView } from 'react-native';
 import { Formik } from 'formik';
+import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -10,15 +11,18 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const ScoreCard = () => {
     const NBA = require("nba");
-
-    const pickPlayer = ( {item} ) => {
-        const newItem = NBA.findPlayer(item.toString());
-        console.log(newItem);
+    const playerListing = {}
+    const pickPlayer = (item) => {
+        
+        console.log(item.player)
+        const newPlayer = NBA.findPlayer(item.player);
+        NBA.stats.playerInfo({ PlayerID: newPlayer.playerId }).then(console.log(playerHeadlineStats));
+        console.log(newPlayer);
     }
     
     return (
         <Formik
-            initialValues={{ player:  '' }}
+            initialValues={{player: ''}}
             onSubmit={values => pickPlayer(values)}
         >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -30,14 +34,13 @@ const ScoreCard = () => {
                 value={values.player}
                 style={styles.textForm}
                 />
+                <Text>{}</Text>
                 <Button style={styles.button} onPress={handleSubmit} title="Submit" />
             </SafeAreaView>
             )}
         </Formik> 
     )
 }
-
-// NBA.stats.playerInfo({ PlayerID: curry.playerId }).then(console.log);
 
 export default ScoreCard
 
