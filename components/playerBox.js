@@ -11,43 +11,61 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const PlayerBox = () => {
     const NBA = require("nba");
-    const playerListing = {}
+    const playerListing = {};
+
     const pickPlayer = (item) => {
-        console.log(item.player);
         var regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
-        const newPlayer = NBA.findPlayer(item.player);
-        if(!regName.test(item.player)) {
+        const newPlayer = NBA.findPlayer(item.player.trim());
+        if(!regName.test(item.player.trim())) {
             alert('Please enter the full name of the player.');
             return false;
         }else {
             if (newPlayer !== undefined) {
-            NBA.stats.playerInfo({ PlayerID: newPlayer.playerId }).then(console.log);
+            NBA.stats.playerInfo({ PlayerID: newPlayer.playerId }).then(res => Object.assign(playerListing, res) );
             }else{
                 alert('Player not found, Try again.')
             }
         }
-        console.log(newPlayer);
+        console.log(playerListing);
+
+        
     }
     
+
+    function search(nameKey, myArray){
+        for (var i=0; i < myArray.length; i++) {
+            if (myArray[i].name === nameKey) {
+                return myArray[i];
+            }
+        }
+    }
+
+    var resultObject = search('playerHeadlineStats', playerListing);
+    var secondObject = search('playerId', playerListing);
+
+    console.log('PLayerIDIDID', resultObject)
+
     return (
-        <Formik
-            initialValues={{player: ''}}
-            onSubmit={values => pickPlayer(values)}
-        >
-            {({ handleChange, handleBlur, handleSubmit, values }) => (
-            <SafeAreaView style={{justifyContent: 'center', alignContent: 'center'}}>
-                <Text style={styles.title}>Find Player Stat's</Text>
-                <TextInput
-                onChangeText={handleChange('player')}
-                onBlur={handleBlur('player')}
-                value={values.player}
-                style={styles.textForm}
-                />
-                <Text>{}</Text>
-                <Button style={styles.button} onPress={handleSubmit} title="Submit" />
-            </SafeAreaView>
-            )}
-        </Formik> 
+        <>
+            <Formik
+                initialValues={{player: ''}}
+                onSubmit={values => pickPlayer(values)}
+            >
+                {({ handleChange, handleBlur, handleSubmit, values }) => (
+                <SafeAreaView style={{justifyContent: 'center', alignContent: 'center'}}>
+                    <Text style={styles.title}>Find Player Stat's</Text>
+                    <TextInput
+                    onChangeText={handleChange('player')}
+                    onBlur={handleBlur('player')}
+                    value={values.player}
+                    style={styles.textForm}
+                    />
+                    <Button style={styles.button} onPress={handleSubmit} title="Submit" />
+                </SafeAreaView>
+                )}
+            </Formik> 
+            <Text>{(playerListing == -1) ? resultObject : 'Default Text'}</Text>
+        </>
     )
 }
 
