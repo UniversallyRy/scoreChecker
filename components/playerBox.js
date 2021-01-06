@@ -13,9 +13,19 @@ const PlayerBox = () => {
     const NBA = require("nba");
     const playerListing = {}
     const pickPlayer = (item) => {
-        console.log(item.player)
+        console.log(item.player);
+        var regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
         const newPlayer = NBA.findPlayer(item.player);
-        NBA.stats.playerInfo({ PlayerID: newPlayer.playerId }).then(console.log);
+        if(!regName.test(item.player)) {
+            alert('Please enter the full name of the player.');
+            return false;
+        }else {
+            if (newPlayer !== undefined) {
+            NBA.stats.playerInfo({ PlayerID: newPlayer.playerId }).then(console.log);
+            }else{
+                alert('Player not found, Try again.')
+            }
+        }
         console.log(newPlayer);
     }
     
