@@ -1,55 +1,93 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View, Dimensions, SafeAreaView } from 'react-native';
 import { Formik } from 'formik';
-import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
-
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
-
+const initialState = {
+        "ast": 0,
+        "pie": 0,
+        "playerId": 0,
+        "playerName": "",
+        "pts": 0,
+        "reb": 0,
+        "timeFrame": "",
+  }
 // NBA.stats.playerInfo({ PlayerID: curry.playerId }).then(console.log);
 
+// maybe filter through object array
 
 const PlayerBox = () => {
+    const [playerObj, setPlayerObj] = useState(initialState)
     const NBA = require("nba");
     const playerListing = {};
 
     const pickPlayer = (item) => {
-        var regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+        const regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
         const newPlayer = NBA.findPlayer(item.player.trim());
+        
         if(!regName.test(item.player.trim())) {
             alert('Please enter the full name of the player.');
             return false;
         }else {
-            if (newPlayer !== undefined) {
+            if (newPlayer != undefined) {
             NBA.stats.playerInfo({ PlayerID: newPlayer.playerId }).then(res => Object.assign(playerListing, res) );
             }else{
                 alert('Player not found, Try again.')
             }
         }
         console.log(playerListing);
-
-        
+        const searchedArr = searchArr('playerHeadlineStats', playerListing)
+        setPlayerObj(searchedArr[0]);
+        console.log('Resulted Array-- ', searchedArr)
+        console.log('Player Object', playerObj);    
     }
-    
 
-    function search(nameKey, myArray){
+    useEffect(() => { 
+        if(playerObj.ast > 0){
+            setTimeout(setPlayerObj(playerObj), 200);
+        }
+        clearTimeout();
+    }, []);
+    
+    function searchArr(nameKey, myObj){
+        return myObj.[nameKey];
+    }
+
+    function searchA(nameKey, myArray){
         for (var i=0; i < myArray.length; i++) {
-            if (myArray[i].name === nameKey) {
-                return myArray[i];
+            if (myArray[i].nameKey === nameKey) {
+                return myArray[i].nameKey;
             }
         }
     }
 
-    var resultObject = search('playerHeadlineStats', playerListing);
-    var secondObject = search('playerId', playerListing);
+    const PlayBoxStats = () => {
+        return (
+            <>
+                <Text>Player: {playerObj.playerName}</Text>
+                <Text>Season: {playerObj.timeFrame}</Text>
+                <Text>Points: {playerObj.pts}</Text>
+                <Text>Rebounds: {playerObj.reb}</Text>
+                <Text>Assists: {playerObj.ast}</Text>
+            </>
+        )
+    }
 
-    console.log('PLayerIDIDID', resultObject)
+    const handleReset = () => {
+        setPlayerObj(initialState);
+    }
 
     return (
         <>
             <Formik
                 initialValues={{player: ''}}
-                onSubmit={values => pickPlayer(values)}
+                onSubmit={(values, actions) => { 
+                    setTimeout(() => {
+                        pickPlayer(values);
+                        actions.resetForm();
+                    }, 100)
+                    }
+                }
             >
                 {({ handleChange, handleBlur, handleSubmit, values }) => (
                 <SafeAreaView style={{justifyContent: 'center', alignContent: 'center'}}>
@@ -60,14 +98,19 @@ const PlayerBox = () => {
                     value={values.player}
                     style={styles.textForm}
                     />
-                    <Button style={styles.button} onPress={handleSubmit} title="Submit" />
+                    <View style={styles.allButtons}>
+                        <Button style={styles.button} onPress={handleSubmit} title="Submit" />
+                        <Button style={styles.button} onPress={handleReset} title="Reset" />
+                    </View>  
                 </SafeAreaView>
                 )}
             </Formik> 
-            <Text>{(playerListing == -1) ? resultObject : 'Default Text'}</Text>
+            {playerListing != {} && <PlayBoxStats/>
+            }
         </>
     )
 }
+
 
 const styles = StyleSheet.create({
     container : {
@@ -77,9 +120,14 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'center',
     },
+    allButtons: {
+        margin: 10,
+    },
     button: {
         width: 250,
         height: 100,
+        marginTop: 10,
+        marginBottom: 10,
     },
     textForm: {
         margin: 40,
