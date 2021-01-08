@@ -12,9 +12,6 @@ const initialState = {
         "reb": 0,
         "timeFrame": "",
   }
-// NBA.stats.playerInfo({ PlayerID: curry.playerId }).then(console.log);
-
-// maybe filter through object array
 
 const PlayerBox = () => {
     const [playerObj, setPlayerObj] = useState(initialState)
@@ -30,24 +27,23 @@ const PlayerBox = () => {
             return false;
         }else {
             if (newPlayer != undefined) {
-            NBA.stats.playerInfo({ PlayerID: newPlayer.playerId }).then(res => Object.assign(playerListing, res) );
+                    NBA.stats.playerInfo({ PlayerID: newPlayer.playerId }).then((res) => Object.assign(playerListing, res) );
+                    const searchedArr = searchArr('playerHeadlineStats', playerListing)
+                    setPlayerObj(searchedArr[0]);
+            
             }else{
                 alert('Player not found, Try again.')
             }
-        }
         console.log(playerListing);
-        const searchedArr = searchArr('playerHeadlineStats', playerListing)
-        setPlayerObj(searchedArr[0]);
-        console.log('Resulted Array-- ', searchedArr)
-        console.log('Player Object', playerObj);    
+        }
     }
 
-    useEffect(() => { 
-        if(playerObj.ast > 0){
-            setTimeout(setPlayerObj(playerObj), 200);
+    useEffect(() => {
+        async function getData() {
+            (playerListing == {}) ? await pickPlayer() : null
         }
-        clearTimeout();
-    }, []);
+        getData()
+      }, []);
     
     function searchArr(nameKey, myObj){
         return myObj.[nameKey];
@@ -105,12 +101,11 @@ const PlayerBox = () => {
                 </SafeAreaView>
                 )}
             </Formik> 
-            {playerListing != {} && <PlayBoxStats/>
+            {playerObj.playerName != "" && <PlayBoxStats/>
             }
         </>
     )
 }
-
 
 const styles = StyleSheet.create({
     container : {
@@ -140,6 +135,6 @@ const styles = StyleSheet.create({
         fontSize: 30,
         marginBottom: 10,
     }
-})
+});
 
 export default PlayerBox;
