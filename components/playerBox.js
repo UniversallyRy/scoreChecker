@@ -2,6 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View, Dimensions, SafeAreaView } from 'react-native';
 import { Formik } from 'formik';
 
+
+// other components seperate into fully functional components/stateless
+// look into promises further  
+// callbacks needed
+
+
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const initialState = {
         "ast": 0,
@@ -14,36 +20,36 @@ const initialState = {
   }
 
 const PlayerBox = () => {
-    const [playerObj, setPlayerObj] = useState(initialState)
     const NBA = require("nba");
-    const playerListing = {};
+    let playerPromisedInfo = undefined;
+    const [playerObj, setPlayerObj] = useState(initialState)
 
     const pickPlayer = (item) => {
         const regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
         const newPlayer = NBA.findPlayer(item.player.trim());
+        const playerListing = [];
         
         if(!regName.test(item.player.trim())) {
             alert('Please enter the full name of the player.');
             return false;
         }else {
             if (newPlayer != undefined) {
-                    NBA.stats.playerInfo({ PlayerID: newPlayer.playerId }).then((res) => Object.assign(playerListing, res) );
-                    const searchedArr = searchArr('playerHeadlineStats', playerListing)
-                    setPlayerObj(searchedArr[0]);
-            
+                    return NBA.stats.playerInfo({ PlayerID: newPlayer.playerId }).then((res) => [...playerListing, res]) 
+                    .then((res) => searchArr('playerHeadlineStats', res))
+                    .then((res) => playerPromisedInfo = res)
             }else{
                 alert('Player not found, Try again.')
             }
-        console.log(playerListing);
         }
     }
 
     useEffect(() => {
-        async function getData() {
-            (playerListing == {}) ? await pickPlayer() : null
+        async function getData() { 
+            if (playerPromisedInfo == undefined) return;
+            await pickPlayer.then(res => setPlayerObj(res[0]))
         }
         getData()
-      }, []);
+      }, [playerPromisedInfo, pickPlayer]);
     
     function searchArr(nameKey, myObj){
         return myObj.[nameKey];
@@ -78,10 +84,8 @@ const PlayerBox = () => {
             <Formik
                 initialValues={{player: ''}}
                 onSubmit={(values, actions) => { 
-                    setTimeout(() => {
                         pickPlayer(values);
                         actions.resetForm();
-                    }, 100)
                     }
                 }
             >
