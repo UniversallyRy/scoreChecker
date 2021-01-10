@@ -6,6 +6,7 @@ import { Formik } from 'formik';
 // other components seperate into fully functional components/stateless
 // look into promises further  
 // callbacks needed
+// context api
 
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -24,7 +25,7 @@ const PlayerBox = () => {
     let playerPromisedInfo = undefined;
     const [playerObj, setPlayerObj] = useState(initialState)
 
-    const pickPlayer = (item) => {
+    const pickPlayer = (item, func) => {
         const regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
         const newPlayer = NBA.findPlayer(item.player.trim());
         const playerListing = [];
