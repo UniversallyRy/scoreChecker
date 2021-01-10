@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View, Dimensions, SafeAreaView } from 'react-native';
 import { Formik } from 'formik';
+import RButton from './buttons';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Input } from 'react-native-elements';
 
 
 // other components seperate into fully functional components/stateless
@@ -93,15 +96,22 @@ const PlayerBox = () => {
                 {({ handleChange, handleBlur, handleSubmit, values }) => (
                 <SafeAreaView style={{justifyContent: 'center', alignContent: 'center'}}>
                     <Text style={styles.title}>Find Player Stat's</Text>
-                    <TextInput
-                    onChangeText={handleChange('player')}
-                    onBlur={handleBlur('player')}
-                    value={values.player}
-                    style={styles.textForm}
+                    <Input
+                        onChangeText={handleChange('player')}
+                        onBlur={handleBlur('player')}
+                        value={values.player}
+                        leftIcon={
+                            <Icon
+                            name='user'
+                            size={24}
+                            color='black'
+                            />
+                        }
+                        style={styles.textForm}
                     />
                     <View style={styles.allButtons}>
-                        <Button style={styles.button} onPress={handleSubmit} title="Submit" />
-                        <Button style={styles.button} onPress={handleReset} title="Reset" />
+                        <RButton onPress={handleSubmit} title="Submit"></RButton>
+                        <RButton onPress={handleReset} title="Reset" />
                     </View>  
                 </SafeAreaView>
                 )}
@@ -121,19 +131,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     allButtons: {
-        margin: 10,
-    },
-    button: {
-        width: 250,
-        height: 100,
-        marginTop: 10,
-        marginBottom: 10,
+        alignContent: 'center',
     },
     textForm: {
-        margin: 40,
-        width: 250,
-        borderColor: 'black',
-        borderWidth: 0.3,
+        paddingHorizontal: 100,
+        margin: 10,
+        height: 50,
     },
     title: {
         alignSelf: 'center',
