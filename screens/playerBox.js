@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View, Dimensions, SafeAreaView } from 'react-native';
 import { Formik } from 'formik';
-import RButton from './buttons';
+import RButton from '../components/buttons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
 
@@ -28,7 +28,7 @@ const PlayerBox = () => {
     let playerPromisedInfo = undefined;
     const [playerObj, setPlayerObj] = useState(initialState)
 
-    const pickPlayer = (item, func) => {
+    const handleInput = (item, func) => {
         const regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
         const newPlayer = NBA.findPlayer(item.player.trim());
         const playerListing = [];
@@ -50,10 +50,10 @@ const PlayerBox = () => {
     useEffect(() => {
         async function getData() { 
             if (playerPromisedInfo == undefined) return;
-            await pickPlayer.then(res => setPlayerObj(res[0]))
+            await handleInput.then(res => setPlayerObj(res[0]))
         }
         getData()
-      }, [playerPromisedInfo, pickPlayer]);
+      }, [playerPromisedInfo, handleInput]);
     
     function searchArr(nameKey, myObj){
         return myObj.[nameKey];
@@ -88,7 +88,7 @@ const PlayerBox = () => {
             <Formik
                 initialValues={{player: ''}}
                 onSubmit={(values, actions) => { 
-                        pickPlayer(values);
+                        handleInput(values);
                         actions.resetForm();
                     }
                 }

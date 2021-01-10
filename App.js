@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon } from 'react-native-elements';
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import PlayerBox from './components/playerBox';
+import PlayerBox from './screens/playerBox';
 import Home from './screens/home';
 
 const Stack = createStackNavigator();
@@ -22,7 +22,7 @@ const MyTabs = () => (
 
 const AuthStack = () => (
   <Stack.Navigator>
-      <Stack.Screen name="Tabs" component={MyTabs} />
+      <Stack.Screen name="NBA Updates" component={MyTabs} />
     </Stack.Navigator>
 );
 
