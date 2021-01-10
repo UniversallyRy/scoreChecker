@@ -1,16 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Icon } from 'react-native-elements';
+import 'react-native-gesture-handler';
+import { StatusBar } from 'expo-status-bar';
 import PlayerBox from './components/playerBox';
+import Home from './screens/home';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <PlayerBox/>
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+
+const MyTabs = () => (
+  <Tab.Navigator> 
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="PlayerBox" component={PlayerBox} />
+    </Tab.Navigator>
+);
+
+const AuthStack = () => (
+  <Stack.Navigator>
+      <Stack.Screen name="Tabs" component={MyTabs} />
+    </Stack.Navigator>
+);
+
+const App = () => (
+    <NavigationContainer style={styles.container}>
       <StatusBar style="auto" />
-    </View>
-  );
-}
+      <AuthStack/>
+    </NavigationContainer>
+);
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
