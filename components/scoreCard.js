@@ -1,38 +1,33 @@
-import React from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View, Dimensions } from 'react-native'
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
 import { Card, ListItem, Icon } from 'react-native-elements';
-import ScoreCard from '../components/scoreCard';
-import Button from '../components/buttons';
+import Button from '../components/buttons'
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
-const NBA = require("nba");
-
-const initialState = [
-  {
-    "ast": 0,
-    "pie": 0,
-    "playerId": 0,
-    "playerName": "",
-    "pts": 0,
-    "reb": 0,
-    "timeFrame": "",
-  },
-];
 
 
-const Home = () => (
+const Home = ({item}) => (
   <>
-      <Card containerStyle={styles.titleContainer}> 
-        <Card.Title>Today's Scores</Card.Title>
+      <Card style={styles.scoreContainer} >
+        <Card.Title>CARD WITH DIVIDER</Card.Title>
         <Card.Divider style={styles.divider} />
-          <Text style={{alignSelf:'center', marginBottom: 10}}>
-            Scores From :Input Date
-          </Text>
+        {
+          item.map((u, i) => {
+            return (
+              <View key={i} style={styles.user}>
+                {/* <Image
+                  style={styles.image}
+                  resizeMode="cover"
+                  source={{ uri: u.avatar }}
+                /> */}
+                <Text style={styles.name}>{u.ast}</Text>
+              </View>
+            );
+          })
+        }
       </Card>
-
-      <ScoreCard item={initialState}/>
   </>      
   );
 

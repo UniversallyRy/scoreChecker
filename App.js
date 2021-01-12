@@ -6,8 +6,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon } from 'react-native-elements';
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import PlayerBox from './screens/playerBox';
 import Home from './screens/home';
+import PlayerBox from './screens/playerBox';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
