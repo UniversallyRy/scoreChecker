@@ -7,7 +7,7 @@ import Button from '../components/buttons'
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-
+// Caution: WebP only images currently, todo: png/jpeg backups
 const Home = ({item}) => (
   <>
       <Card style={styles.scoreContainer} >
@@ -22,7 +22,7 @@ const Home = ({item}) => (
                   resizeMode="cover"
                   source={{ uri: u.avatar }}
                 /> */}
-                <Text style={styles.name}>{u.ast}</Text>
+                <Text style={styles.name}>{u.gamecode}</Text>
               </View>
             );
           })

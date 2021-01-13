@@ -15,23 +15,25 @@ const NBA = require("nba");
 //Initial object to use before the nba api's async is fulfilled
 const initialState = [
   {
-    "ast": 0,
-    "pie": 0,
-    "playerId": 0,
-    "playerName": "",
-    "pts": 0,
-    "reb": 0,
-    "timeFrame": "",
+    "gamecode": "",
+    "gameStatusText": "",
+    "livePeriodTimeBcast": "",
   },
 ];
 
-// Promise from nba api to retrieve nested objects/arrays and get specific stats needed
-const todaysGames = NBA.stats.scoreboard({gameDate: "01/12/2021"}).then(res => console.log(res.gameHeader));
+
+// to look inside gameheader for every object's team: 'gamecode'
+// to look inside gameheader for every games start time: 'gameStatusText'
+// to look inside gameheader for live periods: 'livePeriodTimeBcast'
+//                ^ conditional needed for empties
+// to look inside gameheader for every object's team: 'gamecode'
 
 
 const Home = () => {
   // useState hook for future changing of default initialState to nba api's data
-  const [state, setstate] = useState(initialState);
+  const [state, setState] = useState(initialState);
+  // Promise from nba api to retrieve nested objects/arrays and get specific stats needed
+  NBA.stats.scoreboard({gameDate: "01/12/2021"}).then(res => setState(res.gameHeader));
 
   return(
       <>
