@@ -5,6 +5,7 @@ import { Input } from 'react-native-elements';
 import { Card, ListItem, Icon } from 'react-native-elements';
 import ScoreCard from '../components/scoreCard';
 import Button from '../components/buttons';
+import { setIn } from 'formik';
 
 //consistent screen dimensions across multiple devices
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -33,18 +34,22 @@ const Home = () => {
   // useState hook for future changing of default initialState to nba api's data
   const [state, setState] = useState(initialState);
   const [newObj, setNewObj] = useState([]);
+  const [loading, setLoading] = useState(true);
   
   // Promise from nba api to retrieve nested objects/arrays and get specific stats needed
   NBA.stats.scoreboard({gameDate: "01/12/2021"}).then(res => setNewObj(res.gameHeader));
+
 
   useEffect(() => {
       async function initData() {
         await NBA.stats.scoreboard;
         setState(newObj);
+        setLoading(false);
       }
       initData();
 
   }, [])
+
 
   return(
       <>
@@ -56,7 +61,9 @@ const Home = () => {
             </Text>
         </Card>
         {/* scorecard list component showcasing Today's scores*/}
-        <ScoreCard item={state}/>
+        {loading ? <Text> Loading. . .</Text>
+                 : <ScoreCard item={state}/>
+        }
     </>   
   )   
 };
