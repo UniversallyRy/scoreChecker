@@ -8,6 +8,7 @@ import Button from '../components/buttons'
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 // Caution: WebP only images currently, todo: png/jpeg backups
+// logo 35 x 50
 const Home = ({item}) => (
   <>
       <Card style={styles.scoreContainer} >
@@ -16,14 +17,17 @@ const Home = ({item}) => (
         {
           item.map((u, i) => {
             return (
-              <View key={i} style={styles.user}>
+              <Card key={i} style={styles.user}>
                 {/* <Image
                   style={styles.image}
                   resizeMode="cover"
                   source={{ uri: u.avatar }}
                 /> */}
-                <Text style={styles.name}>{u.gamecode}</Text>
-              </View>
+                <Card.Title style={styles.name}>{u.gamecode}</Card.Title>
+                <Text style={styles.name}>{u.gameStatusText}</Text>
+                <Card.Divider style={styles.divider} />
+                <Text style={styles.name}>{u.livePeriodTimeBcast}</Text>
+              </Card>
             );
           })
         }

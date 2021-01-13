@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
@@ -15,7 +15,7 @@ const NBA = require("nba");
 //Initial object to use before the nba api's async is fulfilled
 const initialState = [
   {
-    "gamecode": "",
+    "gamecode": "Games Loading",
     "gameStatusText": "",
     "livePeriodTimeBcast": "",
   },
@@ -32,8 +32,19 @@ const initialState = [
 const Home = () => {
   // useState hook for future changing of default initialState to nba api's data
   const [state, setState] = useState(initialState);
+  const [newObj, setNewObj] = useState([]);
+  
   // Promise from nba api to retrieve nested objects/arrays and get specific stats needed
-  NBA.stats.scoreboard({gameDate: "01/12/2021"}).then(res => setState(res.gameHeader));
+  NBA.stats.scoreboard({gameDate: "01/12/2021"}).then(res => setNewObj(res.gameHeader));
+
+  useEffect(() => {
+      async function initData() {
+        await NBA.stats.scoreboard;
+        setState(newObj);
+      }
+      initData();
+
+  }, [])
 
   return(
       <>
