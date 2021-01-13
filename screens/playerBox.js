@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, {componentDidMount, useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View, Dimensions, SafeAreaView } from 'react-native';
 import { Formik } from 'formik';
 import RButton from '../components/buttons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
+import { DEFAULT_PLAYER_INFO } from '../constants';
+import nba from 'nba';
+import PlayerProfile from '../components/playerProfile'
 
 
 // other components seperate into fully functional components/stateless
@@ -14,23 +17,26 @@ import { Input } from 'react-native-elements';
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const initialState = {
-        "ast": 0,
-        "pie": 0,
-        "playerId": 0,
-        "playerName": "",
-        "pts": 0,
-        "reb": 0,
-        "timeFrame": "",
+        playerInfo: DEFAULT_PLAYER_INFO
   }
 
+  
+
 const PlayerBox = () => {
-    const NBA = require("nba");
     let playerPromisedInfo = undefined;
     const [playerObj, setPlayerObj] = useState(initialState)
 
+    const loadPlayerInfo = (playerName) => {
+        nba.stats.playerInfo({ PlayerID: nba.findPlayer(playerName).playerId }).then((info) => {
+            const playerInfo = Object.assign(info.commonPlayerInfo[0], info.playerHeadlineStats[0]);
+            console.log(playerInfo);
+            setPlayerObj({ playerInfo });
+        });
+    }
+
     const handleInput = (item, func) => {
         const regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
-        const newPlayer = NBA.findPlayer(item.player.trim());
+        const newPlayer = nba.findPlayer(item.player.trim());
         const playerListing = [];
         
         if(!regName.test(item.player.trim())) {
@@ -38,7 +44,7 @@ const PlayerBox = () => {
             return false;
         }else {
             if (newPlayer != undefined) {
-                    return NBA.stats.playerInfo({ PlayerID: newPlayer.playerId }).then((res) => [...playerListing, res]) 
+                    return nba.stats.playerInfo({ PlayerID: newPlayer.playerId }).then((res) => [...playerListing, res]) 
                     .then((res) => searchArr('playerHeadlineStats', res))
                     .then((res) => playerPromisedInfo = res)
             }else{
@@ -47,13 +53,15 @@ const PlayerBox = () => {
         }
     }
 
+    // loadPlayerInfo(playerObj.playerInfo.fullName);
     useEffect(() => {
-        async function getData() { 
-            if (playerPromisedInfo == undefined) return;
-            await handleInput.then(res => setPlayerObj(res[0]))
-        }
-        getData()
-      }, [playerPromisedInfo, handleInput]);
+        
+        loadPlayerInfo(playerObj.playerInfo.fullName);
+        // async function getData() { 
+            // if (playerPromisedInfo == undefined)
+            // await handleInput.then(res => setPlayerObj(res[0]))
+        // }
+      }, ['James Harden']);
     
     function searchArr(nameKey, myObj){
         return myObj.[nameKey];
@@ -70,7 +78,7 @@ const PlayerBox = () => {
     const PlayBoxStats = () => {
         return (
             <>
-                <Text>Player: {playerObj.playerName}</Text>
+                <Text>Player: {playerObj.fullName}</Text>
                 <Text>Season: {playerObj.timeFrame}</Text>
                 <Text>Points: {playerObj.pts}</Text>
                 <Text>Rebounds: {playerObj.reb}</Text>
@@ -116,8 +124,9 @@ const PlayerBox = () => {
                 </SafeAreaView>
                 )}
             </Formik> 
-            {playerObj.playerName != "" && <PlayBoxStats/>
-            }
+            {/* {playerObj.playerName != "" && <PlayBoxStats/>
+            } */}
+            <PlayerProfile playerInfo={playerObj.playerInfo}/>
         </>
     )
 }

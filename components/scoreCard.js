@@ -12,7 +12,7 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const Home = ({item}) => (
   <>
       <Card style={styles.scoreContainer} >
-        <Card.Title>CARD WITH DIVIDER</Card.Title>
+        <Card.Title>SCORECARD WITH DIVIDER</Card.Title>
         <Card.Divider style={styles.divider} />
         {
           item.map((u, i) => {

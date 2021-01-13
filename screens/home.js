@@ -6,12 +6,16 @@ import { Card, ListItem, Icon } from 'react-native-elements';
 import ScoreCard from '../components/scoreCard';
 import Button from '../components/buttons';
 import { setIn } from 'formik';
+import NBA from 'nba';
+import moment from 'moment';
+
+
+console.log(moment().format());
 
 //consistent screen dimensions across multiple devices
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 // imported nodejs nba api from https://github.com/bttmly/nba
-const NBA = require("nba");
 
 //Initial object to use before the nba api's async is fulfilled
 const initialState = [
@@ -37,18 +41,20 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   
   // Promise from nba api to retrieve nested objects/arrays and get specific stats needed
-  NBA.stats.scoreboard({gameDate: "01/12/2021"}).then(res => setNewObj(res.gameHeader));
-
-
+  
+  const loader = () => {
+    setState(newObj);
+    setLoading(false)
+  }
+  
+  
   useEffect(() => {
-      async function initData() {
-        await NBA.stats.scoreboard;
-        setState(newObj);
-        setLoading(false);
+    async function initData() {
+        await NBA.stats.scoreboard({gameDate: "01/12/2021"}).then(res => setNewObj(res.gameHeader))
       }
       initData();
+    }, [])
 
-  }, [])
 
 
   return(
