@@ -7,20 +7,14 @@ import { Input } from 'react-native-elements';
 import { DEFAULT_PLAYER_INFO } from '../constants';
 import nba from 'nba';
 import PlayerProfile from '../components/playerProfile'
-
-
 // other components seperate into fully functional components/stateless
 // look into promises further  
-// callbacks needed
 // context api
-
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const initialState = {
         playerInfo: DEFAULT_PLAYER_INFO
   }
-
-  
 
 const PlayerBox = () => {
     let playerPromisedInfo = undefined;
