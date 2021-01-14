@@ -21,7 +21,7 @@ const Profile = ({playerInfo}) => {
                 </View>
                 <Image
                     style={styles.teamLogo}
-                    source={`../assets/${playerInfo.teamAbbreviation}.webp`}
+                    source={`../assets/${playerInfo.teamCode}.webp`}
                     alt="Team"
                 />
                 <View style={styles.profileEntry}>
@@ -56,22 +56,35 @@ const Profile = ({playerInfo}) => {
         playerProfile: {
             flex: 1,
             justifyContent: 'center',
-            alignItems: 'center',
-            width: windowWidth,
+            backgroundColor: '#9CBA7F',
+            borderRadius: 6,
             marginBottom: 200,
+        },
+        profileEntryPlayerNname: {
+            fontSize: 20,
+            fontWeight: 'bold',
+            alignSelf: 'center',
+            marginBottom: 25,
         },
         profilePic:{
             margin: 10,
         },
         profileEntry: {
+            alignItems: 'center',
+            alignContent: 'center',
             flexDirection: 'row',
             margin: 2
         },
         profileEntryLeft:{
-            marginRight: 5
+            alignSelf: 'flex-start',
+            marginRight: 10,
+            fontSize: 20,
+            fontWeight: 'bold'
         },
         profileEntryRight:{
-            marginLeft: 3,
+            alignSelf: 'flex-end',
+            marginLeft: 10,
+            fontSize: 18,
         }
     });
 
