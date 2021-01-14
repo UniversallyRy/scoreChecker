@@ -16,7 +16,7 @@ const initialState = {
         playerInfo: DEFAULT_PLAYER_INFO
   }
 
-const PlayerBox = () => {
+const PlayerStats = () => {
     let playerPromisedInfo = undefined;
     const [playerObj, setPlayerObj] = useState(initialState)
 
@@ -80,13 +80,16 @@ const PlayerBox = () => {
             </>
         )
     }
-
+    
     const handleReset = () => {
         setPlayerObj(initialState);
     }
-
+    
     return (
         <>
+            <PlayerProfile 
+            playerInfo={playerObj.playerInfo}
+            />
             <Formik
                 initialValues={{player: ''}}
                 onSubmit={(values, actions) => { 
@@ -120,7 +123,6 @@ const PlayerBox = () => {
             </Formik> 
             {/* {playerObj.playerName != "" && <PlayBoxStats/>
             } */}
-            <PlayerProfile playerInfo={playerObj.playerInfo}/>
         </>
     )
 }
@@ -145,7 +147,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         fontSize: 30,
         marginBottom: 10,
-    }
+    },
 });
 
-export default PlayerBox;
+export default PlayerStats;

@@ -1,53 +1,65 @@
 import React from 'react';
-import { Image, View, Text } from 'react-native';
+import { Image, View, Text, StyleSheet, Dimensions} from 'react-native';
 import { Input, Card } from 'react-native-elements';
 import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
+
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const Profile = ({playerInfo}) => {
 
         return (
-            <Card className="profile">
-                <Text className="profile-entry player-name">{`${playerInfo.playerName}`}</Text>
+            <Card style={styles.playerProfile}>
+                <Text style={styles.profileEntryPlayerNname}>{`${playerInfo.playerName}`}</Text>
                 <Image
-                    className="profile-pic"
-                    source={{uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`}}
+                    style={styles.profilePic}
+                    source={`${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`}
                     alt="Profile"
                 />
-                <View className="profile-entry">
-                    <Text className="profile-entry-left">Team</Text>
-                    <Text className="profile-entry-right">{`${playerInfo.teamCity} ${playerInfo.teamName}`}</Text>
+                <View style={styles.profileEntry}>
+                    <Text style={styles.profileEntryLeft}>Team</Text>
+                    <Text style={styles.profileEntryRight}>{`${playerInfo.teamCity} ${playerInfo.teamName}`}</Text>
                 </View>
                 <Image
-                    className="team-logo"
-                    source={{uri: `${TEAM_PIC_URL_PREFIX}/${playerInfo.teamAbbreviation}_logo.svg`}}
+                    style={styles.teamLogo}
+                    source={`../assets/${playerInfo.teamAbbreviation}.webp`}
                     alt="Team"
                 />
-                <View className="profile-entry">
-                    <Text className="profile-entry-left">Height</Text>
-                    <Text className="profile-entry-right">{`${playerInfo.height}`}</Text>
+                <View style={styles.profileEntry}>
+                    <Text style={styles.profileEntryLeft}>Height</Text>
+                    <Text style={styles.profileEntryRight}>{`${playerInfo.height}`}</Text>
                 </View>
-                <View className="profile-entry">
-                    <Text className="profile-entry-left">Weight</Text>
-                    <Text className="profile-entry-right">{`${playerInfo.weight}`}</Text>
+                <View style={styles.profileEntry}>
+                    <Text style={styles.profileEntryLeft}>Weight</Text>
+                    <Text style={styles.profileEntryRight}>{`${playerInfo.weight}`}</Text>
                 </View>
-                <View className="profile-entry">
-                    <Text className="profile-entry-left">PTS</Text>
-                    <Text className="profile-entry-right">{`${playerInfo.pts}`}</Text>
+                <View style={styles.profileEntry}>
+                    <Text style={styles.profileEntryLeft}>PTS</Text>
+                    <Text style={styles.profileEntryRight}>{`${playerInfo.pts}`}</Text>
                 </View>
-                <View className="profile-entry">
-                    <Text className="profile-entry-left">REB</Text>
-                    <Text className="profile-entry-right">{`${playerInfo.reb}`}</Text>
+                <View style={styles.profileEntry}>
+                    <Text style={styles.profileEntryLeft}>REB</Text>
+                    <Text style={styles.profileEntryRight}>{`${playerInfo.reb}`}</Text>
                 </View>
-                <View className="profile-entry">
-                    <Text className="profile-entry-left">AST</Text>
-                    <Text className="profile-entry-right">{`${playerInfo.ast}`}</Text>
+                <View style={styles.profileEntry}>
+                    <Text style={styles.profileEntryLeft}>AST</Text>
+                    <Text style={styles.profileEntryRight}>{`${playerInfo.ast}`}</Text>
                 </View>
-                <View className="profile-entry">
-                    <Text className="profile-entry-left">PIE</Text>
-                    <Text className="profile-entry-right">{`${playerInfo.pie}`}</Text>
+                <View style={styles.profileEntry}>
+                    <Text style={styles.profileEntryLeft}>PIE</Text>
+                    <Text style={styles.profileEntryRight}>{`${playerInfo.pie}`}</Text>
                 </View>
             </Card>
         );
     }
+
+    const styles = StyleSheet.create({
+        playerProfile: {
+            width: windowWidth,
+            height: windowHeight,
+            backgroundColor: 'grey',
+            alignContent: 'center',
+            justifyContent: 'center',
+        },
+    });
 
     export default Profile;
