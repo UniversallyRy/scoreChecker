@@ -7,6 +7,7 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const Profile = ({playerInfo}) => {
 
+        console.log(playerInfo.teamCode);
         return (
             <Card containerStyle={styles.playerProfile}>
                 <Text style={styles.profileEntryPlayerNname}>{`${playerInfo.playerName}`}</Text>
@@ -21,7 +22,7 @@ const Profile = ({playerInfo}) => {
                 </View>
                 <Image
                     style={styles.teamLogo}
-                    source={`../assets/${playerInfo.teamCode}.webp`}
+                    source={require(`../assets/nets.webp`)}
                     alt="Team"
                 />
                 <View style={styles.profileEntry}>
@@ -85,6 +86,12 @@ const Profile = ({playerInfo}) => {
             alignSelf: 'flex-end',
             marginLeft: 10,
             fontSize: 18,
+        },
+        teamLogo:{
+            width: 50,
+            height: 50, 
+            margin: 10,
+            alignSelf: 'center',
         }
     });
 
