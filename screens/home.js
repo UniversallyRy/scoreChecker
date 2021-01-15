@@ -44,13 +44,17 @@ const Home = () => {
   
   const loader = () => {
     setState(newObj);
-    setLoading(false)
   }
+
+  setTimeout(() => {
+    loader();
+    setLoading(false)
+  }, 1000);
   
-  
+
   useEffect(() => {
     async function initData() {
-        await NBA.stats.scoreboard({gameDate: "01/12/2021"}).then(res => setNewObj(res.gameHeader))
+      NBA.stats.scoreboard({gameDate: "01/14/2021"}).then(res => setNewObj(res.gameHeader));
       }
       initData();
     }, [])
@@ -82,13 +86,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'maroon',
+    backgroundColor: '#586949',
     marginBottom: 45,
-  },
-  scoreContainer: {
-    width: windowWidth * 0.9 ,
-    alignSelf: 'center',
-
   },
   divider: {
     width: windowWidth * 0.98,

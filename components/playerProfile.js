@@ -7,19 +7,20 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const Profile = ({playerInfo}) => {
 
-        console.log(playerInfo.teamCode);
         return (
             <Card containerStyle={styles.playerProfile}>
                 <Text style={styles.profileEntryPlayerNname}>{`${playerInfo.playerName}`}</Text>
+                <View style={styles.proPicBorder}>
                 <Image
                     containerStyle={styles.profilePic}
                     source={{uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`}}
                     alt="Profile"
                 />
+                </View>
                 <View style={styles.profileEntry}>
                     <Text style={styles.profileEntryLeft}>Team:</Text>
                     <Text style={styles.profileEntryRight}>{`${playerInfo.teamCity} ${playerInfo.teamName}`}</Text>
-                </View>
+                </View>                
                 <Image
                     containerStyle={styles.teamLogo}
                     source={{uri: `${TEAM_PIC_URL_PREFIX}/${playerInfo.teamAbbreviation}_logo.svg`}}
@@ -72,11 +73,18 @@ const Profile = ({playerInfo}) => {
             marginBottom: 25,
         },
         profilePic:{
+            borderWidth: 2,
+            overflow: 'hidden',
+            borderColor: '#586949',
+            borderRadius: 50, 
             alignItems: 'center',
             alignSelf: 'center',
             margin: 10,
             height: 100,
             width: 100,
+        },
+        proPicBorder:{
+            borderWidth: 1, 
         },
         profileEntry: {
             alignItems: 'center',

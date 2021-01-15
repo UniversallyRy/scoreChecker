@@ -32,13 +32,18 @@ const PlayerStats = () => {
         const regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
         const newPlayer = nba.findPlayer(item.player.trim());
         const playerListing = [];
+        const newPlayerInfo = {
+            playerId: 0,
+            fullName: '',
+            teamAbbreviation: '',
+        };
         
         if(!regName.test(item.player.trim())) {
             alert('Please enter the full name of the player.');
             return false;
         }else {
             if (newPlayer != undefined) {
-                    return nba.stats.playerInfo({ PlayerID: newPlayer.playerId }).then((res) => [...playerListing, res]) 
+                    return nba.stats.playerInfo({ PlayerID: newPlayer.playerId }).then(console.log) 
                     .then((res) => searchArr('playerHeadlineStats', res))
                     .then((res) => playerPromisedInfo = res)
             }else{

@@ -1,32 +1,33 @@
 import React from 'react'
 import { StyleSheet, Text, View, Dimensions } from 'react-native'
 // import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input } from 'react-native-elements';
-import { Card, ListItem, Icon } from 'react-native-elements';
+import { Card, ListItem, Icon, Input } from 'react-native-elements';
 import Button from '../components/buttons'
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 // Caution: WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
+// create function to extract gamecode teams
+
 const Home = ({item}) => (
   <>
-      <Card style={styles.scoreContainer} >
+      <Card containerStyle={styles.scoreContainer} >
         <Card.Title>SCORECARD WITH DIVIDER</Card.Title>
         <Card.Divider style={styles.divider} />
         {
           item.map((u, i) => {
             return (
-              <Card key={i} style={styles.user}>
+              <Card key={i} raised containerStyle={styles.scoreCard}>
                 {/* <Image
                   style={styles.image}
                   resizeMode="cover"
                   source={{ uri: u.avatar }}
                 /> */}
-                <Card.Title style={styles.name}>{u.gamecode}</Card.Title>
-                <Text style={styles.name}>{u.gameStatusText}</Text>
+                <Card.Title style={styles.title}>{u.gamecode}</Card.Title>
+                <Text style={styles.quarter}>{u.gameStatusText}</Text>
                 <Card.Divider style={styles.divider} />
-                <Text style={styles.name}>{u.livePeriodTimeBcast}</Text>
+                <Text style={styles.broadcast}>{u.livePeriodTimeBcast}</Text>
               </Card>
             );
           })
@@ -38,20 +39,30 @@ const Home = ({item}) => (
 export default Home;
 
 const styles = StyleSheet.create({
-  titleContainer : { 
-    width: windowWidth * 0.999999 ,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'maroon',
-    marginBottom: 45,
-  },
   scoreContainer: {
-    width: windowWidth * 0.9 ,
+    width: windowWidth * 0.99999 ,
+    backgroundColor: '#586949',
     alignSelf: 'center',
-
+    alignItems: 'center',
   },
   divider: {
-    width: windowWidth * 0.98,
+    backgroundColor: '#586949',
+    width: windowWidth * 0.8,
+    alignSelf: 'center',
+    margin: 2,
+  },
+  scoreCard: {
+    width: windowWidth * 0.93 ,
+    backgroundColor: '#9CBA7F',
+  },
+  title:{
+    fontWeight: 'bold',
+  },
+  quarter:{
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  broadcast:{
+    fontSize: 14,
   },
 })
