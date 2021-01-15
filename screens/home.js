@@ -44,17 +44,17 @@ const Home = () => {
   
   const loader = () => {
     setState(newObj);
+    setLoading(false)
   }
 
   setTimeout(() => {
     loader();
-    setLoading(false)
   }, 1000);
   
 
   useEffect(() => {
     async function initData() {
-      NBA.stats.scoreboard({gameDate: "01/14/2021"}).then(res => setNewObj(res.gameHeader));
+      NBA.stats.scoreboard({gameDate: "01/14/2021"}).then(res => setNewObj(res.gameHeader)).then(console.log);
       }
       initData();
     }, [])

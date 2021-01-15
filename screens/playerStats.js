@@ -1,5 +1,5 @@
 import React, {componentDidMount, useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View, Dimensions, SafeAreaView } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View, Dimensions, SafeAreaView, Keyboard } from 'react-native';
 import { Formik } from 'formik';
 import RButton from '../components/buttons';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -7,17 +7,16 @@ import { Input } from 'react-native-elements';
 import { DEFAULT_PLAYER_INFO } from '../constants';
 import nba from 'nba';
 import PlayerProfile from '../components/playerProfile'
+
 // other components seperate into fully functional components/stateless
-// look into promises further  
-// context api
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const initialState = {
+        // James Harden as default profile
         playerInfo: DEFAULT_PLAYER_INFO
   }
 
 const PlayerStats = () => {
-    let playerPromisedInfo = undefined;
     const [playerObj, setPlayerObj] = useState(initialState)
 
     const loadPlayerInfo = (playerName) => {
@@ -28,24 +27,17 @@ const PlayerStats = () => {
         });
     }
 
-    const handleInput = (item, func) => {
+    const handleInput = ( item ) => {
         const regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
-        const newPlayer = nba.findPlayer(item.player.trim());
-        const playerListing = [];
-        const newPlayerInfo = {
-            playerId: 0,
-            fullName: '',
-            teamAbbreviation: '',
-        };
-        
-        if(!regName.test(item.player.trim())) {
+        const trimmedInput = item.player.trim();
+        const newPlayer = nba.findPlayer(trimmedInput);
+
+        if(!regName.test(trimmedInput)) {
             alert('Please enter the full name of the player.');
             return false;
         }else {
             if (newPlayer != undefined) {
-                    return nba.stats.playerInfo({ PlayerID: newPlayer.playerId }).then(console.log) 
-                    .then((res) => searchArr('playerHeadlineStats', res))
-                    .then((res) => playerPromisedInfo = res)
+                    loadPlayerInfo(trimmedInput);
             }else{
                 alert('Player not found, Try again.')
             }
@@ -55,12 +47,11 @@ const PlayerStats = () => {
     // loadPlayerInfo(playerObj.playerInfo.fullName);
     useEffect(() => {
         
-        loadPlayerInfo(playerObj.playerInfo.fullName);
         // async function getData() { 
             // if (playerPromisedInfo == undefined)
             // await handleInput.then(res => setPlayerObj(res[0]))
         // }
-      }, ['James Harden']);
+      }, []);
     
     function searchArr(nameKey, myObj){
         return myObj.[nameKey];
@@ -100,6 +91,7 @@ const PlayerStats = () => {
                 onSubmit={(values, actions) => { 
                         handleInput(values);
                         actions.resetForm();
+                        Keyboard.dismiss();
                     }
                 }
             >
