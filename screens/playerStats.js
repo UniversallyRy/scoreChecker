@@ -6,11 +6,12 @@ import nba from 'nba';
 import { Formik } from 'formik';
 import RButton from '../components/buttons';
 import PlayerProfile from '../components/playerProfile'
-import { DEFAULT_PLAYER_INFO } from '../constants';
 import PlayerSearch from '../components/playerSearch';
+import { DEFAULT_PLAYER_INFO } from '../constants';
+// todos: other components seperate into fully functional components/stateless
 
-// other components seperate into fully functional components/stateless
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+
+const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 const initialState = {
     // James Harden as default profile
     playerInfo: DEFAULT_PLAYER_INFO
@@ -18,57 +19,62 @@ const initialState = {
 
 const PlayerStats = () => {
     // state for player arrays/object
-    const [playerObj, setPlayerObj] = useState(initialState)
+    const [ playerObj, setPlayerObj ] = useState( initialState )
     // stores api promise
-    const loadPlayerInfo = (playerName) => {
-        nba.stats.playerInfo({ PlayerID: nba.findPlayer(playerName).playerId }).then((info) => {
-            const playerInfo = Object.assign(info.commonPlayerInfo[0], info.playerHeadlineStats[0]);
-            console.log(playerInfo);
+    const loadPlayerInfo = ( playerName ) => {
+        nba.stats.playerInfo({ PlayerID: nba.findPlayer( playerName ).playerId }).then(( info ) => {
+            const playerInfo = Object.assign(info.commonPlayerInfo[ 0 ], info.playerHeadlineStats[ 0 ]);
+            console.log( playerInfo );
             setPlayerObj({ playerInfo });
         });
     }
     // cycles through reset twice to trigger promise rerender
-    const handleReset = (n) => {
+    const handleReset = ( n ) => {
         let count = n;
-        if (count > 1) {
+        if ( count > 1 ) {
             return null
         }else{
-            loadPlayerInfo(initialState.playerInfo.fullName)
+            loadPlayerInfo( initialState.playerInfo.fullName )
         }
         count++;
-        handleReset(n + 1);
+        handleReset( n + 1 );
     }
 
     const handleInput = ( item ) => {
+        // regEx that checks to make sure at least 2 words are inputted
         const regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
         const trimmedInput = item.player.trim();
-        const newPlayer = nba.findPlayer(trimmedInput);
+        //searches nba api and checks in below condition to see if its valid
+        const newPlayer = nba.findPlayer( trimmedInput );
 
-        if(!regName.test(trimmedInput)) {
-            alert('Please enter the full name of the player.');
+        if(!regName.test( trimmedInput )) {
+            alert( 'Please enter the full name of the player.' );
             return false;
         }else {
-            if (newPlayer != undefined) {
+            if ( newPlayer != undefined ) {
                     loadPlayerInfo(trimmedInput);
             }else{
-                alert('Player not found, Try again.')
+                //error case for inputs(names) that pass test but don't exist in nba api
+                alert( 'Player not found, Try again.' )
             }
         }
     }
+    // initial load of default profile
     useEffect(() => {
-        loadPlayerInfo(initialState.playerInfo.fullName)
+        loadPlayerInfo( initialState.playerInfo.fullName )
         return () => {
         };
     }, []);
     
     return (
+        //ScrollView added for ability to view all content while keyboard is open
         <ScrollView>
             <PlayerProfile 
-            playerInfo={playerObj.playerInfo}
+                playerInfo={ playerObj.playerInfo }
             />
             <PlayerSearch
-                handleInput={handleInput}
-                handleReset={() => handleReset(0)}
+                handleInput={ handleInput }
+                handleReset={() => handleReset( 0 )}
             /> 
         </ScrollView>
     )

@@ -2,15 +2,19 @@ import React from 'react';
 import { Button } from 'react-native-elements';
 import { StyleSheet, } from 'react-native';
 
-
-const RaisedButton = (props) => <Button buttonStyle={{backgroundColor:'#586949'}} containerStyle={styles.button} raised {...props} />;
-
-const LoadingButton = (props) => 
+const RaisedButton = ( props ) => 
     <Button 
-        containerStyle={styles.button}
+        buttonStyle={{ backgroundColor:'#586949' }}
+        containerStyle={ styles.button } 
+        raised { ...props } 
+    />;
+
+const LoadingButton = ( props ) => 
+    <Button 
+        containerStyle={ styles.button }
         title="Loading button"
         loading
-        {...props}
+        { ...props }
     />
 
 const styles = StyleSheet.create({

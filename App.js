@@ -10,6 +10,7 @@ import Home from './screens/home';
 import PlayerStats from './screens/playerStats';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+// creating bottom tabs and a stack nav
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -19,23 +20,23 @@ const MyTabs = () => (
     tabBarOptions={{
       activeTintColor: '#9CBA7F',
       inactiveTintColor: 'silver',
-      tabStyle: {backgroundColor: '#586949'},
-      labelStyle: {fontSize: 12}
+      tabStyle: { backgroundColor: '#586949' },
+      labelStyle: { fontSize: 12 }
     }}
   > 
-      <Tab.Screen style={styles.tabText} name="Home" component={Home} 
+      <Tab.Screen style={ styles.tabText } name="Home" component={ Home } 
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="basketball" color={color} size={size} />
+            <MaterialCommunityIcons name="basketball" color={ color } size={ size } />
           ),
         }}
       />
-      <Tab.Screen style={styles.tabText} name="Player Stats" component={PlayerStats} 
+      <Tab.Screen style={ styles.tabText } name="Player Stats" component={ PlayerStats } 
         options={{
           tabBarLabel: 'Player Stats',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
+            <MaterialCommunityIcons name="account" color={ color } size={ size } />
           ),
         }}
       />
@@ -44,12 +45,12 @@ const MyTabs = () => (
 
 const AuthStack = () => (
   <Stack.Navigator headerTitleAlign>
-      <Stack.Screen name="NBA Updates" component={MyTabs} 
+      <Stack.Screen name="NBA Updates" component={ MyTabs } 
         options={{
-          headerStyle:{backgroundColor: '#586949'},
-          headerLeft: (props) => (
+          headerStyle:{ backgroundColor: '#586949' },
+          headerLeft: ( props ) => (
             <HeaderBackButton
-              {...props}
+              { ...props }
               onPress={() => {
                 // Do something
               }}
@@ -61,9 +62,9 @@ const AuthStack = () => (
 );
 
 const App = () => (
-    <NavigationContainer style={styles.container}>
+    <NavigationContainer style={ styles.container }>
       <StatusBar style="auto" />
-      <AuthStack/>
+      <AuthStack />
     </NavigationContainer>
 );
 

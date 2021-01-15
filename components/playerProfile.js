@@ -1,58 +1,57 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions} from 'react-native';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Input, Card, Image } from 'react-native-elements';
 import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
 import Button from '../components/buttons'
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
-const Profile = ({playerInfo}, loading) => {
-        const statArray = new Array(7);
-
-
-        return (
-            <Card containerStyle={styles.playerProfile}>
+const Profile = ( { playerInfo }, loading ) => {
+    //  top profile card with future access to more info
+    // todo: profileEntry loop for DRY, fix teamlogo, 
+    return (
+            <Card containerStyle={ styles.playerProfile }>
                 {loading
                 ?<>
-                    <Text style={styles.profileEntryPlayerNname}>{`${playerInfo.playerName}`}</Text>
-                    <View style={styles.proPicBorder}>
+                    <Text style={ styles.profileEntryPlayerNname }>{ `${ playerInfo.playerName }` }</Text>
+                    <View style={ styles.proPicBorder }>
                     <Image
-                        containerStyle={styles.profilePic}
-                        source={{uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`}}
+                        containerStyle={ styles.profilePic }
+                        source={{ uri: `${PROFILE_PIC_URL_PREFIX}/${ playerInfo.playerId }.png` }}
                         alt="Profile"
                     />
                     </View>
                     <Image
-                        containerStyle={styles.teamLogo}
-                        source={{uri: `${TEAM_PIC_URL_PREFIX}/${playerInfo.teamAbbreviation}_logo.svg`}}
+                        containerStyle={ styles.teamLogo }
+                        source={{ uri: `${TEAM_PIC_URL_PREFIX}/${ playerInfo.teamAbbreviation }_logo.svg` }}
                         alt="Team"
                     />
                 
-                    <View style={styles.profileEntry}>
-                        <Text style={styles.profileEntryLeft}>Team:</Text>
-                        <Text style={styles.profileEntryRight}>{`${playerInfo.teamCity} ${playerInfo.teamName}`}</Text>
+                    <View style={ styles.profileEntry }>
+                        <Text style={ styles.profileEntryLeft }>Team:</Text>
+                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.teamCity } ${ playerInfo.teamName }` }</Text>
                     </View>                
-                    <View style={styles.profileEntry}>
-                        <Text style={styles.profileEntryLeft}>Height:</Text>
-                        <Text style={styles.profileEntryRight}>{`${playerInfo.height}`}</Text>
+                    <View style={ styles.profileEntry }>
+                        <Text style={ styles.profileEntryLeft }>Height:</Text>
+                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.height }` }</Text>
                     </View>
-                    <View style={styles.profileEntry}>
-                        <Text style={styles.profileEntryLeft}>Weight:</Text>
-                        <Text style={styles.profileEntryRight}>{`${playerInfo.weight}`}</Text>
+                    <View style={ styles.profileEntry }>
+                        <Text style={ styles.profileEntryLeft }>Weight:</Text>
+                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.weight }` }</Text>
                     </View>
-                    <View style={styles.profileEntry}>
-                        <Text style={styles.profileEntryLeft}>PTS:</Text>
-                        <Text style={styles.profileEntryRight}>{`${playerInfo.pts}`}</Text>
+                    <View style={ styles.profileEntry }>
+                        <Text style={ styles.profileEntryLeft }>PTS:</Text>
+                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.pts }` }</Text>
                     </View>
-                    <View style={styles.profileEntry}>
-                        <Text style={styles.profileEntryLeft}>AST:</Text>
-                        <Text style={styles.profileEntryRight}>{`${playerInfo.ast}`}</Text>
+                    <View style={ styles.profileEntry }>
+                        <Text style={ styles.profileEntryLeft }>AST:</Text>
+                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.ast }` }</Text>
                     </View>
-                    <View style={styles.profileEntry}>
-                        <Text style={styles.profileEntryLeft}>REB:</Text>
-                        <Text style={styles.profileEntryRight}>{`${playerInfo.reb}`}</Text>
+                    <View style={ styles.profileEntry }>
+                        <Text style={ styles.profileEntryLeft }>REB:</Text>
+                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.reb }` }</Text>
                     </View>
                     <Button
-                        containerStyle={styles.button} 
+                        containerStyle={ styles.button } 
                         title="Click for more info"
                         />
                 </>

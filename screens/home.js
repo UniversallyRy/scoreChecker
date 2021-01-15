@@ -8,12 +8,11 @@ import Button from '../components/buttons';
 import { setIn } from 'formik';
 import NBA from 'nba';
 import moment from 'moment';
+// todo: conditional needed for empties: 'livePeriodTimeBcast'
 
-
-console.log(moment().format());
-
+console.log( moment().format() );
 //consistent screen dimensions across multiple devices
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
 // imported nodejs nba api from https://github.com/bttmly/nba
 
@@ -26,51 +25,39 @@ const initialState = [
   },
 ];
 
-
-// to look inside gameheader for every object's team: 'gamecode'
-// to look inside gameheader for every games start time: 'gameStatusText'
-// to look inside gameheader for live periods: 'livePeriodTimeBcast'
-//                ^ conditional needed for empties
-// to look inside gameheader for every object's team: 'gamecode'
-
-
 const Home = () => {
-  // useState hook for future changing of default initialState to nba api's data
-  const [state, setState] = useState(initialState);
-  const [newObj, setNewObj] = useState([]);
-  const [loading, setLoading] = useState(true);
-  
-  // Promise from nba api to retrieve nested objects/arrays and get specific stats needed
+  const [ state, setState ] = useState( initialState );
+  const [ newObj, setNewObj ] = useState( [] );
+  const [ loading, setLoading ] = useState( true );
   
   const loader = () => {
-    setState(newObj);
-    setLoading(false)
+    setState( newObj );
+    setLoading( false )
   }
 
   setTimeout(() => {
     loader();
   }, 1000);
   
-
   useEffect(() => {
     async function initData() {
-      NBA.stats.scoreboard({gameDate: "01/14/2021"}).then(res => setNewObj(res.gameHeader));
+      NBA.stats.scoreboard({ gameDate: "01/14/2021" }).then( res => setNewObj( res.gameHeader ) );
       }
       initData();
     }, [])
 
   return(
       <>
-        <Card containerStyle={styles.titleContainer}> 
-          <Card.Title style={styles.title}>Today's Scores</Card.Title>
-          <Card.Divider style={styles.divider} />
-            <Text style={styles.text}>
+        <Card containerStyle={ styles.titleContainer }> 
+          <Card.Title style={ styles.title }>Today's Scores</Card.Title>
+          <Card.Divider style={ styles.divider } />
+            <Text style={ styles.text }>
               Quickly stay updated
             </Text>
         </Card>
         {/* scorecard list component showcasing Today's scores*/}
         {loading ? <Text> Loading. . .</Text>
-                 : <ScoreCard item={state}/>
+                 : <ScoreCard item={ state }/>
         }
     </>   
   )   
