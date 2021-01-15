@@ -1,12 +1,12 @@
-import React, {componentDidMount, useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View, Dimensions, SafeAreaView, Keyboard } from 'react-native';
+import React, { useEffect, useState, useRef } from 'react';
+import { StyleSheet, View, Dimensions, SafeAreaView, Keyboard, ScrollView  } from 'react-native';
+import { Input, Text, TextInput, Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import nba from 'nba';
 import { Formik } from 'formik';
 import RButton from '../components/buttons';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input } from 'react-native-elements';
-import { DEFAULT_PLAYER_INFO } from '../constants';
-import nba from 'nba';
 import PlayerProfile from '../components/playerProfile'
+import { DEFAULT_PLAYER_INFO } from '../constants';
 
 // other components seperate into fully functional components/stateless
 
@@ -17,6 +17,13 @@ const initialState = {
   }
 
 const PlayerStats = () => {
+    // keyboard fixes 
+    const [keyboardOffset, setKeyboardOffset] = useState(0);
+    const onKeyboardShow = event => setKeyboardOffset(event.endCoordinates.height);
+    const onKeyboardHide = () => setKeyboardOffset(0);
+    const keyboardDidShowListener = useRef();
+    const keyboardDidHideListener = useRef();
+    // state for player arrays/object
     const [playerObj, setPlayerObj] = useState(initialState)
 
     const loadPlayerInfo = (playerName) => {
@@ -44,14 +51,18 @@ const PlayerStats = () => {
         }
     }
 
-    // loadPlayerInfo(playerObj.playerInfo.fullName);
+    // custom mount hook for one time useEffect implementation
+
     useEffect(() => {
-        
-        // async function getData() { 
-            // if (playerPromisedInfo == undefined)
-            // await handleInput.then(res => setPlayerObj(res[0]))
-        // }
-      }, []);
+    keyboardDidShowListener.current = Keyboard.addListener('keyboardWillShow', onKeyboardShow);
+    keyboardDidHideListener.current = Keyboard.addListener('keyboardWillHide', onKeyboardHide);
+    loadPlayerInfo(initialState.playerInfo.fullName)
+    return () => {
+        keyboardDidShowListener.current.remove();
+        keyboardDidHideListener.current.remove();
+  };
+}, []);
+
     
     function searchArr(nameKey, myObj){
         return myObj.[nameKey];
@@ -82,7 +93,7 @@ const PlayerStats = () => {
     }
     
     return (
-        <>
+        <ScrollView>
             <PlayerProfile 
             playerInfo={playerObj.playerInfo}
             />
@@ -96,12 +107,14 @@ const PlayerStats = () => {
                 }
             >
                 {({ handleChange, handleBlur, handleSubmit, values }) => (
-                <SafeAreaView style={{justifyContent: 'center', alignContent: 'center'}}>
-                    <Text style={styles.title}>Find Player Stat's</Text>
+                <View style={{alignContent: 'center'}}>
                     <Input
                         onChangeText={handleChange('player')}
                         onBlur={handleBlur('player')}
                         value={values.player}
+                        enablesReturnKeyAutomatically={true}
+                        importantForAutofill='auto'
+                        placeholder='Search for stats'
                         leftIcon={
                             <Icon
                             name='user'
@@ -115,12 +128,12 @@ const PlayerStats = () => {
                         <RButton onPress={handleSubmit} title="Submit"></RButton>
                         <RButton onPress={handleReset} title="Reset" />
                     </View>  
-                </SafeAreaView>
+                </View>
                 )}
             </Formik> 
             {/* {playerObj.playerName != "" && <PlayBoxStats/>
             } */}
-        </>
+        </ScrollView>
     )
 }
 
@@ -136,6 +149,8 @@ const styles = StyleSheet.create({
         alignContent: 'center',
     },
     textForm: {
+        position: 'absolute',
+        width:    '100%',
         paddingHorizontal: 100,
         margin: 10,
         height: 50,

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, ScrollView } from 'react-native'
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import { Card, ListItem, Icon, Input } from 'react-native-elements';
 import Button from '../components/buttons'
@@ -12,27 +12,29 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const Home = ({item}) => (
   <>
-      <Card containerStyle={styles.scoreContainer} >
-        <Card.Title>SCORECARD WITH DIVIDER</Card.Title>
+      <ScrollView scrollable containerStyle={styles.scoreContainer} >
+        <Card.Title>Scores for :add Date</Card.Title>
         <Card.Divider style={styles.divider} />
         {
           item.map((u, i) => {
-            return (
-              <Card key={i} raised containerStyle={styles.scoreCard}>
+            return ( 
+              <ListItem topDivider={true} key={i} raised containerStyle={styles.scoreCard}>
                 {/* <Image
                   style={styles.image}
                   resizeMode="cover"
                   source={{ uri: u.avatar }}
                 /> */}
-                <Card.Title style={styles.title}>{u.gamecode}</Card.Title>
-                <Text style={styles.quarter}>{u.gameStatusText}</Text>
-                <Card.Divider style={styles.divider} />
-                <Text style={styles.broadcast}>{u.livePeriodTimeBcast}</Text>
-              </Card>
+                <ListItem.Content>
+                    <ListItem.Title style={styles.title}>{u.gamecode}</ListItem.Title>
+                    <ListItem.Subtitle style={styles.quarter}>{u.gameStatusText}</ListItem.Subtitle>
+                    <Card.Divider style={styles.divider} />
+                    <ListItem.Subtitle style={styles.broadcast}>{u.livePeriodTimeBcast}</ListItem.Subtitle>
+                </ListItem.Content>
+              </ListItem>
             );
           })
         }
-      </Card>
+      </ScrollView>
   </>      
   );
 
@@ -52,8 +54,9 @@ const styles = StyleSheet.create({
     margin: 2,
   },
   scoreCard: {
-    width: windowWidth * 0.93 ,
+    width: windowWidth * 0.97 ,
     backgroundColor: '#9CBA7F',
+    alignSelf: 'center',
   },
   title:{
     fontWeight: 'bold',

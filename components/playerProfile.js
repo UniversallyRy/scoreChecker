@@ -5,61 +5,72 @@ import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
 import Button from '../components/buttons'
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const Profile = ({playerInfo}) => {
+const Profile = ({playerInfo}, loading) => {
+        const statArray = new Array(7);
+
 
         return (
             <Card containerStyle={styles.playerProfile}>
-                <Text style={styles.profileEntryPlayerNname}>{`${playerInfo.playerName}`}</Text>
-                <View style={styles.proPicBorder}>
-                <Image
-                    containerStyle={styles.profilePic}
-                    source={{uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`}}
-                    alt="Profile"
-                />
-                </View>
-                <View style={styles.profileEntry}>
-                    <Text style={styles.profileEntryLeft}>Team:</Text>
-                    <Text style={styles.profileEntryRight}>{`${playerInfo.teamCity} ${playerInfo.teamName}`}</Text>
-                </View>                
-                <Image
-                    containerStyle={styles.teamLogo}
-                    source={{uri: `${TEAM_PIC_URL_PREFIX}/${playerInfo.teamAbbreviation}_logo.svg`}}
-                    alt="Team"
-                />
-                <View style={styles.profileEntry}>
-                    <Text style={styles.profileEntryLeft}>Height:</Text>
-                    <Text style={styles.profileEntryRight}>{`${playerInfo.height}`}</Text>
-                </View>
-                <View style={styles.profileEntry}>
-                    <Text style={styles.profileEntryLeft}>Weight:</Text>
-                    <Text style={styles.profileEntryRight}>{`${playerInfo.weight}`}</Text>
-                </View>
-                <View style={styles.profileEntry}>
-                    <Text style={styles.profileEntryLeft}>PTS:</Text>
-                    <Text style={styles.profileEntryRight}>{`${playerInfo.pts}`}</Text>
-                </View>
-                <View style={styles.profileEntry}>
-                    <Text style={styles.profileEntryLeft}>REB:</Text>
-                    <Text style={styles.profileEntryRight}>{`${playerInfo.reb}`}</Text>
-                </View>
-                <View style={styles.profileEntry}>
-                    <Text style={styles.profileEntryLeft}>AST:</Text>
-                    <Text style={styles.profileEntryRight}>{`${playerInfo.ast}`}</Text>
-                </View>
-                <View style={styles.profileEntry}>
-                    <Text style={styles.profileEntryLeft}>PIE:</Text>
-                    <Text style={styles.profileEntryRight}>{`${playerInfo.pie}`}</Text>
-                </View>
-                <Button
-                    containerStyle={styles.button} 
-                    title="Click for more info"
+                {loading
+                ?<>
+                    <Text style={styles.profileEntryPlayerNname}>{`${playerInfo.playerName}`}</Text>
+                    <View style={styles.proPicBorder}>
+                    <Image
+                        containerStyle={styles.profilePic}
+                        source={{uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`}}
+                        alt="Profile"
                     />
+                    </View>
+                    <Image
+                        containerStyle={styles.teamLogo}
+                        source={{uri: `${TEAM_PIC_URL_PREFIX}/${playerInfo.teamAbbreviation}_logo.svg`}}
+                        alt="Team"
+                    />
+                
+                    <View style={styles.profileEntry}>
+                        <Text style={styles.profileEntryLeft}>Team:</Text>
+                        <Text style={styles.profileEntryRight}>{`${playerInfo.teamCity} ${playerInfo.teamName}`}</Text>
+                    </View>                
+                    <View style={styles.profileEntry}>
+                        <Text style={styles.profileEntryLeft}>Height:</Text>
+                        <Text style={styles.profileEntryRight}>{`${playerInfo.height}`}</Text>
+                    </View>
+                    <View style={styles.profileEntry}>
+                        <Text style={styles.profileEntryLeft}>Weight:</Text>
+                        <Text style={styles.profileEntryRight}>{`${playerInfo.weight}`}</Text>
+                    </View>
+                    <View style={styles.profileEntry}>
+                        <Text style={styles.profileEntryLeft}>PTS:</Text>
+                        <Text style={styles.profileEntryRight}>{`${playerInfo.pts}`}</Text>
+                    </View>
+                    <View style={styles.profileEntry}>
+                        <Text style={styles.profileEntryLeft}>REB:</Text>
+                        <Text style={styles.profileEntryRight}>{`${playerInfo.reb}`}</Text>
+                    </View>
+                    <View style={styles.profileEntry}>
+                        <Text style={styles.profileEntryLeft}>AST:</Text>
+                        <Text style={styles.profileEntryRight}>{`${playerInfo.ast}`}</Text>
+                    </View>
+                    <View style={styles.profileEntry}>
+                        <Text style={styles.profileEntryLeft}>PIE:</Text>
+                        <Text style={styles.profileEntryRight}>{`${playerInfo.pie}`}</Text>
+                    </View>
+                    <Button
+                        containerStyle={styles.button} 
+                        title="Click for more info"
+                        />
+                </>
+                :<Text>Loading</Text>
+                }
             </Card>
         );
     }
 
     const styles = StyleSheet.create({
         playerProfile: {
+            width: windowWidth * 0.99,
+            height: windowHeight * 0.6,
+            alignSelf: 'center',
             flex: 1,
             justifyContent: 'center',
             backgroundColor: '#9CBA7F',

@@ -54,20 +54,18 @@ const Home = () => {
 
   useEffect(() => {
     async function initData() {
-      NBA.stats.scoreboard({gameDate: "01/14/2021"}).then(res => setNewObj(res.gameHeader)).then(console.log);
+      NBA.stats.scoreboard({gameDate: "01/14/2021"}).then(res => setNewObj(res.gameHeader));
       }
       initData();
     }, [])
 
-
-
   return(
       <>
         <Card containerStyle={styles.titleContainer}> 
-          <Card.Title>Today's Scores</Card.Title>
+          <Card.Title style={styles.title}>Today's Scores</Card.Title>
           <Card.Divider style={styles.divider} />
-            <Text style={{alignSelf:'center', marginBottom: 10}}>
-              Scores From :Input Date
+            <Text style={styles.text}>
+              Quickly stay updated
             </Text>
         </Card>
         {/* scorecard list component showcasing Today's scores*/}
@@ -77,7 +75,6 @@ const Home = () => {
     </>   
   )   
 };
-
 export default Home;
 
 const styles = StyleSheet.create({
@@ -88,6 +85,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#586949',
     marginBottom: 45,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'silver',
+  },
+  text: {
+    alignSelf:'center', 
+    color: 'silver',
+    marginBottom: 10,
+    fontSize: 8,
   },
   divider: {
     width: windowWidth * 0.98,
