@@ -1,8 +1,8 @@
 import React from 'react';
-import { Image, View, Text, StyleSheet, Dimensions} from 'react-native';
-import { Input, Card } from 'react-native-elements';
+import { View, Text, StyleSheet, Dimensions} from 'react-native';
+import { Input, Card, Image } from 'react-native-elements';
 import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
-
+import Button from '../components/buttons'
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const Profile = ({playerInfo}) => {
@@ -12,8 +12,8 @@ const Profile = ({playerInfo}) => {
             <Card containerStyle={styles.playerProfile}>
                 <Text style={styles.profileEntryPlayerNname}>{`${playerInfo.playerName}`}</Text>
                 <Image
-                    style={styles.profilePic}
-                    source={`${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`}
+                    containerStyle={styles.profilePic}
+                    source={{uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`}}
                     alt="Profile"
                 />
                 <View style={styles.profileEntry}>
@@ -21,8 +21,8 @@ const Profile = ({playerInfo}) => {
                     <Text style={styles.profileEntryRight}>{`${playerInfo.teamCity} ${playerInfo.teamName}`}</Text>
                 </View>
                 <Image
-                    style={styles.teamLogo}
-                    source={require(`../assets/nets.webp`)}
+                    containerStyle={styles.teamLogo}
+                    source={{uri: `${TEAM_PIC_URL_PREFIX}/${playerInfo.teamAbbreviation}_logo.svg`}}
                     alt="Team"
                 />
                 <View style={styles.profileEntry}>
@@ -49,6 +49,10 @@ const Profile = ({playerInfo}) => {
                     <Text style={styles.profileEntryLeft}>PIE:</Text>
                     <Text style={styles.profileEntryRight}>{`${playerInfo.pie}`}</Text>
                 </View>
+                <Button
+                    containerStyle={styles.button} 
+                    title="Click for more info"
+                    />
             </Card>
         );
     }
@@ -59,7 +63,7 @@ const Profile = ({playerInfo}) => {
             justifyContent: 'center',
             backgroundColor: '#9CBA7F',
             borderRadius: 6,
-            marginBottom: 200,
+            marginBottom: 50,
         },
         profileEntryPlayerNname: {
             fontSize: 20,
@@ -68,13 +72,17 @@ const Profile = ({playerInfo}) => {
             marginBottom: 25,
         },
         profilePic:{
+            alignItems: 'center',
+            alignSelf: 'center',
             margin: 10,
+            height: 100,
+            width: 100,
         },
         profileEntry: {
             alignItems: 'center',
             alignContent: 'center',
             flexDirection: 'row',
-            margin: 2
+            margin: 2,
         },
         profileEntryLeft:{
             alignSelf: 'flex-start',
@@ -92,7 +100,10 @@ const Profile = ({playerInfo}) => {
             height: 50, 
             margin: 10,
             alignSelf: 'center',
-        }
+        },
+        button: {
+            marginTop: 5,
+        },
     });
 
     export default Profile;
