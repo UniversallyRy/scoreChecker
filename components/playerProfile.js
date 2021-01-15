@@ -44,16 +44,12 @@ const Profile = ({playerInfo}, loading) => {
                         <Text style={styles.profileEntryRight}>{`${playerInfo.pts}`}</Text>
                     </View>
                     <View style={styles.profileEntry}>
-                        <Text style={styles.profileEntryLeft}>REB:</Text>
-                        <Text style={styles.profileEntryRight}>{`${playerInfo.reb}`}</Text>
-                    </View>
-                    <View style={styles.profileEntry}>
                         <Text style={styles.profileEntryLeft}>AST:</Text>
                         <Text style={styles.profileEntryRight}>{`${playerInfo.ast}`}</Text>
                     </View>
                     <View style={styles.profileEntry}>
-                        <Text style={styles.profileEntryLeft}>PIE:</Text>
-                        <Text style={styles.profileEntryRight}>{`${playerInfo.pie}`}</Text>
+                        <Text style={styles.profileEntryLeft}>REB:</Text>
+                        <Text style={styles.profileEntryRight}>{`${playerInfo.reb}`}</Text>
                     </View>
                     <Button
                         containerStyle={styles.button} 

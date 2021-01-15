@@ -7,31 +7,36 @@ import { Formik } from 'formik';
 import RButton from '../components/buttons';
 import PlayerProfile from '../components/playerProfile'
 import { DEFAULT_PLAYER_INFO } from '../constants';
+import PlayerSearch from '../components/playerSearch';
 
 // other components seperate into fully functional components/stateless
-
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const initialState = {
-        // James Harden as default profile
-        playerInfo: DEFAULT_PLAYER_INFO
-  }
+    // James Harden as default profile
+    playerInfo: DEFAULT_PLAYER_INFO
+}
 
 const PlayerStats = () => {
-    // keyboard fixes 
-    const [keyboardOffset, setKeyboardOffset] = useState(0);
-    const onKeyboardShow = event => setKeyboardOffset(event.endCoordinates.height);
-    const onKeyboardHide = () => setKeyboardOffset(0);
-    const keyboardDidShowListener = useRef();
-    const keyboardDidHideListener = useRef();
     // state for player arrays/object
     const [playerObj, setPlayerObj] = useState(initialState)
-
+    // stores api promise
     const loadPlayerInfo = (playerName) => {
         nba.stats.playerInfo({ PlayerID: nba.findPlayer(playerName).playerId }).then((info) => {
             const playerInfo = Object.assign(info.commonPlayerInfo[0], info.playerHeadlineStats[0]);
             console.log(playerInfo);
             setPlayerObj({ playerInfo });
         });
+    }
+    // cycles through reset twice to trigger promise rerender
+    const handleReset = (n) => {
+        let count = n;
+        if (count > 1) {
+            return null
+        }else{
+            loadPlayerInfo(initialState.playerInfo.fullName)
+        }
+        count++;
+        handleReset(n + 1);
     }
 
     const handleInput = ( item ) => {
@@ -50,89 +55,21 @@ const PlayerStats = () => {
             }
         }
     }
-
-    // custom mount hook for one time useEffect implementation
-
     useEffect(() => {
-    keyboardDidShowListener.current = Keyboard.addListener('keyboardWillShow', onKeyboardShow);
-    keyboardDidHideListener.current = Keyboard.addListener('keyboardWillHide', onKeyboardHide);
-    loadPlayerInfo(initialState.playerInfo.fullName)
-    return () => {
-        keyboardDidShowListener.current.remove();
-        keyboardDidHideListener.current.remove();
-  };
-}, []);
-
-    
-    function searchArr(nameKey, myObj){
-        return myObj.[nameKey];
-    }
-
-    function searchA(nameKey, myArray){
-        for (var i=0; i < myArray.length; i++) {
-            if (myArray[i].nameKey === nameKey) {
-                return myArray[i].nameKey;
-            }
-        }
-    }
-
-    const PlayBoxStats = () => {
-        return (
-            <>
-                <Text>Player: {playerObj.fullName}</Text>
-                <Text>Season: {playerObj.timeFrame}</Text>
-                <Text>Points: {playerObj.pts}</Text>
-                <Text>Rebounds: {playerObj.reb}</Text>
-                <Text>Assists: {playerObj.ast}</Text>
-            </>
-        )
-    }
-    
-    const handleReset = () => {
-        setPlayerObj(initialState);
-    }
+        loadPlayerInfo(initialState.playerInfo.fullName)
+        return () => {
+        };
+    }, []);
     
     return (
         <ScrollView>
             <PlayerProfile 
             playerInfo={playerObj.playerInfo}
             />
-            <Formik
-                initialValues={{player: ''}}
-                onSubmit={(values, actions) => { 
-                        handleInput(values);
-                        actions.resetForm();
-                        Keyboard.dismiss();
-                    }
-                }
-            >
-                {({ handleChange, handleBlur, handleSubmit, values }) => (
-                <View style={{alignContent: 'center'}}>
-                    <Input
-                        onChangeText={handleChange('player')}
-                        onBlur={handleBlur('player')}
-                        value={values.player}
-                        enablesReturnKeyAutomatically={true}
-                        importantForAutofill='auto'
-                        placeholder='Search for stats'
-                        leftIcon={
-                            <Icon
-                            name='user'
-                            size={24}
-                            color='black'
-                            />
-                        }
-                        style={styles.textForm}
-                    />
-                    <View style={styles.allButtons}>
-                        <RButton onPress={handleSubmit} title="Submit"></RButton>
-                        <RButton onPress={handleReset} title="Reset" />
-                    </View>  
-                </View>
-                )}
-            </Formik> 
-            {/* {playerObj.playerName != "" && <PlayBoxStats/>
-            } */}
+            <PlayerSearch
+                handleInput={handleInput}
+                handleReset={() => handleReset(0)}
+            /> 
         </ScrollView>
     )
 }
@@ -144,21 +81,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'grey',
         alignContent: 'center',
         justifyContent: 'center',
-    },
-    allButtons: {
-        alignContent: 'center',
-    },
-    textForm: {
-        position: 'absolute',
-        width:    '100%',
-        paddingHorizontal: 100,
-        margin: 10,
-        height: 50,
-    },
-    title: {
-        alignSelf: 'center',
-        fontSize: 30,
-        marginBottom: 10,
     },
 });
 
