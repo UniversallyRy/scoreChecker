@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to my Stat Checker 👋</h1>
+<h1 align="center">👋👋 App made to stay up to date with NBA statistics 👋👋</h1>
 <p>
   <a href="https://twitter.com/universallyry" target="_blank">
     <img alt="Twitter: universallyry" src="https://img.shields.io/twitter/follow/universallyry.svg?style=social" />
@@ -29,16 +29,12 @@ npm install
 npm start
 ```
 
-## Author
+## Made by:
 
 👤 **Ryan Paige**
 
 - Twitter: [@universallyry](https://twitter.com/universallyry)
 - Github: [@universallyry](https://github.com/universallyry)
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
 
 ---
 
