@@ -7,6 +7,16 @@
 
 > Check NBA scores and stats
 
+## Resources Used
+
+- [NodeJS](https://nodejs.org/en/download/)
+- [react-native](https://reactnative.dev/)
+- [react-native-elements](https://reactnativeelements.com/)
+- [expo](https://expo.io/)
+- [formik](https://formik.org/docs/guides/react-native)
+- [momentjs](https://momentjs.com/)
+- [Node.js client for nba.com API endpoints](https://github.com/bttmly/nba)
+
 ## Install
 
 ```sh
