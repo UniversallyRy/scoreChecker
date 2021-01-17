@@ -8,7 +8,7 @@ import RButton from '../components/buttons';
 import PlayerProfile from '../components/playerProfile'
 import PlayerSearch from '../components/playerSearch';
 import { DEFAULT_PLAYER_INFO } from '../constants';
-// todos: other components seperate into fully functional components/stateless
+// todos: other components seperate into fully functional components/stateless, REST api design
 
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );

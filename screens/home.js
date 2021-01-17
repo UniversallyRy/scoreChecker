@@ -8,7 +8,7 @@ import Button from '../components/buttons';
 import { setIn } from 'formik';
 import NBA from 'nba';
 import moment from 'moment';
-// todo: conditional needed for empties: 'livePeriodTimeBcast'
+// todo: conditional needed for empties: 'livePeriodTimeBcast', RESTful api design
 
 console.log( moment().format() );
 //consistent screen dimensions across multiple devices
