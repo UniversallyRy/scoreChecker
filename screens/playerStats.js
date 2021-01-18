@@ -8,7 +8,7 @@ import RButton from '../components/buttons';
 import PlayerProfile from '../components/playerProfile'
 import PlayerSearch from '../components/playerSearch';
 import { DEFAULT_PLAYER_INFO } from '../constants';
-// todos: other components seperate into fully functional components/stateless, REST api design
+// todos: other components seperate into fully functional components/stateless, more react element styling/usage
 
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
@@ -29,7 +29,7 @@ const PlayerStats = () => {
         });
     }
     // cycles through reset twice to trigger promise rerender
-    const handleReset = ( n ) => {
+    const handleReset =  n  => {
         let count = n;
         if ( count > 1 ) {
             return null
@@ -39,14 +39,11 @@ const PlayerStats = () => {
         count++;
         handleReset( n + 1 );
     }
-
     const handleInput = ( item ) => {
-        // regEx that checks to make sure at least 2 words are inputted
+        // regex that is used in below condition to test that at least 2 words were inputted
         const regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
         const trimmedInput = item.player.trim();
-        //searches nba api and checks in below condition to see if its valid
         const newPlayer = nba.findPlayer( trimmedInput );
-
         if(!regName.test( trimmedInput )) {
             alert( 'Please enter the full name of the player.' );
             return false;
@@ -54,7 +51,6 @@ const PlayerStats = () => {
             if ( newPlayer != undefined ) {
                     loadPlayerInfo(trimmedInput);
             }else{
-                //error case for inputs(names) that pass test but don't exist in nba api
                 alert( 'Player not found, Try again.' )
             }
         }
