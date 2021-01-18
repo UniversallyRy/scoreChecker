@@ -25,7 +25,7 @@ const initialState = [
   },
 ];
 
-const Home = () => {
+const Home = ({navigation}) => {
   const [ state, setState ] = useState( initialState );
   const [ newObj, setNewObj ] = useState( [] );
   const [ loading, setLoading ] = useState( true );

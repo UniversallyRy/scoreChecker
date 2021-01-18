@@ -17,7 +17,7 @@ const initialState = {
     playerInfo: DEFAULT_PLAYER_INFO
 }
 
-const PlayerStats = () => {
+const PlayerStats = ({ navigation }) => {
     // state for player arrays/object
     const [ playerObj, setPlayerObj ] = useState( initialState )
     // stores api promise
@@ -66,6 +66,7 @@ const PlayerStats = () => {
         //ScrollView added for ability to view all content while keyboard is open
         <ScrollView>
             <PlayerProfile 
+                navigation={navigation}
                 playerInfo={ playerObj.playerInfo }
             />
             <PlayerSearch

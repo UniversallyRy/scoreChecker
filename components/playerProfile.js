@@ -5,7 +5,7 @@ import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
 import Button from '../components/buttons'
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
-const Profile = ( { playerInfo }, loading ) => {
+const Profile = ( { playerInfo, navigation }, loading ) => {
     //  top profile card with future access to more info
     // todo: profileEntry loop for DRY, fix teamlogo, 
     return (
@@ -53,6 +53,12 @@ const Profile = ( { playerInfo }, loading ) => {
                     <Button
                         containerStyle={ styles.button } 
                         title="Click for more info"
+                        onPress={() => {
+                            /* 1. Navigate to the Extended Profile route with params */
+                            navigation.navigate('Extended Profile', {
+                                otherParam: 'anything you want here',
+                            });
+                        }}
                         />
                 </>
                 :<Text>Loading</Text>

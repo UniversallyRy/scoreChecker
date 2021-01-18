@@ -8,6 +8,7 @@ import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import Home from './screens/home';
 import PlayerStats from './screens/playerStats';
+import ExtendedProfile from './components/extendedProfile';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // creating bottom tabs and a stack nav
@@ -24,28 +25,41 @@ const MyTabs = () => (
       labelStyle: { fontSize: 12 }
     }}
   > 
-      <Tab.Screen style={ styles.tabText } name="Home" component={ Home } 
-        options={{
-          tabBarLabel: 'Home',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="basketball" color={ color } size={ size } />
-          ),
-        }}
-      />
-      <Tab.Screen style={ styles.tabText } name="Player Stats" component={ PlayerStats } 
-        options={{
-          tabBarLabel: 'Player Stats',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={ color } size={ size } />
-          ),
-        }}
-      />
+    <Tab.Screen style={ styles.tabText } name="Home" component={ Home } 
+      options={{
+        tabBarLabel: 'Home',
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="basketball" color={ color } size={ size } />
+        ),
+      }}
+    />
+    <Tab.Screen style={ styles.tabText } name="Player Stats" component={ PlayerStats } 
+      options={{
+        tabBarLabel: 'Player Stats',
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="account" color={ color } size={ size } />
+        ),
+      }}
+    />
   </Tab.Navigator>
 );
 
 const AuthStack = () => (
   <Stack.Navigator headerTitleAlign>
       <Stack.Screen name="NBA Updates" component={ MyTabs } 
+        options={{
+          headerStyle:{ backgroundColor: '#586949' },
+          headerLeft: ( props ) => (
+            <HeaderBackButton
+              { ...props }
+              onPress={() => {
+                // Do something
+              }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen name="Extended Profile" component={ ExtendedProfile } 
         options={{
           headerStyle:{ backgroundColor: '#586949' },
           headerLeft: ( props ) => (
