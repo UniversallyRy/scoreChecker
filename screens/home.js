@@ -10,9 +10,9 @@ import NBA from 'nba';
 import moment from 'moment';
 // todo: conditional needed for empties: 'livePeriodTimeBcast', RESTful api design
 
-console.log( moment().format() );
 //consistent screen dimensions across multiple devices
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
+const todaysDate = moment().format('L') ;
 
 // imported nodejs nba api from https://github.com/bttmly/nba
 
@@ -41,7 +41,7 @@ const Home = () => {
   
   useEffect(() => {
     async function initData() {
-      NBA.stats.scoreboard({ gameDate: "01/15/2021" }).then( res => setNewObj( res.gameHeader ) );
+      NBA.stats.scoreboard({ gameDate: todaysDate }).then( res => setNewObj( res.gameHeader ) );
       }
       initData();
     }, [])
