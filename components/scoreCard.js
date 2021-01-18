@@ -10,10 +10,10 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 // logo 35 x 50
 // create function to extract gamecode teams
 
-const Home = ({ item }) => (
+const Home = ({ item, date }) => (
   <>
       <ScrollView scrollable containerStyle={ styles.scoreContainer } >
-        <Card.Title>Scores for :add Date</Card.Title>
+        <Card.Title>Scores for {date}</Card.Title>
         <Card.Divider style={ styles.divider } />
         {
           item.map(( u, i ) => {

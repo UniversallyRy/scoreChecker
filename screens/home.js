@@ -57,7 +57,7 @@ const Home = () => {
         </Card>
         {/* scorecard list component showcasing Today's scores*/}
         {loading ? <Text> Loading. . .</Text>
-                 : <ScoreCard item={ state }/>
+                 : <ScoreCard date={ todaysDate } item={ state }/>
         }
     </>   
   )   
