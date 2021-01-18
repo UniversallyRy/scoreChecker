@@ -56,7 +56,8 @@ const Profile = ( { playerInfo, navigation }, loading ) => {
                         onPress={() => {
                             /* 1. Navigate to the Extended Profile route with params */
                             navigation.navigate('Extended Profile', {
-                                otherParam: 'anything you want here',
+                                itemId: 10,
+                                playerInfo: playerInfo,
                             });
                         }}
                         />
@@ -78,7 +79,7 @@ const Profile = ( { playerInfo, navigation }, loading ) => {
             borderRadius: 6,
             marginBottom: 50,
         },
-        profileEntryPlayerNname: {
+        profileEntryPlayerName: {
             fontSize: 20,
             fontWeight: 'bold',
             alignSelf: 'center',
