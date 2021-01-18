@@ -7,15 +7,34 @@ import nba from 'nba';
 import { DEFAULT_PLAYER_INFO } from '../constants';
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
-const initialState = {
-    // James Harden as default profile
-    playerInfo: {},
-}
 
 const ExtendedProfile = ({ route, navigation }) => {
-    // state for player arrays/object
-    const [ playerObj, setPlayerObj ] = useState( initialState );
     const { itemId, playerInfo } = route.params;
+    const profileState = {
+        // James Harden as default profile
+            'Name': playerInfo.displayFirstLast,
+            'Team': playerInfo.teamCity + ' ' + playerInfo.teamName,
+            'Jersey #': playerInfo.jersey,
+            'Position': playerInfo.position,
+            'Experience': playerInfo.seasonExp,
+            'Weight': playerInfo.weight,
+            'Height': playerInfo.height,
+            'Country': playerInfo.country,
+            'College': playerInfo.school,
+            'Draft Year': playerInfo.draftYear,
+            'Draft Round': playerInfo.draftRound,
+            'Draft Number': playerInfo.draftNumber,
+            'Season': playerInfo.timeFrame,
+            'Points': playerInfo.pts,
+            'Rebounds': playerInfo.reb,
+            'Assists': playerInfo.ast,
+            'Assists': playerInfo.ast,
+            'Assists': playerInfo.ast,
+        }
+    
+    // state for player arrays/object
+    const [ playerObj, setPlayerObj ] = useState( playerInfo );
+    console.log(playerInfo)
     // stores api promise
     const loadPlayerInfo = ( playerName ) => {
         nba.stats.playerInfo({ PlayerID: nba.findPlayer( playerName ).playerId }).then(( info ) => {
@@ -26,7 +45,7 @@ const ExtendedProfile = ({ route, navigation }) => {
     }
     // initial load of default profile
     useEffect(() => {
-        // loadPlayerInfo( )
+        // setPlayerObj(playerInfo);
         return () => {
         };
     }, []);
@@ -35,34 +54,14 @@ const ExtendedProfile = ({ route, navigation }) => {
         //ScrollView added for ability to view all content while keyboard is open
         <ScrollView contentContainerStyle={styles.container}>
             <Card>
-                <View style={ styles.profileEntry }>
-                    <Text style={ styles.profileEntryLeft }>Name:</Text>
-                    <Text style={ styles.profileEntryRight }>{ `${ playerInfo.displayFirstLast }` }</Text>
-                </View>
-                <View style={ styles.profileEntry }>
-                    <Text style={ styles.profileEntryLeft }>Team:</Text>
-                    <Text style={ styles.profileEntryRight }>{ `${ playerInfo.teamCity } ${ playerInfo.teamName }` }</Text>
-                </View>                
-                <View style={ styles.profileEntry }>
-                    <Text style={ styles.profileEntryLeft }>Height:</Text>
-                    <Text style={ styles.profileEntryRight }>{ `${ playerInfo.height }` }</Text>
-                    </View>
-                    <View style={ styles.profileEntry }>
-                        <Text style={ styles.profileEntryLeft }>Weight:</Text>
-                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.weight }` }</Text>
-                    </View>
-                    <View style={ styles.profileEntry }>
-                        <Text style={ styles.profileEntryLeft }>PTS:</Text>
-                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.pts }` }</Text>
-                    </View>
-                    <View style={ styles.profileEntry }>
-                        <Text style={ styles.profileEntryLeft }>AST:</Text>
-                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.ast }` }</Text>
-                    </View>
-                    <View style={ styles.profileEntry }>
-                        <Text style={ styles.profileEntryLeft }>REB:</Text>
-                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.reb }` }</Text>
-                    </View>
+                {
+                    Object.entries(profileState).map(([key, data]) => (
+                        <View style={ styles.profileEntry }>
+                            <Text style={ styles.profileEntryLeft }>{ key }:</Text>
+                            <Text style={ styles.profileEntryRight }>{ `${ data }` }</Text>
+                        </View>
+                    ))
+                }               
             </Card>
             <Button title="Go back" onPress={() => navigation.goBack()} />
         </ScrollView>
