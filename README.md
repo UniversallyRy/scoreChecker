@@ -1,4 +1,4 @@
-<h1 align="center">👋👋 App made to stay up to date with NBA statistics 👋👋</h1>
+<h1 align="center">App made to check who's playing today and basic player stats</h1>
 <p>
   <a href="https://twitter.com/universallyry" target="_blank">
     <img alt="Twitter: universallyry" src="https://img.shields.io/twitter/follow/universallyry.svg?style=social" />
