@@ -39,13 +39,12 @@ const ExtendedProfile = ({ route, navigation }) => {
             <Card contentContainerStyle={styles.container}>
                 {
                     Object.entries(profileState).map(([key, data]) => (
-                        <Card.Title style={ styles.profileEntry }>
+                        <Card.Title key={key} style={ styles.profileEntry }>
                             <Text style={ styles.profileEntryLeft }>{ key }: </Text>
                             <Text style={ styles.profileEntryRight }>{ `${ data }` }</Text>
                         </Card.Title>
                     ))
                 }               
-            <Button title="Go back" onPress={() => navigation.goBack()} />
             </Card>
     )
 }

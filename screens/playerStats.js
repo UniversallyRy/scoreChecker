@@ -64,26 +64,28 @@ const PlayerStats = ({ navigation }) => {
     
     return (
         //ScrollView added for ability to view all content while keyboard is open
-        <ScrollView>
-            <PlayerProfile 
-                navigation={navigation}
-                playerInfo={ playerObj.playerInfo }
-            />
-            <PlayerSearch
-                handleInput={ handleInput }
-                handleReset={() => handleReset( 0 )}
-            /> 
-        </ScrollView>
+        <View style={styles.container}>
+            <ScrollView>
+                <PlayerProfile 
+                    navigation={navigation}
+                    playerInfo={ playerObj.playerInfo }
+                />
+                <PlayerSearch
+                    handleInput={ handleInput }
+                    handleReset={() => handleReset( 0 )}
+                />
+            </ScrollView>                 
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     container : {
+        flex: 1,
         width: windowWidth,
         height: windowHeight,
-        backgroundColor: 'grey',
+        backgroundColor: '#696969',
         alignContent: 'center',
-        justifyContent: 'center',
     },
 });
 

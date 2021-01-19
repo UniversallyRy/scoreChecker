@@ -45,31 +45,18 @@ const MyTabs = () => (
 );
 
 const AuthStack = () => (
-  <Stack.Navigator headerTitleAlign>
-      <Stack.Screen name="NBA Updates" component={ MyTabs } 
+  <Stack.Navigator>
+      <Stack.Screen name="NBA Stats" component={ MyTabs } 
         options={{
           headerStyle:{ backgroundColor: '#586949' },
-          headerLeft: ( props ) => (
-            <HeaderBackButton
-              { ...props }
-              onPress={() => {
-                // Do something
-              }}
-            />
-          ),
+          headerTitleContainerStyle: {
+            marginLeft:35,
+          },
         }}
       />
       <Stack.Screen name="Extended Profile" component={ ExtendedProfile } 
         options={{
           headerStyle:{ backgroundColor: '#586949' },
-          headerLeft: ( props ) => (
-            <HeaderBackButton
-              { ...props }
-              onPress={() => {
-                // Do something
-              }}
-            />
-          ),
         }}
       />
   </Stack.Navigator>

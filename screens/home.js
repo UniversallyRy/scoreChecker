@@ -47,7 +47,7 @@ const Home = ({navigation}) => {
     }, [])
 
   return(
-      <>
+      <View style={styles.container}>
         <Card containerStyle={ styles.titleContainer }> 
           <Card.Title style={ styles.title }>Today's Scores</Card.Title>
           <Card.Divider style={ styles.divider } />
@@ -59,12 +59,15 @@ const Home = ({navigation}) => {
         {loading ? <Text> Loading. . .</Text>
                  : <ScoreCard date={ todaysDate } item={ state }/>
         }
-    </>   
+    </View>   
   )   
 };
 export default Home;
 
 const styles = StyleSheet.create({
+  container:{
+    backgroundColor: '#696969'
+  },
   titleContainer : { 
     width: windowWidth * 0.999999 ,
     alignSelf: 'center',
