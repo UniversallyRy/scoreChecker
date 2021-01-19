@@ -77,7 +77,7 @@ const Profile = ({ playerInfo, navigation }) => {
                         }}
                         />
                 </>
-                : <Card>
+                : <Card style={{alignContent:'center'}}>
                     <Text>Loading</Text>
                     <LoadingButton/>
                  </Card>

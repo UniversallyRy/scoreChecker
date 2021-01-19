@@ -1,40 +1,68 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Dimensions, ScrollView } from 'react-native';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import { Card, ListItem, Icon, Input } from 'react-native-elements';
+import { RaisedButton, LoadingButton } from '../components/buttons'
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
 // Caution: WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
 // todos: format score card better
-const Home = ({ item, date }) => (
-  <>
-      <ScrollView containerStyle={ styles.scoreContainer } >
-        <Card.Title style={{color: 'white'}}>Scores for { date }</Card.Title>
-        <Card.Divider style={ styles.divider } />
-        {
-          item.map(( u, i ) => {
-            let comp = u.gamecode.slice(-6);
-            let splitAt = index => x => [x.slice(0, index), x.slice(index)];
-            let splitteam = splitAt(3)(comp);
-            let vs = splitteam[0] + ' at ' + splitteam[1];
+const Home = ({ item, date }) => {
+  // todo: profileEntry loop for DRY, fix teamlogos not appearing,
+  const [ loading , setLoading ] = useState( true );
+    
+  useEffect(() => {
+      const checkInfo = () => {
+          if ( item !== undefined ){
+              setLoading( false );
+          }else{
+              setLoading( true );
+          }
+      }
+          return () => {
+          checkInfo();       
+          };
+  }, [item]);
 
-            return ( 
-              <ListItem topDivider={ true } key={ i } raised containerStyle={ styles.scoreCard }>
+  return(
+    <>
+        <ScrollView containerStyle={ styles.scoreContainer } >
+          <Card.Title style={{color: 'white'}}>Scores for { date }</Card.Title>
+          <Card.Divider style={ styles.divider } />
+          {!loading
+            ?item.map(( u, i ) => {
+              let comp = u.gamecode.slice(-6);
+              let splitAt = index => x => [x.slice(0, index), x.slice(index)];
+              let splitteam = splitAt(3)(comp);
+              let vs = splitteam[0] + ' at ' + splitteam[1];
+
+              return ( 
+                <ListItem topDivider={ true } key={ i } raised containerStyle={ styles.scoreCard }>
+                  <ListItem.Content>
+                      <ListItem.Title style={ styles.title }>{ vs }</ListItem.Title>
+                      <ListItem.Subtitle style={ styles.quarter }>{ u.gameStatusText }</ListItem.Subtitle>
+                      <Card.Divider style={ styles.divider } />
+                      <ListItem.Subtitle style={ styles.broadcast }>{ u.livePeriodTimeBcast }</ListItem.Subtitle>
+                  </ListItem.Content>
+                </ListItem>
+              );
+            })
+        
+            : <ListItem topDivider={ true } raised containerStyle={ styles.scoreCard }>
                 <ListItem.Content>
-                    <ListItem.Title style={ styles.title }>{ vs }</ListItem.Title>
-                    <ListItem.Subtitle style={ styles.quarter }>{ u.gameStatusText }</ListItem.Subtitle>
-                    <Card.Divider style={ styles.divider } />
-                    <ListItem.Subtitle style={ styles.broadcast }>{ u.livePeriodTimeBcast }</ListItem.Subtitle>
+                  <ListItem.Title style={ styles.title }>Loading</ListItem.Title>
+                  <Card.Divider style={ styles.divider } />
+                  <Card.Divider style={ styles.divider } />
+                  <LoadingButton containerStyle={{width: 400}}/>
                 </ListItem.Content>
               </ListItem>
-            );
-          })
-        }
-      </ScrollView>
-  </>      
-  );
+          }
+        </ScrollView>
+    </>      
+  )
+}
 
 export default Home;
 
