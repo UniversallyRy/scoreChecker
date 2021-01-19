@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, ImageBackground } from 'react-native';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
 import { Card, ListItem, Icon } from 'react-native-elements';
@@ -29,6 +29,7 @@ const Home = ({navigation}) => {
   const [ state, setState ] = useState( initialState );
   const [ newObj, setNewObj ] = useState( [] );
   const [ loading, setLoading ] = useState( true );
+  const image = require('../assets/double-bubble-dark.png'); 
   
   const loader = () => {
     setState( newObj );
@@ -48,17 +49,19 @@ const Home = ({navigation}) => {
 
   return(
       <View style={styles.container}>
-        <Card containerStyle={ styles.titleContainer }> 
-          <Card.Title style={ styles.title }>Today's Scores</Card.Title>
-          <Card.Divider style={ styles.divider } />
-            <Text style={ styles.text }>
-              Quickly stay updated
-            </Text>
-        </Card>
-        {/* scorecard list component showcasing Today's scores*/}
-        {loading ? <Text> Loading. . .</Text>
-                 : <ScoreCard date={ todaysDate } item={ state }/>
-        }
+        <ImageBackground source={image} style={styles.bgImage}>
+          <Card containerStyle={ styles.titleContainer }> 
+            <Card.Title style={ styles.title }>Today's Scores</Card.Title>
+            <Card.Divider style={ styles.divider } />
+              <Text style={ styles.text }>
+                Quickly stay updated
+              </Text>
+          </Card>
+          {/* scorecard list component showcasing Today's scores*/}
+          {loading ? <Text> Loading. . .</Text>
+                  : <ScoreCard date={ todaysDate } item={ state }/>
+          }
+        </ImageBackground>
     </View>   
   )   
 };
@@ -66,7 +69,7 @@ export default Home;
 
 const styles = StyleSheet.create({
   container:{
-    backgroundColor: '#696969'
+    flex: 1,
   },
   titleContainer : { 
     width: windowWidth * 0.999999 ,
@@ -89,5 +92,10 @@ const styles = StyleSheet.create({
   },
   divider: {
     width: windowWidth * 0.98,
+  },
+  bgImage: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center"
   },
 })
