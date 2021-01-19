@@ -5,7 +5,6 @@ import { Input } from 'react-native-elements';
 import { Card, ListItem, Icon } from 'react-native-elements';
 import ScoreCard from '../components/scoreCard';
 import Button from '../components/buttons';
-import { setIn } from 'formik';
 import NBA from 'nba';
 import moment from 'moment';
 // todo: conditional needed for empties: 'livePeriodTimeBcast', RESTful api design
@@ -29,6 +28,7 @@ const Home = ({navigation}) => {
   const [ state, setState ] = useState( initialState );
   const [ newObj, setNewObj ] = useState( [] );
   const [ loading, setLoading ] = useState( true );
+  // Background img pattern from Toptal Subtle Patterns(https://www.toptal.com/designers/subtlepatterns/) 
   const image = require('../assets/double-bubble-dark.png'); 
   
   const loader = () => {
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#586949',
+    backgroundColor: '#696969',
     marginBottom: 45,
   },
   title: {

@@ -19,9 +19,9 @@ const MyTabs = () => (
   <Tab.Navigator 
     initialRouteName="Player Stats"
     tabBarOptions={{
-      activeTintColor: '#9CBA7F',
-      inactiveTintColor: 'silver',
-      tabStyle: { backgroundColor: '#586949' },
+      activeTintColor: 'white',
+      inactiveTintColor: 'black',
+      tabStyle: { backgroundColor: '#696969' },
       labelStyle: { fontSize: 12 }
     }}
   > 
@@ -48,15 +48,15 @@ const AuthStack = () => (
   <Stack.Navigator>
       <Stack.Screen name="NBA Stats" component={ MyTabs } 
         options={{
-          headerStyle:{ backgroundColor: '#586949' },
+          headerStyle:{ backgroundColor: '#696969' },
           headerTitleContainerStyle: {
-            marginLeft:35,
+            marginLeft: 35,
           },
         }}
       />
       <Stack.Screen name="Extended Profile" component={ ExtendedProfile } 
         options={{
-          headerStyle:{ backgroundColor: '#586949' },
+          headerStyle:{ backgroundColor: '#696969' },
         }}
       />
   </Stack.Navigator>
@@ -74,7 +74,6 @@ export default App;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },

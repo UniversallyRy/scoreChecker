@@ -8,6 +8,7 @@ import RButton from '../components/buttons';
 import PlayerProfile from '../components/playerProfile'
 import PlayerSearch from '../components/playerSearch';
 import { DEFAULT_PLAYER_INFO } from '../constants';
+import { ScrollView } from 'react-native-gesture-handler';
 // todos: other components seperate into fully functional components/stateless, more react element styling/usage
 
 
@@ -66,7 +67,7 @@ const PlayerStats = ({ navigation }) => {
     
     return (
         //ScrollView added for ability to view all content while keyboard is open
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container}>
             <ImageBackground source={image} style={styles.bgImage}>
                 <PlayerProfile 
                     navigation={navigation}
@@ -77,21 +78,20 @@ const PlayerStats = ({ navigation }) => {
                     handleReset={() => handleReset( 0 )}
                 />
             </ImageBackground>                 
-        </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
     container : {
-        flex: 1,
         width: windowWidth,
+        justifyContent: 'center',
         height: windowHeight,
-        alignContent: 'center',
     },
     bgImage: {
         flex: 1,
         resizeMode: "cover",
-        justifyContent: "center"
+        justifyContent: 'center',
     },
 });
 

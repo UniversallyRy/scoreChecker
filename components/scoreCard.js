@@ -43,7 +43,6 @@ export default Home;
 const styles = StyleSheet.create({
   scoreContainer: {
     width: windowWidth * 0.99999 ,
-    backgroundColor: '#586949',
     alignSelf: 'center',
     alignItems: 'center',
   },
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
   },
   scoreCard: {
     width: windowWidth * 0.97 ,
-    backgroundColor: '#9CBA7F',
+    backgroundColor: '#696969',
     alignSelf: 'center',
   },
   title:{

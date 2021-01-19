@@ -75,7 +75,7 @@ const Profile = ( { playerInfo, navigation }, loading ) => {
             alignSelf: 'center',
             flex: 1,
             justifyContent: 'center',
-            backgroundColor: '#9CBA7F',
+            backgroundColor: '#696969',
             borderRadius: 6,
             marginBottom: 50,
         },

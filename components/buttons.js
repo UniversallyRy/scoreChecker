@@ -4,7 +4,7 @@ import { StyleSheet, } from 'react-native';
 
 const RaisedButton = ( props ) => 
     <Button 
-        buttonStyle={{ backgroundColor:'#586949' }}
+        buttonStyle={{ backgroundColor:'#696969' }}
         containerStyle={ styles.button } 
         raised { ...props } 
     />;

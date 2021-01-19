@@ -46,7 +46,7 @@ const playerSearch = ({ handleInput, handleReset }) => {
                             <Icon
                             name='user'
                             size={ 24 }
-                            color='black'
+                            color='#696969'
                             />
                         }
                     />
@@ -65,20 +65,17 @@ export default playerSearch
 
 const styles = StyleSheet.create({
     container: {
-        display: 'flex',
-
     },
     allButtons: {
         alignContent: 'center',
     },
     textForm: {
-        flex: 1,
         borderColor: 'transparent',
         borderWidth: 1,
-        borderColor: '#586949',
+        borderColor: '#696969',
         textAlign: 'auto',
         alignSelf: 'center',
-        color: '#586949',
+        color: '#696969',
         margin: 10, 
         height: 50,
     },
