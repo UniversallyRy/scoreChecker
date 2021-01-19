@@ -7,7 +7,7 @@ import { Icon } from 'react-native-elements';
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import Home from './screens/home';
-import PlayerStats from './screens/playerStats';
+import PlayerInfo from './screens/playerInfo';
 import ExtendedProfile from './components/extendedProfile';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -17,7 +17,7 @@ const Tab = createBottomTabNavigator();
 
 const MyTabs = () => (
   <Tab.Navigator 
-    initialRouteName="Player Stats"
+    initialRouteName="Player Info"
     tabBarOptions={{
       activeTintColor: 'white',
       inactiveTintColor: 'black',
@@ -33,9 +33,9 @@ const MyTabs = () => (
         ),
       }}
     />
-    <Tab.Screen style={ styles.tabText } name="Player Stats" component={ PlayerStats } 
+    <Tab.Screen style={ styles.tabText } name="Player Info" component={ PlayerInfo } 
       options={{
-        tabBarLabel: 'Player Stats',
+        tabBarLabel: 'Player Info',
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="account" color={ color } size={ size } />
         ),
@@ -46,7 +46,7 @@ const MyTabs = () => (
 
 const AuthStack = () => (
   <Stack.Navigator>
-      <Stack.Screen name="NBA Stats" component={ MyTabs } 
+      <Stack.Screen name="NBA checkup" component={ MyTabs } 
         options={{
           headerStyle:{ backgroundColor: '#696969' },
           headerTitleContainerStyle: {
