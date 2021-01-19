@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Input, Card, Image } from 'react-native-elements';
 import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
-import Button from '../components/buttons'
+import {RaisedButton, LoadingButton} from '../components/buttons'
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
 const Profile = ({ playerInfo, navigation }) => {
-    //  top profile card with future access to more info
-    // todo: profileEntry loop for DRY, fix teamlogo,
-    const [ loading , setLoading ] = useState(false) 
-    if (playerInfo == undefined){
-        setLoading(true);
+    // todo: profileEntry loop for DRY, fix teamlogos not appearing,
+    const [ loading , setLoading ] = useState( false ) 
+    if ( playerInfo == undefined ){
+        setLoading( true );
     }else{
     }
     return (
@@ -55,7 +54,7 @@ const Profile = ({ playerInfo, navigation }) => {
                         <Text style={ styles.profileEntryLeft }>REB:</Text>
                         <Text style={ styles.profileEntryRight }>{ `${ playerInfo.reb }` }</Text>
                     </View>
-                    <Button
+                    <RaisedButton
                         containerStyle={ styles.button } 
                         title="Click for more info"
                         onPress={() => {
@@ -68,6 +67,7 @@ const Profile = ({ playerInfo, navigation }) => {
                         />
                 </>
                 :<Text>Loading</Text>
+                 <LoadingButton/>
                 }
             </Card>
         );

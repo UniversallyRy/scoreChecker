@@ -8,7 +8,7 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
 // Caution: WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
-
+// todos: format score card better
 const Home = ({ item, date }) => (
   <>
       <ScrollView containerStyle={ styles.scoreContainer } >
