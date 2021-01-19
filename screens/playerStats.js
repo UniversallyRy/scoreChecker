@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { StyleSheet, View, Dimensions, SafeAreaView, Keyboard, ImageBackground  } from 'react-native';
+import { StyleSheet, View, Dimensions, ScrollView, Keyboard, ImageBackground  } from 'react-native';
 import { Input, Text, TextInput, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import nba from 'nba';
@@ -8,7 +8,6 @@ import RButton from '../components/buttons';
 import PlayerProfile from '../components/playerProfile'
 import PlayerSearch from '../components/playerSearch';
 import { DEFAULT_PLAYER_INFO } from '../constants';
-import { ScrollView } from 'react-native-gesture-handler';
 // todos: other components seperate into fully functional components/stateless, more react element styling/usage
 
 
@@ -67,10 +66,10 @@ const PlayerStats = ({ navigation }) => {
     
     return (
         //ScrollView added for ability to view all content while keyboard is open
-        <ScrollView contentContainerStyle={styles.container}>
-            <ImageBackground source={image} style={styles.bgImage}>
+        <ScrollView contentContainerStyle={ styles.container }>
+            <ImageBackground source={ image } style={ styles.bgImage }>
                 <PlayerProfile 
-                    navigation={navigation}
+                    navigation={ navigation }
                     playerInfo={ playerObj.playerInfo }
                 />
                 <PlayerSearch

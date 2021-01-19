@@ -5,12 +5,12 @@ import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
 import Button from '../components/buttons'
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
-const Profile = ( { playerInfo, navigation }, loading ) => {
+const Profile = ({ playerInfo, navigation }, loading ) => {
     //  top profile card with future access to more info
     // todo: profileEntry loop for DRY, fix teamlogo, 
     return (
             <Card containerStyle={ styles.playerProfile }>
-                {loading
+                { loading
                 ?<>
                     <Text style={ styles.profileEntryPlayerNname }>{ `${ playerInfo.playerName }` }</Text>
                     <View style={ styles.proPicBorder }>

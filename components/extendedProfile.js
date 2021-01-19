@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { StyleSheet, Dimensions, } from 'react-native';
+import { StyleSheet, Dimensions, ImageBackground } from 'react-native';
 import { Text, Card } from 'react-native-elements';
 import Button from '../components/buttons'
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { ImageBackground } from 'react-native';
-
+ 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
 const ExtendedProfile = ({ route, navigation }) => {
     const { itemId, playerInfo } = route.params;
     const image = require('../assets/double-bubble-dark.png');
+    
     const profileState = {
             'Name': playerInfo.displayFirstLast,
             'Team': playerInfo.teamCity + ' ' + playerInfo.teamName,
@@ -32,17 +32,17 @@ const ExtendedProfile = ({ route, navigation }) => {
         }
 
     useEffect(() => {
-        // setPlayerObj(playerInfo);
+        // insert any future needed component updates here
         return () => {
         };
     }, []);
     
     return (
-        <ImageBackground source={image} style={styles.bgImage}>
-            <Card containerStyle={styles.container}>
+        <ImageBackground source={ image } style={ styles.bgImage }>
+            <Card containerStyle={ styles.container }>
                 {
-                    Object.entries(profileState).map(([key, data]) => (
-                        <Card.Title key={key} style={ styles.profileEntry }>
+                    Object.entries( profileState ).map(( [ key, data ] ) => (
+                        <Card.Title key={ key } style={ styles.profileEntry }>
                             <Text style={ styles.profileEntryLeft }>{ key }: </Text>
                             <Text style={ styles.profileEntryRight }>{ `${ data }` }</Text>
                         </Card.Title>

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Dimensions, ImageBackground } from 'react-native';
 // import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input } from 'react-native-elements';
-import { Card, ListItem, Icon } from 'react-native-elements';
+import { Card, ListItem, Icon, Input } from 'react-native-elements';
 import ScoreCard from '../components/scoreCard';
 import Button from '../components/buttons';
 import NBA from 'nba';
@@ -11,7 +10,7 @@ import moment from 'moment';
 
 //consistent screen dimensions across multiple devices
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
-const todaysDate = moment().format('L') ;
+const todaysDate = moment().format( 'L' ) ;
 
 // imported nodejs nba api from https://github.com/bttmly/nba
 
@@ -24,7 +23,7 @@ const initialState = [
   },
 ];
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
   const [ state, setState ] = useState( initialState );
   const [ newObj, setNewObj ] = useState( [] );
   const [ loading, setLoading ] = useState( true );
@@ -48,8 +47,8 @@ const Home = ({navigation}) => {
     }, [])
 
   return(
-      <View style={styles.container}>
-        <ImageBackground source={image} style={styles.bgImage}>
+      <View style={ styles.container }>
+        <ImageBackground source={ image } style={ styles.bgImage }>
           <Card containerStyle={ styles.titleContainer }> 
             <Card.Title style={ styles.title }>Today's Scores</Card.Title>
             <Card.Divider style={ styles.divider } />
@@ -58,7 +57,7 @@ const Home = ({navigation}) => {
               </Text>
           </Card>
           {/* scorecard list component showcasing Today's scores*/}
-          {loading ? <Text> Loading. . .</Text>
+          { loading ? <Text> Loading. . .</Text>
                   : <ScoreCard date={ todaysDate } item={ state }/>
           }
         </ImageBackground>

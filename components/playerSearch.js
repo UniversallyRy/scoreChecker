@@ -22,7 +22,7 @@ const playerSearch = ({ handleInput, handleReset }) => {
     }, []);
     
     return (
-        <View style={styles.container}>
+        <View style={ styles.container }>
             <Formik
                 initialValues={{ player: '' }}
                 onSubmit={( values, actions ) => { 
