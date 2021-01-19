@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Input, Card, Image } from 'react-native-elements';
 import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
@@ -7,10 +7,21 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
 const Profile = ({ playerInfo, navigation }) => {
     // todo: profileEntry loop for DRY, fix teamlogos not appearing,
-    const [ loading , setLoading ] = useState( false ) 
-    if ( playerInfo == undefined ){
-        setLoading( true );
-    }
+    const [ loading , setLoading ] = useState( true );
+    
+    useEffect(() => {
+        const checkInfo = () => {
+            if ( playerInfo !== undefined ){
+                setLoading( false );
+            }else{
+                setLoading( true );
+            }
+        }
+            return () => {
+            checkInfo();       
+            };
+    }, [playerInfo]);
+
 
     return (
             <Card containerStyle={ styles.playerProfile }>
