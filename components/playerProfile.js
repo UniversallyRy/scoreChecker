@@ -88,7 +88,7 @@ const Profile = ( { playerInfo, navigation }, loading ) => {
         profilePic:{
             borderWidth: 2,
             overflow: 'hidden',
-            borderColor: '#586949',
+            borderColor: 'black',
             borderRadius: 50, 
             alignItems: 'center',
             alignSelf: 'center',

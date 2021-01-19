@@ -86,12 +86,12 @@ const styles = StyleSheet.create({
     container : {
         width: windowWidth,
         justifyContent: 'center',
-        height: windowHeight,
+        alignContent: 'center',
+        height: windowHeight * 0.895,
     },
     bgImage: {
         flex: 1,
         resizeMode: "cover",
-        justifyContent: 'center',
     },
 });
 

@@ -3,11 +3,13 @@ import { StyleSheet, Dimensions, } from 'react-native';
 import { Text, Card } from 'react-native-elements';
 import Button from '../components/buttons'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { ImageBackground } from 'react-native';
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
 const ExtendedProfile = ({ route, navigation }) => {
     const { itemId, playerInfo } = route.params;
+    const image = require('../assets/double-bubble-dark.png');
     const profileState = {
             'Name': playerInfo.displayFirstLast,
             'Team': playerInfo.teamCity + ' ' + playerInfo.teamName,
@@ -36,6 +38,7 @@ const ExtendedProfile = ({ route, navigation }) => {
     }, []);
     
     return (
+        <ImageBackground source={image} style={styles.bgImage}>
             <Card containerStyle={styles.container}>
                 {
                     Object.entries(profileState).map(([key, data]) => (
@@ -46,15 +49,15 @@ const ExtendedProfile = ({ route, navigation }) => {
                     ))
                 }               
             </Card>
+        </ImageBackground>
     )
 }
 
 const styles = StyleSheet.create({
     container : {
-        flex: 1,
-        width: windowWidth,
-        height: windowHeight * 0.5,
-        backgroundColor: '#9CBA7F',
+        width: windowWidth * 0.95,
+        height: windowHeight * 0.92,
+        backgroundColor: '#696969',
         alignSelf: 'center',
         alignContent: 'center',
         justifyContent: 'center',
@@ -76,8 +79,9 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         fontSize: 18,
     },
-    button: {
-        marginTop: 5,
+    bgImage: {
+        flex: 1,
+        resizeMode: "cover",
     },
 });
 

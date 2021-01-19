@@ -40,6 +40,7 @@ const playerSearch = ({ handleInput, handleReset }) => {
                         onBlur={ handleBlur( 'player' ) }
                         value={ values.player }
                         enablesReturnKeyAutomatically={ true }
+                        color='white'
                         importantForAutofill='auto'
                         placeholder='Search for Player'
                         rightIcon={
@@ -65,6 +66,7 @@ export default playerSearch
 
 const styles = StyleSheet.create({
     container: {
+        alignSelf: 'auto'
     },
     allButtons: {
         alignContent: 'center',
@@ -75,7 +77,6 @@ const styles = StyleSheet.create({
         borderColor: '#696969',
         textAlign: 'auto',
         alignSelf: 'center',
-        color: '#696969',
         margin: 10, 
         height: 50,
     },
