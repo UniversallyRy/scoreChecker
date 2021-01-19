@@ -22,7 +22,7 @@ const playerSearch = ({ handleInput, handleReset }) => {
     }, []);
     
     return (
-        <View>
+        <View style={styles.container}>
             <Formik
                 initialValues={{ player: '' }}
                 onSubmit={( values, actions ) => { 
@@ -41,8 +41,8 @@ const playerSearch = ({ handleInput, handleReset }) => {
                         value={ values.player }
                         enablesReturnKeyAutomatically={ true }
                         importantForAutofill='auto'
-                        placeholder='Search for Stats'
-                        leftIcon={
+                        placeholder='Search for Player'
+                        rightIcon={
                             <Icon
                             name='user'
                             size={ 24 }
@@ -64,10 +64,18 @@ const playerSearch = ({ handleInput, handleReset }) => {
 export default playerSearch
 
 const styles = StyleSheet.create({
+    container: {
+        display: 'flex',
+
+    },
     allButtons: {
         alignContent: 'center',
     },
     textForm: {
+        flex: 1,
+        borderColor: 'transparent',
+        borderWidth: 1,
+        borderColor: '#586949',
         textAlign: 'auto',
         alignSelf: 'center',
         color: '#586949',

@@ -36,7 +36,7 @@ const ExtendedProfile = ({ route, navigation }) => {
     }, []);
     
     return (
-            <Card contentContainerStyle={styles.container}>
+            <Card containerStyle={styles.container}>
                 {
                     Object.entries(profileState).map(([key, data]) => (
                         <Card.Title key={key} style={ styles.profileEntry }>
@@ -51,9 +51,11 @@ const ExtendedProfile = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
     container : {
+        flex: 1,
         width: windowWidth,
-        height: windowHeight,
+        height: windowHeight * 0.5,
         backgroundColor: '#9CBA7F',
+        alignSelf: 'center',
         alignContent: 'center',
         justifyContent: 'center',
     },

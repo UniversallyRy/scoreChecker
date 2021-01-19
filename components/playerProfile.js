@@ -100,21 +100,21 @@ const Profile = ( { playerInfo, navigation }, loading ) => {
             borderWidth: 1, 
         },
         profileEntry: {
-            alignItems: 'center',
-            alignContent: 'center',
+            textAlignVertical: 'auto',
             flexDirection: 'row',
             margin: 2,
         },
         profileEntryLeft:{
-            alignSelf: 'flex-start',
-            marginRight: 10,
+            textAlignVertical: 'auto',
             fontSize: 20,
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            marginBottom: 15,
         },
         profileEntryRight:{
-            alignSelf: 'flex-end',
+            textAlignVertical: 'auto',
             marginLeft: 10,
-            fontSize: 18,
+            fontSize: 20,
+            marginBottom: 15,
         },
         teamLogo:{
             width: 50,
