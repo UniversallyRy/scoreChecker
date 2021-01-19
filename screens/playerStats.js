@@ -4,7 +4,6 @@ import { Input, Text, TextInput, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import nba from 'nba';
 import { Formik } from 'formik';
-import RButton from '../components/buttons';
 import PlayerProfile from '../components/playerProfile'
 import PlayerSearch from '../components/playerSearch';
 import { DEFAULT_PLAYER_INFO } from '../constants';

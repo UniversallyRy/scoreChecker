@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, Dimensions, ScrollView } from 'react-native';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import { Card, ListItem, Icon, Input } from 'react-native-elements';
-import Button from '../components/buttons';
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
@@ -16,10 +15,15 @@ const Home = ({ item, date }) => (
         <Card.Divider style={ styles.divider } />
         {
           item.map(( u, i ) => {
+            let comp = u.gamecode.slice(-6);
+            let splitAt = index => x => [x.slice(0, index), x.slice(index)];
+            let splitteam = splitAt(3)(comp);
+            let vs = splitteam[0] + ' at ' + splitteam[1];
+
             return ( 
               <ListItem topDivider={ true } key={ i } raised containerStyle={ styles.scoreCard }>
                 <ListItem.Content>
-                    <ListItem.Title style={ styles.title }>{ u.gamecode }</ListItem.Title>
+                    <ListItem.Title style={ styles.title }>{ vs }</ListItem.Title>
                     <ListItem.Subtitle style={ styles.quarter }>{ u.gameStatusText }</ListItem.Subtitle>
                     <Card.Divider style={ styles.divider } />
                     <ListItem.Subtitle style={ styles.broadcast }>{ u.livePeriodTimeBcast }</ListItem.Subtitle>
@@ -38,7 +42,8 @@ const styles = StyleSheet.create({
   scoreContainer: {
     width: windowWidth * 0.99999 ,
     alignSelf: 'center',
-    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
   },
   divider: {
     backgroundColor: '#586949',
@@ -53,6 +58,7 @@ const styles = StyleSheet.create({
   },
   title:{
     fontWeight: 'bold',
+    marginBottom: 10,
   },
   quarter:{
     fontWeight: 'bold',

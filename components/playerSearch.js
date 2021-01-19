@@ -3,7 +3,7 @@ import { StyleSheet, View, Keyboard } from 'react-native';
 import { Formik } from 'formik';
 import { Input, Text, TextInput, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import RButton from '../components/buttons';
+import { RaisedButton } from '../components/buttons';
 
 const playerSearch = ({ handleInput, handleReset }) => {
     const [ keyboardOffset, setKeyboardOffset ] = useState( 0 );
@@ -52,8 +52,8 @@ const playerSearch = ({ handleInput, handleReset }) => {
                         }
                     />
                     <View style={ styles.allButtons }>
-                        <RButton onPress={ handleSubmit } title="Submit"/>
-                        <RButton onPress={ handleReset } title="Reset" />
+                        <RaisedButton onPress={ handleSubmit } title="Submit"/>
+                        <RaisedButton onPress={ handleReset } title="Reset" />
                     </View>  
                 </>
                 )}

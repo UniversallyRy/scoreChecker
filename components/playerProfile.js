@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Input, Card, Image } from 'react-native-elements';
 import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
-import {RaisedButton, LoadingButton} from '../components/buttons'
+import { RaisedButton, LoadingButton } from '../components/buttons'
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
 const Profile = ({ playerInfo, navigation }) => {
@@ -10,8 +10,8 @@ const Profile = ({ playerInfo, navigation }) => {
     const [ loading , setLoading ] = useState( false ) 
     if ( playerInfo == undefined ){
         setLoading( true );
-    }else{
     }
+
     return (
             <Card containerStyle={ styles.playerProfile }>
                 { !loading
@@ -66,8 +66,10 @@ const Profile = ({ playerInfo, navigation }) => {
                         }}
                         />
                 </>
-                :<Text>Loading</Text>
-                 <LoadingButton/>
+                : <Card>
+                    <Text>Loading</Text>
+                    <LoadingButton/>
+                 </Card>
                 }
             </Card>
         );
