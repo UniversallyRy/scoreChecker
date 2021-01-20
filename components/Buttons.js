@@ -5,8 +5,9 @@ import { Button } from 'react-native-elements';
 export const RaisedButton = ( props ) => 
     <Button 
         buttonStyle={{ backgroundColor:'#696969' }}
-        containerStyle={ styles.button } 
-        raised { ...props } 
+        containerStyle={ styles.button }
+        raised 
+        { ...props } 
     />;
 
 export const LoadingButton = ( props ) => 
