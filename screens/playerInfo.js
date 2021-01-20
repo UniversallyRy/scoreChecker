@@ -25,7 +25,6 @@ const PlayerStats = ({ navigation }) => {
     const loadPlayerInfo = ( playerName ) => {
         nba.stats.playerInfo({ PlayerID: nba.findPlayer( playerName ).playerId }).then(( info ) => {
             const playerInfo = Object.assign(info.commonPlayerInfo[ 0 ], info.playerHeadlineStats[ 0 ]);
-            console.log( playerInfo );
             setPlayerObj({ playerInfo });
         });
     }

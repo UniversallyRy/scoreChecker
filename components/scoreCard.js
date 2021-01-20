@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Dimensions, ScrollView } from 'react-native';
-// import Icon from 'react-native-vector-icons/FontAwesome';
 import { Card, ListItem, Icon, Input } from 'react-native-elements';
+// import Icon from 'react-native-vector-icons/FontAwesome';
 import { RaisedButton, LoadingButton } from '../components/buttons'
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
-
 // Caution: WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
 // todos: format score card better
@@ -64,8 +63,6 @@ const Home = ({ item, date }) => {
   )
 }
 
-export default Home;
-
 const styles = StyleSheet.create({
   scoreContainer: {
     width: windowWidth * 0.99999 ,
@@ -96,3 +93,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 })
+
+export default Home;

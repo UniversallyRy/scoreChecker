@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Dimensions, ImageBackground } from 'react-native';
-// import Icon from 'react-native-vector-icons/FontAwesome';
 import { Card, ListItem, Icon, Input } from 'react-native-elements';
+// import Icon from 'react-native-vector-icons/FontAwesome';
+import moment from 'moment';
+import NBA from 'nba';
 import ScoreCard from '../components/scoreCard';
 import { LoadingButton } from '../components/buttons'
-import NBA from 'nba';
-import moment from 'moment';
 // todo: conditional needed for empties: 'livePeriodTimeBcast', RESTful api design
 
 //consistent screen dimensions across multiple devices
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
-const todaysDate = moment().format( 'L' ) ;
-
+const todaysDate = moment().format( 'L' );
 // imported nodejs nba api from https://github.com/bttmly/nba
 
 //Initial object to use before the nba api's async is fulfilled
@@ -33,7 +32,7 @@ const Home = ({ navigation }) => {
   const loader = () => {
     setState( newObj );
     setLoading( false )
-  }
+  };
 
   setTimeout(() => {
     loader();
@@ -44,7 +43,7 @@ const Home = ({ navigation }) => {
       NBA.stats.scoreboard({ gameDate: todaysDate }).then( res => setNewObj( res.gameHeader ) );
       }
       initData();
-    }, [])
+    }, []);
 
   return(
       <View style={ styles.container }>
@@ -64,7 +63,6 @@ const Home = ({ navigation }) => {
     </View>   
   )   
 };
-export default Home;
 
 const styles = StyleSheet.create({
   container:{
@@ -98,3 +96,5 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
 })
+
+export default Home;

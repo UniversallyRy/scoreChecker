@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Input, Card, Image } from 'react-native-elements';
 import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
 import { RaisedButton, LoadingButton } from '../components/buttons'
+
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
 const Profile = ({ playerInfo, navigation }) => {
@@ -22,25 +23,23 @@ const Profile = ({ playerInfo, navigation }) => {
             };
     }, [playerInfo]);
 
-
     return (
             <Card containerStyle={ styles.playerProfile }>
                 { !loading
                 ?<>
                     <Text style={ styles.profileEntryPlayerNname }>{ `${ playerInfo.playerName }` }</Text>
                     <View style={ styles.proPicBorder }>
-                    <Image
-                        containerStyle={ styles.profilePic }
-                        source={{ uri: `${PROFILE_PIC_URL_PREFIX}/${ playerInfo.playerId }.png` }}
-                        alt="Profile"
-                    />
+                        <Image
+                            containerStyle={ styles.profilePic }
+                            source={{ uri: `${PROFILE_PIC_URL_PREFIX}/${ playerInfo.playerId }.png` }}
+                            alt="Profile"
+                        />
                     </View>
                     <Image
                         containerStyle={ styles.teamLogo }
                         source={{ uri: `${TEAM_PIC_URL_PREFIX}/${ playerInfo.teamAbbreviation }_logo.svg` }}
                         alt="Team"
                     />
-                
                     <View style={ styles.profileEntry }>
                         <Text style={ styles.profileEntryLeft }>Team:</Text>
                         <Text style={ styles.profileEntryRight }>{ `${ playerInfo.teamCity } ${ playerInfo.teamName }` }</Text>
@@ -67,7 +66,7 @@ const Profile = ({ playerInfo, navigation }) => {
                     </View>
                     <RaisedButton
                         containerStyle={ styles.button } 
-                        title="Click for more info"
+                        title="CLICK FOR MORE INFO"
                         onPress={() => {
                             /* 1. Navigate to the Extended Profile route with params */
                             navigation.navigate('Extended Profile', {
@@ -75,7 +74,7 @@ const Profile = ({ playerInfo, navigation }) => {
                                 playerInfo: playerInfo,
                             });
                         }}
-                        />
+                    />
                 </>
                 : <Card style={{alignContent:'center'}}>
                     <Text>Loading</Text>

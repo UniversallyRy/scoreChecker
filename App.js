@@ -4,12 +4,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon } from 'react-native-elements';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import Home from './screens/home';
 import PlayerInfo from './screens/playerInfo';
 import ExtendedProfile from './components/extendedProfile';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // creating bottom tabs and a stack nav
 const Stack = createStackNavigator();
@@ -69,8 +69,6 @@ const App = () => (
     </NavigationContainer>
 );
 
-export default App;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -78,3 +76,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default App;

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, View, Keyboard } from 'react-native';
-import { Formik } from 'formik';
 import { Input, Text, TextInput, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Formik } from 'formik';
 import { RaisedButton } from '../components/buttons';
 
 const playerSearch = ({ handleInput, handleReset }) => {

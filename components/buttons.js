@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button } from 'react-native-elements';
 import { StyleSheet } from 'react-native';
+import { Button } from 'react-native-elements';
 
 export const RaisedButton = ( props ) => 
     <Button 

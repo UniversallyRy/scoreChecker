@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { StyleSheet, Dimensions, ImageBackground } from 'react-native';
 import { Text, Card } from 'react-native-elements';
-import Button from '../components/buttons'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Button from '../components/buttons'
  
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
@@ -26,8 +26,6 @@ const ExtendedProfile = ({ route, navigation }) => {
             'Season': playerInfo.timeFrame,
             'Points': playerInfo.pts,
             'Rebounds': playerInfo.reb,
-            'Assists': playerInfo.ast,
-            'Assists': playerInfo.ast,
             'Assists': playerInfo.ast,
         }
 
