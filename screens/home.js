@@ -4,8 +4,8 @@ import { Card, ListItem, Icon, Input } from 'react-native-elements';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
 import NBA from 'nba';
-import ScoreCard from '../components/scoreCard';
-import { LoadingButton } from '../components/buttons'
+import ScoreCard from '../components/ScoreCard';
+import { LoadingButton } from '../components/Buttons'
 // todo: conditional needed for empties: 'livePeriodTimeBcast', RESTful api design
 
 //consistent screen dimensions across multiple devices

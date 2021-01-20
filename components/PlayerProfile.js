@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Input, Card, Image } from 'react-native-elements';
 import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
-import { RaisedButton, LoadingButton } from '../components/buttons'
+import { RaisedButton, LoadingButton } from './Buttons'
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 

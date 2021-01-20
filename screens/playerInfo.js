@@ -4,8 +4,8 @@ import { Input, Text, TextInput, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import nba from 'nba';
 import { Formik } from 'formik';
-import PlayerProfile from '../components/playerProfile'
-import PlayerSearch from '../components/playerSearch';
+import PlayerProfile from '../components/PlayerProfile'
+import PlayerSearch from '../components/PlayerSearch';
 import { DEFAULT_PLAYER_INFO } from '../constants';
 // todos: other components seperate into fully functional components/stateless, more react element styling/usage
 

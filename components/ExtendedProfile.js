@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { StyleSheet, Dimensions, ImageBackground } from 'react-native';
 import { Text, Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Button from '../components/buttons'
+import Button from './Buttons'
  
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
