@@ -11,7 +11,6 @@ import { DEFAULT_PLAYER_INFO } from '../constants';
 
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
-// Background img pattern from Toptal Subtle Patterns(https://www.toptal.com/designers/subtlepatterns/) 
 const image = require('../assets/double-bubble-dark.png'); 
 const initialState = {
     // James Harden as default profile

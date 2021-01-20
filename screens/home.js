@@ -26,7 +26,6 @@ const Home = ({ navigation }) => {
   const [ state, setState ] = useState( initialState );
   const [ newObj, setNewObj ] = useState( [] );
   const [ loading, setLoading ] = useState( true );
-  // Background img pattern from Toptal Subtle Patterns(https://www.toptal.com/designers/subtlepatterns/) 
   const image = require('../assets/double-bubble-dark.png'); 
   
   const loader = () => {
@@ -51,12 +50,12 @@ const Home = ({ navigation }) => {
           <Card containerStyle={ styles.titleContainer }> 
             <Card.Title style={ styles.title }>Today's Scores</Card.Title>
             <Card.Divider style={ styles.divider } />
-            <Text style={ styles.text }>
+            <Card.Title style={ styles.text }>
                 Quickly stay updated
-            </Text>
+            </Card.Title>
           </Card>
           {/* scorecard list component showcasing Today's scores*/}
-          { loading ? <Text> Loading. . .</Text>
+          { loading ? <Card.Title> Loading. . .</Card.Title>
                   : <ScoreCard date={ todaysDate } item={ state }/>
           }
         </ImageBackground>

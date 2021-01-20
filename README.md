@@ -16,6 +16,7 @@
 - [formik](https://formik.org/docs/guides/react-native)
 - [momentjs](https://momentjs.com/)
 - [Node.js client for nba.com API endpoints](https://github.com/bttmly/nba)
+- Background img pattern from [Toptal Subtle Patterns](https://www.toptal.com/designers/subtlepatterns/)
 
 ## Install
 

@@ -27,7 +27,7 @@ const Profile = ({ playerInfo, navigation }) => {
             <Card containerStyle={ styles.playerProfile }>
                 { !loading
                 ?<>
-                    <Text style={ styles.profileEntryPlayerNname }>{ `${ playerInfo.playerName }` }</Text>
+                    <Card.Title style={ styles.profileEntryPlayerNname }>{ `${ playerInfo.playerName }` }</Card.Title>
                     <Card.Content style={ styles.proPicBorder }>
                         <Image
                             containerStyle={ styles.profilePic }
@@ -41,28 +41,28 @@ const Profile = ({ playerInfo, navigation }) => {
                         alt="Team"
                     />
                     <Card.Content style={ styles.profileEntry }>
-                        <Text style={ styles.profileEntryLeft }>Team:</Text>
-                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.teamCity } ${ playerInfo.teamName }` }</Text>
+                        <Card.Title style={ styles.profileEntryLeft }>Team:</Card.Title>
+                        <Card.Title style={ styles.profileEntryRight }>{ `${ playerInfo.teamCity } ${ playerInfo.teamName }` }</Card.Title>
                     </Card.Content>                
                     <Card.Content style={ styles.profileEntry }>
-                        <Text style={ styles.profileEntryLeft }>Height:</Text>
-                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.height }` }</Text>
+                        <Card.Title style={ styles.profileEntryLeft }>Height:</Card.Title>
+                        <Card.Title style={ styles.profileEntryRight }>{ `${ playerInfo.height }` }</Card.Title>
                     </Card.Content>
                     <Card.Content style={ styles.profileEntry }>
-                        <Text style={ styles.profileEntryLeft }>Weight:</Text>
-                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.weight }` }</Text>
+                        <Card.Title style={ styles.profileEntryLeft }>Weight:</Card.Title>
+                        <Card.Title style={ styles.profileEntryRight }>{ `${ playerInfo.weight }` }</Card.Title>
                     </Card.Content>
                     <Card.Content style={ styles.profileEntry }>
-                        <Text style={ styles.profileEntryLeft }>PTS:</Text>
-                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.pts }` }</Text>
+                        <Card.Title style={ styles.profileEntryLeft }>PTS:</Card.Title>
+                        <Card.Title style={ styles.profileEntryRight }>{ `${ playerInfo.pts }` }</Card.Title>
                     </Card.Content>
                     <Card.Content style={ styles.profileEntry }>
-                        <Text style={ styles.profileEntryLeft }>AST:</Text>
-                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.ast }` }</Text>
+                        <Card.Title style={ styles.profileEntryLeft }>AST:</Card.Title>
+                        <Card.Title style={ styles.profileEntryRight }>{ `${ playerInfo.ast }` }</Card.Title>
                     </Card.Content>
                     <Card.Content style={ styles.profileEntry }>
-                        <Text style={ styles.profileEntryLeft }>REB:</Text>
-                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.reb }` }</Text>
+                        <Card.Title style={ styles.profileEntryLeft }>REB:</Card.Title>
+                        <Card.Title style={ styles.profileEntryRight }>{ `${ playerInfo.reb }` }</Card.Title>
                     </Card.Content>
                     <RaisedButton
                         containerStyle={ styles.button } 
@@ -77,7 +77,7 @@ const Profile = ({ playerInfo, navigation }) => {
                     />
                 </>
                 : <Card style={{alignContent:'center'}}>
-                    <Text>Loading</Text>
+                    <Card.Title>Loading</Card.Title>
                     <LoadingButton/>
                  </Card>
                 }
