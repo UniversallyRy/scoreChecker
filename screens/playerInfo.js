@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { StyleSheet, View, Dimensions, ScrollView, Keyboard, ImageBackground  } from 'react-native';
+import { StyleSheet, Dimensions, ScrollView, Keyboard, ImageBackground  } from 'react-native';
 import { Input, Text, TextInput, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import nba from 'nba';

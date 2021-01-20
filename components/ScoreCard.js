@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Dimensions, ScrollView } from 'react-native';
-import { Card, ListItem, Icon, Input } from 'react-native-elements';
+import { StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { Card, ListItem, Icon, Input, Text } from 'react-native-elements';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import { RaisedButton, LoadingButton } from './Buttons'
 

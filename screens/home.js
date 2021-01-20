@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Dimensions, ImageBackground } from 'react-native';
-import { Card, ListItem, Icon, Input } from 'react-native-elements';
+import { StyleSheet, Dimensions, ImageBackground } from 'react-native';
+import { Card, ListItem, Icon, Text, Input } from 'react-native-elements';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
 import NBA from 'nba';
@@ -46,21 +46,21 @@ const Home = ({ navigation }) => {
     }, []);
 
   return(
-      <View style={ styles.container }>
+      <Card style={ styles.container }>
         <ImageBackground source={ image } style={ styles.bgImage }>
           <Card containerStyle={ styles.titleContainer }> 
             <Card.Title style={ styles.title }>Today's Scores</Card.Title>
             <Card.Divider style={ styles.divider } />
-              <Text style={ styles.text }>
+            <Text style={ styles.text }>
                 Quickly stay updated
-              </Text>
+            </Text>
           </Card>
           {/* scorecard list component showcasing Today's scores*/}
           { loading ? <Text> Loading. . .</Text>
                   : <ScoreCard date={ todaysDate } item={ state }/>
           }
         </ImageBackground>
-    </View>   
+      </Card>   
   )   
 };
 
