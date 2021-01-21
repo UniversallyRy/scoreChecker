@@ -9,7 +9,7 @@ import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import Home from './screens/home';
 import PlayerInfo from './screens/playerInfo';
-import ExtendedProfile from './components/extendedProfile';
+import ExtendedProfile from './components/ExtendedProfile';
 
 // creating bottom tabs and a stack nav
 const Stack = createStackNavigator();
