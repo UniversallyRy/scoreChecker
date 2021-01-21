@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, Keyboard } from 'react-native';
+import { StyleSheet, Keyboard, View } from 'react-native';
 import { Input, Text, TextInput, Button, Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Formik } from 'formik';
 import { RaisedButton } from './Buttons';
 
-const playerSearch = ({ handleInput, handleReset }) => {
+const PlayerSearch = ({ handleInput, handleReset }) => {
     const [ keyboardOffset, setKeyboardOffset ] = useState( 0 );
     const onKeyboardShow = event => setKeyboardOffset( event.endCoordinates.height );
     const onKeyboardHide = () => setKeyboardOffset( 0 );
@@ -22,7 +22,7 @@ const playerSearch = ({ handleInput, handleReset }) => {
     }, []);
     
     return (
-        <Card style={ styles.container }>
+        <View style={ styles.container }>
             <Formik
                 initialValues={{ player: '' }}
                 onSubmit={( values, actions ) => { 
@@ -51,18 +51,18 @@ const playerSearch = ({ handleInput, handleReset }) => {
                             />
                         }
                     />
-                    <Card.Content style={ styles.allButtons }>
+                    <View style={ styles.allButtons }>
                         <RaisedButton onPress={ handleSubmit } title="Submit"/>
                         <RaisedButton onPress={ handleReset } title="Reset" />
-                    </Card.Content>  
+                    </View>  
                 </>
                 )}
             </Formik>
-        </Card>
+        </View>
     )
 }
 
-export default playerSearch
+export default PlayerSearch;
 
 const styles = StyleSheet.create({
     container: {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, View, Dimensions, ScrollView } from 'react-native';
 import { Card, ListItem, Icon, Input, Text } from 'react-native-elements';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import { RaisedButton, LoadingButton } from './Buttons'
@@ -28,7 +28,7 @@ const Home = ({ item, date }) => {
   return(
     <>
         <ScrollView containerStyle={ styles.scoreContainer } >
-          <Card.Title style={{color: 'white'}}>Scores for { date }</Card.Title>
+          <Text style={{color: 'white'}}>Scores for { date }</Text>
           <Card.Divider style={ styles.divider } />
           {!loading
             ?item.map(( u, i ) => {

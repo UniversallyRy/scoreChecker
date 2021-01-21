@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { StyleSheet, Dimensions, ImageBackground } from 'react-native';
-import { Card } from 'react-native-elements';
+import { Card, Text} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from './Buttons'
  
@@ -40,10 +40,10 @@ const ExtendedProfile = ({ route, navigation }) => {
             <Card containerStyle={ styles.container }>
                 {
                     Object.entries( profileState ).map(( [ key, data ] ) => (
-                        <Card.Content key={ key } style={ styles.profileEntry }>
-                            <Card.Title style={ styles.profileEntryLeft }>{ key }: </Card.Title>
-                            <Card.Title style={ styles.profileEntryRight }>{ `${ data }` }</Card.Title>
-                        </Card.Content>
+                        <Card.Title key={ key } style={ styles.profileEntry }>
+                            <Text style={ styles.profileEntryLeft }>{ key }: </Text>
+                            <Text style={ styles.profileEntryRight }>{ `${ data }` }</Text>
+                        </Card.Title>
                     ))
                 }               
             </Card>

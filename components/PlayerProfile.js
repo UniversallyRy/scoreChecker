@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, View } from 'react-native';
 import { Input, Card, Image, Text } from 'react-native-elements';
 import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
 import { RaisedButton, LoadingButton } from './Buttons'
@@ -27,43 +27,43 @@ const Profile = ({ playerInfo, navigation }) => {
             <Card containerStyle={ styles.playerProfile }>
                 { !loading
                 ?<>
-                    <Card.Title style={ styles.profileEntryPlayerNname }>{ `${ playerInfo.playerName }` }</Card.Title>
-                    <Card.Content style={ styles.proPicBorder }>
+                    <Text style={ styles.profileEntryPlayerNname }>{ `${ playerInfo.playerName }` }</Text>
+                    <View style={ styles.proPicBorder }>
                         <Image
                             containerStyle={ styles.profilePic }
                             source={{ uri: `${PROFILE_PIC_URL_PREFIX}/${ playerInfo.playerId }.png` }}
                             alt="Profile"
                         />
-                    </Card.Content>
+                    </View>
                     <Image
                         containerStyle={ styles.teamLogo }
                         source={{ uri: `${TEAM_PIC_URL_PREFIX}/${ playerInfo.teamAbbreviation }_logo.svg` }}
                         alt="Team"
                     />
-                    <Card.Content style={ styles.profileEntry }>
-                        <Card.Title style={ styles.profileEntryLeft }>Team:</Card.Title>
-                        <Card.Title style={ styles.profileEntryRight }>{ `${ playerInfo.teamCity } ${ playerInfo.teamName }` }</Card.Title>
-                    </Card.Content>                
-                    <Card.Content style={ styles.profileEntry }>
-                        <Card.Title style={ styles.profileEntryLeft }>Height:</Card.Title>
-                        <Card.Title style={ styles.profileEntryRight }>{ `${ playerInfo.height }` }</Card.Title>
-                    </Card.Content>
-                    <Card.Content style={ styles.profileEntry }>
-                        <Card.Title style={ styles.profileEntryLeft }>Weight:</Card.Title>
-                        <Card.Title style={ styles.profileEntryRight }>{ `${ playerInfo.weight }` }</Card.Title>
-                    </Card.Content>
-                    <Card.Content style={ styles.profileEntry }>
-                        <Card.Title style={ styles.profileEntryLeft }>PTS:</Card.Title>
-                        <Card.Title style={ styles.profileEntryRight }>{ `${ playerInfo.pts }` }</Card.Title>
-                    </Card.Content>
-                    <Card.Content style={ styles.profileEntry }>
-                        <Card.Title style={ styles.profileEntryLeft }>AST:</Card.Title>
-                        <Card.Title style={ styles.profileEntryRight }>{ `${ playerInfo.ast }` }</Card.Title>
-                    </Card.Content>
-                    <Card.Content style={ styles.profileEntry }>
-                        <Card.Title style={ styles.profileEntryLeft }>REB:</Card.Title>
-                        <Card.Title style={ styles.profileEntryRight }>{ `${ playerInfo.reb }` }</Card.Title>
-                    </Card.Content>
+                    <View style={ styles.profileEntry }>
+                        <Text style={ styles.profileEntryLeft }>Team:</Text>
+                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.teamCity } ${ playerInfo.teamName }` }</Text>
+                    </View>                
+                    <View style={ styles.profileEntry }>
+                        <Text style={ styles.profileEntryLeft }>Height:</Text>
+                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.height }` }</Text>
+                    </View>
+                    <View style={ styles.profileEntry }>
+                        <Text style={ styles.profileEntryLeft }>Weight:</Text>
+                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.weight }` }</Text>
+                    </View>
+                    <View style={ styles.profileEntry }>
+                        <Text style={ styles.profileEntryLeft }>PTS:</Text>
+                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.pts }` }</Text>
+                    </View>
+                    <View style={ styles.profileEntry }>
+                        <Text style={ styles.profileEntryLeft }>AST:</Text>
+                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.ast }` }</Text>
+                    </View>
+                    <View style={ styles.profileEntry }>
+                        <Text style={ styles.profileEntryLeft }>REB:</Text>
+                        <Text style={ styles.profileEntryRight }>{ `${ playerInfo.reb }` }</Text>
+                    </View>
                     <RaisedButton
                         containerStyle={ styles.button } 
                         title="CLICK FOR MORE INFO"
@@ -76,10 +76,10 @@ const Profile = ({ playerInfo, navigation }) => {
                         }}
                     />
                 </>
-                : <Card style={{alignContent:'center'}}>
-                    <Card.Title>Loading</Card.Title>
+                : <View style={{alignContent:'center'}}>
+                    <Text>Loading</Text>
                     <LoadingButton/>
-                 </Card>
+                 </View>
                 }
             </Card>
         );
