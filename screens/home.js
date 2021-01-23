@@ -6,7 +6,9 @@ import moment from 'moment';
 import NBA from 'nba';
 import ScoreCard from '../components/ScoreCard';
 import { LoadingButton } from '../components/Buttons'
-// todo: add final scores, RESTful api design, possible navigation into further score stats, possible team screen/standings
+// todo: add final scores, RESTful api design, possible navigation into further score stats
+// possible team screen/standings, team icon addition/fix, scorecard styling/separation, visible scroll if necessary,
+//  
 
 //consistent screen dimensions across multiple devices
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
