@@ -42,6 +42,7 @@ const Home = ({ item, date }) => {
                   <ListItem.Content>
                       <ListItem.Title style={ styles.title }>{ vs }</ListItem.Title>
                       <ListItem.Subtitle style={ styles.quarter }>{ u.gameStatusText }</ListItem.Subtitle>
+                      <ListItem.Subtitle style={ styles.quarter }>{ u.gameId }</ListItem.Subtitle>
                       <Card.Divider style={ styles.divider } />
                       <ListItem.Subtitle style={ styles.broadcast }>{ u.livePeriodTimeBcast }</ListItem.Subtitle>
                   </ListItem.Content>
