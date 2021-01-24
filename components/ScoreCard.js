@@ -4,27 +4,59 @@ import { Card, ListItem, Icon, Input, Text, Image } from 'react-native-elements'
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import { RaisedButton, LoadingButton } from './Buttons'
 import logos from '../logoManager';
+import NBA from 'nba';
+import moment from 'moment';
+const todaysDate = moment().format( 'L' );
+
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 // Caution: WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
 // todos: format score card better
 
+
 const Score = ({ u }) => {
+  const [ homeScore, setHome ] = useState(0);
+  const [ awayScore, setAway ] = useState(0);
   let comp = u.gamecode.slice(-6);
+  let date = u.gamecode.slice(0, 8);
   let splitAt = index => x => [ x.slice( 0, index ), x.slice( index ) ];
   let splitTeam = splitAt(3)( comp );
   let awayTeam = splitTeam[0];
   let homeTeam = splitTeam[1];
   let awayLogo = logos[ awayTeam ]; 
   let homeLogo = logos[ homeTeam ];
+  console.log(date)
 
+  // const thePlays = () => {
+  //   NBA.data.boxScore("20210123", u.gameId)
+  //   .then(res => res.sports_content)
+  //   .then(res => res.game)
+  //   .then(res => res.home)
+  //   .then(res => res.score)
+  //   .then(res => homeScore = res);
+  //   // NBA.stats.scoreboard({ gameDate: todaysDate }).then(res => console.log(res.gameHeader));
+  // }
+
+  useEffect(() => {
+    async function initData() {
+      NBA.data.boxScore( date, u.gameId)
+      .then(res => res.sports_content)
+      .then(res => res.game)
+      .then(res => {
+        setAway(res.visitor.score);
+        setHome(res.home.score);
+      })
+      }
+      initData();
+    }, []);
+  
   return(
     <ListItem topDivider={ true } raised containerStyle={ styles.scoreCard }>
       <ListItem.Content>
         <View style={ styles.teamVersus }>
           <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-            <Text style={ styles.title }>{ awayTeam }</Text>
+            <Text style={ styles.title }>{ awayTeam } - {awayScore}</Text>
             <Image
               accessibilityLabel={ awayTeam }
               source={ awayLogo }
@@ -38,7 +70,7 @@ const Score = ({ u }) => {
           </Text>
 
           <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-            <Text style={ styles.title }>{ homeTeam }</Text>
+            <Text style={ styles.title }>{ homeTeam } - {homeScore} </Text>
             <Image
               accessibilityLabel={ homeTeam }
               source={ homeLogo }
@@ -59,7 +91,7 @@ const Score = ({ u }) => {
 const ScoreCard = ({ item, date }) => {
   // todo: profileEntry loop for DRY, fix teamlogos not appearing,
   const [ loading , setLoading ] = useState( true );
-  
+
   const renderItem = ({ item }) => (
     <Score u={ item } />
   );
