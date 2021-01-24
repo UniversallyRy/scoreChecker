@@ -12,35 +12,38 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
 const Score = ({ u }) => {
   let comp = u.gamecode.slice(-6);
-  let splitAt = index => x => [x.slice(0, index), x.slice(index)];
-  let splitTeam = splitAt(3)(comp);
+  let splitAt = index => x => [ x.slice( 0, index ), x.slice( index ) ];
+  let splitTeam = splitAt(3)( comp );
   let awayTeam = splitTeam[0];
   let homeTeam = splitTeam[1];
-  let awayLogo = logos[awayTeam]; 
-  let homeLogo = logos[homeTeam];
-  let vs = splitTeam[0] + ' at ' + splitTeam[1];
+  let awayLogo = logos[ awayTeam ]; 
+  let homeLogo = logos[ homeTeam ];
 
   return(
     <ListItem topDivider={ true } raised containerStyle={ styles.scoreCard }>
       <ListItem.Content>
-        <View style={styles.teamVersus}>
-          <View style={{flexDirection: 'column', alignItems: 'center'}}>
-            <Text style={styles.title}>{awayTeam}</Text>
+        <View style={ styles.teamVersus }>
+          <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+            <Text style={ styles.title }>{ awayTeam }</Text>
             <Image
-              accessibilityLabel={awayTeam}
-              source={awayLogo}
+              accessibilityLabel={ awayTeam }
+              source={ awayLogo }
               style={{ width: 50, height: 50, margin: 5 }}
-              PlaceholderContent={<ActivityIndicator/>}
+              PlaceholderContent={ <ActivityIndicator/> }
             />
           </View>
-          <Text style={styles.title}> At </Text>
-          <View style={{flexDirection: 'column', alignItems: 'center'}}>
-            <Text style={styles.title}>{homeTeam}</Text>
+
+          <Text style={{fontWeight: 'bold', marginLeft: 25, marginRight: 25}}>
+            At
+          </Text>
+
+          <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+            <Text style={ styles.title }>{ homeTeam }</Text>
             <Image
-              accessibilityLabel={homeTeam}
-              source={homeLogo}
+              accessibilityLabel={ homeTeam }
+              source={ homeLogo }
               style={{ width: 50, height: 50, margin: 5  }}
-              PlaceholderContent={<ActivityIndicator/>}
+              PlaceholderContent={ <ActivityIndicator/> }
             />
           </View>
         </View>
@@ -75,9 +78,8 @@ const ScoreCard = ({ item, date }) => {
   }, [ item ]);
 
   return(
-    <>
-        <View containerStyle={ styles.scoreContainer } >
-          <Text style={{color: 'white'}}>Scores for { date }</Text>
+        <View style={ styles.scoreContainer } >
+          <Text style={{ marginLeft: 25, color: 'white' }}>Scores for { date }</Text>
           <Card.Divider style={ styles.divider } />
           {!loading
             ? <SafeAreaView style={styles.container}>
@@ -97,16 +99,19 @@ const ScoreCard = ({ item, date }) => {
               </ListItem>
           }
         </View>
-    </>      
   )
 }
 
 const styles = StyleSheet.create({
   scoreContainer: {
+    flex: 1,
     width: windowWidth * 0.99999 ,
     alignSelf: 'center',
     alignContent: 'center',
     justifyContent: 'center',
+  },
+  container: {
+    margin: 10,
   },
   divider: {
     backgroundColor: '#586949',
@@ -131,19 +136,23 @@ const styles = StyleSheet.create({
   },
   teamVersus:{
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     alignSelf: 'center',
     margin: 5,
+    marginBottom: 10,
   },
   title:{
     fontWeight: 'bold',
     marginBottom: 10,
   },
   quarter:{
+    alignSelf: 'center',
     fontWeight: 'bold',
     fontSize: 16,
   },
   broadcast:{
+    alignSelf: 'center',
     fontSize: 14,
   },
 })
