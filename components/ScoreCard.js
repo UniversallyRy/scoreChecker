@@ -6,37 +6,22 @@ import { RaisedButton, LoadingButton } from './Buttons'
 import logos from '../logoManager';
 import NBA from 'nba';
 import moment from 'moment';
+
 const todaysDate = moment().format( 'L' );
-
-
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 // Caution: WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
 // todos: format score card better
 
-
 const Score = ({ u }) => {
   const [ homeScore, setHome ] = useState(0);
   const [ awayScore, setAway ] = useState(0);
+  const splitAt = index => x => [ x.slice( 0, index ), x.slice( index ) ];
   let comp = u.gamecode.slice(-6);
   let date = u.gamecode.slice(0, 8);
-  let splitAt = index => x => [ x.slice( 0, index ), x.slice( index ) ];
   let splitTeam = splitAt(3)( comp );
-  let awayTeam = splitTeam[0];
-  let homeTeam = splitTeam[1];
-  let awayLogo = logos[ awayTeam ]; 
-  let homeLogo = logos[ homeTeam ];
-  console.log(date)
-
-  // const thePlays = () => {
-  //   NBA.data.boxScore("20210123", u.gameId)
-  //   .then(res => res.sports_content)
-  //   .then(res => res.game)
-  //   .then(res => res.home)
-  //   .then(res => res.score)
-  //   .then(res => homeScore = res);
-  //   // NBA.stats.scoreboard({ gameDate: todaysDate }).then(res => console.log(res.gameHeader));
-  // }
+  let [ awayTeam, homeTeam ] = [ splitTeam[0], splitTeam[1] ];
+  let [ awayLogo, homeLogo ] = [ logos[ awayTeam ], logos[ homeTeam ] ]; 
 
   useEffect(() => {
     async function initData() {
@@ -80,9 +65,8 @@ const Score = ({ u }) => {
           </View>
         </View>
         <ListItem.Subtitle style={ styles.quarter }>{ u.gameStatusText }</ListItem.Subtitle>
-        <ListItem.Subtitle style={ styles.quarter }>{ u.gameId }</ListItem.Subtitle>
         <Card.Divider style={ styles.divider }/>
-        <ListItem.Subtitle style={ styles.broadcast }>{ u.livePeriodTimeBcast }</ListItem.Subtitle>
+        <ListItem.Subtitle style={ styles.broadcast }>{(u.gameStatusText !== "Final") ? u.livePeriodTimeBcast : ''}{<Icon name='info' size={20}/>}</ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>
   )
@@ -146,29 +130,29 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   divider: {
-    backgroundColor: '#586949',
-    width: windowWidth * 0.6,
+    backgroundColor: '#696969',
+    width: windowWidth * 0.8,
     alignSelf: 'center',
-    margin: 1,
+    height: 2,
   },
   scoreCard: {
     width: windowWidth * 0.90,
     backgroundColor: '#696969',
     alignSelf: 'center',
-    margin: 15,
-    borderRadius: 8,
+    margin: 10,
+    borderColor: 'black',
+    borderRadius: 6,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.55,
     shadowRadius: 3.84,
     elevation: 5,
   },
   teamVersus:{
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
     alignSelf: 'center',
     margin: 5,
@@ -185,6 +169,7 @@ const styles = StyleSheet.create({
   },
   broadcast:{
     alignSelf: 'center',
+    justifyContent: 'space-around',
     fontSize: 14,
   },
 })

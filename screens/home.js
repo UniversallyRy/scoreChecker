@@ -14,7 +14,7 @@ import { LoadingButton } from '../components/Buttons'
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 const todaysDate = moment().format( 'L' );
 // imported nodejs nba api from https://github.com/bttmly/nba
-console.log(todaysDate)
+
 //Initial object to use before the nba api's async is fulfilled
 const initialState = [
   {
@@ -43,7 +43,7 @@ const Home = ({ navigation }) => {
   // NBA.stats.boxScore( {GameID: "0022000226"} ).then( res => console.log( res ) );
   useEffect(() => {
     async function initData() {
-      NBA.stats.scoreboard({ gameDate: '01/23/2021' }).then( res => setNewObj( res.gameHeader ) );
+      NBA.stats.scoreboard({ gameDate: '01/22/2021' }).then( res => setNewObj( res.gameHeader ) );
       }
       initData();
     }, []);
