@@ -6,6 +6,7 @@ import moment from 'moment';
 import NBA from 'nba';
 import ScoreCard from '../components/ScoreCard';
 import { LoadingButton } from '../components/Buttons'
+import AnimatedLoader from "react-native-animated-loader";
 // todo: add final scores, RESTful api design, possible navigation into further score stats
 // possible team screen/standings, team icon addition/fix, scorecard styling/separation, visible scroll if necessary,
 //  
@@ -60,8 +61,16 @@ const Home = ({ navigation }) => {
           </Card>
           {/* scorecard list component showcasing Today's scores*/}
           { loading ? <> 
-                    <Text> Loading. . .</Text>
-                    </>
+                        <AnimatedLoader
+                          visible={visible}
+                          overlayColor="rgba(255,255,255,0.75)"
+                          source={require("./loader.json")}
+                          animationStyle={styles.lottie}
+                          speed={1}
+                        >
+                          <Text> Loading. . .</Text>
+                        </AnimatedLoader>
+                      </>
                   : <ScoreCard date={ todaysDate } item={ state }/>
           }
         </ImageBackground>
@@ -99,6 +108,10 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center"
+  },
+  lottie: {
+    width: 100,
+    height: 100
   },
 })
 
