@@ -41,7 +41,7 @@ Only previewed/used in Expo currently, so no idea on how the NBA api handles in 
 👤 **Ryan Paige**
 
 - Twitter: [@universallyry](https://twitter.com/universallyry)
-- Github: [@universallyry](https://github.com/universallyry)
+- Github Profile: [@universallyry](https://github.com/universallyry)
 
 ---
 
