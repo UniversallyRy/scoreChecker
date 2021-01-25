@@ -44,18 +44,49 @@ const extendedGame = ({ navigation, route }) => {
     }, []);
 
     const LineScores = () => {
-        const newArr = [];
-        const quarterStats = awayLines.map(( u, i ) => {
+        const awayArr = [];
+        const homeArr = [];
+        const awayQuarters = awayLines.map(( u, i ) => {
             console.log(u);
-            return newArr[i] = u.score;
+            return awayArr[i] = u.score;
+        })
+        const homeQuarters = homeLines.map(( u, i ) => {
+            console.log(u);
+            return homeArr[i] = u.score;
         })
         return (
-            <Card containerStyle={styles.lineScores}>
-                <Text style ={styles.quarter}>Q1: {newArr[0]}</Text>    
-                <Text style ={styles.quarter}>Q2: {newArr[1]}</Text>    
-                <Text style ={styles.quarter}>Q3: {newArr[2]}</Text>    
-                <Text style ={styles.quarter}>Q4: {newArr[3]}</Text>    
-            </Card>
+                <Card wrapperStyle={styles.quarterCard} containerStyle={styles.lineScores}>
+                        <View style={styles.quarterContainer1}>
+                            <Image
+                            accessibilityLabel={ awayTeam }
+                            source={ awayLogo }
+                            style={{ width: 20, height: 20, margin: 5 }}
+                            PlaceholderContent={ <ActivityIndicator/> }
+                            />
+                            {
+                                awayArr.map((u, i)=> {
+                                    return (                                
+                                        <Text key={i} style={styles.quarterText}>Q{i+1}: {u}</Text> 
+                                    )
+                                })
+                            }
+                        </View> 
+                        <View style={styles.quarterContainer2}>
+                            <Image
+                                accessibilityLabel={ homeTeam }
+                                source={ homeLogo }
+                                style={{ width: 20, height: 20, margin: 5 }}
+                                PlaceholderContent={ <ActivityIndicator/> }
+                            />
+                            {
+                                homeArr.map((u, i)=> {
+                                return (
+                                        <Text key={i} style={styles.quarterText}>Q{i+1}: {u}</Text> 
+                                ) 
+                                })
+                                }
+                        </View>
+                </Card>
         );
     }
 
@@ -131,13 +162,26 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     lineScores: {
-        flexDirection: 'row',
-        margin: 10,
-        
+        flex: 1,
     },
-    quarter: {
+    quarterCard: {
+        width: windowWidth * 0.3,
+        flexDirection: 'row',
+        alignItems: 'center',
+        alignSelf: 'center',
+    },
+    quarterText: {
+        fontWeight: 'bold',
         margin: 3,
+    },
+    quarterContainer1: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    quarterContainer2: {
+        flex: 1,
+        alignItems: 'center',
     },
 })
 
-export default extendedGame
+export default extendedGame;
