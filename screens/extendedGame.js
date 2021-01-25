@@ -28,16 +28,16 @@ const extendedGame = ({ navigation, route }) => {
 
     useEffect(() => {
         async function initData() {
-          NBA.data.boxScore( date, scoreInfo.gameId)
-          .then(res => res.sports_content)
-          .then(res => res.game)
-          .then(res => {
-              console.log(res)
-            setAway(res.visitor.score);
-            setHome(res.home.score);
-            setAwayLines(res.visitor.linescores.period);
-            setHomeLines(res.home.linescores.period);
-            setData(res);
+          NBA.data.boxScore( date, scoreInfo.gameId )
+          .then( res => res.sports_content )
+          .then( res => res.game )
+          .then( res => {
+              console.log( res );
+            setAway( res.visitor.score );
+            setHome( res.home.score );
+            setAwayLines( res.visitor.linescores.period );
+            setHomeLines( res.home.linescores.period );
+            setData( res );
           })
           }
           initData();
@@ -47,16 +47,14 @@ const extendedGame = ({ navigation, route }) => {
         const awayArr = [];
         const homeArr = [];
         const awayQuarters = awayLines.map(( u, i ) => {
-            console.log(u);
-            return awayArr[i] = u.score;
+            return awayArr[ i ] = u.score;
         })
         const homeQuarters = homeLines.map(( u, i ) => {
-            console.log(u);
-            return homeArr[i] = u.score;
+            return homeArr[ i ] = u.score;
         })
         return (
-                <Card wrapperStyle={styles.quarterCard} containerStyle={styles.lineScores}>
-                        <View style={styles.quarterContainer1}>
+                <Card wrapperStyle={ styles.quarterCard }>
+                        <View style={ styles.quarterContainer }>
                             <Image
                             accessibilityLabel={ awayTeam }
                             source={ awayLogo }
@@ -64,14 +62,14 @@ const extendedGame = ({ navigation, route }) => {
                             PlaceholderContent={ <ActivityIndicator/> }
                             />
                             {
-                                awayArr.map((u, i)=> {
+                                awayArr.map(( u, i )=> {
                                     return (                                
-                                        <Text key={i} style={styles.quarterText}>Q{i+1}: {u}</Text> 
+                                        <Text key={ i } style={ styles.quarterText }>Q{ i+1 }: {u}</Text> 
                                     )
                                 })
                             }
                         </View> 
-                        <View style={styles.quarterContainer2}>
+                        <View style={ styles.quarterContainer }>
                             <Image
                                 accessibilityLabel={ homeTeam }
                                 source={ homeLogo }
@@ -79,24 +77,24 @@ const extendedGame = ({ navigation, route }) => {
                                 PlaceholderContent={ <ActivityIndicator/> }
                             />
                             {
-                                homeArr.map((u, i)=> {
-                                return (
-                                        <Text key={i} style={styles.quarterText}>Q{i+1}: {u}</Text> 
-                                ) 
+                                homeArr.map(( u, i )=> {
+                                    return (
+                                        <Text key={ i } style={ styles.quarterText }>Q{i+1}: {u}</Text> 
+                                    ) 
                                 })
-                                }
+                            }
                         </View>
                 </Card>
         );
     }
 
     return (
-        <View style={styles.container}>
+        <View style={ styles.container }>
             <ImageBackground source={ image } style={ styles.bgImage }>
-                <Card containerStyle={styles.scoreCard}>
-                    <View style={styles.teamVersus}>
+                <Card wrapperStyle={ styles.scoreCard } containerStyle={ styles.scoreCard }>
+                    <View style={ styles.teamVersus }>
                         <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                            <Text style={ styles.title }>{ awayTeam } - {awayScore}</Text>
+                            <Text style={ styles.title }>{ awayTeam } - { awayScore }</Text>
                             <Image
                             accessibilityLabel={ awayTeam }
                             source={ awayLogo }
@@ -105,7 +103,7 @@ const extendedGame = ({ navigation, route }) => {
                             />
                         </View>
 
-                        <Text style={{fontWeight: 'bold', marginLeft: 25, marginRight: 25}}>
+                        <Text style={{ fontWeight: 'bold', marginLeft: 25, marginRight: 25 }}>
                             At
                         </Text>
 
@@ -119,14 +117,14 @@ const extendedGame = ({ navigation, route }) => {
                             />
                         </View>
                     </View>
-                    <Text>Arena: {gameData.arena}</Text>
-                    <Text>City: {gameData.city}</Text>
-                    <Text>Country: {gameData.country}</Text>
-                    <Text>Date : {gameData.date}</Text>
-                    <Text>{gameData.city}</Text>
-                    <Text>{gameData.city}</Text>
-                    <Text>{gameData.city}</Text>
-                    <Text>{gameData.city}</Text>
+                    <Text>Arena: { gameData.arena }</Text>
+                    <Text>City: { gameData.city }</Text>
+                    <Text>Country: { gameData.country }</Text>
+                    <Text>Date : { gameData.date }</Text>
+                    <Text>{ gameData.city }</Text>
+                    <Text>{ gameData.city }</Text>
+                    <Text>{ gameData.city }</Text>
+                    <Text>{ gameData.city }</Text>
                     <LineScores/>
                 </Card>
             </ImageBackground>
@@ -136,33 +134,33 @@ const extendedGame = ({ navigation, route }) => {
 
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         flex: 1,
-        alignItems: 'center'
-    },
-    scoreCard: {
-        width: 500,
-        height: 500,
         alignItems: 'center',
+
     },
     bgImage: {
         flex: 1,
         resizeMode: "cover",
         justifyContent: "center"
     },
+    scoreCard: {
+        backgroundColor: '#696969',
+        width: windowWidth * 0.97,
+        height: windowHeight * 0.55,
+        borderColor: '#696969',
+        alignItems: 'center',
+    },
     title:{
         fontWeight: 'bold',
         marginBottom: 10,
     },
-    teamVersus:{
+    teamVersus: {
         flexDirection: 'row',
         alignItems: 'center',
         alignSelf: 'center',
         margin: 5,
         marginBottom: 10,
-    },
-    lineScores: {
-        flex: 1,
     },
     quarterCard: {
         width: windowWidth * 0.3,
@@ -174,11 +172,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         margin: 3,
     },
-    quarterContainer1: {
-        flex: 1,
-        alignItems: 'center',
-    },
-    quarterContainer2: {
+    quarterContainer: {
         flex: 1,
         alignItems: 'center',
     },
