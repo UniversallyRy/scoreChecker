@@ -44,17 +44,18 @@ const extendedGame = ({ navigation, route }) => {
     }, []);
 
     const LineScores = () => {
-
-        const quarterStats = awayLines.map((u, i) => {
-            return u.period
+        const newArr = [];
+        const quarterStats = awayLines.map(( u, i ) => {
+            console.log(u);
+            return newArr[i] = u.score;
         })
         return (
-            <>
-                <Text>1: {quarterStats}</Text>    
-                <Text>2: {quarterStats}</Text>    
-                <Text>3: {quarterStats}</Text>    
-                <Text>4: {quarterStats}</Text>    
-            </>
+            <Card containerStyle={styles.lineScores}>
+                <Text style ={styles.quarter}>Q1: {newArr[0]}</Text>    
+                <Text style ={styles.quarter}>Q2: {newArr[1]}</Text>    
+                <Text style ={styles.quarter}>Q3: {newArr[2]}</Text>    
+                <Text style ={styles.quarter}>Q4: {newArr[3]}</Text>    
+            </Card>
         );
     }
 
@@ -128,6 +129,14 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         margin: 5,
         marginBottom: 10,
+    },
+    lineScores: {
+        flexDirection: 'row',
+        margin: 10,
+        
+    },
+    quarter: {
+        margin: 3,
     },
 })
 

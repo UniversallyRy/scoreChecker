@@ -42,7 +42,7 @@ const Score = ({ u, navigation }) => {
       <ListItem.Content>
         <View style={ styles.teamVersus }>
           <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-            <Text style={ styles.title }>{ awayTeam } - {awayScore}</Text>
+            <Text style={ styles.teams }>{ awayTeam } - {awayScore}</Text>
             <Image
               accessibilityLabel={ awayTeam }
               source={ awayLogo }
@@ -56,7 +56,7 @@ const Score = ({ u, navigation }) => {
           </Text>
 
           <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-            <Text style={ styles.title }>{ homeTeam } - {homeScore} </Text>
+            <Text style={ styles.teams }>{ homeTeam } - {homeScore} </Text>
             <Image
               accessibilityLabel={ homeTeam }
               source={ homeLogo }
@@ -75,11 +75,11 @@ const Score = ({ u, navigation }) => {
               size={20}
               onPress={() => {
                 /* Navigate to the Extended Score route with params */
-                            navigation.navigate('Extended Score', {
-                                itemId: 10,
-                                scoreInfo: u,
-                            });
-                        }}
+                navigation.navigate('Extended Score', {
+                  itemId: 10,
+                  scoreInfo: u,
+                });
+              }}
             />
           </TouchableOpacity>}
         </ListItem.Subtitle>
@@ -180,6 +180,13 @@ const styles = StyleSheet.create({
   title:{
     fontWeight: 'bold',
     marginBottom: 10,
+  },
+  teams:{
+    fontWeight: 'bold',
+    marginBottom: 10,
+    borderColor: 'black',
+    borderWidth: .5,
+    borderRadius: 2,
   },
   quarter:{
     alignSelf: 'center',
