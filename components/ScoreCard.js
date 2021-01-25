@@ -6,6 +6,7 @@ import { RaisedButton, LoadingButton } from './Buttons'
 import logos from '../logoManager';
 import NBA from 'nba';
 import moment from 'moment';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const todaysDate = moment().format( 'L' );
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
@@ -13,7 +14,7 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 // logo 35 x 50
 // todos: format score card better
 
-const Score = ({ u }) => {
+const Score = ({ u, navigation }) => {
   const [ homeScore, setHome ] = useState(0);
   const [ awayScore, setAway ] = useState(0);
   const splitAt = index => x => [ x.slice( 0, index ), x.slice( index ) ];
@@ -66,18 +67,36 @@ const Score = ({ u }) => {
         </View>
         <ListItem.Subtitle style={ styles.quarter }>{ u.gameStatusText }</ListItem.Subtitle>
         <Card.Divider style={ styles.divider }/>
-        <ListItem.Subtitle style={ styles.broadcast }>{(u.gameStatusText !== "Final") ? u.livePeriodTimeBcast : ''}{<Icon name='info' size={20}/>}</ListItem.Subtitle>
+        <ListItem.Subtitle style={ styles.broadcast }>
+          {(u.gameStatusText != "Final") ? u.livePeriodTimeBcast : ''}
+          {<TouchableOpacity>
+            <Icon
+              name='info'
+              size={20}
+              onPress={() => {
+                /* Navigate to the Extended Score route with params */
+                            navigation.navigate('Extended Score', {
+                                itemId: 10,
+                                scoreInfo: u,
+                            });
+                        }}
+            />
+          </TouchableOpacity>}
+        </ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>
   )
 }
 
-const ScoreCard = ({ item, date }) => {
+const ScoreCard = ({ item, date, navigation }) => {
   // todo: profileEntry loop for DRY, fix teamlogos not appearing,
   const [ loading , setLoading ] = useState( true );
 
   const renderItem = ({ item }) => (
-    <Score u={ item } />
+    <Score 
+      u={ item }
+      navigation={ navigation }
+    />
   );
 
   useEffect(() => {

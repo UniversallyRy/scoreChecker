@@ -9,6 +9,7 @@ import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import Home from './screens/home';
 import PlayerInfo from './screens/playerInfo';
+import ExtendedScore from './screens/extendedGame';
 import ExtendedProfile from './components/ExtendedProfile';
 
 // creating bottom tabs and a stack nav
@@ -55,6 +56,11 @@ const AuthStack = () => (
         }}
       />
       <Stack.Screen name="Extended Profile" component={ ExtendedProfile } 
+        options={{
+          headerStyle:{ backgroundColor: '#696969' },
+        }}
+      />
+      <Stack.Screen name="Extended Score" component={ ExtendedScore } 
         options={{
           headerStyle:{ backgroundColor: '#696969' },
         }}
