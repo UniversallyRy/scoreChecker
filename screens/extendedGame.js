@@ -15,7 +15,6 @@ const extendedGame = ({ navigation, route }) => {
     // seperate screen from components
     // add menu/dropdown to switch stat lookup
 
-
     const [ gameData, setData ] = useState({});
     const [ homeScore, setHome ] = useState(0);
     const [ awayScore, setAway ] = useState(0);
@@ -43,23 +42,23 @@ const extendedGame = ({ navigation, route }) => {
           .then( res => {
             setHome( res.home.score );
             setAway( res.visitor.score );
-            setHomeLeaders(res.home.Leaders.Points)
-            setAwayLeaders(res.visitor.Leaders.Points)
-            setHomeLines( res.home.linescores.period );
-            setAwayLines( res.visitor.linescores.period );
-            setData( res );
-            setScoringHome(res.home.Leaders.Points.leader[0].FirstName + ' ' + res.home.Leaders.Points.leader[0].LastName)
-            setScoringAway(res.visitor.Leaders.Points.leader[0].FirstName + ' ' + res.visitor.Leaders.Points.leader[0].LastName)
+            setHomeLeaders( res.home.Leaders.Points )
+            setAwayLeaders( res.visitor.Leaders.Points )
+            setHomeLines( res.home.linescores.period )
+            setAwayLines( res.visitor.linescores.period )
+            setData( res )
+            setScoringHome( res.home.Leaders.Points.leader[0].FirstName + ' ' + res.home.Leaders.Points.leader[0].LastName )
+            setScoringAway( res.visitor.Leaders.Points.leader[0].FirstName + ' ' + res.visitor.Leaders.Points.leader[0].LastName )
             })
         }
         initData();
-    }, []);
+    }, []); 
     
     const ScoringLeader = () => { 
         // homeLeaders.leader.map((u) => {
         //     });
             return ( 
-                <Card wrapperStyle={{ width: windowWidth * 0.8,flexDirection: 'row', justifyContent: 'center'}}>
+                <Card wrapperStyle={{ width: windowWidth * 0.8,flexDirection: 'row', justifyContent: 'center' }}>
                     <Card containerStyle={{flex: 1,}}>
                         <Card.Title> Away Points Leader </Card.Title>
                         <Text>Player: { scoringAway }</Text>
@@ -78,7 +77,7 @@ const extendedGame = ({ navigation, route }) => {
     const LineScores = () => {
         const awayArr = [];
         const homeArr = [];
-        if(awayLines === 4){
+        if( awayLines === 4 ){
             const awayQuarters = awayLines.map(( u, i ) => {
                 return awayArr[ i ] = u.score;
             })
@@ -101,7 +100,7 @@ const extendedGame = ({ navigation, route }) => {
                             {
                                 awayArr.map(( u, i )=> {
                                     return (                                
-                                        <Text key={ i } style={ styles.quarterText }>Q{ i+1 }: {u}</Text> 
+                                        <Text key={ i } style={ styles.quarterText }>Q{ i+1 }: { u }</Text> 
                                     )
                                 })
                             }
@@ -116,7 +115,7 @@ const extendedGame = ({ navigation, route }) => {
                             {
                                 homeArr.map(( u, i )=> {
                                     return (
-                                        <Text key={ i } style={ styles.quarterText }>Q{i+1}: {u}</Text> 
+                                        <Text key={ i } style={ styles.quarterText }>Q{ i+1 }: { u }</Text> 
                                     ) 
                                 })
                             }
@@ -148,7 +147,7 @@ const extendedGame = ({ navigation, route }) => {
                         </Text>
 
                         <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                            <Text style={ styles.title }>{ homeTeam } - {homeScore} </Text>
+                            <Text style={ styles.title }>{ homeTeam } - { homeScore } </Text>
                             <Image
                             accessibilityLabel={ homeTeam }
                             source={ homeLogo }

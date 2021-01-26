@@ -1,14 +1,14 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Dimensions, ImageBackground } from 'react-native';
-import { Card, Text} from 'react-native-elements';
+import { Card, Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Button from './Buttons'
+import Button from './Buttons';
  
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
 const ExtendedProfile = ({ route, navigation }) => {
     const { itemId, playerInfo } = route.params;
-    const image = require('../assets/double-bubble-dark.png');
+    const image = require( '../assets/double-bubble-dark.png' );
     
     const profileState = {
             'Name': playerInfo.displayFirstLast,

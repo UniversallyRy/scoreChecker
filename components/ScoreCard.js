@@ -26,12 +26,12 @@ const Score = ({ u, navigation }) => {
 
   useEffect(() => {
     async function initData() {
-      NBA.data.boxScore( date, u.gameId)
-      .then(res => res.sports_content)
-      .then(res => res.game)
-      .then(res => {
-        setAway(res.visitor.score);
-        setHome(res.home.score);
+      NBA.data.boxScore( date, u.gameId )
+      .then( res => res.sports_content )
+      .then( res => res.game )
+      .then( res => {
+        setAway( res.visitor.score );
+        setHome( res.home.score );
       })
       }
       initData();
@@ -51,12 +51,12 @@ const Score = ({ u, navigation }) => {
             />
           </View>
 
-          <Text style={{fontWeight: 'bold', marginLeft: 25, marginRight: 25}}>
+          <Text style={{ fontWeight: 'bold', marginLeft: 25, marginRight: 25 }}>
             At
           </Text>
 
           <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-            <Text style={ styles.teams }>{ homeTeam } - {homeScore} </Text>
+            <Text style={ styles.teams }>{ homeTeam } - { homeScore } </Text>
             <Image
               accessibilityLabel={ homeTeam }
               source={ homeLogo }
@@ -65,10 +65,10 @@ const Score = ({ u, navigation }) => {
             />
           </View>
         </View>
-        <ListItem.Subtitle style={ styles.quarter }>{u.gameStatusText !== 'PPD' ? u.gameStatusText : 'Postponed' }</ListItem.Subtitle>
+        <ListItem.Subtitle style={ styles.quarter }>{ u.gameStatusText !== 'PPD' ? u.gameStatusText : 'Postponed' }</ListItem.Subtitle>
         <Card.Divider style={ styles.divider }/>
         <ListItem.Subtitle style={ styles.broadcast }>
-          {(u.gameStatusText != "Final") && (u.gameStatusText != "PPD") ? u.livePeriodTimeBcast : ''}
+          {( u.gameStatusText != "Final" ) && ( u.gameStatusText != "PPD" ) ? u.livePeriodTimeBcast : ''}
           {<TouchableOpacity>
             <Icon
               name='info'
@@ -117,14 +117,14 @@ const ScoreCard = ({ item, date, navigation }) => {
 
   return(
         <View style={ styles.scoreContainer } >
-          <Text style={{ marginLeft: 25, color: 'white' }}>Scores for { date }</Text>
+          <Text style={{ marginLeft: 25, color: 'white' }}>Scores for { date } : : Add Date Picker Here</Text>
           <Card.Divider style={ styles.divider } />
           {!loading
-            ? <SafeAreaView style={styles.container}>
+            ? <SafeAreaView style={ styles.container }>
                 <FlatList
-                  data={item}
-                  renderItem={renderItem}
-                  keyExtractor={item => item.gameId}
+                  data={ item }
+                  renderItem={ renderItem }
+                  keyExtractor={ item => item.gameId }
                 />
               </SafeAreaView>
             : <ListItem topDivider={ true } raised containerStyle={ styles.scoreCard }>

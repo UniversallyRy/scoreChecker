@@ -6,9 +6,7 @@ import moment from 'moment';
 import NBA from 'nba';
 import ScoreCard from '../components/ScoreCard';
 import { LoadingButton } from '../components/Buttons'
-// todo: add final scores, RESTful api design, possible navigation into further score stats
-// possible team screen/standings, team icon addition/fix, scorecard styling/separation, visible scroll if necessary,
-//  
+// todo: RESTful api design, possible team screen/standings, scorecard styling/separation
 
 //consistent screen dimensions across multiple devices
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
@@ -28,7 +26,7 @@ const Home = ({ navigation }) => {
   const [ state, setState ] = useState( initialState );
   const [ newObj, setNewObj ] = useState( [] );
   const [ loading, setLoading ] = useState( true );
-  const image = require('../assets/double-bubble-dark.png'); 
+  const image = require( '../assets/double-bubble-dark.png' ); 
   
 
   const loader = () => {
@@ -40,7 +38,6 @@ const Home = ({ navigation }) => {
     loader();
   }, 1000);
   
-  // NBA.stats.boxScore( {GameID: "0022000226"} ).then( res => console.log( res ) );
   useEffect(() => {
     async function initData() {
       NBA.stats.scoreboard({ gameDate: todaysDate }).then( res => setNewObj( res.gameHeader ) );
