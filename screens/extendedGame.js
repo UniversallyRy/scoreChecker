@@ -168,6 +168,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
+        justifyContent: 'center',
 
     },
     bgImage: {
@@ -178,7 +179,6 @@ const styles = StyleSheet.create({
     scoreCard: {
         backgroundColor: '#696969',
         width: windowWidth * 0.97,
-        height: windowHeight * 0.55,
         borderColor: '#696969',
         alignItems: 'center',
     },
