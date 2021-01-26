@@ -11,9 +11,16 @@ import { LoadingButton } from '../components/Buttons';
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
 const extendedGame = ({ navigation, route }) => {
+    // todos: will need to break down in seperate components
+    // seperate screen from components
+    // add menu/dropdown to switch stat lookup
+
+
     const [ gameData, setData ] = useState({});
     const [ homeScore, setHome ] = useState(0);
     const [ awayScore, setAway ] = useState(0);
+    const [ homeLeaders, setHomeLeaders ] = useState({});
+    const [ awayLeaders, setAwayLeaders ] = useState({});
     const { itemId, scoreInfo } = route.params;
     const [ homeLines, setHomeLines ] = useState([]);
     const [ awayLines, setAwayLines ] = useState([]);
@@ -23,25 +30,50 @@ const extendedGame = ({ navigation, route }) => {
     let date = scoreInfo.gamecode.slice(0, 8);
     let splitTeam = splitAt(3)( comp );
     let [ awayTeam, homeTeam ] = [ splitTeam[0], splitTeam[1] ];
-    let [ awayLogo, homeLogo ] = [ logos[ awayTeam ], logos[ homeTeam ] ]; 
+    let [ awayLogo, homeLogo ] = [ logos[ awayTeam ], logos[ homeTeam ] ];
+    const [ scoringHome, setScoringHome ] = useState('');
+    const [ scoringAway, setScoringAway ] = useState('');
     
-
+    
     useEffect(() => {
         async function initData() {
           NBA.data.boxScore( date, scoreInfo.gameId )
           .then( res => res.sports_content )
           .then( res => res.game )
           .then( res => {
-              console.log( res );
-            setAway( res.visitor.score );
             setHome( res.home.score );
-            setAwayLines( res.visitor.linescores.period );
+            setAway( res.visitor.score );
+            setHomeLeaders(res.home.Leaders.Points)
+            setAwayLeaders(res.visitor.Leaders.Points)
             setHomeLines( res.home.linescores.period );
+            setAwayLines( res.visitor.linescores.period );
             setData( res );
-          })
-          }
-          initData();
+            setScoringHome(res.home.Leaders.Points.leader[0].FirstName + ' ' + res.home.Leaders.Points.leader[0].LastName)
+            setScoringAway(res.visitor.Leaders.Points.leader[0].FirstName + ' ' + res.visitor.Leaders.Points.leader[0].LastName)
+            })
+        }
+        initData();
     }, []);
+    
+    const ScoringLeader = () => { 
+        // homeLeaders.leader.map((u) => {
+        //     });
+            return ( 
+                <Card wrapperStyle={{ width: windowWidth * 0.8,flexDirection: 'row', justifyContent: 'center'}}>
+                    <Card containerStyle={{flex: 1,}}>
+                        <Card.Title> Away Points Leader </Card.Title>
+                        <Text>Player: { scoringAway }</Text>
+                        <Text>Points: { awayLeaders.StatValue }</Text>
+                    </Card>
+                    <Card containerStyle={{flex: 1,}}>
+                        <Card.Title> Home Points Leader </Card.Title>
+                        <Text>Player: { scoringHome }</Text>
+                        <Text>Points: { homeLeaders.StatValue }</Text>
+                    </Card>
+                </Card>
+            )
+    };
+    
 
     const LineScores = () => {
         const awayArr = [];
@@ -123,8 +155,7 @@ const extendedGame = ({ navigation, route }) => {
                     <Text>Date : { gameData.date }</Text>
                     <Text>{ gameData.city }</Text>
                     <Text>{ gameData.city }</Text>
-                    <Text>{ gameData.city }</Text>
-                    <Text>{ gameData.city }</Text>
+                    <ScoringLeader/>
                     <LineScores/>
                 </Card>
             </ImageBackground>
