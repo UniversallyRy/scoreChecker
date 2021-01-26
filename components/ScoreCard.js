@@ -12,7 +12,7 @@ const todaysDate = moment().format( 'L' );
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 // Caution: WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
-// todos: format score card better
+// todos: format score card better, time picker needed
 
 const Score = ({ u, navigation }) => {
   const [ homeScore, setHome ] = useState(0);
@@ -65,16 +65,19 @@ const Score = ({ u, navigation }) => {
             />
           </View>
         </View>
-        <ListItem.Subtitle style={ styles.quarter }>{ u.gameStatusText }</ListItem.Subtitle>
+        <ListItem.Subtitle style={ styles.quarter }>{u.gameStatusText !== 'PPD' ? u.gameStatusText : 'Postponed' }</ListItem.Subtitle>
         <Card.Divider style={ styles.divider }/>
         <ListItem.Subtitle style={ styles.broadcast }>
-          {(u.gameStatusText != "Final") ? u.livePeriodTimeBcast : ''}
+          {(u.gameStatusText != "Final") && (u.gameStatusText != "PPD") ? u.livePeriodTimeBcast : ''}
           {<TouchableOpacity>
             <Icon
               name='info'
               size={20}
               onPress={() => {
                 /* Navigate to the Extended Score route with params */
+                if(u.gameStatusText == 'PPD'){
+                    return null;
+                }
                 navigation.navigate('Extended Score', {
                   itemId: 10,
                   scoreInfo: u,
