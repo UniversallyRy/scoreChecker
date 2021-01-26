@@ -43,7 +43,7 @@ const Home = ({ navigation }) => {
   // NBA.stats.boxScore( {GameID: "0022000226"} ).then( res => console.log( res ) );
   useEffect(() => {
     async function initData() {
-      NBA.stats.scoreboard({ gameDate: '01/24/2021' }).then( res => setNewObj( res.gameHeader ) );
+      NBA.stats.scoreboard({ gameDate: todaysDate }).then( res => setNewObj( res.gameHeader ) );
       }
       initData();
     }, []);

@@ -78,14 +78,19 @@ const extendedGame = ({ navigation, route }) => {
     const LineScores = () => {
         const awayArr = [];
         const homeArr = [];
-        const awayQuarters = awayLines.map(( u, i ) => {
-            return awayArr[ i ] = u.score;
-        })
-        const homeQuarters = homeLines.map(( u, i ) => {
-            return homeArr[ i ] = u.score;
-        })
+        if(awayLines === 4){
+            const awayQuarters = awayLines.map(( u, i ) => {
+                return awayArr[ i ] = u.score;
+            })
+            const homeQuarters = homeLines.map(( u, i ) => {
+                return homeArr[ i ] = u.score;
+            })
+        }
+
         return (
-                <Card wrapperStyle={ styles.quarterCard }>
+            <Card wrapperStyle={ styles.quarterCard }>
+            { awayLines
+                        ?<>
                         <View style={ styles.quarterContainer }>
                             <Image
                             accessibilityLabel={ awayTeam }
@@ -116,6 +121,9 @@ const extendedGame = ({ navigation, route }) => {
                                 })
                             }
                         </View>
+                        </>
+                : <></>
+            }
                 </Card>
         );
     }
