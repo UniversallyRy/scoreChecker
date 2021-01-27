@@ -54,10 +54,10 @@ const extendedGame = ({ navigation, route }) => {
         initData();
     }, []); 
     
-    const ScoringLeader = () => { 
-        // homeLeaders.leader.map((u) => {
-        //     });
-            return ( 
+    const StatLeader = () => { 
+        const scoring= '';
+
+        return ( 
                 <Card wrapperStyle={{ width: windowWidth * 0.8,flexDirection: 'row', justifyContent: 'center' }}>
                     <Card containerStyle={{flex: 1,}}>
                         <Card.Title> Away Points Leader </Card.Title>
@@ -162,7 +162,7 @@ const extendedGame = ({ navigation, route }) => {
                     <Text>Date : { gameData.date }</Text>
                     <Text>{ gameData.city }</Text>
                     <Text>{ gameData.city }</Text>
-                    <ScoringLeader/>
+                    <StatLeader/>
                     <LineScores/>
                 </Card>
             </ImageBackground>

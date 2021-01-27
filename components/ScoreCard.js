@@ -7,6 +7,7 @@ import logos from '../logoManager';
 import NBA from 'nba';
 import moment from 'moment';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import DatePicker from './DatePicker';
 
 const todaysDate = moment().format( 'L' );
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
@@ -118,6 +119,7 @@ const ScoreCard = ({ item, date, navigation }) => {
   return(
         <View style={ styles.scoreContainer } >
           <Text style={{ marginLeft: 25, color: 'white' }}>Scores for { date } : : Add Date Picker Here</Text>
+          <DatePicker/>
           <Card.Divider style={ styles.divider } />
           {!loading
             ? <SafeAreaView style={ styles.container }>
