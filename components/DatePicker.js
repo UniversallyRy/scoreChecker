@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {View, Button, Platform} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
+// todos: better styling, smaller, stateful, connected
+
 const DatePicker = () => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
