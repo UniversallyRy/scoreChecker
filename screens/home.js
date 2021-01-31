@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Dimensions, ImageBackground, View } from 'react-native';
 import { Card, ListItem, Icon, Text, Input } from 'react-native-elements';
-// import Icon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
 import NBA from 'nba';
 import ScoreCard from '../components/ScoreCard';
 import { LoadingButton } from '../components/Buttons'
-// todo: RESTful api design, possible team screen/standings, scorecard styling/separation
+// todo: RESTful api design, possible team screen/standings
 
-//consistent screen dimensions across multiple devices
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 const todaysDate = moment().format( 'L' );
 // imported nodejs nba api from https://github.com/bttmly/nba
@@ -28,7 +26,6 @@ const Home = ({ navigation }) => {
   const [ loading, setLoading ] = useState( true );
   const image = require( '../assets/double-bubble-dark.png' ); 
   
-
   const loader = () => {
     setState( newObj );
     setLoading( false );

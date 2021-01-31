@@ -8,7 +8,6 @@ import PlayerSearch from '../components/PlayerSearch';
 import { DEFAULT_PLAYER_INFO } from '../constants';
 // todos: other components seperate into fully functional components/stateless, more react element styling/usage
 
-
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 const image = require('../assets/double-bubble-dark.png'); 
 const initialState = {

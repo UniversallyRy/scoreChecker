@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Dimensions, ScrollView, SafeAreaView, FlatList, View, ActivityIndicator} from 'react-native';
 import { Card, ListItem, Icon, Input, Text, Image } from 'react-native-elements';
-// import Icon from 'react-native-vector-icons/FontAwesome';
 import { RaisedButton, LoadingButton } from './Buttons'
 import logos from '../logoManager';
 import NBA from 'nba';
@@ -13,7 +12,6 @@ const todaysDate = moment().format( 'L' );
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 // Caution: WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
-// todos: format score card better, time picker needed
 
 const Score = ({ u, navigation }) => {
   const [ homeScore, setHome ] = useState(0);
@@ -93,7 +91,7 @@ const Score = ({ u, navigation }) => {
 }
 
 const ScoreCard = ({ item, date, navigation }) => {
-  // todo: profileEntry loop for DRY, fix teamlogos not appearing,
+  // todo: profileEntry loop for DRY
   const [ loading , setLoading ] = useState( true );
 
   const renderItem = ({ item }) => (
@@ -118,7 +116,7 @@ const ScoreCard = ({ item, date, navigation }) => {
 
   return(
         <View style={ styles.scoreContainer } >
-          <Text style={{ marginLeft: 25, color: 'white' }}>Scores for { date } : : Add Date Picker Here</Text>
+          <Text style={{ margin: 25, color: 'white' }}>Scores for { date } </Text>
           <DatePicker/>
           <Card.Divider style={ styles.divider } />
           {!loading
