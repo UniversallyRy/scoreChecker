@@ -55,7 +55,7 @@ const extendedGame = ({ navigation, route }) => {
     }, []); 
     
     const StatLeader = () => { 
-        const scoring= '';
+        const scoring= ''
 
         return ( 
                 <Card wrapperStyle={{ width: windowWidth * 0.8,flexDirection: 'row', justifyContent: 'center' }}>
