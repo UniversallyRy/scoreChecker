@@ -55,17 +55,17 @@ const extendedGame = ({ navigation, route }) => {
     }, []); 
     
     const StatLeader = () => { 
-        const scoring= ''
+        const scoring= '';
 
         return ( 
-                <Card wrapperStyle={{ width: windowWidth * 0.8,flexDirection: 'row', justifyContent: 'center' }}>
-                    <Card containerStyle={{flex: 1,}}>
-                        <Card.Title> Away Points Leader </Card.Title>
+                <Card containerStyle={{backgroundColor: 'lightgrey'}} wrapperStyle={ styles.scoreLeadersContainer }>
+                    <Card containerStyle={ styles.scoreLeaders }>
+                        <Card.Title>Away Points Leader</Card.Title>
                         <Text>Player: { scoringAway }</Text>
                         <Text>Points: { awayLeaders.StatValue }</Text>
                     </Card>
-                    <Card containerStyle={{flex: 1,}}>
-                        <Card.Title> Home Points Leader </Card.Title>
+                    <Card containerStyle={ styles.scoreLeaders }>
+                        <Card.Title>Home Points Leader</Card.Title>
                         <Text>Player: { scoringHome }</Text>
                         <Text>Points: { homeLeaders.StatValue }</Text>
                     </Card>
@@ -160,8 +160,6 @@ const extendedGame = ({ navigation, route }) => {
                     <Text>City: { gameData.city }</Text>
                     <Text>Country: { gameData.country }</Text>
                     <Text>Date : { gameData.date }</Text>
-                    <Text>{ gameData.city }</Text>
-                    <Text>{ gameData.city }</Text>
                     <StatLeader/>
                     <LineScores/>
                 </Card>
@@ -213,6 +211,16 @@ const styles = StyleSheet.create({
     quarterContainer: {
         flex: 1,
         alignItems: 'center',
+    },
+    scoreLeadersContainer: {
+        width: windowWidth * 0.8,
+        flexDirection: 'row', 
+        justifyContent: 'center',
+    },
+    scoreLeaders:{
+        flex: 1,
+        backgroundColor: '#696969',
+        borderColor: '#696969',
     },
 })
 
