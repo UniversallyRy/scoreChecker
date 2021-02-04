@@ -8,6 +8,8 @@ import logos from '../logoManager';
 import ScoreCard from '../components/ScoreCard';
 import { LoadingButton } from '../components/Buttons';
 import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
+import DropDownPicker from 'react-native-dropdown-picker';
+import {Icon as IconF} from 'react-native-vector-icons/Feather';
 
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
@@ -16,7 +18,8 @@ const extendedGame = ({ navigation, route }) => {
     // todos: will need to break down in seperate components
     // seperate screen from components
     // add menu/dropdown to switch stat lookup
-
+    const [ leaderDropdown, setDropdown ] = useState({ countries: ['uk', 'la', 'dc', 'ny']});
+    const [ value, setValue ] = useState(null);
     const [ gameData, setData ] = useState({});
     const [ homeScore, setHome ] = useState(0);
     const [ awayScore, setAway ] = useState(0);
@@ -34,6 +37,7 @@ const extendedGame = ({ navigation, route }) => {
     let splitTeam = splitAt(3)( comp );
     let [ awayTeam, homeTeam ] = [ splitTeam[0], splitTeam[1] ];
     let [ awayLogo, homeLogo ] = [ logos[ awayTeam ], logos[ homeTeam ] ];
+    let controller;
     const [ scoringHome, setScoringHome ] = useState('');
     const [ scoringAway, setScoringAway ] = useState('');
     
@@ -71,8 +75,8 @@ const extendedGame = ({ navigation, route }) => {
                             source={{ uri: `${PROFILE_PIC_URL_PREFIX}/${ awayPic }.png` }}
                             alt="Player"
                         />
-                        <Text>Player: { scoringAway }</Text>
-                        <Text>Points: { awayLeaders.StatValue }</Text>
+                        <Text>{ scoringAway }</Text>
+                        <Text style={{alignSelf:'center'}}>{ awayLeaders.StatValue } Points</Text>
                     </Card>
                     <Card containerStyle={ styles.scoreLeaders }>
                         <Card.Title>Home</Card.Title>
@@ -81,8 +85,8 @@ const extendedGame = ({ navigation, route }) => {
                             source={{ uri: `${PROFILE_PIC_URL_PREFIX}/${ homePic }.png` }}
                             alt="Player"
                         />
-                        <Text>Player: { scoringHome }</Text>
-                        <Text>Points: { homeLeaders.StatValue }</Text>
+                        <Text>{ scoringHome }</Text>
+                        <Text style={{alignSelf:'center'}}>{ homeLeaders.StatValue } Points</Text>
                     </Card>
                 </View>
             )
@@ -175,6 +179,21 @@ const extendedGame = ({ navigation, route }) => {
                     <Text>City: { gameData.city }</Text>
                     <Text>Country: { gameData.country }</Text>
                     <Text>Date : { gameData.date }</Text>
+
+                    <View style={{ width: windowWidth * 0.8 }}>
+                        <Text>{ leaderDropdown.countries }</Text>
+                        <DropDownPicker
+                            items={ leaderDropdown.countries }
+                            controller={ instance => controller = instance }
+                            onChangeList={( items, callback ) => {
+                                new Promise(( resolve, reject ) => resolve( setDropdown( items ) ))
+                                    .then( () => callback() )
+                                    .catch( () => {} );
+                            }}
+                            defaultValue={ value }
+                            onChangeItem={ item => setValue( item.value ) }
+                        />
+                    </View>
                     <StatLeader/>
                     <LineScores/>
                 </Card>
@@ -238,12 +257,19 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'lightgrey',
         borderColor: 'lightgrey',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     playerPic: {
         width: 75,
         height: 75,
         margin: 10,
         alignSelf: 'center',
+        borderColor: 'white',
+        borderStyle: 'dashed',
+        borderWidth: 0.5,
+        borderRadius: 3,
+    
     },
 })
 
