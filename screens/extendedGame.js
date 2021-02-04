@@ -7,6 +7,8 @@ import NBA from 'nba';
 import logos from '../logoManager';
 import ScoreCard from '../components/ScoreCard';
 import { LoadingButton } from '../components/Buttons';
+import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
+
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
@@ -20,6 +22,8 @@ const extendedGame = ({ navigation, route }) => {
     const [ awayScore, setAway ] = useState(0);
     const [ homeLeaders, setHomeLeaders ] = useState({});
     const [ awayLeaders, setAwayLeaders ] = useState({});
+    const [ homePic, setHomePic ] = useState({});
+    const [ awayPic, setAwayPic ] = useState({});
     const { itemId, scoreInfo } = route.params;
     const [ homeLines, setHomeLines ] = useState([]);
     const [ awayLines, setAwayLines ] = useState([]);
@@ -49,6 +53,8 @@ const extendedGame = ({ navigation, route }) => {
             setData( res )
             setScoringHome( res.home.Leaders.Points.leader[0].FirstName + ' ' + res.home.Leaders.Points.leader[0].LastName )
             setScoringAway( res.visitor.Leaders.Points.leader[0].FirstName + ' ' + res.visitor.Leaders.Points.leader[0].LastName )
+            setHomePic( res.home.Leaders.Points.leader[0].PersonID )
+            setAwayPic( res.visitor.Leaders.Points.leader[0].PersonID )
             })
         }
         initData();
@@ -56,20 +62,29 @@ const extendedGame = ({ navigation, route }) => {
     
     const StatLeader = () => { 
         const scoring= '';
-
         return ( 
-                <Card containerStyle={{backgroundColor: 'lightgrey'}} wrapperStyle={ styles.scoreLeadersContainer }>
+                <View style={ styles.scoreLeadersContainer }>
                     <Card containerStyle={ styles.scoreLeaders }>
-                        <Card.Title>Away Points Leader</Card.Title>
+                        <Card.Title>Away</Card.Title>
+                        <Image
+                            containerStyle={ styles.playerPic }
+                            source={{ uri: `${PROFILE_PIC_URL_PREFIX}/${ awayPic }.png` }}
+                            alt="Player"
+                        />
                         <Text>Player: { scoringAway }</Text>
                         <Text>Points: { awayLeaders.StatValue }</Text>
                     </Card>
                     <Card containerStyle={ styles.scoreLeaders }>
-                        <Card.Title>Home Points Leader</Card.Title>
+                        <Card.Title>Home</Card.Title>
+                        <Image
+                            containerStyle={ styles.playerPic }
+                            source={{ uri: `${PROFILE_PIC_URL_PREFIX}/${ homePic }.png` }}
+                            alt="Player"
+                        />
                         <Text>Player: { scoringHome }</Text>
                         <Text>Points: { homeLeaders.StatValue }</Text>
                     </Card>
-                </Card>
+                </View>
             )
     };
     
@@ -213,14 +228,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     scoreLeadersContainer: {
-        width: windowWidth * 0.8,
+        marginTop: 25,
+        width: windowWidth,
         flexDirection: 'row', 
         justifyContent: 'center',
     },
     scoreLeaders:{
+        margin: 10,
         flex: 1,
-        backgroundColor: '#696969',
-        borderColor: '#696969',
+        backgroundColor: 'lightgrey',
+        borderColor: 'lightgrey',
+    },
+    playerPic: {
+        width: 75,
+        height: 75,
+        margin: 10,
+        alignSelf: 'center',
     },
 })
 
