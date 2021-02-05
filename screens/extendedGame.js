@@ -17,7 +17,7 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 const extendedGame = ({ navigation, route }) => {
     // todos: will need to break down in seperate components
     // seperate screen from components
-    // add menu/dropdown to switch stat lookup
+    // add menu/dropdown to switch stat lookup, connect menu state to stats
     const [ leaderDropdown, setDropdown ] = useState({ countries: ['uk', 'la', 'dc', 'ny']});
     const [ value, setValue ] = useState(null);
     const [ gameData, setData ] = useState({});
