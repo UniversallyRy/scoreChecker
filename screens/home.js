@@ -37,7 +37,7 @@ const Home = ({ navigation }) => {
   
   useEffect(() => {
     async function initData() {
-      NBA.stats.scoreboard({ gameDate: '02/03/2021' }).then( res => setNewObj( res.gameHeader ) );
+      NBA.stats.scoreboard({ gameDate: todaysDate }).then( res => setNewObj( res.gameHeader ) );
       }
       initData();
     }, []);

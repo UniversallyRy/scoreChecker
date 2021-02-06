@@ -7,6 +7,7 @@ import NBA from 'nba';
 import moment from 'moment';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import DatePicker from './DatePicker';
+import { isObject } from 'formik';
 
 const todaysDate = moment().format( 'L' );
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
@@ -22,6 +23,7 @@ const Score = ({ u, navigation }) => {
   let splitTeam = splitAt(3)( comp );
   let [ awayTeam, homeTeam ] = [ splitTeam[0], splitTeam[1] ];
   let [ awayLogo, homeLogo ] = [ logos[ awayTeam ], logos[ homeTeam ] ]; 
+  console.log(u.gameStatusText)
 
   useEffect(() => {
     async function initData() {
@@ -74,7 +76,7 @@ const Score = ({ u, navigation }) => {
               size={20}
               onPress={() => {
                 /* Navigate to the Extended Score route with params */
-                if(u.gameStatusText == 'PPD'){
+                  if(u.gameStatusText.length > 7){
                     return null;
                 }
                 navigation.navigate('Extended Score', {
