@@ -149,9 +149,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignContent: 'center',
     justifyContent: 'center',
+    margin: 10,
   },
   container: {
     margin: 10,
+    marginBottom: 40,
   },
   divider: {
     backgroundColor: '#696969',
@@ -160,12 +162,14 @@ const styles = StyleSheet.create({
     height: 2,
   },
   scoreCard: {
+    flex: 1,
     width: windowWidth * 0.90,
     backgroundColor: '#696969',
     alignSelf: 'center',
-    margin: 10,
     borderColor: 'black',
     borderRadius: 6,
+    marginBottom: 20,
+    bottom: 0,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -179,7 +183,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'center',
-    margin: 5,
     marginBottom: 10,
   },
   title:{

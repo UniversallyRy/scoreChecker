@@ -66,6 +66,8 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
+    height: windowHeight,
+    width: windowWidth,
   },
   titleContainer : { 
     width: windowWidth * 0.999999 ,
