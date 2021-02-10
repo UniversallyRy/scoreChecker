@@ -23,7 +23,6 @@ const Score = ({ u, navigation }) => {
   let splitTeam = splitAt(3)( comp );
   let [ awayTeam, homeTeam ] = [ splitTeam[0], splitTeam[1] ];
   let [ awayLogo, homeLogo ] = [ logos[ awayTeam ], logos[ homeTeam ] ]; 
-  console.log(u.gameStatusText)
 
   useEffect(() => {
     async function initData() {
@@ -66,10 +65,10 @@ const Score = ({ u, navigation }) => {
             />
           </View>
         </View>
-        <ListItem.Subtitle style={ styles.quarter }>{ u.gameStatusText !== 'PPD' ? u.gameStatusText : 'Postponed' }</ListItem.Subtitle>
+        <ListItem.Subtitle style={ styles.quarter }>{ u.gameStatusText != 'PPD' ? u.gameStatusText : 'Postponed' }</ListItem.Subtitle>
         <Card.Divider style={ styles.divider }/>
         <ListItem.Subtitle style={ styles.broadcast }>
-          {( u.gameStatusText != "Final" ) && ( u.gameStatusText != "PPD" ) ? u.livePeriodTimeBcast : ''}
+          {( u.gameStatusText != "Final" ) && ( u.gameStatusText != "PPD" ) && ( u.livePeriodTimeBcast.charAt(1) != '0' ) ? u.livePeriodTimeBcast : ''}
           {<TouchableOpacity>
             <Icon
               name='info'
