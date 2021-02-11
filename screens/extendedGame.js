@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Dimensions, ImageBackground, View, ActivityIndicator } from 'react-native';
 import { Card, ListItem, Icon, Text, Image } from 'react-native-elements';
-// import Icon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
 import NBA from 'nba';
 import logos from '../logoManager';
@@ -107,7 +106,9 @@ const extendedGame = ({ navigation, route }) => {
         }
 
         return (
-            <Card wrapperStyle={styles.quarterCard}>
+            <Card containerStyle={styles.quarterCard}>
+                <Card.Title>Game Quarter Logs</Card.Title>
+                <Card wrapperStyle={{ flexDirection: 'row'}}>
                 { awayLines
                     ? <>
                         <View style={styles.quarterContainer}>
@@ -115,7 +116,6 @@ const extendedGame = ({ navigation, route }) => {
                                 awayArr.map((u, i) => {
                                     const quarter = `Q${i + 1}: ` + u;
                                     const overtime = `OT ${i - 4}: ` + u;
-                                    console.log(awayArr);
                                     return (
                                         <Text key={i} style={styles.quarterText}>{ i < 5 ? quarter : overtime }</Text>
                                     )
@@ -136,6 +136,7 @@ const extendedGame = ({ navigation, route }) => {
                     </>
                     : <></>
                 }
+                </Card>
             </Card>
         );
     }
@@ -226,9 +227,9 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     quarterCard: {
-        width: windowWidth * 0.3,
-        height: windowHeight * 0.2,
-        flexDirection: 'row',
+        width: windowWidth * 0.45,
+        height: windowHeight * 0.3,
+        flexDirection: 'column',
         alignItems: 'center',
         alignSelf: 'center',
     },
@@ -238,8 +239,8 @@ const styles = StyleSheet.create({
         margin: 3,
     },
     quarterContainer: {
-        flex: 1,
         alignItems: 'center',
+        margin: 10,
     },
     scoreLeadersContainer: {
         marginTop: 25,
