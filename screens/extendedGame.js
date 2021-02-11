@@ -96,13 +96,12 @@ const extendedGame = ({ navigation, route }) => {
     const LineScores = () => {
         const awayArr = [];
         const homeArr = [];
-        console.log(awayLines);
 
-        if (awayLines >= 4) {
-            const awayQuarters = awayLines.map((u, i) => {
+        if (awayLines.length >= 4) {
+            awayLines.map((u, i) => {
                 return awayArr[i] = u.score;
             })
-            const homeQuarters = homeLines.map((u, i) => {
+            homeLines.map((u, i) => {
                 return homeArr[i] = u.score;
             })
         }
@@ -114,9 +113,9 @@ const extendedGame = ({ navigation, route }) => {
                         <View style={styles.quarterContainer}>
                             {
                                 awayArr.map((u, i) => {
-                                    const quarter = `Q ${i + 1}: ` + u;
+                                    const quarter = `Q${i + 1}: ` + u;
                                     const overtime = `OT ${i - 4}: ` + u;
-                                    console.log(quarter);
+                                    console.log(awayArr);
                                     return (
                                         <Text key={i} style={styles.quarterText}>{ i < 5 ? quarter : overtime }</Text>
                                     )
@@ -126,7 +125,7 @@ const extendedGame = ({ navigation, route }) => {
                         <View style={styles.quarterContainer}>
                             {
                                 homeArr.map((u, i) => {
-                                    const quarter = `Q ${i + 1}: ` + u;
+                                    const quarter = `Q${i + 1}: ` + u;
                                     const overtime = `OT ${i - 4}: ` + u;
                                     return (
                                         <Text key={i} style={styles.quarterText}>{ i < 5 ? quarter : overtime }</Text>
