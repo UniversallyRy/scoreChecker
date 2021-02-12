@@ -8,7 +8,7 @@ export const RaisedButton = ( props ) =>
         containerStyle={ styles.button }
         raised 
         { ...props } 
-    />;
+    />
 
 export const LoadingButton = ( props ) => 
     <Button 

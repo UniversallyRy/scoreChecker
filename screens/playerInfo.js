@@ -21,7 +21,7 @@ const PlayerStats = ({ navigation }) => {
     // stores api promise
     const loadPlayerInfo = ( playerName ) => {
         nba.stats.playerInfo({ PlayerID: nba.findPlayer( playerName ).playerId }).then(( info ) => {
-            const playerInfo = Object.assign(info.commonPlayerInfo[ 0 ], info.playerHeadlineStats[ 0 ]);
+            const playerInfo = Object.assign( info.commonPlayerInfo[ 0 ], info.playerHeadlineStats[ 0 ] );
             setPlayerObj({ playerInfo });
         });
     }
@@ -46,7 +46,7 @@ const PlayerStats = ({ navigation }) => {
             return false;
         }else {
             if ( newPlayer != undefined ) {
-                    loadPlayerInfo(trimmedInput);
+                    loadPlayerInfo( trimmedInput );
             }else{
                 alert( 'Player not found, Try again.' )
             }
@@ -69,7 +69,7 @@ const PlayerStats = ({ navigation }) => {
                 />
                 <PlayerSearch
                     handleInput={ handleInput }
-                    handleReset={() => handleReset( 0 )}
+                    handleReset={ () => handleReset( 0 ) }
                 />
             </ImageBackground>                 
         </ScrollView>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Dimensions, ScrollView, SafeAreaView, FlatList, View, ActivityIndicator} from 'react-native';
+import { StyleSheet, Dimensions, ScrollView, SafeAreaView, FlatList, View, ActivityIndicator } from 'react-native';
 import { Card, ListItem, Icon, Input, Text, Image } from 'react-native-elements';
 import { RaisedButton, LoadingButton } from './Buttons'
 import logos from '../logoManager';
@@ -15,13 +15,13 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 // logo 35 x 50
 
 const Score = ({ u, navigation }) => {
-  const [ homeScore, setHome ] = useState(0);
-  const [ awayScore, setAway ] = useState(0);
+  const [ homeScore, setHome ] = useState( 0 );
+  const [ awayScore, setAway ] = useState( 0 );
   const splitAt = index => x => [ x.slice( 0, index ), x.slice( index ) ];
-  let comp = u.gamecode.slice(-6);
-  let date = u.gamecode.slice(0, 8);
-  let splitTeam = splitAt(3)( comp );
-  let [ awayTeam, homeTeam ] = [ splitTeam[0], splitTeam[1] ];
+  let comp = u.gamecode.slice( -6 );
+  let date = u.gamecode.slice( 0, 8 );
+  let splitTeam = splitAt( 3 )( comp );
+  let [ awayTeam, homeTeam ] = [ splitTeam[ 0 ], splitTeam[ 1 ] ];
   let [ awayLogo, homeLogo ] = [ logos[ awayTeam ], logos[ homeTeam ] ]; 
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const Score = ({ u, navigation }) => {
       <ListItem.Content>
         <View style={ styles.teamVersus }>
           <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-            <Text style={ styles.teams }>{ awayTeam } - {awayScore}</Text>
+            <Text style={ styles.teams }>{ awayTeam } - { awayScore }</Text>
             <Image
               accessibilityLabel={ awayTeam }
               source={ awayLogo }
@@ -72,7 +72,7 @@ const Score = ({ u, navigation }) => {
           {<TouchableOpacity>
             <Icon
               name='info'
-              size={20}
+              size={ 20 }
               onPress={() => {
                 /* Navigate to the Extended Score route with params */
                   if(u.gameStatusText.length > 7){
@@ -133,7 +133,7 @@ const ScoreCard = ({ item, date, navigation }) => {
                   <ListItem.Title style={ styles.title }>Loading</ListItem.Title>
                   <Card.Divider style={ styles.divider } />
                   <Card.Divider style={ styles.divider } />
-                  <LoadingButton containerStyle={{width: 400}}/>
+                  <LoadingButton containerStyle={{ width: 400 }}/>
                 </ListItem.Content>
               </ListItem>
           }

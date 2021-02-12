@@ -21,7 +21,7 @@ const Profile = ({ playerInfo, navigation }) => {
             return () => {
             checkInfo();       
             };
-    }, [playerInfo]);
+    }, [ playerInfo ]);
 
     return (
             <Card containerStyle={ styles.playerProfile }>
@@ -31,13 +31,13 @@ const Profile = ({ playerInfo, navigation }) => {
                     <View style={ styles.proPicBorder }>
                         <Image
                             containerStyle={ styles.profilePic }
-                            source={{ uri: `${PROFILE_PIC_URL_PREFIX}/${ playerInfo.playerId }.png` }}
+                            source={{ uri: `${ PROFILE_PIC_URL_PREFIX }/${ playerInfo.playerId }.png` }}
                             alt="Profile"
                         />
                     </View>
                     <Image
                         containerStyle={ styles.teamLogo }
-                        source={{ uri: `${TEAM_PIC_URL_PREFIX}/${ playerInfo.teamAbbreviation }_logo.svg` }}
+                        source={{ uri: `${ TEAM_PIC_URL_PREFIX }/${ playerInfo.teamAbbreviation }_logo.svg` }}
                         alt="Team"
                     />
                     <View style={ styles.profileEntry }>

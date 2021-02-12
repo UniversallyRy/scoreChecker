@@ -11,53 +11,53 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { Icon as IconF } from 'react-native-vector-icons/Feather';
 
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
 const extendedGame = ({ navigation, route }) => {
     // todos: will need to break down in seperate components, connect drodown 
     // seperate screen from components
     // update menu/dropdown to switch stat lookup, connect menu state to stats
-    const [leaderDropdown, setDropdown] = useState({ countries: ['uk', 'la', 'dc', 'ny'] });
-    const [value, setValue] = useState(null);
-    const [gameData, setData] = useState({});
-    const [homeScore, setHome] = useState(0);
-    const [awayScore, setAway] = useState(0);
-    const [homeLeaders, setHomeLeaders] = useState({});
-    const [awayLeaders, setAwayLeaders] = useState({});
-    const [homePic, setHomePic] = useState({});
-    const [awayPic, setAwayPic] = useState({});
+    const [ leaderDropdown, setDropdown ] = useState({ countries: [ 'uk', 'la', 'dc', 'ny' ] });
+    const [ value, setValue ] = useState( null );
+    const [ gameData, setData ] = useState({});
+    const [ homeScore, setHome ] = useState( 0 );
+    const [ awayScore, setAway ] = useState( 0 );
+    const [ homeLeaders, setHomeLeaders ] = useState({});
+    const [ awayLeaders, setAwayLeaders ] = useState({});
+    const [ homePic, setHomePic ] = useState({});
+    const [ awayPic, setAwayPic ] = useState({});
     const { itemId, scoreInfo } = route.params;
-    const [homeLines, setHomeLines] = useState([]);
-    const [awayLines, setAwayLines] = useState([]);
-    const image = require('../assets/double-bubble-dark.png');
-    const splitAt = index => x => [x.slice(0, index), x.slice(index)];
-    let comp = scoreInfo.gamecode.slice(-6);
-    let date = scoreInfo.gamecode.slice(0, 8);
-    let splitTeam = splitAt(3)(comp);
-    let [awayTeam, homeTeam] = [splitTeam[0], splitTeam[1]];
-    let [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
+    const [ homeLines, setHomeLines ] = useState([]);
+    const [ awayLines, setAwayLines ] = useState([]);
+    const image = require( '../assets/double-bubble-dark.png' );
+    const splitAt = index => x => [ x.slice( 0, index ), x.slice( index ) ];
+    let comp = scoreInfo.gamecode.slice( -6 );
+    let date = scoreInfo.gamecode.slice( 0, 8 );
+    let splitTeam = splitAt( 3 )( comp );
+    let [ awayTeam, homeTeam ] = [ splitTeam[0], splitTeam[ 1 ] ];
+    let [ awayLogo, homeLogo ] = [ logos[ awayTeam ], logos[ homeTeam ] ];
     let controller;
-    const [scoringHome, setScoringHome] = useState('');
-    const [scoringAway, setScoringAway] = useState('');
+    const [ scoringHome, setScoringHome ] = useState('');
+    const [ scoringAway, setScoringAway ] = useState('');
 
 
     useEffect(() => {
         async function initData() {
-            NBA.data.boxScore(date, scoreInfo.gameId)
-                .then(res => res.sports_content)
-                .then(res => res.game)
-                .then(res => {
-                    setHome(res.home.score);
-                    setAway(res.visitor.score);
-                    setHomeLeaders(res.home.Leaders.Points)
-                    setAwayLeaders(res.visitor.Leaders.Points)
-                    setHomeLines(res.home.linescores.period)
-                    setAwayLines(res.visitor.linescores.period)
-                    setData(res)
-                    setScoringHome(res.home.Leaders.Points.leader[0].FirstName + ' ' + res.home.Leaders.Points.leader[0].LastName)
-                    setScoringAway(res.visitor.Leaders.Points.leader[0].FirstName + ' ' + res.visitor.Leaders.Points.leader[0].LastName)
-                    setHomePic(res.home.Leaders.Points.leader[0].PersonID)
-                    setAwayPic(res.visitor.Leaders.Points.leader[0].PersonID)
+            NBA.data.boxScore( date, scoreInfo.gameId )
+                .then( res => res.sports_content )
+                .then( res => res.game )
+                .then( res => {
+                    setHome( res.home.score );
+                    setAway( res.visitor.score );
+                    setHomeLeaders( res.home.Leaders.Points )
+                    setAwayLeaders( res.visitor.Leaders.Points )
+                    setHomeLines( res.home.linescores.period )
+                    setAwayLines( res.visitor.linescores.period )
+                    setData( res )
+                    setScoringHome( res.home.Leaders.Points.leader[ 0 ].FirstName + ' ' + res.home.Leaders.Points.leader[ 0 ].LastName )
+                    setScoringAway( res.visitor.Leaders.Points.leader[ 0 ].FirstName + ' ' + res.visitor.Leaders.Points.leader[ 0 ].LastName )
+                    setHomePic( res.home.Leaders.Points.leader[ 0 ].PersonID )
+                    setAwayPic( res.visitor.Leaders.Points.leader[ 0 ].PersonID )
                 })
         }
         initData();
@@ -66,26 +66,26 @@ const extendedGame = ({ navigation, route }) => {
     const StatLeader = () => {
         const scoring = '';
         return (
-            <View style={styles.scoreLeadersContainer}>
-                <Card containerStyle={styles.scoreLeaders}>
+            <View style={ styles.scoreLeadersContainer }>
+                <Card containerStyle={ styles.scoreLeaders }>
                     <Card.Title>Away</Card.Title>
                     <Image
-                        containerStyle={styles.playerPic}
-                        source={{ uri: `${PROFILE_PIC_URL_PREFIX}/${awayPic}.png` }}
+                        containerStyle={ styles.playerPic }
+                        source={{ uri: `${ PROFILE_PIC_URL_PREFIX }/${ awayPic }.png` }}
                         alt="Player"
                     />
-                    <Text>{scoringAway}</Text>
-                    <Text style={{ alignSelf: 'center' }}>{awayLeaders.StatValue} Points</Text>
+                    <Text>{ scoringAway }</Text>
+                    <Text style={{ alignSelf: 'center' }}>{ awayLeaders.StatValue } Points</Text>
                 </Card>
-                <Card containerStyle={styles.scoreLeaders}>
+                <Card containerStyle={ styles.scoreLeaders }>
                     <Card.Title>Home</Card.Title>
                     <Image
-                        containerStyle={styles.playerPic}
-                        source={{ uri: `${PROFILE_PIC_URL_PREFIX}/${homePic}.png` }}
+                        containerStyle={ styles.playerPic }
+                        source={{ uri: `${ PROFILE_PIC_URL_PREFIX }/${ homePic }.png` }}
                         alt="Player"
                     />
-                    <Text>{scoringHome}</Text>
-                    <Text style={{ alignSelf: 'center' }}>{homeLeaders.StatValue} Points</Text>
+                    <Text>{ scoringHome }</Text>
+                    <Text style={{ alignSelf: 'center' }}>{ homeLeaders.StatValue } Points</Text>
                 </Card>
             </View>
         )
@@ -96,39 +96,39 @@ const extendedGame = ({ navigation, route }) => {
         const awayArr = [];
         const homeArr = [];
 
-        if (awayLines.length >= 4) {
-            awayLines.map((u, i) => {
-                return awayArr[i] = u.score;
+        if ( awayLines.length >= 4 ) {
+            awayLines.map(( u, i ) => {
+                return awayArr[ i ] = u.score;
             })
-            homeLines.map((u, i) => {
-                return homeArr[i] = u.score;
+            homeLines.map(( u, i ) => {
+                return homeArr[ i ] = u.score;
             })
         }
 
         return (
-            <Card containerStyle={styles.quarterCard}>
+            <Card containerStyle={ styles.quarterCard }>
                 <Card.Title>Game Quarter Logs</Card.Title>
-                <Card wrapperStyle={{ flexDirection: 'row'}}>
+                <Card wrapperStyle={{ flexDirection: 'row' }}>
                 { awayLines
                     ? <>
-                        <View style={styles.quarterContainer}>
+                        <View style={ styles.quarterContainer }>
                             {
-                                awayArr.map((u, i) => {
-                                    const quarter = `Q${i + 1}: ` + u;
-                                    const overtime = `OT ${i - 4}: ` + u;
+                                awayArr.map(( u, i ) => {
+                                    const quarter = `Q${ i + 1 }: ` + u;
+                                    const overtime = `OT ${ i - 4 }: ` + u;
                                     return (
-                                        <Text key={i} style={styles.quarterText}>{ i < 5 ? quarter : overtime }</Text>
+                                        <Text key={ i } style={ styles.quarterText }>{ i < 5 ? quarter : overtime }</Text>
                                     )
                                 })
                             }
                         </View>
-                        <View style={styles.quarterContainer}>
+                        <View style={ styles.quarterContainer }>
                             {
-                                homeArr.map((u, i) => {
-                                    const quarter = `Q${i + 1}: ` + u;
-                                    const overtime = `OT ${i - 4}: ` + u;
+                                homeArr.map(( u, i ) => {
+                                    const quarter = `Q${ i + 1 }: ` + u;
+                                    const overtime = `OT ${ i - 4 }: ` + u;
                                     return (
-                                        <Text key={i} style={styles.quarterText}>{ i < 5 ? quarter : overtime }</Text>
+                                        <Text key={ i } style={ styles.quarterText }>{ i < 5 ? quarter : overtime }</Text>
                                     )
                                 })
                             }
@@ -142,17 +142,17 @@ const extendedGame = ({ navigation, route }) => {
     }
 
     return (
-        <View style={styles.container}>
-            <ImageBackground source={image} style={styles.bgImage}>
-                <Card wrapperStyle={styles.scoreCard} containerStyle={styles.scoreCard}>
-                    <View style={styles.teamVersus}>
+        <View style={ styles.container }>
+            <ImageBackground source={image} style={ styles.bgImage }>
+                <Card wrapperStyle={ styles.scoreCard } containerStyle={ styles.scoreCard }>
+                    <View style={ styles.teamVersus }>
                         <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                            <Text style={styles.title}>{awayTeam} - {awayScore}</Text>
+                            <Text style={ styles.title }>{ awayTeam } - { awayScore }</Text>
                             <Image
-                                accessibilityLabel={awayTeam}
-                                source={awayLogo}
+                                accessibilityLabel={ awayTeam }
+                                source={ awayLogo }
                                 style={{ width: 50, height: 50, margin: 5 }}
-                                PlaceholderContent={<ActivityIndicator />}
+                                PlaceholderContent={ <ActivityIndicator /> }
                             />
                         </View>
 
@@ -161,31 +161,31 @@ const extendedGame = ({ navigation, route }) => {
                         </Text>
 
                         <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                            <Text style={styles.title}>{homeTeam} - {homeScore} </Text>
+                            <Text style={ styles.title }>{ homeTeam } - { homeScore } </Text>
                             <Image
-                                accessibilityLabel={homeTeam}
-                                source={homeLogo}
+                                accessibilityLabel={ homeTeam }
+                                source={ homeLogo }
                                 style={{ width: 50, height: 50, margin: 5 }}
-                                PlaceholderContent={<ActivityIndicator />}
+                                PlaceholderContent={ <ActivityIndicator/> }
                             />
                         </View>
                     </View>
-                    <Text style={{ margin: 5 }}>Arena: {gameData.arena}</Text>
-                    <Text style={{ margin: 5 }}>City: {gameData.city}</Text>
-                    <Text style={{ margin: 5 }}>Country: {gameData.country}</Text>
+                    <Text style={{ margin: 5 }}>Arena: { gameData.arena }</Text>
+                    <Text style={{ margin: 5 }}>City: { gameData.city }</Text>
+                    <Text style={{ margin: 5 }}>Country: { gameData.country }</Text>
 
                     <View style={{ width: windowWidth * 0.8 }}>
-                        <Text>{leaderDropdown.countries}</Text>
+                        <Text>{ leaderDropdown.countries }</Text>
                         <DropDownPicker
-                            items={leaderDropdown.countries}
-                            controller={instance => controller = instance}
-                            onChangeList={(items, callback) => {
-                                new Promise((resolve, reject) => resolve(setDropdown(items)))
+                            items={ leaderDropdown.countries }
+                            controller={ instance => controller = instance }
+                            onChangeList={( items, callback ) => {
+                                new Promise(( resolve, reject ) => resolve( setDropdown( items ) ))
                                     .then(() => callback())
                                     .catch(() => { });
                             }}
-                            defaultValue={value}
-                            onChangeItem={item => setValue(item.value)}
+                            defaultValue={ value }
+                            onChangeItem={ item => setValue( item.value ) }
                         />
                     </View>
                     <StatLeader />
