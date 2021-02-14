@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import { View, Button, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 // todos: better styling, smaller, stateful, connected, 
@@ -18,8 +18,21 @@ const DatePicker = () => {
     const currentDate = selectedDate.toISOString().split( 'T' )[ 0 ] || date;
     setShow( Platform.OS === 'ios' );
     // setDate(currentDate );
-    formatDate( currentDate );    
+    console.log(formatDate( currentDate ));    
   };
+
+  // useEffect(() => {
+  //   const checkInfo = () => {
+  //       if ( date !== undefined ){
+  //           setDate( new Date() );
+  //       }else{
+  //           setLoading( true );
+  //       }
+  //   }
+  //       return () => {
+  //       checkInfo();       
+  //       };
+  // }, [ date ]);
 
   const showMode = () => {
     setShow( true );
@@ -34,7 +47,10 @@ const DatePicker = () => {
       </View>
       { show && (
         <DateTimePicker
+          defaultDate={new Date()}
+          placeHolderText={(new Date()).toLocaleDateString()}
           testID="datePicker"
+          format="DD-MM-YYYY"
           value={ date }
           display="default"
           onChange={ onChange }
