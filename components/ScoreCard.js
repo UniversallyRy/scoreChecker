@@ -93,7 +93,7 @@ const Score = ({ u, navigation }) => {
 
 const ScoreCard = ({ item, date, navigation }) => {
   // todo: profileEntry loop for DRY
-  const [ loading , setLoading ] = useState( true );
+  const [ loading, setLoading ] = useState( true );
 
   const renderItem = ({ item }) => (
     <Score 
@@ -101,10 +101,10 @@ const ScoreCard = ({ item, date, navigation }) => {
       navigation={ navigation }
     />
   );
-
+  
   useEffect(() => {
-      const checkInfo = () => {
-          if ( item !== undefined ){
+    const checkInfo = () => {
+      if ( item !== undefined ){
               setLoading( false );
           }else{
               setLoading( true );
@@ -118,8 +118,6 @@ const ScoreCard = ({ item, date, navigation }) => {
   return(
         <View style={ styles.scoreContainer } >
           <Text style={{ margin: 25, color: 'white' }}>Scores for { date } </Text>
-          <DatePicker
-          />
           <Card.Divider style={ styles.divider } />
           {!loading
             ? <SafeAreaView style={ styles.container }>

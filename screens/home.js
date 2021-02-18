@@ -4,8 +4,9 @@ import { Card, ListItem, Icon, Text, Input } from 'react-native-elements';
 import moment from 'moment';
 import NBA from 'nba';
 import ScoreCard from '../components/ScoreCard';
-import { LoadingButton } from '../components/Buttons'
-// todo: RESTful api design, possible team screen/standings
+import { LoadingButton } from '../components/Buttons';
+import DatePicker, { returnDate } from '../components/DatePicker';
+// todo: RESTful api design, possible team screen/standings, fix datepicker
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 const todaysDate = moment().format( 'L' );
@@ -30,13 +31,14 @@ const Home = ({ navigation }) => {
     setState( newObj );
     setLoading( false );
   };
-
+  
   setTimeout(() => {
     loader();
   }, 1000);
   
   useEffect(() => {
     async function initData() {
+      console.log(DatePicker.returnDate + 'testRTTTHOME');
       NBA.stats.scoreboard({ gameDate: todaysDate }).then( res => setNewObj( res.gameHeader ) );
       }
       initData();
@@ -51,6 +53,9 @@ const Home = ({ navigation }) => {
             <Text style={ styles.text }>
                 Quickly stay updated
             </Text>
+            <DatePicker
+              homeDate={todaysDate}
+            />
           </Card>
           {/* scorecard list component showcasing Today's scores*/}
           { loading ? <> 
