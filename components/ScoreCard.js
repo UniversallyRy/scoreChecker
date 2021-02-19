@@ -12,7 +12,7 @@ import { isObject } from 'formik';
 const todaysDate = moment().format( 'L' );
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 // Caution: WebP only images currently, todo: png/jpeg backups
-// logo 35 x 50
+// logo 35 x 50 
 
 const Score = ({ u, navigation }) => {
   const [ homeScore, setHome ] = useState( 0 );
@@ -75,7 +75,7 @@ const Score = ({ u, navigation }) => {
               size={ 20 }
               onPress={() => {
                 /* Navigate to the Extended Score route with params */
-                  if(u.gameStatusText.length > 7){
+                  if(u.gameStatusText.length > 7 || u.gameStatusText == 'PPD'){
                     return null;
                 }
                 navigation.navigate('Extended Score', {
