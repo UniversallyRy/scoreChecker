@@ -5,11 +5,10 @@ import moment from 'moment';
 import NBA from 'nba';
 import ScoreCard from '../components/ScoreCard';
 import { LoadingButton } from '../components/Buttons';
-import DatePicker, { returnDate } from '../components/DatePicker';
+import { DatePicker, returnDate } from '../components/DatePicker';
 // todo: RESTful api design, possible team screen/standings, fix datepicker
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
-const todaysDate = moment().format( 'L' );
 // imported nodejs nba api from https://github.com/bttmly/nba
 
 //Initial object to use before the nba api's async is fulfilled
@@ -22,10 +21,11 @@ const initialState = [
 ];
 
 const Home = ({ navigation }) => {
+  const [ todaysDate, setTodaysDate ] = useState(moment().format( 'L' ));
   const [ state, setState ] = useState( initialState );
   const [ newObj, setNewObj ] = useState( [] );
   const [ loading, setLoading ] = useState( true );
-  const image = require( '../assets/double-bubble-dark.png' ); 
+  const image = require( '../assets/double-bubble-dark.png' );
   
   const loader = () => {
     setState( newObj );
@@ -38,11 +38,20 @@ const Home = ({ navigation }) => {
   
   useEffect(() => {
     async function initData() {
-      console.log(DatePicker.returnDate + 'testRTTTHOME');
-      NBA.stats.scoreboard({ gameDate: '02/19/2021' }).then( res => setNewObj( res.gameHeader ) );
+      NBA.stats.scoreboard({ gameDate: todaysDate }).then( res => setNewObj( res.gameHeader ) );
       }
       initData();
-    }, []);
+    }, [todaysDate]);
+
+    const onSubmit = (item) => {
+      let changedDate = item;
+      setTodaysDate(changedDate);
+      console.log(changedDate + 'testfromhometopicker111' + todaysDate);
+      async function initData() {
+        NBA.stats.scoreboard({ gameDate: changedDate }).then( res => setNewObj( res.gameHeader ) );
+        }
+        initData();
+    };
 
   return(
       <View style={ styles.container }>
@@ -54,6 +63,7 @@ const Home = ({ navigation }) => {
                 Quickly stay updated
             </Text>
             <DatePicker
+              onSubmit={onSubmit}
               homeDate={todaysDate}
             />
           </Card>

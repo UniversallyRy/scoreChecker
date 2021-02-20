@@ -96,7 +96,8 @@ const ScoreCard = ({ item, date, navigation }) => {
   const [ loading, setLoading ] = useState( true );
 
   const renderItem = ({ item }) => (
-    <Score 
+    <Score
+      key={item.gameId}
       u={ item }
       navigation={ navigation }
     />
