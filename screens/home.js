@@ -5,7 +5,7 @@ import moment from 'moment';
 import NBA from 'nba';
 import ScoreCard from '../components/ScoreCard';
 import { LoadingButton } from '../components/Buttons';
-import { DatePicker, returnDate } from '../components/DatePicker';
+import DatePicker from '../components/DatePicker';
 // todo: RESTful api design, possible team screen/standings, fix datepicker
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
@@ -21,7 +21,7 @@ const initialState = [
 ];
 
 const Home = ({ navigation }) => {
-  const [ todaysDate, setTodaysDate ] = useState(moment().format( 'L' ));
+  const [ todaysDate, setTodaysDate ] = useState( moment().format( 'L' ) );
   const [ state, setState ] = useState( initialState );
   const [ newObj, setNewObj ] = useState( [] );
   const [ loading, setLoading ] = useState( true );
@@ -41,12 +41,11 @@ const Home = ({ navigation }) => {
       NBA.stats.scoreboard({ gameDate: todaysDate }).then( res => setNewObj( res.gameHeader ) );
       }
       initData();
-    }, [todaysDate]);
+    }, [ todaysDate ]);
 
-    const onSubmit = (item) => {
+    const onSubmit = ( item ) => {
       let changedDate = item;
-      setTodaysDate(changedDate);
-      console.log(changedDate + 'testfromhometopicker111' + todaysDate);
+      setTodaysDate( changedDate );
       async function initData() {
         NBA.stats.scoreboard({ gameDate: changedDate }).then( res => setNewObj( res.gameHeader ) );
         }
