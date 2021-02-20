@@ -1,17 +1,16 @@
 import React, { useState, useEffect  } from 'react';
-import { View, Button, Platform } from 'react-native';
+import { View, Button, Platform, Text } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 // todos: better styling, smaller, stateful, connected, 
 //stats needed: points, rebs, asts, blocks, steals, 
 
 const DatePicker = ({ homeDate }) => {
   const [ date, setDate ] = useState( new Date() );
-  const [ newDate, newSetDate ] = useState( '' );
+  const [ newDate, newSetDate ] = useState( homeDate );
   const [ show, setShow ] = useState( false );
 
   function returnDate() {
-    console.log(date + 'defaultdaetest');
-    console.log(homeDate + 'testfromgometodate');
+    console.log(homeDate + 'testfromhometopicker');
   }
 
   const onChange = ( event, selectedDate ) => {
@@ -19,13 +18,12 @@ const DatePicker = ({ homeDate }) => {
     setShow( Platform.OS === 'ios' );
     const formattedItem = currentDate.split( '-' );
     newSetDate( formattedItem[1] + '/' + formattedItem[2] + '/' + formattedItem[0] );
-    console.log( newDate );
+    console.log( newDate + 'onpickerchange');
   };
 
   useEffect(() => {  
     const checkDate = () => {
-      returnDate();
-      
+      returnDate(); 
     }
         return () => {
          checkDate();       
@@ -40,8 +38,7 @@ const DatePicker = ({ homeDate }) => {
     <View>
       <View>
         <Button onPress={ showMode } title="Show date picker!" />
-      </View>
-      <View>
+        <Text> Scores for : { homeDate } </Text>
       </View>
       { show && (
         <DateTimePicker

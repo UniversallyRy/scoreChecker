@@ -39,7 +39,7 @@ const Home = ({ navigation }) => {
   useEffect(() => {
     async function initData() {
       console.log(DatePicker.returnDate + 'testRTTTHOME');
-      NBA.stats.scoreboard({ gameDate: todaysDate }).then( res => setNewObj( res.gameHeader ) );
+      NBA.stats.scoreboard({ gameDate: '02/19/2021' }).then( res => setNewObj( res.gameHeader ) );
       }
       initData();
     }, []);
