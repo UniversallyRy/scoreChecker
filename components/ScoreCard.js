@@ -118,7 +118,6 @@ const ScoreCard = ({ item, date, navigation }) => {
 
   return(
         <View style={ styles.scoreContainer } >
-          <Text style={{ margin: 25, color: 'white' }}>Scores for { date } </Text>
           <Card.Divider style={ styles.divider } />
           {!loading
             ? <SafeAreaView style={ styles.container }>

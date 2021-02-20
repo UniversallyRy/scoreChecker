@@ -56,7 +56,7 @@ const Home = ({ navigation }) => {
       <View style={ styles.container }>
         <ImageBackground source={ image } style={ styles.bgImage }>
           <Card containerStyle={ styles.titleContainer }> 
-            <Card.Title style={ styles.title }>Today's Scores</Card.Title>
+            <Card.Title style={ styles.title }>Scores for {todaysDate}</Card.Title>
             <Card.Divider style={ styles.divider } />
             <Text style={ styles.text }>
                 Quickly stay updated
