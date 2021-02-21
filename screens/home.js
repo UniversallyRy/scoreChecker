@@ -40,17 +40,21 @@ const Home = ({ navigation }) => {
     async function initData() {
       NBA.stats.scoreboard({ gameDate: todaysDate }).then( res => setNewObj( res.gameHeader ) );
       }
-      initData();
+      return () => {
+        initData();
+      };
     }, [ todaysDate ]);
-
+    //
     const onSubmit = 
       useCallback(( item ) => {
         let changedDate = item;
         setTodaysDate( changedDate );
-        async function initData() {
+        async function newDay() {
           NBA.stats.scoreboard({ gameDate: changedDate }).then( res => setNewObj( res.gameHeader ) );
           }
-          initData();
+          return () => {
+            newDay();
+          };
       }, []);
     
 

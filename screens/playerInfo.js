@@ -54,8 +54,10 @@ const PlayerStats = ({ navigation }) => {
     }
     // initial load of default profile
     useEffect(() => {
+        const initData =
         loadPlayerInfo( initialState.playerInfo.fullName )
         return () => {
+            initData();
         };
     }, []);
     
