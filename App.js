@@ -77,6 +77,7 @@ const App = () => (
 
 const styles = StyleSheet.create({
   container: {
+    fontFamily: 'Roboto',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',

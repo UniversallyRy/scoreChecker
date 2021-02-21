@@ -94,12 +94,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
+    fontFamily: 'Roboto',
     color: 'silver',
   },
   text: {
     alignSelf:'center', 
     color: 'silver',
     marginBottom: 10,
+    fontFamily: 'Roboto',
     fontSize: 8,
   },
   divider: {

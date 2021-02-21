@@ -29,5 +29,6 @@ const styles = StyleSheet.create({
     button: {
         margin: 10,
         marginBottom: 9,
+        fontFamily: 'Roboto',
     },
 });

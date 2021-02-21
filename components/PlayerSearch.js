@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
         borderColor: '#696969',
         textAlign: 'auto',
         alignSelf: 'center',
+        fontFamily: 'Roboto',
         margin: 10, 
         height: 50,
     },

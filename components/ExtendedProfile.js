@@ -64,12 +64,14 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         marginRight: 10,
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily: 'Roboto',
     },
     profileEntryRight: {
         alignSelf: 'flex-end',
         marginLeft: 10,
         fontSize: 18,
+        fontFamily: 'Roboto',
     },
     bgImage: {
         flex: 1,

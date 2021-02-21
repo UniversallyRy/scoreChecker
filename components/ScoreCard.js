@@ -188,10 +188,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: 'bold',
+    fontFamily: 'Roboto',
     marginBottom: 10,
   },
   teams: {
     fontWeight: 'bold',
+    fontFamily: 'Roboto',
     marginBottom: 10,
     borderColor: 'black',
     borderWidth: .5,
@@ -200,12 +202,14 @@ const styles = StyleSheet.create({
   quarter: {
     alignSelf: 'center',
     fontWeight: 'bold',
+    fontFamily: 'Roboto',
     fontSize: 16,
   },
   broadcast: {
     alignSelf: 'center',
     justifyContent: 'space-around',
     fontSize: 14,
+    fontFamily: 'Roboto',
   },
 });
 

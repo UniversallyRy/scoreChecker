@@ -79,6 +79,7 @@ const PlayerStats = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container : {
+        fontFamily: 'roboto',
         width: windowWidth,
         justifyContent: 'center',
         alignContent: 'center',

@@ -48,6 +48,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 const styles = StyleSheet.create({
   button: {
     alignSelf: 'center',
+    fontFamily: 'Roboto',
     height: 40,
     width: 200
   },

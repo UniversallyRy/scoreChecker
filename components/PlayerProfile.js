@@ -28,7 +28,7 @@ const Profile = ({ playerInfo, navigation }) => {
             <Card containerStyle={ styles.playerProfile }>
                 { !loading
                 ?<>
-                    <Text style={ styles.profileEntryPlayerNname }>{ `${ playerInfo.playerName }` }</Text>
+                    <Text style={ styles.profileEntryPlayerName }>{ `${ playerInfo.playerName }` }</Text>
                     <View style={ styles.proPicBorder }>
                         <Image
                             containerStyle={ styles.profilePic }
@@ -94,11 +94,13 @@ const Profile = ({ playerInfo, navigation }) => {
             flex: 1,
             justifyContent: 'center',
             backgroundColor: '#696969',
+            fontFamily: 'roboto',
             borderRadius: 6,
             marginBottom: 50,
         },
         profileEntryPlayerName: {
             fontSize: 20,
+            fontFamily: 'Roboto',
             fontWeight: 'bold',
             alignSelf: 'center',
             marginBottom: 25,
@@ -126,12 +128,14 @@ const Profile = ({ playerInfo, navigation }) => {
             textAlignVertical: 'auto',
             fontSize: 20,
             fontWeight: 'bold',
+            fontFamily: 'Roboto',
             marginBottom: 15,
         },
         profileEntryRight: {
             textAlignVertical: 'auto',
             marginLeft: 10,
             fontSize: 20,
+            fontFamily: 'Roboto',
             marginBottom: 15,
         },
         teamLogo: {
@@ -141,7 +145,7 @@ const Profile = ({ playerInfo, navigation }) => {
             alignSelf: 'center',
         },
         button: {
-            marginTop: 5,
+            margin: 15,
         },
     });
 
