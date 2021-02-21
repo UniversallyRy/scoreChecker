@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { StyleSheet, Keyboard, View } from 'react-native';
 import { Input, Text, TextInput, Button, Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';

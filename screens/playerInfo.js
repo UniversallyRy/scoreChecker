@@ -52,7 +52,7 @@ const PlayerStats = ({ navigation }) => {
             }
         }
     }
-    // initial load of default profile
+    // initial load of default Harden profile
     useEffect(() => {
         const initData =
         loadPlayerInfo( initialState.playerInfo.fullName )

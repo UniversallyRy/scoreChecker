@@ -33,7 +33,7 @@ const Score = ({ u, navigation }) => {
         setAway( res.visitor.score );
         setHome( res.home.score );
       })
-      }
+    }
       initData();
     }, []);
   

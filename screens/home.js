@@ -40,9 +40,7 @@ const Home = ({ navigation }) => {
     async function initData() {
       NBA.stats.scoreboard({ gameDate: todaysDate }).then( res => setNewObj( res.gameHeader ) );
       }
-      return () => {
         initData();
-      };
     }, [ todaysDate ]);
     //
     const onSubmit = 
@@ -51,10 +49,8 @@ const Home = ({ navigation }) => {
         setTodaysDate( changedDate );
         async function newDay() {
           NBA.stats.scoreboard({ gameDate: changedDate }).then( res => setNewObj( res.gameHeader ) );
-          }
-          return () => {
-            newDay();
-          };
+        }
+        newDay();
       }, []);
     
 
