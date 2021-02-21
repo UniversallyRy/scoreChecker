@@ -17,7 +17,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
       if( event.type == "set" ) {
         let currentDate = selectedDate.toISOString().split( 'T' )[ 0 ] || date;
         let formattedItem = currentDate.split( '-' );
-        let formattedDate = formattedItem[ 1 ] + '/' + formattedItem[ 2 ] + '/' + formattedItem[ 0 ]
+        let formattedDate = formattedItem[ 1 ] + '/' + formattedItem[ 2 ] + '/' + formattedItem[ 0 ];
         setShow( Platform.OS === 'ios' );
         onSubmit( formattedDate );  
      }else {
@@ -33,7 +33,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
         </View>
         { show && (
           <DateTimePicker
-            placeHolderText={(new Date()).toLocaleDateString()}
+            placeHolderText={ ( new Date() ).toLocaleDateString() }
             testID="datePicker"
             value={ date }
             display="default"
@@ -51,6 +51,6 @@ const styles = StyleSheet.create({
     height: 40,
     width: 200
   },
-})
+});
 
 export default DatePicker;

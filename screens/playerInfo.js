@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions, ScrollView, Keyboard, ImageBackground  } from '
 import { Input, Text, TextInput, Button } from 'react-native-elements';
 import nba from 'nba';
 import { Formik } from 'formik';
-import PlayerProfile from '../components/PlayerProfile'
+import PlayerProfile from '../components/PlayerProfile';
 import PlayerSearch from '../components/PlayerSearch';
 import { DEFAULT_PLAYER_INFO } from '../constants';
 // todos: other components seperate into fully functional components/stateless, more react element styling/usage
@@ -31,7 +31,7 @@ const PlayerStats = ({ navigation }) => {
         if ( count > 1 ) {
             return null
         }else{
-            loadPlayerInfo( initialState.playerInfo.fullName )
+            loadPlayerInfo( initialState.playerInfo.fullName );
         }
         count++;
         handleReset( n + 1 );
@@ -54,10 +54,9 @@ const PlayerStats = ({ navigation }) => {
     }
     // initial load of default Harden profile
     useEffect(() => {
-        const initData =
-        loadPlayerInfo( initialState.playerInfo.fullName )
+        const initData = loadPlayerInfo( initialState.playerInfo.fullName )
         return () => {
-            initData();
+            initData;
         };
     }, []);
     

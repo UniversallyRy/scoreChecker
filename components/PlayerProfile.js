@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Dimensions, View } from 'react-native';
 import { Input, Card, Image, Text } from 'react-native-elements';
-import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
+import { PROFILE_PIC_URL_PREFIX } from '../constants';
 import { RaisedButton, LoadingButton } from './Buttons';
+import logos from '../logoManager';
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
 const Profile = ({ playerInfo, navigation }) => {
-    // todo: profileEntry loop for DRY, fix teamlogos not appearing,
+    // todo: profileEntry loop for DRY
     const [ loading , setLoading ] = useState( true );
     
     useEffect(() => {
@@ -17,10 +18,10 @@ const Profile = ({ playerInfo, navigation }) => {
             }else{
                 setLoading( true );
             }
-        }
-            return () => {
+        };
+        return () => {
             checkInfo();       
-            };
+        };
     }, [ playerInfo ]);
 
     return (
@@ -37,7 +38,7 @@ const Profile = ({ playerInfo, navigation }) => {
                     </View>
                     <Image
                         containerStyle={ styles.teamLogo }
-                        source={{ uri: `${ TEAM_PIC_URL_PREFIX }/${ playerInfo.teamAbbreviation }_logo.svg` }}
+                        source={ logos[ playerInfo.teamAbbreviation ] }
                         alt="Team"
                     />
                     <View style={ styles.profileEntry }>
@@ -53,15 +54,15 @@ const Profile = ({ playerInfo, navigation }) => {
                         <Text style={ styles.profileEntryRight }>{ `${ playerInfo.weight }` }</Text>
                     </View>
                     <View style={ styles.profileEntry }>
-                        <Text style={ styles.profileEntryLeft }>PTS:</Text>
+                        <Text style={ styles.profileEntryLeft }>PPG:</Text>
                         <Text style={ styles.profileEntryRight }>{ `${ playerInfo.pts }` }</Text>
                     </View>
                     <View style={ styles.profileEntry }>
-                        <Text style={ styles.profileEntryLeft }>AST:</Text>
+                        <Text style={ styles.profileEntryLeft }>APG:</Text>
                         <Text style={ styles.profileEntryRight }>{ `${ playerInfo.ast }` }</Text>
                     </View>
                     <View style={ styles.profileEntry }>
-                        <Text style={ styles.profileEntryLeft }>REB:</Text>
+                        <Text style={ styles.profileEntryLeft }>RPG:</Text>
                         <Text style={ styles.profileEntryRight }>{ `${ playerInfo.reb }` }</Text>
                     </View>
                     <RaisedButton
@@ -102,7 +103,7 @@ const Profile = ({ playerInfo, navigation }) => {
             alignSelf: 'center',
             marginBottom: 25,
         },
-        profilePic:{
+        profilePic: {
             borderWidth: 2,
             overflow: 'hidden',
             borderColor: 'black',
@@ -113,7 +114,7 @@ const Profile = ({ playerInfo, navigation }) => {
             height: 100,
             width: 100,
         },
-        proPicBorder:{
+        proPicBorder: {
             borderWidth: 1, 
         },
         profileEntry: {
@@ -121,19 +122,19 @@ const Profile = ({ playerInfo, navigation }) => {
             flexDirection: 'row',
             margin: 2,
         },
-        profileEntryLeft:{
+        profileEntryLeft: {
             textAlignVertical: 'auto',
             fontSize: 20,
             fontWeight: 'bold',
             marginBottom: 15,
         },
-        profileEntryRight:{
+        profileEntryRight: {
             textAlignVertical: 'auto',
             marginLeft: 10,
             fontSize: 20,
             marginBottom: 15,
         },
-        teamLogo:{
+        teamLogo: {
             width: 50,
             height: 50, 
             margin: 10,

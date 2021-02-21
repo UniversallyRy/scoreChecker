@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, Keyboard, View } from 'react-native';
-import { Input, Text, TextInput, Button, Card } from 'react-native-elements';
+import { Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Formik } from 'formik';
 import { RaisedButton } from './Buttons';
@@ -12,6 +12,7 @@ const PlayerSearch = ({ handleInput, handleReset }) => {
     const keyboardDidShowListener = useRef();
     const keyboardDidHideListener = useRef();
 
+    //event listeners for keyboard controls
     useEffect(() => {
         keyboardDidShowListener.current = Keyboard.addListener( 'keyboardWillShow', onKeyboardShow );
         keyboardDidHideListener.current = Keyboard.addListener( 'keyboardWillHide', onKeyboardHide );
@@ -62,8 +63,6 @@ const PlayerSearch = ({ handleInput, handleReset }) => {
     )
 }
 
-export default PlayerSearch;
-
 const styles = StyleSheet.create({
     container: {
         alignSelf: 'auto'
@@ -81,3 +80,5 @@ const styles = StyleSheet.create({
         height: 50,
     },
 });
+
+export default PlayerSearch;

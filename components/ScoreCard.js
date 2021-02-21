@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Dimensions, ScrollView, SafeAreaView, FlatList, View, ActivityIndicator } from 'react-native';
-import { Card, ListItem, Icon, Input, Text, Image } from 'react-native-elements';
-import { RaisedButton, LoadingButton } from './Buttons'
-import logos from '../logoManager';
+import { StyleSheet, Dimensions, SafeAreaView, FlatList, View, ActivityIndicator } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Card, ListItem, Icon, Text, Image } from 'react-native-elements';
 import NBA from 'nba';
 import moment from 'moment';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import logos from '../logoManager';
+import { LoadingButton } from './Buttons';
 import DatePicker from './DatePicker';
-import { isObject } from 'formik';
 
 const todaysDate = moment().format( 'L' );
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
-// Caution: WebP only images currently, todo: png/jpeg backups
+// WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50 
 
 const Score = ({ u, navigation }) => {
@@ -32,14 +31,15 @@ const Score = ({ u, navigation }) => {
       .then( res => {
         setAway( res.visitor.score );
         setHome( res.home.score );
-      })
-    }
+      });
+    };
       initData();
     }, []);
   
   return(
     <ListItem topDivider={ true } raised containerStyle={ styles.scoreCard }>
       <ListItem.Content>
+      {/* Team Logos */}
         <View style={ styles.teamVersus }>
           <View style={{ flexDirection: 'column', alignItems: 'center' }}>
             <Text style={ styles.teams }>{ awayTeam } - { awayScore }</Text>
@@ -65,6 +65,8 @@ const Score = ({ u, navigation }) => {
             />
           </View>
         </View>
+
+      {/* Game Status(Shows postponed, game times in EST and info is selectable only if game is already played ) */}
         <ListItem.Subtitle style={ styles.quarter }>{ u.gameStatusText != 'PPD' ? u.gameStatusText : 'Postponed' }</ListItem.Subtitle>
         <Card.Divider style={ styles.divider }/>
         <ListItem.Subtitle style={ styles.broadcast }>
@@ -74,11 +76,12 @@ const Score = ({ u, navigation }) => {
               name='info'
               size={ 20 }
               onPress={() => {
-                /* Navigate to the Extended Score route with params */
-                  if(u.gameStatusText.length > 7 || u.gameStatusText == 'PPD'){
+                // When game status is still showing a start time, or postponed, no routing and returns null
+                  if( u.gameStatusText.length > 7 || u.gameStatusText == 'PPD' ){
                     return null;
                 }
-                navigation.navigate('Extended Score', {
+                // Navigate to the Extended Score route with params
+                navigation.navigate( 'Extended Score', {
                   itemId: 10,
                   scoreInfo: u,
                 });
@@ -88,16 +91,16 @@ const Score = ({ u, navigation }) => {
         </ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>
-  )
-}
+  );
+};
 
 const ScoreCard = ({ item, date, navigation }) => {
-  // todo: profileEntry loop for DRY
+  // loading boolean for when to show loading component
   const [ loading, setLoading ] = useState( true );
 
   const renderItem = ({ item }) => (
     <Score
-      key={item.gameId}
+      key={ item.gameId }
       u={ item }
       navigation={ navigation }
     />
@@ -137,8 +140,8 @@ const ScoreCard = ({ item, date, navigation }) => {
               </ListItem>
           }
         </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   scoreContainer: {
@@ -204,6 +207,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     fontSize: 14,
   },
-})
+});
 
 export default ScoreCard;

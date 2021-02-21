@@ -10,6 +10,7 @@ const ExtendedProfile = ({ route, navigation }) => {
     const { itemId, playerInfo } = route.params;
     const image = require( '../assets/double-bubble-dark.png' );
     
+    // Object container for player information
     const profileState = {
             'Name': playerInfo.displayFirstLast,
             'Team': playerInfo.teamCity + ' ' + playerInfo.teamName,
@@ -27,14 +28,8 @@ const ExtendedProfile = ({ route, navigation }) => {
             'Points': playerInfo.pts,
             'Rebounds': playerInfo.reb,
             'Assists': playerInfo.ast,
-        }
+    };
 
-    useEffect(() => {
-        // insert any future needed component updates here
-        return () => {
-        };
-    }, []);
-    
     return (
         <ImageBackground source={ image } style={ styles.bgImage }>
             <Card containerStyle={ styles.container }>
@@ -48,8 +43,8 @@ const ExtendedProfile = ({ route, navigation }) => {
                 }               
             </Card>
         </ImageBackground>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container : {
