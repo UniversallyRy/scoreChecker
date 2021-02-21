@@ -135,7 +135,7 @@ const ScoreCard = ({ item, date, navigation }) => {
                   <ListItem.Title style={ styles.title }>Loading</ListItem.Title>
                   <Card.Divider style={ styles.divider } />
                   <Card.Divider style={ styles.divider } />
-                  <LoadingButton containerStyle={{ width: 400 }}/>
+                  <LoadingButton containerStyle={ styles.lButton }/>
                 </ListItem.Content>
               </ListItem>
           }
@@ -161,6 +161,11 @@ const styles = StyleSheet.create({
     width: windowWidth * 0.8,
     alignSelf: 'center',
     height: 2,
+  },
+  lButton: { 
+    height: 400, 
+    width: windowWidth * 0.90, 
+    alignSelf: 'center',
   },
   scoreCard: {
     flex: 1,
