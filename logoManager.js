@@ -29,4 +29,4 @@ export default {
     TOR: require('./assets/TOR.webp'),
     UTA: require('./assets/UTA.webp'),
     WAS: require('./assets/WAS.webp'),
- }
+ };

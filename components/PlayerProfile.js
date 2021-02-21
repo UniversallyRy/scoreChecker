@@ -9,7 +9,7 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
 const Profile = ({ playerInfo, navigation }) => {
     // todo: profileEntry loop for DRY
-    const [ loading , setLoading ] = useState( true );
+    let [ loading , setLoading ] = useState( true );
     
     useEffect(() => {
         const checkInfo = () => {

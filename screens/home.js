@@ -42,7 +42,7 @@ const Home = ({ navigation }) => {
       }
         initData();
     }, [ todaysDate ]);
-    //
+    // callback for datepicker changes
     const onSubmit = 
       useCallback(( item ) => {
         let changedDate = item;
@@ -52,7 +52,6 @@ const Home = ({ navigation }) => {
         }
         newDay();
       }, []);
-    
 
   return(
       <View style={ styles.container }>
@@ -79,7 +78,7 @@ const Home = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
     height: windowHeight,
     width: windowWidth,

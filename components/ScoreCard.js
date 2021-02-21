@@ -180,29 +180,29 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  teamVersus:{
+  teamVersus: {
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'center',
     marginBottom: 10,
   },
-  title:{
+  title: {
     fontWeight: 'bold',
     marginBottom: 10,
   },
-  teams:{
+  teams: {
     fontWeight: 'bold',
     marginBottom: 10,
     borderColor: 'black',
     borderWidth: .5,
     borderRadius: 2,
   },
-  quarter:{
+  quarter: {
     alignSelf: 'center',
     fontWeight: 'bold',
     fontSize: 16,
   },
-  broadcast:{
+  broadcast: {
     alignSelf: 'center',
     justifyContent: 'space-around',
     fontSize: 14,

@@ -6,8 +6,8 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 // stats needed: points, rebs, asts, blocks, steals 
 
  const DatePicker = ({ onSubmit }) => {
-    const [ date, setDate ] = useState( new Date() );
-    const [ show, setShow ] = useState( false );
+    let [ date, setDate ] = useState( new Date() );
+    let [ show, setShow ] = useState( false );
     
     const showMode = () => {
       setShow( true );
@@ -46,7 +46,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 };  
 
 const styles = StyleSheet.create({
-  button:{
+  button: {
     alignSelf: 'center',
     height: 40,
     width: 200

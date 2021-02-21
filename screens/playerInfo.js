@@ -39,9 +39,9 @@ const PlayerStats = ({ navigation }) => {
     const handleInput = ( item ) => {
         // regex that is used in below condition to test that at least 2 words were inputted
         const regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
-        const trimmedInput = item.player.trim();
-        const newPlayer = nba.findPlayer( trimmedInput );
-        if(!regName.test( trimmedInput )) {
+        let trimmedInput = item.player.trim();
+        let newPlayer = nba.findPlayer( trimmedInput );
+        if( !regName.test( trimmedInput ) ) {
             alert( 'Please enter the full name of the player.' );
             return false;
         }else {
@@ -54,7 +54,7 @@ const PlayerStats = ({ navigation }) => {
     }
     // initial load of default Harden profile
     useEffect(() => {
-        const initData = loadPlayerInfo( initialState.playerInfo.fullName )
+        const initData = loadPlayerInfo( initialState.playerInfo.fullName );
         return () => {
             initData;
         };

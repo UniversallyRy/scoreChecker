@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Dimensions, ImageBackground, View, ActivityIndicator } from 'react-native';
 import { Card, ListItem, Icon, Text, Image } from 'react-native-elements';
-import moment from 'moment';
+import DropDownPicker from 'react-native-dropdown-picker';
+import { Icon as IconF } from 'react-native-vector-icons/Feather';
 import NBA from 'nba';
+import moment from 'moment';
+import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
 import logos from '../logoManager';
 import ScoreCard from '../components/ScoreCard';
 import { LoadingButton } from '../components/Buttons';
-import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
-import DropDownPicker from 'react-native-dropdown-picker';
-import { Icon as IconF } from 'react-native-vector-icons/Feather';
-
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
 const extendedGame = ({ navigation, route }) => {
-    // todos: will need to break down in seperate components, connect drodown 
+    // todos: will need to break down in seperate components(seperate statsleader/linescores possibly), connect dropdown 
     // seperate screen from components
     // update menu/dropdown to switch stat lookup, connect menu state to stats
     const [ leaderDropdown, setDropdown ] = useState({ countries: [ 'uk', 'la', 'dc', 'ny' ] });
@@ -29,6 +28,8 @@ const extendedGame = ({ navigation, route }) => {
     const { itemId, scoreInfo } = route.params;
     const [ homeLines, setHomeLines ] = useState([]);
     const [ awayLines, setAwayLines ] = useState([]);
+    const [ scoringHome, setScoringHome ] = useState('');
+    const [ scoringAway, setScoringAway ] = useState('');
     const image = require( '../assets/double-bubble-dark.png' );
     const splitAt = index => x => [ x.slice( 0, index ), x.slice( index ) ];
     let comp = scoreInfo.gamecode.slice( -6 );
@@ -37,12 +38,11 @@ const extendedGame = ({ navigation, route }) => {
     let [ awayTeam, homeTeam ] = [ splitTeam[0], splitTeam[ 1 ] ];
     let [ awayLogo, homeLogo ] = [ logos[ awayTeam ], logos[ homeTeam ] ];
     let controller;
-    const [ scoringHome, setScoringHome ] = useState('');
-    const [ scoringAway, setScoringAway ] = useState('');
 
 
     useEffect(() => {
         async function initData() {
+            // fetches data needed for single scorecard and gives values to above states.
             NBA.data.boxScore( date, scoreInfo.gameId )
                 .then( res => res.sports_content )
                 .then( res => res.game )
@@ -59,12 +59,12 @@ const extendedGame = ({ navigation, route }) => {
                     setHomePic( res.home.Leaders.Points.leader[ 0 ].PersonID )
                     setAwayPic( res.visitor.Leaders.Points.leader[ 0 ].PersonID )
                 })
-        }
+        };
         initData();
     }, []);
 
     const StatLeader = () => {
-        const scoring = '';
+        let scoring = '';
         return (
             <View style={ styles.scoreLeadersContainer }>
                 <Card containerStyle={ styles.scoreLeaders }>
@@ -88,13 +88,13 @@ const extendedGame = ({ navigation, route }) => {
                     <Text style={{ alignSelf: 'center' }}>{ homeLeaders.StatValue } Points</Text>
                 </Card>
             </View>
-        )
+        );
     };
 
 
     const LineScores = () => {
-        const awayArr = [];
-        const homeArr = [];
+        let awayArr = [];
+        let homeArr = [];
 
         if ( awayLines.length >= 4 ) {
             awayLines.map(( u, i ) => {
@@ -103,7 +103,7 @@ const extendedGame = ({ navigation, route }) => {
             homeLines.map(( u, i ) => {
                 return homeArr[ i ] = u.score;
             })
-        }
+        };
 
         return (
             <Card containerStyle={ styles.quarterCard }>
@@ -139,7 +139,7 @@ const extendedGame = ({ navigation, route }) => {
                 </Card>
             </Card>
         );
-    }
+    };
 
     return (
         <View style={ styles.container }>
@@ -193,9 +193,8 @@ const extendedGame = ({ navigation, route }) => {
                 </Card>
             </ImageBackground>
         </View>
-    )
-}
-
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -267,6 +266,6 @@ const styles = StyleSheet.create({
         borderRadius: 3,
 
     },
-})
+});
 
 export default extendedGame;

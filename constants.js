@@ -7,4 +7,4 @@ export const DEFAULT_PLAYER_INFO = {
 };
 export const DEFAULT_SCORES_INFO = {
     
-}
+};

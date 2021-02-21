@@ -5,11 +5,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from './Buttons';
  
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
+const image = require( '../assets/double-bubble-dark.png' );              
 
 const ExtendedProfile = ({ route, navigation }) => {
     const { itemId, playerInfo } = route.params;
-    const image = require( '../assets/double-bubble-dark.png' );
-    
     // Object container for player information
     const profileState = {
             'Name': playerInfo.displayFirstLast,
@@ -61,13 +60,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         margin: 2,
     },
-    profileEntryLeft:{
+    profileEntryLeft: {
         alignSelf: 'flex-start',
         marginRight: 10,
         fontSize: 20,
         fontWeight: 'bold'
     },
-    profileEntryRight:{
+    profileEntryRight: {
         alignSelf: 'flex-end',
         marginLeft: 10,
         fontSize: 18,
