@@ -65,7 +65,6 @@ const Home = ({ navigation }) => {
             </Text>
             <DatePicker
               onSubmit={ onSubmit }
-              homeDate={ todaysDate }
             />
           </Card>
           {/* scorecard list component showcasing Today's scores*/}
