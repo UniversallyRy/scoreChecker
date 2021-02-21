@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Dimensions, ImageBackground, View, ActivityIndicator } from 'react-native';
 import { Card, ListItem, Icon, Text, Image } from 'react-native-elements';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { Icon as IconF } from 'react-native-vector-icons/Feather';
 import NBA from 'nba';
 import moment from 'moment';
 import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
