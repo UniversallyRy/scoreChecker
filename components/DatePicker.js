@@ -5,14 +5,12 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 // todos: better styling, smaller 
 //stats needed: points, rebs, asts, blocks, steals, 
 
-
-
  const DatePicker = ({ homeDate, onSubmit }) => {
     const [ date, setDate ] = useState( new Date() );
     const [ show, setShow ] = useState( false );
 
     const onChange = ( event, selectedDate ) => {
-      if(event.type == "set") {
+      if( event.type == "set" ) {
         let currentDate = selectedDate.toISOString().split( 'T' )[ 0 ] || date;
         setShow( Platform.OS === 'ios' );
         const formattedItem = currentDate.split( '-' );

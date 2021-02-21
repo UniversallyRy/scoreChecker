@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, Dimensions, ImageBackground, View } from 'react-native';
 import { Card, ListItem, Icon, Text, Input } from 'react-native-elements';
 import moment from 'moment';
@@ -6,7 +6,7 @@ import NBA from 'nba';
 import ScoreCard from '../components/ScoreCard';
 import { LoadingButton } from '../components/Buttons';
 import DatePicker from '../components/DatePicker';
-// todo: RESTful api design, possible team screen/standings, fix datepicker
+// todo: RESTful api design, possible team screen/standings
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 // imported nodejs nba api from https://github.com/bttmly/nba
@@ -43,27 +43,29 @@ const Home = ({ navigation }) => {
       initData();
     }, [ todaysDate ]);
 
-    const onSubmit = ( item ) => {
-      let changedDate = item;
-      setTodaysDate( changedDate );
-      async function initData() {
-        NBA.stats.scoreboard({ gameDate: changedDate }).then( res => setNewObj( res.gameHeader ) );
-        }
-        initData();
-    };
+    const onSubmit = 
+      useCallback(( item ) => {
+        let changedDate = item;
+        setTodaysDate( changedDate );
+        async function initData() {
+          NBA.stats.scoreboard({ gameDate: changedDate }).then( res => setNewObj( res.gameHeader ) );
+          }
+          initData();
+      }, []);
+    
 
   return(
       <View style={ styles.container }>
         <ImageBackground source={ image } style={ styles.bgImage }>
           <Card containerStyle={ styles.titleContainer }> 
-            <Card.Title style={ styles.title }>Scores for {todaysDate}</Card.Title>
+            <Card.Title style={ styles.title }>Scores for { todaysDate }</Card.Title>
             <Card.Divider style={ styles.divider } />
             <Text style={ styles.text }>
                 Quickly stay updated
             </Text>
             <DatePicker
-              onSubmit={onSubmit}
-              homeDate={todaysDate}
+              onSubmit={ onSubmit }
+              homeDate={ todaysDate }
             />
           </Card>
           {/* scorecard list component showcasing Today's scores*/}
