@@ -8,6 +8,7 @@ import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
 import logos from '../logoManager';
 import ScoreCard from '../components/ScoreCard';
 import { LoadingButton } from '../components/Buttons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
@@ -78,28 +79,32 @@ const extendedGame = ({ navigation, route }) => {
     }, []);
 
     const StatLeader = () => {
-        let scoring = '';
         return (
-            <View style={ styles.scoreLeadersContainer }>
-                <Card containerStyle={ styles.scoreLeaders }>
-                    <Card.Title>Away</Card.Title>
-                    <Image
-                        containerStyle={ styles.playerPic }
-                        source={{ uri: `${ PROFILE_PIC_URL_PREFIX }/${ awayPic }.png` }}
-                        alt="Player"
-                    />
-                    <Text>{ scoringAway }</Text>
-                    <Text style={{ alignSelf: 'center' }}>{ awayLeaders.StatValue } { statState }</Text>
-                </Card>
-                <Card containerStyle={ styles.scoreLeaders }>
-                    <Card.Title>Home</Card.Title>
-                    <Image
-                        containerStyle={ styles.playerPic }
-                        source={{ uri: `${ PROFILE_PIC_URL_PREFIX }/${ homePic }.png` }}
-                        alt="Player"
-                    />
-                    <Text>{ scoringHome }</Text>
-                    <Text style={{ alignSelf: 'center' }}>{ homeLeaders.StatValue } { statState }</Text>
+            <View>
+                <View style={ styles.scoreLeadersContainer }>
+                    <Card containerStyle={ styles.scoreLeaders }>
+                        <Card.Title>Away</Card.Title>
+                        <Image
+                            containerStyle={ styles.playerPic }
+                            source={{ uri: `${ PROFILE_PIC_URL_PREFIX }/${ awayPic }.png` }}
+                            alt="Player"
+                        />
+                        <Text>{ scoringAway }</Text>
+                        <Text style={{ alignSelf: 'center' }}>{ awayLeaders.StatValue } { statState }</Text>
+                    </Card>
+                    <Card containerStyle={ styles.scoreLeaders }>
+                        <Card.Title>Home</Card.Title>
+                        <Image
+                            containerStyle={ styles.playerPic }
+                            source={{ uri: `${ PROFILE_PIC_URL_PREFIX }/${ homePic }.png` }}
+                            alt="Player"
+                        />
+                        <Text>{ scoringHome }</Text>
+                        <Text style={{ alignSelf: 'center' }}>{ homeLeaders.StatValue } { statState }</Text>
+                    </Card>
+                </View>
+                <Card containerStyle={styles.statsHeader}>
+                    <Card.Title>{statState} Leaders</Card.Title>
                 </Card>
             </View>
         );
@@ -170,7 +175,7 @@ const extendedGame = ({ navigation, route }) => {
                             />
                         </View>
 
-                        <Text style={{ fontWeight: 'bold', marginLeft: 25, marginRight: 25 }}>
+                        <Text style={{justifyContent: 'center', fontWeight: 'bold', marginLeft: 25, marginRight: 25 }}>
                             At
                         </Text>
 
@@ -185,28 +190,37 @@ const extendedGame = ({ navigation, route }) => {
                         </View>
                     </View>
                     <Text style={{ margin: 5 }}>Arena: { gameData.arena }</Text>
-                    <Text style={{ margin: 5 }}>City: { gameData.city }</Text>
-                    <Text style={{ margin: 5 }}>Country: { gameData.country }</Text>
+                    <Text style={{ margin: 5 }}>City: { gameData.city }, { gameData.country }</Text>
 
-                    <View style={{ width: windowWidth * 0.8 }}>
+                    <View style={{ 
+                            width: windowWidth * 0.8,
+                            minHeight: 120,
+                            ...(Platform.OS !== 'android' && {
+                                zIndex: 10,
+                                margin: 5, 
+                                width: windowWidth * 0.8, 
+                            })
+                            
+                    }}>
                         <DropDownPicker
-                            containerStyle={{ height: 40 }}
+                            containerStyle={{ height: 40, margin: 10,}}
                             itemStyle={{
-                                justifyContent: 'flex-start'
+                                justifyContent: 'flex-start',
+                                zIndex: 1,
                             }}
                             items={[
-                                {label: 'Points', value: 'Points', icon: () => <Icon name="flag" size={18} color="#900" />},
-                                {label: 'Rebounds', value: 'Rebounds', icon: () => <Icon name="flag" size={18} color="#900" />},
-                                {label: 'Assists', value: 'Assists', icon: () => <Icon name="flag" size={18} color="#900" />},
+                                {label: 'Points', value: 'Points', icon: () => <MaterialCommunityIcons name="basketball" size={18} color="#900" style={{ marginRight: 10 }}/>},
+                                {label: 'Rebounds', value: 'Rebounds', icon: () => <MaterialCommunityIcons name="basketball" size={18} color="#900" style={{ marginRight: 10 }} />},
+                                {label: 'Assists', value: 'Assists', icon: () => <MaterialCommunityIcons name="basketball" size={18} color="#900" style={{ marginRight: 10 }} />},
                             ]}
-                            dropDownStyle={{backgroundColor: '#fafafa'}}
+                            dropDownStyle={{backgroundColor: '#fafafa', marginTop: 1}}
                             style={styles.dropDown}
                             controller={ instance => controller = instance }
                             onChangeItem={item => {
                                 setDropdown({ value: item.value })
                                 changeStats( item.value )
                             }}
-                            defaultValue={null}
+                            defaultValue={ statState }
                         />
                     </View>
                     <StatLeader />
@@ -220,6 +234,7 @@ const extendedGame = ({ navigation, route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        zIndex: 2,
         alignItems: 'center',
         justifyContent: 'center',
 
@@ -264,7 +279,7 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     scoreLeadersContainer: {
-        marginTop: 25,
+        marginTop: 15,
         width: windowWidth,
         flexDirection: 'row',
         justifyContent: 'center',
@@ -289,7 +304,14 @@ const styles = StyleSheet.create({
 
     },
     dropDown: {
-        backgroundColor: '#fafafa'
+        alignItems: "center",
+        zIndex: 1,
+    },
+    statsHeader: {
+        alignSelf: 'center',
+        justifyContent: 'center',
+        width: windowWidth * 0.7,
+        height: 25,
     },
 });
 
