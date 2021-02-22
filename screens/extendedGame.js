@@ -12,11 +12,10 @@ import { LoadingButton } from '../components/Buttons';
 const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
 const extendedGame = ({ navigation, route }) => {
-    // todos: will need to break down in seperate components(seperate statsleader/linescores possibly), connect dropdown 
+    // todos: will need to break down in seperate components(seperate statsleader/linescores possibly)
     // seperate screen from components
-    // update menu/dropdown to switch stat lookup, connect menu state to stats
-    const [ leaderDropdown, setDropdown ] = useState({ countries: [ 'uk', 'la', 'dc', 'ny' ] });
-    const [ value, setValue ] = useState( null );
+    const [ leaderDropdown, setDropdown ] = useState({ value: 'Points' });
+    const [ statState, setStat ] = useState( 'Points' );
     const [ gameData, setData ] = useState({});
     const [ homeScore, setHome ] = useState( 0 );
     const [ awayScore, setAway ] = useState( 0 );
@@ -38,6 +37,22 @@ const extendedGame = ({ navigation, route }) => {
     let [ awayLogo, homeLogo ] = [ logos[ awayTeam ], logos[ homeTeam ] ];
     let controller;
 
+
+    const changeStats = ( stat ) => {
+        const newStat = stat;
+        setStat(stat);
+        NBA.data.boxScore( date, scoreInfo.gameId )
+            .then( res => res.sports_content )
+            .then( res => res.game )
+            .then( res => {
+                setHomeLeaders( res.home.Leaders[newStat] )
+                setAwayLeaders( res.visitor.Leaders[newStat] )
+                setScoringHome( res.home.Leaders[newStat].leader[ 0 ].FirstName + ' ' + res.home.Leaders[newStat].leader[ 0 ].LastName )
+                setScoringAway( res.visitor.Leaders[newStat].leader[ 0 ].FirstName + ' ' + res.visitor.Leaders[newStat].leader[ 0 ].LastName )
+                setHomePic( res.home.Leaders[newStat].leader[ 0 ].PersonID )
+                setAwayPic( res.visitor.Leaders[newStat].leader[ 0 ].PersonID )
+            });
+    };
 
     useEffect(() => {
         async function initData() {
@@ -74,7 +89,7 @@ const extendedGame = ({ navigation, route }) => {
                         alt="Player"
                     />
                     <Text>{ scoringAway }</Text>
-                    <Text style={{ alignSelf: 'center' }}>{ awayLeaders.StatValue } Points</Text>
+                    <Text style={{ alignSelf: 'center' }}>{ awayLeaders.StatValue } { statState }</Text>
                 </Card>
                 <Card containerStyle={ styles.scoreLeaders }>
                     <Card.Title>Home</Card.Title>
@@ -84,7 +99,7 @@ const extendedGame = ({ navigation, route }) => {
                         alt="Player"
                     />
                     <Text>{ scoringHome }</Text>
-                    <Text style={{ alignSelf: 'center' }}>{ homeLeaders.StatValue } Points</Text>
+                    <Text style={{ alignSelf: 'center' }}>{ homeLeaders.StatValue } { statState }</Text>
                 </Card>
             </View>
         );
@@ -174,17 +189,24 @@ const extendedGame = ({ navigation, route }) => {
                     <Text style={{ margin: 5 }}>Country: { gameData.country }</Text>
 
                     <View style={{ width: windowWidth * 0.8 }}>
-                        <Text>{ leaderDropdown.countries }</Text>
                         <DropDownPicker
-                            items={ leaderDropdown.countries }
-                            controller={ instance => controller = instance }
-                            onChangeList={( items, callback ) => {
-                                new Promise(( resolve, reject ) => resolve( setDropdown( items ) ))
-                                    .then(() => callback())
-                                    .catch(() => { });
+                            containerStyle={{ height: 40 }}
+                            itemStyle={{
+                                justifyContent: 'flex-start'
                             }}
-                            defaultValue={ value }
-                            onChangeItem={ item => setValue( item.value ) }
+                            items={[
+                                {label: 'Points', value: 'Points', icon: () => <Icon name="flag" size={18} color="#900" />},
+                                {label: 'Rebounds', value: 'Rebounds', icon: () => <Icon name="flag" size={18} color="#900" />},
+                                {label: 'Assists', value: 'Assists', icon: () => <Icon name="flag" size={18} color="#900" />},
+                            ]}
+                            dropDownStyle={{backgroundColor: '#fafafa'}}
+                            style={styles.dropDown}
+                            controller={ instance => controller = instance }
+                            onChangeItem={item => {
+                                setDropdown({ value: item.value })
+                                changeStats( item.value )
+                            }}
+                            defaultValue={null}
                         />
                     </View>
                     <StatLeader />
@@ -265,6 +287,9 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderRadius: 3,
 
+    },
+    dropDown: {
+        backgroundColor: '#fafafa'
     },
 });
 
