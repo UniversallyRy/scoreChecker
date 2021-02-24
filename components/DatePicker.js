@@ -2,6 +2,7 @@ import React, { useState, useEffect  } from 'react';
 import { View, Platform, StyleSheet } from 'react-native';
 import { Card, Text, Button } from 'react-native-elements';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { RaisedButton } from './Buttons'
 // todos: better styling
 // stats needed: points, rebs, asts, blocks, steals 
 
@@ -27,9 +28,9 @@ import DateTimePicker from '@react-native-community/datetimepicker';
     };
 
     return (
-      <View>
+      <>
         <View>
-          <Button buttonStyle={ styles.button } onPress={ showMode } title="Click for Date Change" />
+          <RaisedButton containerStyle={styles.button} onPress={ showMode } title="Click for Date Change" />
         </View>
         { show && (
           <DateTimePicker
@@ -41,7 +42,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
             minimumDate={ new Date( 1980, 0, 1 ) }
           />
         )}
-      </View>
+      </>
     );
 };  
 
@@ -49,8 +50,10 @@ const styles = StyleSheet.create({
   button: {
     alignSelf: 'center',
     fontFamily: 'Roboto',
+    borderRadius: 4,
     height: 40,
-    width: 200
+    width: 200,
+    backgroundColor: '#696969',
   },
 });
 
