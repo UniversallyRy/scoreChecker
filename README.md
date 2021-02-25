@@ -38,7 +38,8 @@ Only previewed/used in Expo currently, so no idea on how the NBA api handles in 
 
 ## Demo
 
-[Demo Test - Animated gif demo](demo/extendedScore.gif)
+**Extended Score**
+![Demo Test - Animated gif demo](demo/extendedScore.gif)
 
 ## Made by:
 
