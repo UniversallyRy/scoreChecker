@@ -130,7 +130,7 @@ const ScoreCard = ({ item, date, navigation }) => {
                   keyExtractor={ item => item.gameId }
                 />
               </SafeAreaView>
-            : <ListItem topDivider={ true } raised containerStyle={ styles.scoreCard }>
+            : <ListItem topDivider={ true } containerStyle={ styles.loadingContainer }>
                 <ListItem.Content>
                   <ListItem.Title style={ styles.title }>Loading</ListItem.Title>
                   <Card.Divider style={ styles.divider } />
@@ -146,7 +146,7 @@ const ScoreCard = ({ item, date, navigation }) => {
 const styles = StyleSheet.create({
   scoreContainer: {
     flex: 1,
-    width: windowWidth * 0.99999 ,
+    width: windowWidth,
     alignSelf: 'center',
     alignContent: 'center',
     justifyContent: 'center',
@@ -162,15 +162,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     height: 2,
   },
-  lButton: { 
-    height: 400, 
-    width: windowWidth * 0.90, 
-    alignSelf: 'center',
-  },
   scoreCard: {
     flex: 1,
-    width: windowWidth * 0.90,
+    width: windowWidth * 0.935,
     backgroundColor: '#696969',
+    justifyContent: 'center',
     alignSelf: 'center',
     borderColor: 'black',
     borderRadius: 6,
@@ -215,6 +211,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     fontSize: 14,
     fontFamily: 'Roboto',
+  },
+  loadingContainer: {
+    backgroundColor: '#696969',
+    height: windowHeight * 0.35,
+  },
+  lButton: { 
+    height: 300, 
+    alignSelf: 'center',
   },
 });
 

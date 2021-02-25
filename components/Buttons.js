@@ -17,6 +17,7 @@ export const RaisedButton = ( props ) => {
 export const LoadingButton = ( props ) => {
     return(
         <Button 
+            buttonStyle={{ backgroundColor:'#696969' }}
             containerStyle={ styles.button }
             title="Loading button"
             loading

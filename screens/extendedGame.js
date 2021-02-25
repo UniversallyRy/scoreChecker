@@ -103,8 +103,8 @@ const extendedGame = ({ navigation, route }) => {
                         <Text style={{ alignSelf: 'center' }}>{ homeLeaders.StatValue } { statState }</Text>
                     </Card>
                 </View>
-                <Card containerStyle={styles.statsHeader}>
-                    <Card.Title>{statState} Leaders</Card.Title>
+                <Card containerStyle={ styles.statsHeader }>
+                    <Card.Title>{ statState } Leaders</Card.Title>
                 </Card>
             </View>
         );
@@ -127,10 +127,10 @@ const extendedGame = ({ navigation, route }) => {
         return (
             <Card containerStyle={ styles.quarterCard }>
                 <Card.Title>Game Quarter Logs</Card.Title>
-                <Card wrapperStyle={{ flexDirection: 'row' }}>
+                <View style={ styles.quarterContainer }>
                 { awayLines
                     ? <>
-                        <View style={ styles.quarterContainer }>
+                        <View style={{ marginRight: 25 }}>
                             {
                                 awayArr.map(( u, i ) => {
                                     const quarter = `Q${ i + 1 }: ` + u;
@@ -141,7 +141,7 @@ const extendedGame = ({ navigation, route }) => {
                                 })
                             }
                         </View>
-                        <View style={ styles.quarterContainer }>
+                        <View style={{ marginLeft: 25 }}>
                             {
                                 homeArr.map(( u, i ) => {
                                     const quarter = `Q${ i + 1 }: ` + u;
@@ -155,7 +155,7 @@ const extendedGame = ({ navigation, route }) => {
                     </>
                     : <></>
                 }
-                </Card>
+                </View>
             </Card>
         );
     };
@@ -194,7 +194,8 @@ const extendedGame = ({ navigation, route }) => {
 
                     <View style={{ 
                             width: windowWidth * 0.8,
-                            minHeight: 120,
+                            minHeight: 150,
+                            margin: 5,
                             ...(Platform.OS !== 'android' && {
                                 zIndex: 10,
                                 margin: 5, 
@@ -203,7 +204,7 @@ const extendedGame = ({ navigation, route }) => {
                             
                     }}>
                         <DropDownPicker
-                            containerStyle={{ height: 40, margin: 10,}}
+                            containerStyle={{ height: 40, margin: 5,}}
                             itemStyle={{
                                 justifyContent: 'flex-start',
                                 zIndex: 1,
@@ -213,7 +214,7 @@ const extendedGame = ({ navigation, route }) => {
                                 {label: 'Rebounds', value: 'Rebounds', icon: () => <MaterialCommunityIcons name="basketball" size={18} color="#900" style={{ marginRight: 10 }} />},
                                 {label: 'Assists', value: 'Assists', icon: () => <MaterialCommunityIcons name="basketball" size={18} color="#900" style={{ marginRight: 10 }} />},
                             ]}
-                            dropDownStyle={{backgroundColor: '#fafafa', marginTop: 1}}
+                            dropDownStyle={{backgroundColor: 'darkgrey', marginTop: 1}}
                             style={styles.dropDown}
                             controller={ instance => controller = instance }
                             onChangeItem={item => {
@@ -234,10 +235,8 @@ const extendedGame = ({ navigation, route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        zIndex: 2,
         alignItems: 'center',
         justifyContent: 'center',
-
     },
     bgImage: {
         flex: 1,
@@ -246,72 +245,77 @@ const styles = StyleSheet.create({
     },
     scoreCard: {
         backgroundColor: '#696969',
-        width: windowWidth * 0.97,
+        width: windowWidth,
         borderColor: '#696969',
         alignItems: 'center',
     },
     title: {
         fontWeight: 'bold',
         fontFamily: 'Roboto',
-        marginBottom: 10,
+        marginBottom: 5,
     },
     teamVersus: {
         flexDirection: 'row',
         alignItems: 'center',
         alignSelf: 'center',
         margin: 5,
-        marginBottom: 10,
+        marginBottom: 5,
     },
     quarterCard: {
-        width: windowWidth * 0.45,
-        height: windowHeight * 0.3,
+        width: windowWidth * 0.75,
         flexDirection: 'column',
         alignItems: 'center',
         alignSelf: 'center',
+        marginBottom: 10,
+        borderColor: 'darkgrey',
+        backgroundColor: 'darkgrey',
     },
     quarterText: {
         color: 'black',
         fontWeight: 'bold',
-        margin: 3,
+        margin: 1,
     },
     quarterContainer: {
-        alignItems: 'center',
-        margin: 10,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        backgroundColor: 'darkgrey', 
+        borderColor: 'darkgrey', 
     },
     scoreLeadersContainer: {
-        marginTop: 15,
+        marginTop: 1,
         width: windowWidth,
         flexDirection: 'row',
         justifyContent: 'center',
     },
     scoreLeaders: {
-        margin: 10,
+        margin: 3,
         flex: 1,
-        backgroundColor: 'lightgrey',
-        borderColor: 'lightgrey',
+        backgroundColor: 'darkgrey',
+        borderColor: 'darkgrey',
         justifyContent: 'center',
         alignItems: 'center',
     },
     playerPic: {
-        width: 75,
-        height: 75,
-        margin: 10,
+        width: 65,
+        height: 65,
         alignSelf: 'center',
-        borderColor: 'white',
-        borderStyle: 'dashed',
-        borderWidth: 0.5,
-        borderRadius: 3,
+        borderColor: 'black',
+        borderStyle: 'solid',
+        borderWidth: 0.6,
+        borderRadius: 50,
 
     },
     dropDown: {
         alignItems: "center",
-        zIndex: 1,
+        backgroundColor: '#696969',
+        borderColor: 'darkgrey',
     },
     statsHeader: {
         alignSelf: 'center',
-        justifyContent: 'center',
-        width: windowWidth * 0.7,
-        height: 25,
+        width: windowWidth * 0.45,
+        height: 20,
+        backgroundColor: 'darkgrey',
+        borderColor: 'darkgrey',
     },
 });
 

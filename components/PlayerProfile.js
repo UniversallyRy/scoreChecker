@@ -28,7 +28,6 @@ const Profile = ({ playerInfo, navigation }) => {
             <Card containerStyle={ styles.playerProfile }>
                 { !loading
                 ?<>
-                    <Text style={ styles.profileEntryPlayerName }>{ `${ playerInfo.playerName }` }</Text>
                     <View style={ styles.proPicBorder }>
                         <Image
                             containerStyle={ styles.profilePic }
@@ -36,6 +35,7 @@ const Profile = ({ playerInfo, navigation }) => {
                             alt="Profile"
                         />
                     </View>
+                    <Text style={ styles.profileEntryPlayerName }>{ `${ playerInfo.playerName }` }</Text>
                     <Image
                         containerStyle={ styles.teamLogo }
                         source={ logos[ playerInfo.teamAbbreviation ] }
@@ -88,22 +88,25 @@ const Profile = ({ playerInfo, navigation }) => {
 
     const styles = StyleSheet.create({
         playerProfile: {
-            width: windowWidth * 0.99,
-            height: windowHeight * 0.6,
-            alignSelf: 'center',
             flex: 1,
-            justifyContent: 'center',
+            width: windowWidth * 0.99,
+            height: windowHeight * 0.65,
+            alignSelf: 'center',
+            justifyContent: 'flex-end',
             backgroundColor: '#696969',
-            fontFamily: 'roboto',
-            borderRadius: 6,
-            marginBottom: 50,
+            fontFamily: 'Roboto',
+            borderRadius: 4,
+            padding: 3,
         },
         profileEntryPlayerName: {
             fontSize: 20,
             fontFamily: 'Roboto',
             fontWeight: 'bold',
             alignSelf: 'center',
-            marginBottom: 25,
+        },
+        proPicBorder: {
+            borderWidth: 1,
+            marginTop: 15, 
         },
         profilePic: {
             borderWidth: 2,
@@ -112,31 +115,27 @@ const Profile = ({ playerInfo, navigation }) => {
             borderRadius: 50, 
             alignItems: 'center',
             alignSelf: 'center',
-            margin: 10,
+            marginTop: 15,
+            marginBottom: 5,
             height: 100,
             width: 100,
         },
-        proPicBorder: {
-            borderWidth: 1, 
-        },
         profileEntry: {
-            textAlignVertical: 'auto',
             flexDirection: 'row',
-            margin: 2,
         },
         profileEntryLeft: {
             textAlignVertical: 'auto',
             fontSize: 20,
             fontWeight: 'bold',
             fontFamily: 'Roboto',
-            marginBottom: 15,
+            marginBottom: 10,
         },
         profileEntryRight: {
             textAlignVertical: 'auto',
-            marginLeft: 10,
             fontSize: 20,
             fontFamily: 'Roboto',
-            marginBottom: 15,
+            marginLeft: 10,
+            marginBottom: 10,
         },
         teamLogo: {
             width: 50,
@@ -145,7 +144,7 @@ const Profile = ({ playerInfo, navigation }) => {
             alignSelf: 'center',
         },
         button: {
-            margin: 15,
+            margin: 5,
         },
     });
 

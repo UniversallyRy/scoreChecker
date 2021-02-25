@@ -47,11 +47,11 @@ const MyTabs = () => (
 
 const AuthStack = () => (
   <Stack.Navigator>
-      <Stack.Screen name="NBA checkup" component={ MyTabs } 
+      <Stack.Screen name="NBA Check-In" component={ MyTabs } 
         options={{
           headerStyle:{ backgroundColor: '#696969' },
           headerTitleContainerStyle: {
-            marginLeft: 35,
+            marginLeft: 15,
           },
         }}
       />
