@@ -38,7 +38,20 @@ Only previewed/used in Expo currently, so no idea on how the NBA api handles in 
 
 ## Demo
 
-**Extended Score**![Demo Test - Animated gif demo](demo/sExtendedScore.gif)
+<table>
+  <tr>
+    <td>Player Profile</td>
+     <td>Extended Profile</td>
+     <td>Scores</td>
+     <td>Extended Scorecard</td>
+  </tr>
+  <tr>
+    <td valign="top"><img src="demo/sPlayerProfile.gif"></td>
+    <td valign="top"><img src="demo/sExtendedProfile.gif"></td>
+    <td valign="top"><img src="demo/sScoreCard.gif"></td>
+    <td valign="top"><img src="demo/sExtendedScore.gif"></td>
+  </tr>
+ </table>
 
 ## Made by:
 
