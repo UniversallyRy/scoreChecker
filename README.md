@@ -36,6 +36,8 @@ React native app styled with react-native-elements. Made for my friends and I to
 
 Only previewed/used in Expo currently, so no idea on how the NBA api handles in production. Paths sometimes change due to official changes/bugs.
 
+## Demo
+
 ## Made by:
 
 👤 **Ryan Paige**
