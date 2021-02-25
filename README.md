@@ -1,4 +1,4 @@
-<h1 align="center">React Native app made to replace having to Google NBA schedules and stats</h1>
+<h1 align="center">React Native app made to replace having to google NBA schedules and stats</h1>
 <p>
   <a href="https://twitter.com/universallyry" target="_blank">
     <img alt="Twitter: universallyry" src="https://img.shields.io/twitter/follow/universallyry.svg?style=social" />
@@ -27,20 +27,26 @@ npm install
 ## Usage
 
 ```sh
+expo start
+```
+
+**or**
+
+```sh
 npm start
 ```
 
 ## About
 
-React native app styled with react-native-elements. Made for my friends and I to keep up with the NBA. Feel free to use and take anything for your own sports app.:thumbsup::thumbsup:
+React native app created with Expo and styled with react-native-elements. Made for my friends, and I, to keep up with the NBA. Feel free to use and take anything for your own sports app.:thumbsup::thumbsup:
 
-Only previewed/used in Expo currently, so no idea on how the NBA api handles in production. Paths sometimes change due to official API changes/bugs.
+Only previewed/used in Expo, so no idea on how the NBA api handles in production. Paths sometimes change due to official API changes/bugs.
 
 ## Demo
 
 <table>
   <tr>
-    <td>Player Profile with Extended</td>
+    <td>Player Profile</td>
     <td>Scores</td>
     <td>Extended Scorecard</td>
   </tr>
