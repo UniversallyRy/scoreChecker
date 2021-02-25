@@ -34,11 +34,11 @@ npm start
 
 React native app styled with react-native-elements. Made for my friends and I to keep up with the NBA. Feel free to use and take anything for your own sports app.:thumbsup::thumbsup:
 
-Only previewed/used in Expo currently, so no idea on how the NBA api handles in production. Paths sometimes change due to official changes/bugs.
+Only previewed/used in Expo currently, so no idea on how the NBA api handles in production. Paths sometimes change due to official API changes/bugs.
 
 ## Demo
 
-![Demo Test - Animated gif demo](demo/extendedScore.gif)
+[Demo Test - Animated gif demo](demo/extendedScore.gif)
 
 ## Made by:
 
