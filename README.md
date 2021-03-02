@@ -1,4 +1,4 @@
-<h1 align="center">React Native app made to replace having to google NBA schedules and stats</h1>
+<h1 align="center">React Native app made to replace having to google basic NBA schedules and stats</h1>
 <p>
   <a href="https://twitter.com/universallyry" target="_blank">
     <img alt="Twitter: universallyry" src="https://img.shields.io/twitter/follow/universallyry.svg?style=social" />
