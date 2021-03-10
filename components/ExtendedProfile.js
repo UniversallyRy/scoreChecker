@@ -33,9 +33,9 @@ const ExtendedProfile = ({ route, navigation }) => {
     <ImageBackground source={image} style={styles.bgImage}>
       <Card containerStyle={styles.container}>
         {Object.entries(profileState).map(([key, data]) => (
-          <Card.Title key={key} style={styles.profileEntry}>
-            <Text style={styles.profileEntryLeft}>{key}: </Text>
-            <Text style={styles.profileEntryRight}>{`${data}`}</Text>
+          <Card.Title key={key} style={styles.playerInfo}>
+            <Text style={styles.playerInfoLeft}>{key}: </Text>
+            <Text style={styles.playerInfoRight}>{`${data}`}</Text>
           </Card.Title>
         ))}
       </Card>
@@ -52,20 +52,20 @@ const styles = StyleSheet.create({
     alignContent: "center",
     justifyContent: "center",
   },
-  profileEntry: {
+  playerInfo: {
     alignItems: "center",
     alignContent: "center",
     flexDirection: "row",
     margin: 2,
   },
-  profileEntryLeft: {
+  playerInfoLeft: {
     alignSelf: "flex-start",
     marginRight: 10,
     fontSize: 20,
     fontWeight: "bold",
     fontFamily: "Roboto",
   },
-  profileEntryRight: {
+  playerInfoRight: {
     alignSelf: "flex-end",
     marginLeft: 10,
     fontSize: 18,

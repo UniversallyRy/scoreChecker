@@ -8,7 +8,7 @@ import logos from "../logoManager";
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const Profile = ({ playerInfo, navigation }) => {
-  // todo: profileEntry loop for DRY
+  // todo: playerInfo loop for DRY
   let [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -28,52 +28,46 @@ const Profile = ({ playerInfo, navigation }) => {
     <Card containerStyle={styles.playerProfile}>
       {!loading ? (
         <>
-          <View style={styles.proPicBorder}>
+          <View style={styles.picBorder}>
             <Image
-              containerStyle={styles.profilePic}
+              containerStyle={styles.playerPic}
               source={{
                 uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`,
               }}
               alt="Profile"
             />
           </View>
-          <Text
-            style={styles.profileEntryPlayerName}
-          >{`${playerInfo.playerName}`}</Text>
+          <Text style={styles.playerName}>{`${playerInfo.playerName}`}</Text>
           <Image
             containerStyle={styles.teamLogo}
             source={logos[playerInfo.teamAbbreviation]}
             alt="Team"
           />
-          <View style={styles.profileEntry}>
-            <Text style={styles.profileEntryLeft}>Team:</Text>
-            <Text
-              style={styles.profileEntryRight}
-            >{`${playerInfo.teamCity} ${playerInfo.teamName}`}</Text>
+          <View style={styles.playerInfo}>
+            <Text style={styles.playerInfoLeft}>Team:</Text>
+            <Text style={styles.playerInfoRight}>
+              {`${playerInfo.teamCity} ${playerInfo.teamName}`}
+            </Text>
           </View>
-          <View style={styles.profileEntry}>
-            <Text style={styles.profileEntryLeft}>Height:</Text>
-            <Text
-              style={styles.profileEntryRight}
-            >{`${playerInfo.height}`}</Text>
+          <View style={styles.playerInfo}>
+            <Text style={styles.playerInfoLeft}>Height:</Text>
+            <Text style={styles.playerInfoRight}>{`${playerInfo.height}`}</Text>
           </View>
-          <View style={styles.profileEntry}>
-            <Text style={styles.profileEntryLeft}>Weight:</Text>
-            <Text
-              style={styles.profileEntryRight}
-            >{`${playerInfo.weight}`}</Text>
+          <View style={styles.playerInfo}>
+            <Text style={styles.playerInfoLeft}>Weight:</Text>
+            <Text style={styles.playerInfoRight}>{`${playerInfo.weight}`}</Text>
           </View>
-          <View style={styles.profileEntry}>
-            <Text style={styles.profileEntryLeft}>PPG:</Text>
-            <Text style={styles.profileEntryRight}>{`${playerInfo.pts}`}</Text>
+          <View style={styles.playerInfo}>
+            <Text style={styles.playerInfoLeft}>PPG:</Text>
+            <Text style={styles.playerInfoRight}>{`${playerInfo.pts}`}</Text>
           </View>
-          <View style={styles.profileEntry}>
-            <Text style={styles.profileEntryLeft}>APG:</Text>
-            <Text style={styles.profileEntryRight}>{`${playerInfo.ast}`}</Text>
+          <View style={styles.playerInfo}>
+            <Text style={styles.playerInfoLeft}>APG:</Text>
+            <Text style={styles.playerInfoRight}>{`${playerInfo.ast}`}</Text>
           </View>
-          <View style={styles.profileEntry}>
-            <Text style={styles.profileEntryLeft}>RPG:</Text>
-            <Text style={styles.profileEntryRight}>{`${playerInfo.reb}`}</Text>
+          <View style={styles.playerInfo}>
+            <Text style={styles.playerInfoLeft}>RPG:</Text>
+            <Text style={styles.playerInfoRight}>{`${playerInfo.reb}`}</Text>
           </View>
           <RaisedButton
             containerStyle={styles.button}
@@ -109,39 +103,39 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     padding: 3,
   },
-  profileEntryPlayerName: {
-    fontSize: 20,
-    fontFamily: "Roboto",
-    fontWeight: "bold",
-    alignSelf: "center",
-  },
-  proPicBorder: {
+  picBorder: {
     borderWidth: 1,
-    marginTop: 15,
+    marginTop: 25,
   },
-  profilePic: {
+  playerPic: {
     borderWidth: 2,
     overflow: "hidden",
     borderColor: "black",
     borderRadius: 50,
     alignItems: "center",
     alignSelf: "center",
-    marginTop: 15,
-    marginBottom: 5,
+    marginTop: 20,
+    marginBottom: 3,
     height: 100,
     width: 100,
   },
-  profileEntry: {
+  playerName: {
+    fontSize: 20,
+    fontFamily: "Roboto",
+    fontWeight: "bold",
+    alignSelf: "center",
+  },
+  playerInfo: {
     flexDirection: "row",
   },
-  profileEntryLeft: {
+  playerInfoLeft: {
     textAlignVertical: "auto",
     fontSize: 20,
     fontWeight: "bold",
     fontFamily: "Roboto",
     marginBottom: 10,
   },
-  profileEntryRight: {
+  playerInfoRight: {
     textAlignVertical: "auto",
     fontSize: 20,
     fontFamily: "Roboto",
