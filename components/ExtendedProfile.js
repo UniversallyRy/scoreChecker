@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions, ImageBackground, View } from "react-native";
 import { Card, Text } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Button from "./Buttons";
-
+// todos: Years/year conditional, better list styling
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const image = require("../assets/double-bubble-dark.png");
 
@@ -57,13 +57,13 @@ const styles = StyleSheet.create({
     textAlign: "auto",
   },
   playerInfoLeft: {
-    marginRight: 5,
+    marginRight: 2,
     fontSize: 18,
     fontWeight: "bold",
     fontFamily: "Roboto",
   },
   playerInfoRight: {
-    marginLeft: 5,
+    marginLeft: 2,
     fontSize: 18,
     fontFamily: "Roboto",
   },
