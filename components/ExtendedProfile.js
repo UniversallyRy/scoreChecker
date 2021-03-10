@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Dimensions, ImageBackground } from "react-native";
+import { StyleSheet, Dimensions, ImageBackground, View } from "react-native";
 import { Card, Text } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Button from "./Buttons";
@@ -33,10 +33,10 @@ const ExtendedProfile = ({ route, navigation }) => {
     <ImageBackground source={image} style={styles.bgImage}>
       <Card containerStyle={styles.container}>
         {Object.entries(profileState).map(([key, data]) => (
-          <Card.Title key={key} style={styles.playerInfo}>
+          <View key={key} style={styles.playerInfo}>
             <Text style={styles.playerInfoLeft}>{key}: </Text>
             <Text style={styles.playerInfoRight}>{`${data}`}</Text>
-          </Card.Title>
+          </View>
         ))}
       </Card>
     </ImageBackground>
@@ -45,29 +45,25 @@ const ExtendedProfile = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: windowWidth * 0.95,
-    height: windowHeight * 0.92,
+    width: windowWidth * 0.99,
+    height: windowHeight * 0.88,
     backgroundColor: "#696969",
     alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
   },
   playerInfo: {
-    alignItems: "center",
-    alignContent: "center",
+    margin: 7,
+    alignItems: "flex-start",
     flexDirection: "row",
-    margin: 2,
+    textAlign: "auto",
   },
   playerInfoLeft: {
-    alignSelf: "flex-start",
-    marginRight: 10,
-    fontSize: 20,
+    marginRight: 5,
+    fontSize: 18,
     fontWeight: "bold",
     fontFamily: "Roboto",
   },
   playerInfoRight: {
-    alignSelf: "flex-end",
-    marginLeft: 10,
+    marginLeft: 5,
     fontSize: 18,
     fontFamily: "Roboto",
   },
