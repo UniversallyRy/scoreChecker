@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Dimensions, ImageBackground, View } from "react-native";
-import { Card, Text } from "react-native-elements";
+import { Card, Text, Image } from "react-native-elements";
+import { PROFILE_PIC_URL_PREFIX } from "../constants";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Button from "./Buttons";
 // todos: Years/year conditional, better list styling
@@ -32,6 +33,13 @@ const ExtendedProfile = ({ route, navigation }) => {
   return (
     <ImageBackground source={image} style={styles.bgImage}>
       <Card containerStyle={styles.container}>
+        <Image
+          containerStyle={styles.playerPic}
+          source={{
+            uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`,
+          }}
+          alt="Profile"
+        />
         {Object.entries(profileState).map(([key, data]) => (
           <View key={key} style={styles.playerInfo}>
             <Text style={styles.playerInfoLeft}>{key}: </Text>
@@ -70,6 +78,18 @@ const styles = StyleSheet.create({
   bgImage: {
     flex: 1,
     resizeMode: "cover",
+  },
+  playerPic: {
+    borderWidth: 2,
+    overflow: "hidden",
+    borderColor: "black",
+    borderRadius: 50,
+    alignItems: "center",
+    alignSelf: "center",
+    marginTop: 10,
+    marginBottom: 3,
+    height: 100,
+    width: 100,
   },
 });
 

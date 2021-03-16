@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     width: windowWidth * 0.99,
     height: windowHeight * 0.65,
     alignSelf: "center",
-    justifyContent: "flex-end",
+    justifyContent: "center",
     backgroundColor: "#696969",
     fontFamily: "Roboto",
     borderRadius: 4,
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   },
   picBorder: {
     borderWidth: 1,
-    marginTop: 25,
+    marginTop: 1,
   },
   playerPic: {
     borderWidth: 2,
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     alignItems: "center",
     alignSelf: "center",
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 3,
     height: 100,
     width: 100,
