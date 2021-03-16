@@ -37,6 +37,7 @@ const extendedGame = ({ navigation, route }) => {
   const [scoringAway, setScoringAway] = useState("");
   const image = require("../assets/double-bubble-dark.png");
   const splitAt = (index) => (x) => [x.slice(0, index), x.slice(index)];
+  console.log(scoreInfo);
   let comp = scoreInfo.gamecode.slice(-6);
   let date = scoreInfo.gamecode.slice(0, 8);
   let splitTeam = splitAt(3)(comp);

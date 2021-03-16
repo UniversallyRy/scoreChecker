@@ -101,12 +101,13 @@ const Score = ({ u, navigation }) => {
                     u.gameStatusText == "PPD"
                   ) {
                     return null;
+                  } else {
+                    // Navigate to the Extended Score route with params
+                    navigation.navigate("Extended Score", {
+                      itemId: 10,
+                      scoreInfo: u,
+                    });
                   }
-                  // Navigate to the Extended Score route with params
-                  navigation.navigate("Extended Score", {
-                    itemId: 10,
-                    scoreInfo: u,
-                  });
                 }}
               />
             </TouchableOpacity>
@@ -180,7 +181,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#696969",
     width: windowWidth * 0.8,
     alignSelf: "center",
-    height: 2,
+    height: 1,
   },
   scoreCard: {
     flex: 1,
