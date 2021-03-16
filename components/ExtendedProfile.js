@@ -30,6 +30,16 @@ const ExtendedProfile = ({ route, navigation }) => {
     Assists: playerInfo.ast,
   };
 
+  // checks for college skippers
+  const onlyHS = (item, itemData) => {
+    if (
+      !itemData ||
+      (typeof itemData === "string" && itemData.includes("HS"))
+    ) {
+      return "High School";
+    } else return item;
+  };
+
   return (
     <ImageBackground source={image} style={styles.bgImage}>
       <Card containerStyle={styles.container}>
@@ -42,7 +52,7 @@ const ExtendedProfile = ({ route, navigation }) => {
         />
         {Object.entries(profileState).map(([key, data]) => (
           <View key={key} style={styles.playerInfo}>
-            <Text style={styles.playerInfoLeft}>{key}: </Text>
+            <Text style={styles.playerInfoLeft}>{onlyHS(key, data)}: </Text>
             <Text style={styles.playerInfoRight}>{`${data}`}</Text>
           </View>
         ))}
