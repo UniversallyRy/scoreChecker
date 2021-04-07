@@ -6,7 +6,7 @@ import NBA from "nba";
 import ScoreCard from "../components/ScoreCard";
 import { LoadingButton } from "../components/Buttons";
 import DatePicker from "../components/DatePicker";
-// todo: RESTful api design, possible team screen/standings
+// todo: switch to GraphQL, possible team screen/standings
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 // imported nodejs nba api from https://github.com/bttmly/nba
