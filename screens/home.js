@@ -6,6 +6,8 @@ import NBA from "nba";
 import ScoreCard from "../components/ScoreCard";
 import { LoadingButton } from "../components/Buttons";
 import DatePicker from "../components/DatePicker";
+import { client } from "../graphql/Client";
+import { Player } from "../graphql/Queries";
 // todo: switch to GraphQL, possible team screen/standings
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -31,19 +33,35 @@ const Home = ({ navigation }) => {
     setState(newObj);
     setLoading(false);
   };
-
   setTimeout(() => {
     loader();
   }, 1000);
 
   useEffect(() => {
-    async function initData() {
-      NBA.stats
-        .scoreboard({ gameDate: todaysDate })
-        .then((res) => setNewObj(res.gameHeader));
-    }
-    initData();
-  }, [todaysDate]);
+    requestHeadlines();
+  }, []);
+
+  const requestHeadlines = () => {
+    client
+      .query({
+        query: Player,
+      })
+      .then((response) => {
+        console.log("RESPONSE ==>", response);
+      })
+      .catch((error) => {
+        console.log("ERROR ==>", error);
+      });
+  };
+
+  // useEffect(() => {
+  //   async function initData() {
+  //     NBA.stats
+  //       .scoreboard({ gameDate: todaysDate })
+  //       .then((res) => setNewObj(res.gameHeader));
+  //   }
+  //   initData();
+  // }, [todaysDate]);
   // callback for datepicker changes
   const onSubmit = useCallback((item) => {
     let changedDate = item;
