@@ -18,6 +18,7 @@ import ExtendedProfile from "./components/ExtendedProfile";
 // creating bottom tabs and a stack nav
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const { ApolloServer, gql } = require("apollo-server");
 
 const MyTabs = () => (
   <Tab.Navigator
