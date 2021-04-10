@@ -9,8 +9,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "react-native-elements";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import "react-native-gesture-handler";
-import { ApolloProvider } from "@apollo/react-hooks";
-import { client } from "./graphql/Client";
 import { StatusBar } from "expo-status-bar";
 import Home from "./screens/home";
 import PlayerInfo from "./screens/playerInfo";
@@ -86,12 +84,10 @@ const AuthStack = () => (
 );
 
 const App = () => (
-  <ApolloProvider client={client}>
-    <NavigationContainer style={styles.container}>
-      <StatusBar style="auto" />
-      <AuthStack />
-    </NavigationContainer>
-  </ApolloProvider>
+  <NavigationContainer style={styles.container}>
+    <StatusBar style="auto" />
+    <AuthStack />
+  </NavigationContainer>
 );
 
 const styles = StyleSheet.create({

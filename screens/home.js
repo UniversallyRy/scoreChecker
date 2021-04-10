@@ -6,8 +6,6 @@ import NBA from "nba";
 import ScoreCard from "../components/ScoreCard";
 import { LoadingButton } from "../components/Buttons";
 import DatePicker from "../components/DatePicker";
-import { client } from "../graphql/Client";
-import { Player } from "../graphql/Queries";
 // todo: switch to GraphQL, possible team screen/standings
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -39,9 +37,9 @@ const Home = ({ navigation }) => {
 
   useEffect(() => {
     async function initData() {
-      NBA.stats
-        .scoreboard({ gameDate: todaysDate })
-        .then((res) => setNewObj(res.gameHeader));
+      NBA.stats.scoreboard({ gameDate: todaysDate }).then((res) => {
+        setNewObj(res.gameHeader);
+      });
     }
     initData();
   }, [todaysDate]);

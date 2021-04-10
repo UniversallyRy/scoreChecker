@@ -15,13 +15,14 @@ import logos from "../logoManager";
 import { LoadingButton } from "./Buttons";
 import DatePicker from "./DatePicker";
 
-const todaysDate = moment().format("L");
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 // WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
+const todaysDate = moment().format("L");
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const Score = ({ u, navigation }) => {
   const [homeScore, setHome] = useState(0);
+  const [extendedState, setExtended] = useState(0);
   const [awayScore, setAway] = useState(0);
   const splitAt = (index) => (x) => [x.slice(0, index), x.slice(index)];
   let comp = u.gamecode.slice(-6);
@@ -29,6 +30,8 @@ const Score = ({ u, navigation }) => {
   let splitTeam = splitAt(3)(comp);
   let [awayTeam, homeTeam] = [splitTeam[0], splitTeam[1]];
   let [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
+
+  // res.Leaders
 
   useEffect(() => {
     async function initData() {
