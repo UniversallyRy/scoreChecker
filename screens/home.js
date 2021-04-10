@@ -7,7 +7,7 @@ import ScoreCard from "../components/ScoreCard";
 import { LoadingButton } from "../components/Buttons";
 import DatePicker from "../components/DatePicker";
 import { client } from "../graphql/Client";
-import { Player } from "../graphql/Queries";
+import { Scoreboard } from "../graphql/Queries";
 // todo: switch to GraphQL, possible team screen/standings
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -31,6 +31,7 @@ const Home = ({ navigation }) => {
 
   const loader = () => {
     setState(newObj);
+    console.log(newObj);
     setLoading(false);
   };
   setTimeout(() => {
@@ -39,15 +40,15 @@ const Home = ({ navigation }) => {
 
   useEffect(() => {
     requestHeadlines();
-  }, []);
+  }, [todaysDate]);
 
   const requestHeadlines = () => {
     client
       .query({
-        query: Player,
+        query: Scoreboard,
       })
       .then((response) => {
-        console.log("RESPONSE ==>", response);
+        setNewObj(response.data.todayScoreboard.games);
       })
       .catch((error) => {
         console.log("ERROR ==>", error);

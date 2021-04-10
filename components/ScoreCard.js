@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Card, ListItem, Icon, Text, Image } from "react-native-elements";
-import NBA from "nba";
 import moment from "moment";
 import logos from "../logoManager";
 import { LoadingButton } from "./Buttons";
@@ -21,28 +20,29 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 // logo 35 x 50
 
 const Score = ({ u, navigation }) => {
-  const [homeScore, setHome] = useState(0);
   const [awayScore, setAway] = useState(0);
   const splitAt = (index) => (x) => [x.slice(0, index), x.slice(index)];
-  let comp = u.gamecode.slice(-6);
-  let date = u.gamecode.slice(0, 8);
+  let comp = u.gameUrlCode.slice(-6);
+  let date = u.gameUrlCode.slice(0, 8);
   let splitTeam = splitAt(3)(comp);
   let [awayTeam, homeTeam] = [splitTeam[0], splitTeam[1]];
   let [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
 
-  useEffect(() => {
-    async function initData() {
-      NBA.data
-        .boxScore(date, u.gameId)
-        .then((res) => res.sports_content)
-        .then((res) => res.game)
-        .then((res) => {
-          setAway(res.visitor.score);
-          setHome(res.home.score);
-        });
+  const quarterPicker = (num) => {
+    if (num === 1) {
+      return num + "st";
     }
-    initData();
-  }, []);
+    if (num === 2) {
+      return num + "nd";
+    }
+    if (num === 3) {
+      return num + "rd";
+    }
+    if (num === 4) {
+      return num + "th";
+    }
+    return u.startTimeEastern;
+  };
 
   return (
     <ListItem topDivider={true} raised containerStyle={styles.scoreCard}>
@@ -51,7 +51,7 @@ const Score = ({ u, navigation }) => {
         <View style={styles.teamVersus}>
           <View style={{ flexDirection: "column", alignItems: "center" }}>
             <Text style={styles.teams}>
-              {awayTeam} - {awayScore}
+              {awayTeam} - {u.vTeam.score}
             </Text>
             <Image
               accessibilityLabel={awayTeam}
@@ -67,7 +67,7 @@ const Score = ({ u, navigation }) => {
 
           <View style={{ flexDirection: "column", alignItems: "center" }}>
             <Text style={styles.teams}>
-              {homeTeam} - {homeScore}{" "}
+              {homeTeam} - {u.hTeam.score}{" "}
             </Text>
             <Image
               accessibilityLabel={homeTeam}
@@ -80,14 +80,16 @@ const Score = ({ u, navigation }) => {
 
         {/* Game Status(Shows postponed, game times in EST and info is selectable only if game is already played ) */}
         <ListItem.Subtitle style={styles.quarter}>
-          {u.gameStatusText != "PPD" ? u.gameStatusText : "Postponed"}
+          {quarterPicker(u.period.current) != "PPD"
+            ? quarterPicker(u.period.current)
+            : "Postponed"}
         </ListItem.Subtitle>
         <Card.Divider style={styles.divider} />
         <ListItem.Subtitle style={styles.broadcast}>
-          {u.gameStatusText != "Final" &&
-          u.gameStatusText != "PPD" &&
-          u.livePeriodTimeBcast.charAt(1) != "0"
-            ? u.livePeriodTimeBcast
+          {quarterPicker(u.period.current) != "Final" &&
+          quarterPicker(u.period.current) != "PPD" &&
+          u.clock.charAt(1) != "0"
+            ? u.clock
             : ""}
           {
             <TouchableOpacity>
@@ -97,8 +99,8 @@ const Score = ({ u, navigation }) => {
                 onPress={() => {
                   // When game status is still showing a start time, or postponed, no routing and returns null
                   if (
-                    u.gameStatusText.length > 7 ||
-                    u.gameStatusText == "PPD"
+                    u.period.current.length >= 1 ||
+                    u.startTimeEastern == "PPD"
                   ) {
                     return null;
                   } else {

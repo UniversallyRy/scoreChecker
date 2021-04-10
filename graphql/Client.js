@@ -4,10 +4,7 @@ import { RestLink } from "apollo-link-rest";
 import apiKey from "../.expo/apiKey";
 
 const restLink = new RestLink({
-  uri: "free-nba.p.rapidapi.com",
-  headers: {
-    Authorization: apiKey,
-  },
+  uri: "http://data.nba.net",
 });
 
 export const client = new ApolloClient({
