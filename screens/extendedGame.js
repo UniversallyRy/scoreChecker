@@ -21,25 +21,21 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const extendedGame = ({ navigation, route }) => {
   // todos: will need to break down in seperate components(seperate statsleader/linescores possibly)
   // seperate screen from components
+  const { itemId, scoreInfo } = route.params;
   const [leaderDropdown, setDropdown] = useState({ value: "Points" });
   const [statState, setStat] = useState("Points");
-  const [gameData, setData] = useState({});
-  const [homeScore, setHome] = useState(0);
-  const [awayScore, setAway] = useState(0);
   const [homeLeaders, setHomeLeaders] = useState({});
   const [awayLeaders, setAwayLeaders] = useState({});
   const [homePic, setHomePic] = useState({});
   const [awayPic, setAwayPic] = useState({});
-  const { itemId, scoreInfo } = route.params;
   const [homeLines, setHomeLines] = useState([]);
   const [awayLines, setAwayLines] = useState([]);
   const [scoringHome, setScoringHome] = useState("");
   const [scoringAway, setScoringAway] = useState("");
   const image = require("../assets/double-bubble-dark.png");
   const splitAt = (index) => (x) => [x.slice(0, index), x.slice(index)];
-  console.log(scoreInfo);
-  let comp = scoreInfo.gamecode.slice(-6);
-  let date = scoreInfo.gamecode.slice(0, 8);
+  let comp = scoreInfo.gameUrlCode.slice(-6);
+  let date = scoreInfo.gameUrlCode.slice(0, 8);
   let splitTeam = splitAt(3)(comp);
   let [awayTeam, homeTeam] = [splitTeam[0], splitTeam[1]];
   let [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
@@ -78,13 +74,10 @@ const extendedGame = ({ navigation, route }) => {
         .then((res) => res.sports_content)
         .then((res) => res.game)
         .then((res) => {
-          setHome(res.home.score);
-          setAway(res.visitor.score);
           setHomeLeaders(res.home.Leaders.Points);
           setAwayLeaders(res.visitor.Leaders.Points);
           setHomeLines(res.home.linescores.period);
           setAwayLines(res.visitor.linescores.period);
-          setData(res);
           setScoringHome(
             res.home.Leaders.Points.leader[0].FirstName +
               " " +
@@ -195,7 +188,7 @@ const extendedGame = ({ navigation, route }) => {
           <View style={styles.teamVersus}>
             <View style={{ flexDirection: "column", alignItems: "center" }}>
               <Text style={styles.title}>
-                {awayTeam} - {awayScore}
+                {awayTeam} - {scoreInfo.vTeam.score}
               </Text>
               <Image
                 accessibilityLabel={awayTeam}
@@ -218,7 +211,7 @@ const extendedGame = ({ navigation, route }) => {
 
             <View style={{ flexDirection: "column", alignItems: "center" }}>
               <Text style={styles.title}>
-                {homeTeam} - {homeScore}{" "}
+                {homeTeam} - {scoreInfo.hTeam.score}{" "}
               </Text>
               <Image
                 accessibilityLabel={homeTeam}
@@ -228,11 +221,10 @@ const extendedGame = ({ navigation, route }) => {
               />
             </View>
           </View>
-          <Text style={{ margin: 5 }}>Arena: {gameData.arena}</Text>
+          <Text style={{ margin: 5 }}>Arena: {scoreInfo.arena.name}</Text>
           <Text style={{ margin: 5 }}>
-            City: {gameData.city}, {gameData.country}
+            City: {scoreInfo.arena.city}, {scoreInfo.arena.country}
           </Text>
-
           <View
             style={{
               width: windowWidth * 0.8,

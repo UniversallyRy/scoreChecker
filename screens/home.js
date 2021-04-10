@@ -11,6 +11,8 @@ import { Scoreboard } from "../graphql/Queries";
 // todo: switch to GraphQL, possible team screen/standings
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+export const gameDatezz = moment().format("YYYYMMDD");
+
 // imported nodejs nba api from https://github.com/bttmly/nba
 
 //Initial object to use before the nba api's async is fulfilled
@@ -23,15 +25,16 @@ const initialState = [
 ];
 
 const Home = ({ navigation }) => {
-  const [todaysDate, setTodaysDate] = useState(moment().format("L"));
+  const [todaysDate, setTodaysDate] = useState(gameDatezz);
   const [state, setState] = useState(initialState);
   const [newObj, setNewObj] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [gameNum, setGameNum] = useState(0);
   const image = require("../assets/double-bubble-dark.png");
 
   const loader = () => {
     setState(newObj);
-    console.log(newObj);
+    // console.log(newObj);
     setLoading(false);
   };
   setTimeout(() => {
@@ -48,6 +51,7 @@ const Home = ({ navigation }) => {
         query: Scoreboard,
       })
       .then((response) => {
+        setGameNum(response.data.todayScoreboard.numGames);
         setNewObj(response.data.todayScoreboard.games);
       })
       .catch((error) => {
@@ -55,17 +59,10 @@ const Home = ({ navigation }) => {
       });
   };
 
-  // useEffect(() => {
-  //   async function initData() {
-  //     NBA.stats
-  //       .scoreboard({ gameDate: todaysDate })
-  //       .then((res) => setNewObj(res.gameHeader));
-  //   }
-  //   initData();
-  // }, [todaysDate]);
   // callback for datepicker changes
   const onSubmit = useCallback((item) => {
     let changedDate = item;
+    gameDatezz = item;
     setTodaysDate(changedDate);
     async function newDay() {
       NBA.stats
@@ -90,7 +87,12 @@ const Home = ({ navigation }) => {
             <Text> Loading. . .</Text>
           </>
         ) : (
-          <ScoreCard navigation={navigation} date={todaysDate} item={state} />
+          <ScoreCard
+            gameNum={gameNum}
+            navigation={navigation}
+            date={todaysDate}
+            item={state}
+          />
         )}
       </ImageBackground>
     </View>

@@ -9,12 +9,12 @@ import {
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Card, ListItem, Icon, Text, Image } from "react-native-elements";
-import moment from "moment";
 import logos from "../logoManager";
 import { LoadingButton } from "./Buttons";
 import DatePicker from "./DatePicker";
+import { client } from "../graphql/Client";
+import { Scoreboard } from "../graphql/Queries";
 
-const todaysDate = moment().format("L");
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 // WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
@@ -29,6 +29,9 @@ const Score = ({ u, navigation }) => {
   let [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
 
   const quarterPicker = (num) => {
+    if (u.period.isHalftime) {
+      return "Halftime";
+    }
     if (num === 1) {
       return num + "st";
     }
@@ -83,44 +86,43 @@ const Score = ({ u, navigation }) => {
           {quarterPicker(u.period.current) != "PPD"
             ? quarterPicker(u.period.current)
             : "Postponed"}
-        </ListItem.Subtitle>
-        <Card.Divider style={styles.divider} />
-        <ListItem.Subtitle style={styles.broadcast}>
+          {"   "}
           {quarterPicker(u.period.current) != "Final" &&
           quarterPicker(u.period.current) != "PPD" &&
           u.clock.charAt(1) != "0"
             ? u.clock
             : ""}
-          {
-            <TouchableOpacity>
-              <Icon
-                name="info"
-                size={20}
-                onPress={() => {
-                  // When game status is still showing a start time, or postponed, no routing and returns null
-                  if (
-                    u.period.current.length >= 1 ||
-                    u.startTimeEastern == "PPD"
-                  ) {
-                    return null;
-                  } else {
-                    // Navigate to the Extended Score route with params
-                    navigation.navigate("Extended Score", {
-                      itemId: 10,
-                      scoreInfo: u,
-                    });
-                  }
-                }}
-              />
-            </TouchableOpacity>
-          }
+        </ListItem.Subtitle>
+        <Card.Divider style={styles.divider} />
+        <ListItem.Subtitle style={styles.broadcast}>
+          <TouchableOpacity containerStyle={{ marginLeft: 10 }}>
+            <Icon
+              name="info"
+              size={20}
+              onPress={() => {
+                // When game status is still showing a start time, or postponed, no routing and returns null
+                if (
+                  u.period.current.length >= 1 ||
+                  u.startTimeEastern == "PPD"
+                ) {
+                  return null;
+                } else {
+                  // Navigate to the Extended Score route with params
+                  navigation.navigate("Extended Score", {
+                    itemId: 10,
+                    scoreInfo: u,
+                  });
+                }
+              }}
+            />
+          </TouchableOpacity>
         </ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>
   );
 };
 
-const ScoreCard = ({ item, date, navigation }) => {
+const ScoreCard = ({ item, date, navigation, gameNum }) => {
   // loading boolean for when to show loading component
   const [loading, setLoading] = useState(true);
 
@@ -143,6 +145,7 @@ const ScoreCard = ({ item, date, navigation }) => {
 
   return (
     <View style={styles.scoreContainer}>
+      <Text style={styles.gameNumber}>Number of Games: {gameNum}</Text>
       <Card.Divider style={styles.divider} />
       {!loading ? (
         <SafeAreaView style={styles.container}>
@@ -178,6 +181,14 @@ const styles = StyleSheet.create({
   container: {
     margin: 10,
     marginBottom: 40,
+  },
+  gameNumber: {
+    alignSelf: "center",
+    fontWeight: "bold",
+    fontFamily: "Roboto",
+    color: "#696969",
+    fontSize: 16,
+    margin: 5,
   },
   divider: {
     backgroundColor: "#696969",
