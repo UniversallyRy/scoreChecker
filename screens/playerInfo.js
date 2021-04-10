@@ -12,8 +12,6 @@ import { Formik } from "formik";
 import PlayerProfile from "../components/PlayerProfile";
 import PlayerSearch from "../components/PlayerSearch";
 import { DEFAULT_PLAYER_INFO } from "../constants";
-import { client } from "../graphql/Client";
-import { Player } from "../graphql/Queries";
 // todos: other components seperate into fully functional components/stateless, more react element styling/usage
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -26,14 +24,25 @@ const initialState = {
 const PlayerStats = ({ navigation }) => {
   // state for player arrays/object
   const [playerObj, setPlayerObj] = useState(initialState);
+  // stores api promise
+  const loadPlayerInfo = (playerName) => {
+    nba.stats
+      .playerInfo({ PlayerID: nba.findPlayer(playerName).playerId })
+      .then((info) => {
+        const playerInfo = Object.assign(
+          info.commonPlayerInfo[0],
+          info.playerHeadlineStats[0]
+        );
+        setPlayerObj({ playerInfo });
+      });
+  };
   // cycles through reset twice to trigger promise rerender
-
   const handleReset = (n) => {
     let count = n;
     if (count > 1) {
       return null;
     } else {
-      requestHeadlines();
+      loadPlayerInfo(initialState.playerInfo.fullName);
     }
     count++;
     handleReset(n + 1);
@@ -48,6 +57,7 @@ const PlayerStats = ({ navigation }) => {
       return false;
     } else {
       if (newPlayer != undefined) {
+        loadPlayerInfo(trimmedInput);
       } else {
         alert("Player not found, Try again.");
       }
@@ -55,27 +65,20 @@ const PlayerStats = ({ navigation }) => {
   };
   // initial load of default Harden profile
   useEffect(() => {
-    requestHeadlines();
+    const initData = loadPlayerInfo(initialState.playerInfo.fullName);
+    return () => {
+      initData;
+    };
   }, []);
-
-  const requestHeadlines = () => {
-    client
-      .query({
-        query: Player,
-      })
-      .then((response) => {
-        setPlayerObj(response.data.Player.league.standard.stats.latest);
-      })
-      .catch((error) => {
-        console.log("ERROR ==>", error);
-      });
-  };
 
   return (
     //ScrollView added for ability to view all content while keyboard is open
     <ScrollView contentContainerStyle={styles.container}>
       <ImageBackground source={image} style={styles.bgImage}>
-        <PlayerProfile navigation={navigation} playerInfo={playerObj} />
+        <PlayerProfile
+          navigation={navigation}
+          playerInfo={playerObj.playerInfo}
+        />
         <PlayerSearch
           handleInput={handleInput}
           handleReset={() => handleReset(0)}

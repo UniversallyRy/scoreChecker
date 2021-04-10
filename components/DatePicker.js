@@ -17,9 +17,11 @@ const DatePicker = ({ onSubmit }) => {
   const onChange = (event, selectedDate) => {
     if (event.type == "set") {
       let currentDate = selectedDate.toISOString().split("T")[0] || date;
-      let formattedDate = currentDate.split("-").join("");
+      let formattedItem = currentDate.split("-");
+      let formattedDate =
+        formattedItem[1] + "/" + formattedItem[2] + "/" + formattedItem[0];
       setShow(Platform.OS === "ios");
-      // onSubmit(formattedDate);
+      onSubmit(formattedDate);
     } else {
       // handles cancelled date
       setShow(false);

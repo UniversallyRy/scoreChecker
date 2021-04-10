@@ -12,7 +12,6 @@
 - [NodeJS](https://nodejs.org/en/download/)
 - [Node.js client for nba.com API endpoints](https://github.com/bttmly/nba)
 - [expo](https://expo.io/)
-- [GraphQL](https://graphql.org/) with [Express](https://expressjs.com/)
 - [react-native-elements](https://reactnativeelements.com/)
 - [formik](https://formik.org/docs/guides/react-native)
 - [momentjs](https://momentjs.com/)

@@ -32,7 +32,7 @@ const Profile = ({ playerInfo, navigation }) => {
             <Image
               containerStyle={styles.playerPic}
               source={{
-                uri: `${PROFILE_PIC_URL_PREFIX}/${201935}.png`,
+                uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`,
               }}
               alt="Profile"
             />
@@ -40,44 +40,38 @@ const Profile = ({ playerInfo, navigation }) => {
           <Text style={styles.playerName}>{`${playerInfo.playerName}`}</Text>
           <Image
             containerStyle={styles.teamLogo}
-            source={logos.BKN}
+            source={logos[playerInfo.teamAbbreviation]}
             alt="Team"
           />
           <View style={styles.playerInfo}>
+            <Text style={styles.playerInfoLeft}>Team:</Text>
+            <Text style={styles.playerInfoRight}>
+              {`${playerInfo.teamCity} ${playerInfo.teamName}`}
+            </Text>
+          </View>
+          <View style={styles.playerInfo}>
+            <Text style={styles.playerInfoLeft}>Height:</Text>
+            <Text style={styles.playerInfoRight}>{`${playerInfo.height}`}</Text>
+          </View>
+          <View style={styles.playerInfo}>
+            <Text style={styles.playerInfoLeft}>Weight:</Text>
+            <Text style={styles.playerInfoRight}>{`${playerInfo.weight}`}</Text>
+          </View>
+          <View style={styles.playerInfo}>
             <Text style={styles.playerInfoLeft}>PPG:</Text>
-            <Text style={styles.playerInfoRight}>{`${playerInfo.ppg}`}</Text>
+            <Text style={styles.playerInfoRight}>{`${playerInfo.pts}`}</Text>
           </View>
           <View style={styles.playerInfo}>
             <Text style={styles.playerInfoLeft}>APG:</Text>
-            <Text style={styles.playerInfoRight}>{`${playerInfo.apg}`}</Text>
+            <Text style={styles.playerInfoRight}>{`${playerInfo.ast}`}</Text>
           </View>
           <View style={styles.playerInfo}>
             <Text style={styles.playerInfoLeft}>RPG:</Text>
-            <Text style={styles.playerInfoRight}>{`${playerInfo.rpg}`}</Text>
-          </View>
-          <View style={styles.playerInfo}>
-            <Text style={styles.playerInfoLeft}>MPG:</Text>
-            <Text style={styles.playerInfoRight}>{playerInfo.mpg}</Text>
-          </View>
-          <View style={styles.playerInfo}>
-            <Text style={styles.playerInfoLeft}>SPG:</Text>
-            <Text style={styles.playerInfoRight}>{playerInfo.spg}</Text>
-          </View>
-          <View style={styles.playerInfo}>
-            <Text style={styles.playerInfoLeft}>TOPG:</Text>
-            <Text style={styles.playerInfoRight}>{playerInfo.topg}</Text>
-          </View>
-          <View style={styles.playerInfo}>
-            <Text style={styles.playerInfoLeft}>FG%:</Text>
-            <Text style={styles.playerInfoRight}>{`${playerInfo.fgp}`}</Text>
-          </View>
-          <View style={styles.playerInfo}>
-            <Text style={styles.playerInfoLeft}>FT%:</Text>
-            <Text style={styles.playerInfoRight}>{`${playerInfo.ftp}`}</Text>
+            <Text style={styles.playerInfoRight}>{`${playerInfo.reb}`}</Text>
           </View>
           <RaisedButton
             containerStyle={styles.button}
-            title="Click Here For Totals"
+            title="CLICK FOR MORE INFO"
             onPress={() => {
               /* 1. Navigate to the Extended Profile route with params */
               navigation.navigate("Extended Profile", {

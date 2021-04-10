@@ -9,43 +9,40 @@ import {
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Card, ListItem, Icon, Text, Image } from "react-native-elements";
+import NBA from "nba";
+import moment from "moment";
 import logos from "../logoManager";
 import { LoadingButton } from "./Buttons";
 import DatePicker from "./DatePicker";
-import { client } from "../graphql/Client";
-import { Scoreboard } from "../graphql/Queries";
 
+const todaysDate = moment().format("L");
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 // WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
 
 const Score = ({ u, navigation }) => {
+  const [homeScore, setHome] = useState(0);
   const [awayScore, setAway] = useState(0);
   const splitAt = (index) => (x) => [x.slice(0, index), x.slice(index)];
-  let comp = u.gameUrlCode.slice(-6);
-  let date = u.gameUrlCode.slice(0, 8);
+  let comp = u.gamecode.slice(-6);
+  let date = u.gamecode.slice(0, 8);
   let splitTeam = splitAt(3)(comp);
   let [awayTeam, homeTeam] = [splitTeam[0], splitTeam[1]];
   let [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
 
-  const quarterPicker = (num) => {
-    if (u.period.isHalftime) {
-      return "Halftime";
+  useEffect(() => {
+    async function initData() {
+      NBA.data
+        .boxScore(date, u.gameId)
+        .then((res) => res.sports_content)
+        .then((res) => res.game)
+        .then((res) => {
+          setAway(res.visitor.score);
+          setHome(res.home.score);
+        });
     }
-    if (num === 1) {
-      return num + "st";
-    }
-    if (num === 2) {
-      return num + "nd";
-    }
-    if (num === 3) {
-      return num + "rd";
-    }
-    if (num === 4) {
-      return num + "th";
-    }
-    return u.startTimeEastern;
-  };
+    initData();
+  }, []);
 
   return (
     <ListItem topDivider={true} raised containerStyle={styles.scoreCard}>
@@ -54,7 +51,7 @@ const Score = ({ u, navigation }) => {
         <View style={styles.teamVersus}>
           <View style={{ flexDirection: "column", alignItems: "center" }}>
             <Text style={styles.teams}>
-              {awayTeam} - {u.vTeam.score}
+              {awayTeam} - {awayScore}
             </Text>
             <Image
               accessibilityLabel={awayTeam}
@@ -70,7 +67,7 @@ const Score = ({ u, navigation }) => {
 
           <View style={{ flexDirection: "column", alignItems: "center" }}>
             <Text style={styles.teams}>
-              {homeTeam} - {u.hTeam.score}{" "}
+              {homeTeam} - {homeScore}{" "}
             </Text>
             <Image
               accessibilityLabel={homeTeam}
@@ -83,46 +80,45 @@ const Score = ({ u, navigation }) => {
 
         {/* Game Status(Shows postponed, game times in EST and info is selectable only if game is already played ) */}
         <ListItem.Subtitle style={styles.quarter}>
-          {quarterPicker(u.period.current) != "PPD"
-            ? quarterPicker(u.period.current)
-            : "Postponed"}
-          {"   "}
-          {quarterPicker(u.period.current) != "Final" &&
-          quarterPicker(u.period.current) != "PPD" &&
-          u.clock.charAt(1) != "0"
-            ? u.clock
-            : ""}
+          {u.gameStatusText != "PPD" ? u.gameStatusText : "Postponed"}
         </ListItem.Subtitle>
         <Card.Divider style={styles.divider} />
         <ListItem.Subtitle style={styles.broadcast}>
-          <TouchableOpacity containerStyle={{ marginLeft: 10 }}>
-            <Icon
-              name="info"
-              size={20}
-              onPress={() => {
-                // When game status is still showing a start time, or postponed, no routing and returns null
-                if (
-                  u.period.current.length >= 1 ||
-                  u.startTimeEastern == "PPD"
-                ) {
-                  return null;
-                } else {
-                  // Navigate to the Extended Score route with params
-                  navigation.navigate("Extended Score", {
-                    itemId: 10,
-                    scoreInfo: u,
-                  });
-                }
-              }}
-            />
-          </TouchableOpacity>
+          {u.gameStatusText != "Final" &&
+          u.gameStatusText != "PPD" &&
+          u.livePeriodTimeBcast.charAt(1) != "0"
+            ? u.livePeriodTimeBcast
+            : ""}
+          {
+            <TouchableOpacity>
+              <Icon
+                name="info"
+                size={20}
+                onPress={() => {
+                  // When game status is still showing a start time, or postponed, no routing and returns null
+                  if (
+                    u.gameStatusText.length > 7 ||
+                    u.gameStatusText == "PPD"
+                  ) {
+                    return null;
+                  } else {
+                    // Navigate to the Extended Score route with params
+                    navigation.navigate("Extended Score", {
+                      itemId: 10,
+                      scoreInfo: u,
+                    });
+                  }
+                }}
+              />
+            </TouchableOpacity>
+          }
         </ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>
   );
 };
 
-const ScoreCard = ({ item, date, navigation, gameNum }) => {
+const ScoreCard = ({ item, date, navigation }) => {
   // loading boolean for when to show loading component
   const [loading, setLoading] = useState(true);
 
@@ -145,7 +141,6 @@ const ScoreCard = ({ item, date, navigation, gameNum }) => {
 
   return (
     <View style={styles.scoreContainer}>
-      <Text style={styles.gameNumber}>Number of Games: {gameNum}</Text>
       <Card.Divider style={styles.divider} />
       {!loading ? (
         <SafeAreaView style={styles.container}>
@@ -181,14 +176,6 @@ const styles = StyleSheet.create({
   container: {
     margin: 10,
     marginBottom: 40,
-  },
-  gameNumber: {
-    alignSelf: "center",
-    fontWeight: "bold",
-    fontFamily: "Roboto",
-    color: "#696969",
-    fontSize: 16,
-    margin: 5,
   },
   divider: {
     backgroundColor: "#696969",
