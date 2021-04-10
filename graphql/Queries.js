@@ -9,7 +9,8 @@ console.log(newPath);
 
 export const Scoreboard = gql`
   query {
-    todayScoreboard @rest(type: "Scores", path: newPath) {
+    todayScoreboard
+      @rest(type: "Scores", path: "/prod/v1/20210409/scoreboard.json") {
       numGames: Int
       games @type(name: "ID") {
         gameId

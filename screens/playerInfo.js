@@ -33,7 +33,7 @@ const PlayerStats = ({ navigation }) => {
     if (count > 1) {
       return null;
     } else {
-      loadPlayerInfo(initialState.playerInfo.fullName);
+      requestHeadlines();
     }
     count++;
     handleReset(n + 1);
@@ -48,7 +48,6 @@ const PlayerStats = ({ navigation }) => {
       return false;
     } else {
       if (newPlayer != undefined) {
-        loadPlayerInfo(trimmedInput);
       } else {
         alert("Player not found, Try again.");
       }
