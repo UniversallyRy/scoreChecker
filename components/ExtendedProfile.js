@@ -12,22 +12,25 @@ const ExtendedProfile = ({ route, navigation }) => {
   const { itemId, playerInfo } = route.params;
   // Object container for player information
   const profileState = {
-    Name: playerInfo.displayFirstLast,
-    Team: playerInfo.teamCity + " " + playerInfo.teamName,
-    "Jersey #": playerInfo.jersey,
-    Position: playerInfo.position,
-    Experience: playerInfo.seasonExp + " Years",
-    Weight: playerInfo.weight,
-    Height: playerInfo.height,
-    Country: playerInfo.country,
-    College: playerInfo.school,
-    "Draft Year": playerInfo.draftYear,
-    "Draft Round": playerInfo.draftRound,
-    "Draft Number": playerInfo.draftNumber,
-    Season: playerInfo.timeFrame,
-    Points: playerInfo.pts,
-    Rebounds: playerInfo.reb,
-    Assists: playerInfo.ast,
+    Points: playerInfo.points,
+    Assists: playerInfo.assists,
+    Blocks: playerInfo.blocks,
+    Steals: playerInfo.steals,
+    Turnovers: playerInfo.turnovers,
+    "Offensive Rebounds": playerInfo.offReb,
+    "Defensive Rebounds": playerInfo.defReb,
+    "Total Rebounds": playerInfo.totReb,
+    "Field Goals Attempted": playerInfo.fga,
+    "Field Goals Made": playerInfo.fgm,
+    "Three Pointers Attempted": playerInfo.tpa,
+    "Three Pointers Made": playerInfo.tpm,
+    "Free Throws Attempted": playerInfo.fta,
+    "Free Throws Made": playerInfo.ftm,
+    "Games Played": playerInfo.gamesPlayed,
+    "Games Started": playerInfo.gamesStarted,
+    "Total Minutes": playerInfo.min,
+    "Double Doubles": playerInfo.dd2,
+    "Triple Doubles": playerInfo.td3,
   };
 
   // checks for college skippers
@@ -46,7 +49,7 @@ const ExtendedProfile = ({ route, navigation }) => {
         <Image
           containerStyle={styles.playerPic}
           source={{
-            uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`,
+            uri: `${PROFILE_PIC_URL_PREFIX}/${201935}.png`,
           }}
           alt="Profile"
         />
@@ -76,13 +79,13 @@ const styles = StyleSheet.create({
   },
   playerInfoLeft: {
     marginRight: 2,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
     fontFamily: "Roboto",
   },
   playerInfoRight: {
     marginLeft: 2,
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: "Roboto",
   },
   bgImage: {
