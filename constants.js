@@ -7,4 +7,3 @@ export const DEFAULT_PLAYER_INFO = {
   fullName: "James Harden",
   teamAbbreviation: "HOU",
 };
-export const DEFAULT_SCORES_INFO = {};
