@@ -8,7 +8,7 @@ import logos from "../logoManager";
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const Profile = ({ playerInfo, navigation }) => {
-  // todo: playerInfo loop for DRY
+  // todo: dry loop needed for text component
   let [loading, setLoading] = useState(true);
 
   useEffect(() => {
