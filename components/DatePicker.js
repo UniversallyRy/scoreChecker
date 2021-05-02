@@ -3,7 +3,7 @@ import { View, Platform, StyleSheet } from "react-native";
 import { Card, Text, Button } from "react-native-elements";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { RaisedButton } from "./Buttons";
-// todos: better styling
+// todos: better styling, more components
 // stats needed: points, rebs, asts, blocks, steals
 
 const DatePicker = ({ onSubmit }) => {
