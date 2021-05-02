@@ -31,8 +31,6 @@ const Score = ({ u, navigation }) => {
   let [awayTeam, homeTeam] = [splitTeam[0], splitTeam[1]];
   let [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
 
-  // res.Leaders
-
   useEffect(() => {
     async function initData() {
       NBA.data
@@ -122,7 +120,6 @@ const Score = ({ u, navigation }) => {
 };
 
 const ScoreCard = ({ item, date, navigation }) => {
-  // loading boolean for when to show loading component
   const [loading, setLoading] = useState(true);
 
   const renderItem = ({ item }) => (

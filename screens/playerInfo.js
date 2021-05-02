@@ -12,7 +12,7 @@ import { Formik } from "formik";
 import PlayerProfile from "../components/PlayerProfile";
 import PlayerSearch from "../components/PlayerSearch";
 import { DEFAULT_PLAYER_INFO } from "../constants";
-// todos: other components seperate into fully functional components/stateless, more react element styling/usage
+// todos: other components seperate into fully functional components/stateless, more react-element styling/usage
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const image = require("../assets/double-bubble-dark.png");
@@ -22,9 +22,8 @@ const initialState = {
 };
 
 const PlayerStats = ({ navigation }) => {
-  // state for player arrays/object
   const [playerObj, setPlayerObj] = useState(initialState);
-  // stores api promise
+
   const loadPlayerInfo = (playerName) => {
     nba.stats
       .playerInfo({ PlayerID: nba.findPlayer(playerName).playerId })

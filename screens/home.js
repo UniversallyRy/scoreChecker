@@ -6,10 +6,9 @@ import NBA from "nba";
 import ScoreCard from "../components/ScoreCard";
 import { LoadingButton } from "../components/Buttons";
 import DatePicker from "../components/DatePicker";
-// todo: switch to GraphQL, possible team screen/standings
+// todo: possible team screen/standings
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
-// imported nodejs nba api from https://github.com/bttmly/nba
 
 //Initial object to use before the nba api's async is fulfilled
 const initialState = [
@@ -64,7 +63,7 @@ const Home = ({ navigation }) => {
           <Text style={styles.text}>Quickly stay updated</Text>
           <DatePicker onSubmit={onSubmit} />
         </Card>
-        {/* scorecard list component showcasing Today's scores*/}
+        {/* scorecard list component showcasing today's scores*/}
         {loading ? (
           <>
             <Text> Loading. . .</Text>
