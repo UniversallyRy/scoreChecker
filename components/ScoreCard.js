@@ -121,6 +121,8 @@ const Score = ({ u, navigation }) => {
 
 const ScoreCard = ({ item, date, navigation }) => {
   const [loading, setLoading] = useState(true);
+  const numOfGames = item.length;
+  console.log(numOfGames);
 
   const renderItem = ({ item }) => (
     <Score key={item.gameId} u={item} navigation={navigation} />
@@ -142,6 +144,7 @@ const ScoreCard = ({ item, date, navigation }) => {
   return (
     <View style={styles.scoreContainer}>
       <Card.Divider style={styles.divider} />
+      <Text style={styles.gameCount}>{numOfGames} Games Today</Text>
       {!loading ? (
         <SafeAreaView style={styles.container}>
           <FlatList
@@ -182,6 +185,11 @@ const styles = StyleSheet.create({
     width: windowWidth * 0.8,
     alignSelf: "center",
     height: 1,
+  },
+  gameCount: {
+    fontSize: 16,
+    alignSelf: "center",
+    color: "#696969",
   },
   scoreCard: {
     flex: 1,
