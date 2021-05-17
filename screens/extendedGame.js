@@ -105,7 +105,7 @@ const extendedGame = ({ navigation, route }) => {
     return (
       <View>
         <View style={styles.scoreLeadersContainer}>
-          <Card containerStyle={styles.scoreLeaders}>
+          <View style={styles.scoreLeaders}>
             <Card.Title>Away</Card.Title>
             <Image
               containerStyle={styles.playerPic}
@@ -116,8 +116,8 @@ const extendedGame = ({ navigation, route }) => {
             <Text style={{ alignSelf: "center" }}>
               {awayLeaders.StatValue} {statState}
             </Text>
-          </Card>
-          <Card containerStyle={styles.scoreLeaders}>
+          </View>
+          <View style={styles.scoreLeaders}>
             <Card.Title>Home</Card.Title>
             <Image
               containerStyle={styles.playerPic}
@@ -128,7 +128,7 @@ const extendedGame = ({ navigation, route }) => {
             <Text style={{ alignSelf: "center" }}>
               {homeLeaders.StatValue} {statState}
             </Text>
-          </Card>
+          </View>
         </View>
         <Card containerStyle={styles.statsHeader}>
           <Card.Title>{statState} Leaders</Card.Title>
@@ -235,7 +235,7 @@ const extendedGame = ({ navigation, route }) => {
           <View
             style={{
               width: windowWidth * 0.8,
-              minHeight: 150,
+              minHeight: 100,
               margin: 5,
               ...(Platform.OS !== "android" && {
                 zIndex: 10,
@@ -364,8 +364,7 @@ const styles = StyleSheet.create({
   scoreLeaders: {
     margin: 3,
     flex: 1,
-    backgroundColor: "darkgrey",
-    borderColor: "darkgrey",
+    backgroundColor: "transparent",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -385,8 +384,10 @@ const styles = StyleSheet.create({
   },
   statsHeader: {
     alignSelf: "center",
+    alignItems: "center",
+    padding: 1,
     width: windowWidth * 0.45,
-    height: 20,
+    height: 25,
     backgroundColor: "darkgrey",
     borderColor: "darkgrey",
   },
