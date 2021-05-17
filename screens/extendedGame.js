@@ -112,7 +112,7 @@ const extendedGame = ({ navigation, route }) => {
               source={{ uri: `${PROFILE_PIC_URL_PREFIX}/${awayPic}.png` }}
               alt="Player"
             />
-            <Text>{scoringAway}</Text>
+            <Text style={{ margin: 5, fontWeight: "bold" }}>{scoringAway}</Text>
             <Text style={{ alignSelf: "center" }}>
               {awayLeaders.StatValue} {statState}
             </Text>
@@ -124,7 +124,7 @@ const extendedGame = ({ navigation, route }) => {
               source={{ uri: `${PROFILE_PIC_URL_PREFIX}/${homePic}.png` }}
               alt="Player"
             />
-            <Text>{scoringHome}</Text>
+            <Text style={{ margin: 5, fontWeight: "bold" }}>{scoringHome}</Text>
             <Text style={{ alignSelf: "center" }}>
               {homeLeaders.StatValue} {statState}
             </Text>
