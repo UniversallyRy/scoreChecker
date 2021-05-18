@@ -13,7 +13,6 @@ import NBA from "nba";
 import moment from "moment";
 import logos from "../logoManager";
 import { LoadingButton } from "./Buttons";
-import DatePicker from "./DatePicker";
 
 // WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
@@ -21,7 +20,6 @@ const todaysDate = moment().format("L");
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const Score = ({ u, navigation }) => {
-  console.log(u);
   const [homeScore, setHome] = useState(0);
   const [extendedState, setExtended] = useState(0);
   const [awayScore, setAway] = useState(0);
