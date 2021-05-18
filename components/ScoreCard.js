@@ -21,6 +21,7 @@ const todaysDate = moment().format("L");
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const Score = ({ u, navigation }) => {
+  console.log(u);
   const [homeScore, setHome] = useState(0);
   const [extendedState, setExtended] = useState(0);
   const [awayScore, setAway] = useState(0);
@@ -122,7 +123,6 @@ const Score = ({ u, navigation }) => {
 const ScoreCard = ({ item, date, navigation }) => {
   const [loading, setLoading] = useState(true);
   const numOfGames = item.length;
-  console.log(numOfGames);
 
   const renderItem = ({ item }) => (
     <Score key={item.gameId} u={item} navigation={navigation} />
@@ -150,7 +150,7 @@ const ScoreCard = ({ item, date, navigation }) => {
           <FlatList
             data={item}
             renderItem={renderItem}
-            keyExtractor={(item) => item.gameId}
+            keyExtractor={(item) => item.gameId.toString()}
           />
         </SafeAreaView>
       ) : (
