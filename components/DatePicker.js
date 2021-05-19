@@ -3,9 +3,7 @@ import { View, Platform, StyleSheet } from "react-native";
 import { Card, Text, Button } from "react-native-elements";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { RaisedButton } from "./Buttons";
-// todos: better styling, more components
-// stats needed: points, rebs, asts, blocks, steals
-// todos: better styling
+// todos: fix laggy picker, sometimes jumps a day
 
 const DatePicker = ({ onSubmit }) => {
   let [date, setDate] = useState(new Date());
