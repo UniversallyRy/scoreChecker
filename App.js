@@ -22,11 +22,21 @@ const Tab = createBottomTabNavigator();
 const MyTabs = () => (
   <Tab.Navigator
     initialRouteName="Player Info"
-    tabBarOptions={{
-      activeTintColor: "white",
-      inactiveTintColor: "black",
-      tabStyle: { backgroundColor: "#696969" },
-      labelStyle: { fontSize: 12 },
+    screenOptions={{
+      tabBarActiveTintColor: "white",
+      tabBarInactiveTintColor: "black",
+      tabBarLabelStyle: {
+        fontSize: 12,
+      },
+      tabBarItemStyle: {
+        backgroundColor: "#696969",
+      },
+      tabBarStyle: [
+        {
+          display: "flex",
+        },
+        null,
+      ],
     }}
   >
     <Tab.Screen
