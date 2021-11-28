@@ -54,10 +54,10 @@ const Profile = ({ playerInfo, navigation }) => {
           />
           {Object.entries(infoList).map(([item, value]) => (
             <HStack marginBottom={2} textAlignVertical="auto">
-              <Text textAlignVertical fontSize="xl" bold>
+              <Text lineHeight="lg" fontSize="xl" bold>
                 {item}
               </Text>
-              <Text textAlignVertical="auto" fontSize="lg">
+              <Text marginLeft={1} lineHeight="xl" fontSize="lg">
                 {value}
               </Text>
             </HStack>
