@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Dimensions, View } from "react-native";
-import { Input, Card, Image, Text } from "react-native-elements";
+import { Flex, Image, Button, Text, HStack } from "native-base";
 import { PROFILE_PIC_URL_PREFIX } from "../constants";
 import { RaisedButton, LoadingButton } from "./Buttons";
 import logos from "../logoManager";
@@ -10,6 +10,15 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const Profile = ({ playerInfo, navigation }) => {
   // todo: dry loop needed for text component
   let [loading, setLoading] = useState(true);
+
+  const infoList = {
+    "Team:": `${playerInfo.teamCity} ${playerInfo.teamName}`,
+    "Height:": `${playerInfo.height}`,
+    "Weight:": `${playerInfo.weight}`,
+    "PPG:": `${playerInfo.pts}`,
+    "APG:": `${playerInfo.ast}`,
+    "RPG:": `${playerInfo.reb}`,
+  };
 
   useEffect(() => {
     const checkInfo = () => {
@@ -25,12 +34,12 @@ const Profile = ({ playerInfo, navigation }) => {
   }, [playerInfo]);
 
   return (
-    <Card containerStyle={styles.playerProfile}>
+    <Flex style={styles.playerProfile}>
       {!loading ? (
         <>
           <View style={styles.picBorder}>
             <Image
-              containerStyle={styles.playerPic}
+              style={styles.playerPic}
               source={{
                 uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`,
               }}
@@ -39,39 +48,22 @@ const Profile = ({ playerInfo, navigation }) => {
           </View>
           <Text style={styles.playerName}>{`${playerInfo.playerName}`}</Text>
           <Image
-            containerStyle={styles.teamLogo}
+            style={styles.teamLogo}
             source={logos[playerInfo.teamAbbreviation]}
             alt="Team"
           />
-          <View style={styles.playerInfo}>
-            <Text style={styles.playerInfoLeft}>Team:</Text>
-            <Text style={styles.playerInfoRight}>
-              {`${playerInfo.teamCity} ${playerInfo.teamName}`}
-            </Text>
-          </View>
-          <View style={styles.playerInfo}>
-            <Text style={styles.playerInfoLeft}>Height:</Text>
-            <Text style={styles.playerInfoRight}>{`${playerInfo.height}`}</Text>
-          </View>
-          <View style={styles.playerInfo}>
-            <Text style={styles.playerInfoLeft}>Weight:</Text>
-            <Text style={styles.playerInfoRight}>{`${playerInfo.weight}`}</Text>
-          </View>
-          <View style={styles.playerInfo}>
-            <Text style={styles.playerInfoLeft}>PPG:</Text>
-            <Text style={styles.playerInfoRight}>{`${playerInfo.pts}`}</Text>
-          </View>
-          <View style={styles.playerInfo}>
-            <Text style={styles.playerInfoLeft}>APG:</Text>
-            <Text style={styles.playerInfoRight}>{`${playerInfo.ast}`}</Text>
-          </View>
-          <View style={styles.playerInfo}>
-            <Text style={styles.playerInfoLeft}>RPG:</Text>
-            <Text style={styles.playerInfoRight}>{`${playerInfo.reb}`}</Text>
-          </View>
+          {Object.entries(infoList).map(([item, value]) => (
+            <HStack marginBottom={2} textAlignVertical="auto">
+              <Text textAlignVertical fontSize="xl" bold>
+                {item}
+              </Text>
+              <Text textAlignVertical="auto" fontSize="lg">
+                {value}
+              </Text>
+            </HStack>
+          ))}
           <RaisedButton
             containerStyle={styles.button}
-            title="CLICK FOR MORE INFO"
             onPress={() => {
               /* 1. Navigate to the Extended Profile route with params */
               navigation.navigate("Extended Profile", {
@@ -79,7 +71,9 @@ const Profile = ({ playerInfo, navigation }) => {
                 playerInfo: playerInfo,
               });
             }}
-          />
+          >
+            CLICK FOR MORE INFO
+          </RaisedButton>
         </>
       ) : (
         <View style={{ alignContent: "center" }}>
@@ -87,7 +81,7 @@ const Profile = ({ playerInfo, navigation }) => {
           <LoadingButton />
         </View>
       )}
-    </Card>
+    </Flex>
   );
 };
 

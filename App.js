@@ -7,6 +7,7 @@ import {
 } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "react-native-elements";
+import { NativeBaseProvider } from "native-base";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
@@ -94,10 +95,12 @@ const AuthStack = () => (
 );
 
 const App = () => (
-  <NavigationContainer style={styles.container}>
-    <StatusBar style="auto" />
-    <AuthStack />
-  </NavigationContainer>
+  <NativeBaseProvider>
+    <NavigationContainer style={styles.container}>
+      <StatusBar style="auto" />
+      <AuthStack />
+    </NavigationContainer>
+  </NativeBaseProvider>
 );
 
 const styles = StyleSheet.create({

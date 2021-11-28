@@ -1,26 +1,19 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Button } from "react-native-elements";
+import { Button } from "native-base";
 
 // Custom Button components
 export const RaisedButton = (props) => {
-  return (
-    <Button
-      buttonStyle={{ backgroundColor: "#696969" }}
-      containerStyle={styles.button}
-      raised
-      {...props}
-    />
-  );
+  return <Button bg="amber.600:alpha.70" style={styles.button} {...props} />;
 };
 
 export const LoadingButton = (props) => {
   return (
     <Button
-      buttonStyle={{ backgroundColor: "#696969" }}
-      containerStyle={styles.button}
-      title="Loading button"
-      loading
+      bg="amber.400:alpha.70"
+      style={styles.button}
+      isLoadingText="Searching"
+      isLoading
       {...props}
     />
   );
