@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import { StyleSheet, Keyboard, View } from "react-native";
-import { Input } from "react-native-elements";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { StyleSheet, Keyboard, View, Dimensions } from "react-native";
+import { Input, InputGroup, InputLeftAddon, Flex, Stack } from "native-base";
 import { Formik } from "formik";
+import Icon from "react-native-vector-icons/FontAwesome";
 import { RaisedButton } from "./Buttons";
+
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const PlayerSearch = ({ handleInput, handleReset }) => {
   const [keyboardOffset, setKeyboardOffset] = useState(0);
@@ -30,7 +32,7 @@ const PlayerSearch = ({ handleInput, handleReset }) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <Flex align="center">
       <Formik
         initialValues={{ player: "" }}
         onSubmit={(values, actions) => {
@@ -40,45 +42,53 @@ const PlayerSearch = ({ handleInput, handleReset }) => {
         }}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
-          <>
-            <Input
-              containerStyle={styles.textForm}
-              onChangeText={handleChange("player")}
-              onBlur={handleBlur("player")}
-              value={values.player}
-              enablesReturnKeyAutomatically={true}
-              color="white"
-              importantForAutofill="auto"
-              placeholder="Search for Player"
-              rightIcon={<Icon name="user" size={24} color="#696969" />}
-            />
+          <Stack>
+            <InputGroup
+              w={{
+                base: "90%",
+                md: "100%",
+              }}
+              style={styles.textForm}
+            >
+              <InputLeftAddon>
+                <Icon name="user" size={24} color="#696969" />
+              </InputLeftAddon>
+              <Input
+                w={{
+                  base: "100%",
+                }}
+                key="inputPlayer"
+                onChangeText={handleChange("player")}
+                onBlur={handleBlur("player")}
+                value={values.player}
+                enablesReturnKeyAutomatically={true}
+                color="white"
+                importantForAutofill="auto"
+                placeholder="Search for Player"
+              />
+            </InputGroup>
             <View style={styles.allButtons}>
-              <RaisedButton onPress={handleSubmit} title="Submit" />
-              <RaisedButton onPress={handleReset} title="Reset" />
+              <RaisedButton key="submitButton" onPress={handleSubmit}>
+                Submit
+              </RaisedButton>
+              <RaisedButton onPress={handleReset}>Reset</RaisedButton>
             </View>
-          </>
+          </Stack>
         )}
       </Formik>
-    </View>
+    </Flex>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    alignSelf: "auto",
-  },
-  allButtons: {
-    alignContent: "center",
-  },
   textForm: {
     borderColor: "transparent",
     borderWidth: 1,
     borderColor: "#696969",
     textAlign: "auto",
     alignSelf: "center",
-    fontFamily: "Roboto",
-    margin: 10,
-    height: 50,
+    margin: 5,
+    height: windowHeight * 0.057,
   },
 });
 

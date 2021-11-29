@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Dimensions, View } from "react-native";
-import { Flex, Image, Button, Text, HStack } from "native-base";
+import { Flex, Image, Button, Text, HStack, Box } from "native-base";
 import { PROFILE_PIC_URL_PREFIX } from "../constants";
 import { RaisedButton, LoadingButton } from "./Buttons";
 import logos from "../logoManager";
@@ -8,7 +8,6 @@ import logos from "../logoManager";
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const Profile = ({ playerInfo, navigation }) => {
-  // todo: dry loop needed for text component
   let [loading, setLoading] = useState(true);
 
   const infoList = {
@@ -34,26 +33,26 @@ const Profile = ({ playerInfo, navigation }) => {
   }, [playerInfo]);
 
   return (
-    <Flex style={styles.playerProfile}>
+    <Box style={styles.playerProfile}>
       {!loading ? (
-        <>
-          <View style={styles.picBorder}>
-            <Image
-              style={styles.playerPic}
-              source={{
-                uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`,
-              }}
-              alt="Profile"
-            />
-          </View>
+        <Flex>
+          <Image
+            key={playerInfo.playerId}
+            style={styles.playerPic}
+            source={{
+              uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`,
+            }}
+            alt="Profile"
+          />
           <Text style={styles.playerName}>{`${playerInfo.playerName}`}</Text>
           <Image
+            key={playerInfo.teamAbbreviation}
             style={styles.teamLogo}
             source={logos[playerInfo.teamAbbreviation]}
             alt="Team"
           />
           {Object.entries(infoList).map(([item, value]) => (
-            <HStack marginBottom={2} textAlignVertical="auto">
+            <HStack key={item} marginBottom={2} textAlignVertical="auto">
               <Text lineHeight="lg" fontSize="xl" bold>
                 {item}
               </Text>
@@ -74,28 +73,27 @@ const Profile = ({ playerInfo, navigation }) => {
           >
             CLICK FOR MORE INFO
           </RaisedButton>
-        </>
+        </Flex>
       ) : (
         <View style={{ alignContent: "center" }}>
           <Text>Loading</Text>
           <LoadingButton />
         </View>
       )}
-    </Flex>
+    </Box>
   );
 };
 
 const styles = StyleSheet.create({
   playerProfile: {
-    flex: 1,
-    width: windowWidth * 0.99,
-    height: windowHeight * 0.65,
     alignSelf: "center",
+    width: windowWidth * 0.98,
+    height: windowHeight * 0.65,
     justifyContent: "center",
+    borderRadius: 7,
+    padding: 10,
+    marginTop: 3,
     backgroundColor: "#696969",
-    fontFamily: "Roboto",
-    borderRadius: 4,
-    padding: 3,
   },
   picBorder: {
     borderWidth: 1,
@@ -115,24 +113,18 @@ const styles = StyleSheet.create({
   },
   playerName: {
     fontSize: 20,
-    fontFamily: "Roboto",
     fontWeight: "bold",
     alignSelf: "center",
-  },
-  playerInfo: {
-    flexDirection: "row",
   },
   playerInfoLeft: {
     textAlignVertical: "auto",
     fontSize: 20,
     fontWeight: "bold",
-    fontFamily: "Roboto",
     marginBottom: 10,
   },
   playerInfoRight: {
     textAlignVertical: "auto",
     fontSize: 20,
-    fontFamily: "Roboto",
     marginLeft: 10,
     marginBottom: 10,
   },

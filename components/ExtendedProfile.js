@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Dimensions, ImageBackground, View } from "react-native";
-import { Card, Text, Image } from "react-native-elements";
+import { Flex, Image, Text, HStack, Box } from "native-base";
 import { PROFILE_PIC_URL_PREFIX } from "../constants";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Button from "./Buttons";
@@ -11,12 +11,20 @@ const image = require("../assets/double-bubble-dark.png");
 const ExtendedProfile = ({ route, navigation }) => {
   const { itemId, playerInfo } = route.params;
   // Object container for player information
+
+  const experience = (item) => {
+    if (item < 1) return "Rookie";
+    if (typeof item === "number" && item > 1) {
+      return item + " Previous Seasons";
+    } else return "1 Previous Season";
+  };
+
   const profileState = {
     Name: playerInfo.displayFirstLast,
     Team: playerInfo.teamCity + " " + playerInfo.teamName,
     "Jersey #": playerInfo.jersey,
     Position: playerInfo.position,
-    Experience: playerInfo.seasonExp + " Years",
+    Experience: experience(playerInfo.seasonExp),
     Weight: playerInfo.weight,
     Height: playerInfo.height,
     Country: playerInfo.country,
@@ -42,9 +50,9 @@ const ExtendedProfile = ({ route, navigation }) => {
 
   return (
     <ImageBackground source={image} style={styles.bgImage}>
-      <Card containerStyle={styles.container}>
+      <Flex style={styles.container}>
         <Image
-          containerStyle={styles.playerPic}
+          style={styles.playerPic}
           source={{
             uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`,
           }}
@@ -56,17 +64,19 @@ const ExtendedProfile = ({ route, navigation }) => {
             <Text style={styles.playerInfoRight}>{`${data}`}</Text>
           </View>
         ))}
-      </Card>
+      </Flex>
     </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    width: windowWidth * 0.99,
+    alignSelf: "center",
+    width: windowWidth * 0.98,
     height: windowHeight * 0.88,
     backgroundColor: "#696969",
-    alignSelf: "center",
+    margin: 10,
+    borderRadius: 3,
   },
   playerInfo: {
     margin: 7,
