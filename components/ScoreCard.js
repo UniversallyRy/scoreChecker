@@ -4,11 +4,19 @@ import {
   Dimensions,
   SafeAreaView,
   FlatList,
-  View,
   ActivityIndicator,
 } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { Card, ListItem, Icon, Text, Image } from "react-native-elements";
+import {
+  Flex,
+  Text,
+  Image,
+  Divider,
+  InfoIcon,
+  VStack,
+  Pressable,
+  Stack,
+  Container,
+} from "native-base";
 import NBA from "nba";
 import moment from "moment";
 import logos from "../logoManager";
@@ -45,11 +53,11 @@ const Score = ({ u, navigation }) => {
   }, []);
 
   return (
-    <ListItem topDivider={true} raised containerStyle={styles.scoreCard}>
-      <ListItem.Content>
+    <Flex topDivider={true} p={1} style={styles.scoreCard}>
+      <Stack>
         {/* Team Logos */}
-        <View style={styles.teamVersus}>
-          <View style={{ flexDirection: "column", alignItems: "center" }}>
+        <VStack style={styles.teamVersus}>
+          <VStack>
             <Text style={styles.teams}>
               {awayTeam} - {awayScore}
             </Text>
@@ -58,14 +66,15 @@ const Score = ({ u, navigation }) => {
               source={awayLogo}
               style={{ width: 50, height: 50, margin: 5 }}
               PlaceholderContent={<ActivityIndicator />}
+              alt="Away Logo"
             />
-          </View>
+          </VStack>
 
           <Text style={{ fontWeight: "bold", marginLeft: 25, marginRight: 25 }}>
             At
           </Text>
 
-          <View style={{ flexDirection: "column", alignItems: "center" }}>
+          <VStack>
             <Text style={styles.teams}>
               {homeTeam} - {homeScore}{" "}
             </Text>
@@ -74,26 +83,26 @@ const Score = ({ u, navigation }) => {
               source={homeLogo}
               style={{ width: 50, height: 50, margin: 5 }}
               PlaceholderContent={<ActivityIndicator />}
+              alt="Home Logo"
             />
-          </View>
-        </View>
+          </VStack>
+        </VStack>
 
         {/* Game Status(Shows postponed, game times in EST and info is selectable only if game is already played ) */}
-        <ListItem.Subtitle style={styles.quarter}>
+        <Text style={styles.quarter}>
           {u.gameStatusText != "PPD" ? u.gameStatusText : "Postponed"}
-        </ListItem.Subtitle>
-        <Card.Divider style={styles.divider} />
-        <ListItem.Subtitle style={styles.broadcast}>
+        </Text>
+        <Divider style={styles.divider} />
+        <Text style={styles.broadcast}>
           {u.gameStatusText != "Final" &&
           u.gameStatusText != "PPD" &&
           u.livePeriodTimeBcast.charAt(1) != "0"
             ? u.livePeriodTimeBcast
             : ""}
           {
-            <TouchableOpacity>
-              <Icon
-                name="info"
-                size={20}
+            <Pressable>
+              <InfoIcon
+                size="7"
                 onPress={() => {
                   // When game status is still showing a start time, or postponed, no routing and returns null
                   if (
@@ -110,11 +119,11 @@ const Score = ({ u, navigation }) => {
                   }
                 }}
               />
-            </TouchableOpacity>
+            </Pressable>
           }
-        </ListItem.Subtitle>
-      </ListItem.Content>
-    </ListItem>
+        </Text>
+      </Stack>
+    </Flex>
   );
 };
 
@@ -140,8 +149,8 @@ const ScoreCard = ({ item, date, navigation }) => {
   }, [item]);
 
   return (
-    <View style={styles.scoreContainer}>
-      <Card.Divider style={styles.divider} />
+    <Flex style={styles.scoreContainer}>
+      <Divider style={styles.divider} />
       <Text style={styles.gameCount}>{numOfGames} Games Today</Text>
       {!loading ? (
         <SafeAreaView style={styles.container}>
@@ -152,16 +161,16 @@ const ScoreCard = ({ item, date, navigation }) => {
           />
         </SafeAreaView>
       ) : (
-        <ListItem topDivider={true} containerStyle={styles.loadingContainer}>
-          <ListItem.Content>
-            <ListItem.Title style={styles.title}>Loading</ListItem.Title>
-            <Card.Divider style={styles.divider} />
-            <Card.Divider style={styles.divider} />
+        <Container topDivider={true} containerStyle={styles.loadingContainer}>
+          <Flex>
+            <Text style={styles.title}>Loading</Text>
+            <Divider style={styles.divider} />
+            <Divider style={styles.divider} />
             <LoadingButton containerStyle={styles.lButton} />
-          </ListItem.Content>
-        </ListItem>
+          </Flex>
+        </Container>
       )}
-    </View>
+    </Flex>
   );
 };
 
@@ -179,10 +188,11 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   divider: {
-    backgroundColor: "#696969",
+    backgroundColor: "black",
     width: windowWidth * 0.8,
     alignSelf: "center",
     height: 1,
+    marginBottom: 5,
   },
   gameCount: {
     fontSize: 16,
@@ -190,7 +200,6 @@ const styles = StyleSheet.create({
     color: "#696969",
   },
   scoreCard: {
-    flex: 1,
     width: windowWidth * 0.935,
     backgroundColor: "#696969",
     justifyContent: "center",

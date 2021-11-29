@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { StyleSheet, Dimensions, ImageBackground, View } from "react-native";
-import { Card, ListItem, Icon, Text, Input } from "react-native-elements";
+import { StyleSheet, Dimensions, ImageBackground } from "react-native";
+import { Flex, Text, Divider, VStack } from "native-base";
 import moment from "moment";
 import NBA from "nba";
 import ScoreCard from "../components/ScoreCard";
@@ -56,14 +56,14 @@ const Home = ({ navigation }) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <Flex style={styles.container}>
       <ImageBackground source={image} style={styles.bgImage}>
-        <Card containerStyle={styles.titleContainer}>
-          <Card.Title style={styles.title}>Scores for {todaysDate}</Card.Title>
-          <Card.Divider style={styles.divider} />
+        <VStack style={styles.titleContainer}>
+          <Text style={styles.title}>Scores for {todaysDate}</Text>
+          <Divider style={styles.divider} />
           <Text style={styles.text}>Quickly stay updated</Text>
           <DatePicker onSubmit={onSubmit} />
-        </Card>
+        </VStack>
         {/* scorecard list component showcasing today's scores*/}
         {loading ? (
           <>
@@ -73,7 +73,7 @@ const Home = ({ navigation }) => {
           <ScoreCard navigation={navigation} date={todaysDate} item={state} />
         )}
       </ImageBackground>
-    </View>
+    </Flex>
   );
 };
 
@@ -85,11 +85,15 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     width: windowWidth * 0.999999,
+    height: windowHeight * 0.14,
+    margin: 2,
+    borderRadius: 3,
+    padding: 10,
     alignSelf: "center",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#696969",
-    marginBottom: 45,
+    marginBottom: 30,
   },
   title: {
     fontSize: 20,

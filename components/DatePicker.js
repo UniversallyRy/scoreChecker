@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { View, Platform, StyleSheet } from "react-native";
-import { Card, Text, Button } from "react-native-elements";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { RaisedButton } from "./Buttons";
 // todos: fix laggy picker, sometimes jumps a day
@@ -29,13 +28,9 @@ const DatePicker = ({ onSubmit }) => {
 
   return (
     <>
-      <View>
-        <RaisedButton
-          containerStyle={styles.button}
-          onPress={showMode}
-          title="Click for Date Change"
-        />
-      </View>
+      <RaisedButton style={styles.button} onPress={showMode}>
+        CHANGE DATE
+      </RaisedButton>
       {show && (
         <DateTimePicker
           placeHolderText={new Date().toLocaleDateString()}
@@ -54,10 +49,9 @@ const styles = StyleSheet.create({
   button: {
     alignSelf: "center",
     fontFamily: "Roboto",
-    borderRadius: 4,
+    borderRadius: 3,
     height: 40,
     width: 200,
-    backgroundColor: "#696969",
   },
 });
 

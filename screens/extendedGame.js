@@ -6,7 +6,16 @@ import {
   View,
   ActivityIndicator,
 } from "react-native";
-import { Card, ListItem, Icon, Text, Image } from "react-native-elements";
+import {
+  Box,
+  Container,
+  Flex,
+  Heading,
+  HStack,
+  Text,
+  VStack,
+  Image,
+} from "native-base";
 import DropDownPicker from "react-native-dropdown-picker";
 import NBA from "nba";
 import moment from "moment";
@@ -33,8 +42,8 @@ const extendedGame = ({ navigation, route }) => {
   const { itemId, scoreInfo } = route.params;
   const [homeLines, setHomeLines] = useState([]);
   const [awayLines, setAwayLines] = useState([]);
-  const [scoringHome, setScoringHome] = useState("");
-  const [scoringAway, setScoringAway] = useState("");
+  const [scorerHome, setScorerHome] = useState("");
+  const [scorerAway, setScorerAway] = useState("");
   const image = require("../assets/double-bubble-dark.png");
   const splitAt = (index) => (x) => [x.slice(0, index), x.slice(index)];
   let comp = scoreInfo.gamecode.slice(-6);
@@ -54,12 +63,12 @@ const extendedGame = ({ navigation, route }) => {
       .then((res) => {
         setHomeLeaders(res.home.Leaders[newStat]);
         setAwayLeaders(res.visitor.Leaders[newStat]);
-        setScoringHome(
+        setScorerHome(
           res.home.Leaders[newStat].leader[0].FirstName +
             " " +
             res.home.Leaders[newStat].leader[0].LastName
         );
-        setScoringAway(
+        setScorerAway(
           res.visitor.Leaders[newStat].leader[0].FirstName +
             " " +
             res.visitor.Leaders[newStat].leader[0].LastName
@@ -84,12 +93,12 @@ const extendedGame = ({ navigation, route }) => {
           setHomeLines(res.home.linescores.period);
           setAwayLines(res.visitor.linescores.period);
           setData(res);
-          setScoringHome(
+          setScorerHome(
             res.home.Leaders.Points.leader[0].FirstName +
               " " +
               res.home.Leaders.Points.leader[0].LastName
           );
-          setScoringAway(
+          setScorerAway(
             res.visitor.Leaders.Points.leader[0].FirstName +
               " " +
               res.visitor.Leaders.Points.leader[0].LastName
@@ -103,37 +112,39 @@ const extendedGame = ({ navigation, route }) => {
 
   const StatLeader = () => {
     return (
-      <View>
-        <View style={styles.scoreLeadersContainer}>
-          <View style={styles.scoreLeaders}>
-            <Card.Title>Away</Card.Title>
+      <Flex>
+        <Box size="xl" style={styles.statsHeader}>
+          <Heading>{statState} Leaders</Heading>
+        </Box>
+        <Container style={styles.scoreLeadersContainer}>
+          <Box style={styles.scoreLeaders}>
+            <Heading size="sm" bold>
+              Away
+            </Heading>
             <Image
-              containerStyle={styles.playerPic}
+              style={styles.playerPic}
               source={{ uri: `${PROFILE_PIC_URL_PREFIX}/${awayPic}.png` }}
               alt="Player"
             />
-            <Text style={{ margin: 5, fontWeight: "bold" }}>{scoringAway}</Text>
-            <Text style={{ alignSelf: "center" }}>
+            <Heading size="md">{scorerAway}</Heading>
+            <Text fontSize="md">
               {awayLeaders.StatValue} {statState}
             </Text>
-          </View>
-          <View style={styles.scoreLeaders}>
-            <Card.Title>Home</Card.Title>
+          </Box>
+          <Box style={styles.scoreLeaders}>
+            <Heading size="sm">Home</Heading>
             <Image
-              containerStyle={styles.playerPic}
+              style={styles.playerPic}
               source={{ uri: `${PROFILE_PIC_URL_PREFIX}/${homePic}.png` }}
               alt="Player"
             />
-            <Text style={{ margin: 5, fontWeight: "bold" }}>{scoringHome}</Text>
-            <Text style={{ alignSelf: "center" }}>
+            <Heading size="md">{scorerHome}</Heading>
+            <Text fontSize="md">
               {homeLeaders.StatValue} {statState}
             </Text>
-          </View>
-        </View>
-        <Card containerStyle={styles.statsHeader}>
-          <Card.Title>{statState} Leaders</Card.Title>
-        </Card>
-      </View>
+          </Box>
+        </Container>
+      </Flex>
     );
   };
 
@@ -151,12 +162,12 @@ const extendedGame = ({ navigation, route }) => {
     }
 
     return (
-      <Card containerStyle={styles.quarterCard}>
-        <Card.Title>Game Quarter Logs</Card.Title>
-        <View style={styles.quarterContainer}>
+      <Container style={styles.quarterCard}>
+        <Heading m={1}>Game Quarter Logs</Heading>
+        <HStack style={styles.quarterContainer}>
           {awayLines ? (
             <>
-              <View style={{ marginRight: 25 }}>
+              <VStack style={{ marginRight: 25 }}>
                 {awayArr.map((u, i) => {
                   const quarter = `Q${i + 1}: ` + u;
                   const overtime = `OT ${i - 4}: ` + u;
@@ -166,8 +177,8 @@ const extendedGame = ({ navigation, route }) => {
                     </Text>
                   );
                 })}
-              </View>
-              <View style={{ marginLeft: 25 }}>
+              </VStack>
+              <VStack style={{ marginLeft: 25 }}>
                 {homeArr.map((u, i) => {
                   const quarter = `Q${i + 1}: ` + u;
                   const overtime = `OT ${i - 4}: ` + u;
@@ -177,22 +188,22 @@ const extendedGame = ({ navigation, route }) => {
                     </Text>
                   );
                 })}
-              </View>
+              </VStack>
             </>
           ) : (
             <></>
           )}
-        </View>
-      </Card>
+        </HStack>
+      </Container>
     );
   };
 
   return (
-    <View style={styles.container}>
+    <Flex alignItems="center" style={styles.container}>
       <ImageBackground source={image} style={styles.bgImage}>
-        <Card wrapperStyle={styles.scoreCard} containerStyle={styles.scoreCard}>
-          <View style={styles.teamVersus}>
-            <View style={{ flexDirection: "column", alignItems: "center" }}>
+        <VStack wrapperStyle={styles.scoreCard} style={styles.scoreCard}>
+          <HStack style={styles.teamVersus}>
+            <VStack>
               <Text style={styles.title}>
                 {awayTeam} - {awayScore}
               </Text>
@@ -201,8 +212,9 @@ const extendedGame = ({ navigation, route }) => {
                 source={awayLogo}
                 style={{ width: 50, height: 50, margin: 5 }}
                 PlaceholderContent={<ActivityIndicator />}
+                alt="Away Team Logo"
               />
-            </View>
+            </VStack>
 
             <Text
               style={{
@@ -215,7 +227,7 @@ const extendedGame = ({ navigation, route }) => {
               At
             </Text>
 
-            <View style={{ flexDirection: "column", alignItems: "center" }}>
+            <VStack>
               <Text style={styles.title}>
                 {homeTeam} - {homeScore}{" "}
               </Text>
@@ -224,15 +236,16 @@ const extendedGame = ({ navigation, route }) => {
                 source={homeLogo}
                 style={{ width: 50, height: 50, margin: 5 }}
                 PlaceholderContent={<ActivityIndicator />}
+                alt="Home Team Logo"
               />
-            </View>
-          </View>
-          <Text style={{ margin: 5 }}>Arena: {gameData.arena}</Text>
-          <Text style={{ margin: 5 }}>
+            </VStack>
+          </HStack>
+          <Text m={3}>Arena: {gameData.arena}</Text>
+          <Text m={3}>
             City: {gameData.city}, {gameData.country}
           </Text>
 
-          <View
+          <Flex
             style={{
               width: windowWidth * 0.8,
               minHeight: 100,
@@ -245,7 +258,7 @@ const extendedGame = ({ navigation, route }) => {
             }}
           >
             <DropDownPicker
-              containerStyle={{ height: 40, margin: 5 }}
+              style={{ height: 40, margin: 5 }}
               itemStyle={{
                 justifyContent: "flex-start",
                 zIndex: 1,
@@ -297,20 +310,18 @@ const extendedGame = ({ navigation, route }) => {
               }}
               defaultValue={statState}
             />
-          </View>
+          </Flex>
           <StatLeader />
           <LineScores />
-        </Card>
+        </VStack>
       </ImageBackground>
-    </View>
+    </Flex>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
   },
   bgImage: {
     flex: 1,
@@ -387,7 +398,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 1,
     width: windowWidth * 0.45,
-    height: 25,
+    height: 30,
     backgroundColor: "darkgrey",
     borderColor: "darkgrey",
   },
