@@ -6,7 +6,6 @@ import {
   HeaderBackButton,
 } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Icon } from "react-native-elements";
 import { NativeBaseProvider } from "native-base";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import "react-native-gesture-handler";
@@ -15,6 +14,8 @@ import Home from "./screens/home";
 import PlayerInfo from "./screens/playerInfo";
 import ExtendedScore from "./screens/extendedGame";
 import ExtendedProfile from "./components/ExtendedProfile";
+import { useFonts, Inter_900Black } from "@expo-google-fonts/inter";
+import AppLoading from "expo-app-loading";
 
 // creating bottom tabs and a stack nav
 const Stack = createStackNavigator();
@@ -94,14 +95,24 @@ const AuthStack = () => (
   </Stack.Navigator>
 );
 
-const App = () => (
-  <NativeBaseProvider>
-    <NavigationContainer style={styles.container}>
-      <StatusBar style="auto" />
-      <AuthStack />
-    </NavigationContainer>
-  </NativeBaseProvider>
-);
+const App = () => {
+  let [fontsLoaded] = useFonts({
+    Inter_900Black,
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <NativeBaseProvider>
+        <NavigationContainer style={styles.container}>
+          <StatusBar style="auto" />
+          <AuthStack />
+        </NavigationContainer>
+      </NativeBaseProvider>
+    );
+  }
+};
 
 const styles = StyleSheet.create({
   container: {

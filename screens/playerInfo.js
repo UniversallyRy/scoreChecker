@@ -72,7 +72,10 @@ const PlayerStats = ({ navigation }) => {
     //ScrollView added for ability to view all content while keyboard is open
     <ScrollView>
       <KeyboardAvoidingView>
-        <ImageBackground source={image}>
+        <ImageBackground
+          source={image}
+          style={{ flex: 1, resizeMode: "cover" }}
+        >
           <PlayerProfile
             navigation={navigation}
             playerInfo={playerObj.playerInfo}
