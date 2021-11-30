@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Dimensions, View } from "react-native";
-import { Flex, Image, Button, Text, HStack, Box } from "native-base";
+import { Dimensions } from "react-native";
+import { Flex, Image, Button, Text, HStack, Box, VStack } from "native-base";
 import { PROFILE_PIC_URL_PREFIX } from "../constants";
 import { RaisedButton, LoadingButton } from "./Buttons";
 import logos from "../logoManager";
@@ -33,22 +33,50 @@ const Profile = ({ playerInfo, navigation }) => {
   }, [playerInfo]);
 
   return (
-    <Box style={styles.playerProfile}>
+    <Box
+      alignSelf="center"
+      justifyContent="center"
+      w={windowWidth * 0.98}
+      h={windowHeight * 0.65}
+      borderRadius={3}
+      p={10}
+      mt={1}
+      bg="#C32F27"
+      shadowColor="#000"
+      shadowOffset={{ width: 1, height: 0.34 }}
+      shadowOpacity={0.85}
+      shadowRadius={6.6}
+      elevation={5}
+    >
       {!loading ? (
-        <Flex>
+        <VStack>
           <Image
+            borderWidth={2}
+            overflow="hidden"
+            borderColor="#780116"
+            borderRadius={50}
+            alignItems="center"
+            alignSelf="center"
+            mt={1}
+            mb={1}
+            h={100}
+            w={100}
             key={playerInfo.playerId}
-            style={styles.playerPic}
             source={{
               uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`,
             }}
             alt="Profile"
           />
-          <Text style={styles.playerName}>{`${playerInfo.playerName}`}</Text>
+          <Text alignSelf="center" fontSize="xl" color="#F7B538">
+            {`${playerInfo.playerName}`}
+          </Text>
           <Image
-            key={playerInfo.teamAbbreviation}
-            style={styles.teamLogo}
+            width={50}
+            height={50}
+            margin={5}
+            alignSelf="center"
             source={logos[playerInfo.teamAbbreviation]}
+            key={playerInfo.teamAbbreviation}
             alt="Team"
           />
           {Object.entries(infoList).map(([item, value]) => (
@@ -78,64 +106,15 @@ const Profile = ({ playerInfo, navigation }) => {
           >
             <Text color="#F7B538">CLICK FOR MORE INFO </Text>
           </RaisedButton>
-        </Flex>
+        </VStack>
       ) : (
-        <View style={{ alignContent: "center" }}>
+        <Box alignContent="center">
           <Text color="#F7B538">Loading</Text>
           <LoadingButton />
-        </View>
+        </Box>
       )}
     </Box>
   );
 };
-
-const styles = StyleSheet.create({
-  playerProfile: {
-    alignSelf: "center",
-    width: windowWidth * 0.98,
-    height: windowHeight * 0.65,
-    justifyContent: "center",
-    borderRadius: 3,
-    padding: 10,
-    marginTop: 3,
-    backgroundColor: "#C32F27",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 1,
-      height: 0.34,
-    },
-    shadowOpacity: 0.85,
-    shadowRadius: 6.6,
-    elevation: 5,
-  },
-  picBorder: {
-    borderWidth: 1,
-    marginTop: 1,
-  },
-  playerPic: {
-    borderWidth: 2,
-    overflow: "hidden",
-    borderColor: "#780116",
-    borderRadius: 50,
-    alignItems: "center",
-    alignSelf: "center",
-    marginTop: 10,
-    marginBottom: 3,
-    height: 100,
-    width: 100,
-  },
-  playerName: {
-    fontSize: 20,
-    fontWeight: "bold",
-    alignSelf: "center",
-    color: "#F7B538",
-  },
-  teamLogo: {
-    width: 50,
-    height: 50,
-    margin: 10,
-    alignSelf: "center",
-  },
-});
 
 export default Profile;

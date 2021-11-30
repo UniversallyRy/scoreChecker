@@ -70,7 +70,7 @@ const PlayerInfo = ({ navigation }) => {
 
   return (
     //ScrollView added for ability to view all content while keyboard is open
-    <Box style={{ backgroundColor: "#273e47" }}>
+    <Box bg="#273e47">
       <ScrollView>
         <KeyboardAvoidingView>
           <PlayerProfile

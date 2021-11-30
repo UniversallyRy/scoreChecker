@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Dimensions, View } from "react-native";
+import { Dimensions } from "react-native";
 import { Flex, Image, Text, HStack, Box } from "native-base";
 import { PROFILE_PIC_URL_PREFIX } from "../constants";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -49,68 +49,43 @@ const ExtendedProfile = ({ route, navigation }) => {
   };
 
   return (
-    <Box h="100%" style={{ backgroundColor: "#273e47" }}>
-      <Flex style={styles.container}>
+    <Box h="100%" bg="#273e47">
+      <Flex
+        alignSelf="center"
+        w={windowWidth * 0.98}
+        h={windowHeight * 0.88}
+        bg="#C32F27"
+        m={10}
+        p={2}
+        borderRadius={5}
+      >
         <Image
-          style={styles.playerPic}
+          borderWidth={2}
+          overflow="hidden"
+          borderColor="black"
+          borderRadius={50}
+          alignItems="center"
+          alignSelf="center"
+          mt={10}
+          mb={5}
+          h={100}
+          w={100}
           source={{
             uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`,
           }}
           alt="Profile"
         />
         {Object.entries(profileState).map(([key, data]) => (
-          <View key={key} style={styles.playerInfo}>
-            <Text style={styles.playerInfoLeft}>{onlyHS(key, data)}: </Text>
-            <Text style={styles.playerInfoRight}>{`${data}`}</Text>
-          </View>
+          <HStack m={1} textAlign="auto" key={key}>
+            <Text marginRight={1} fontSize="lg" bold>
+              {onlyHS(key, data)}:{" "}
+            </Text>
+            <Text ml={2} fontSize="lg">{`${data}`}</Text>
+          </HStack>
         ))}
       </Flex>
     </Box>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    alignSelf: "center",
-    width: windowWidth * 0.98,
-    height: windowHeight * 0.88,
-    backgroundColor: "#C32F27",
-    margin: 10,
-    borderRadius: 3,
-  },
-  playerInfo: {
-    margin: 7,
-    alignItems: "flex-start",
-    flexDirection: "row",
-    textAlign: "auto",
-  },
-  playerInfoLeft: {
-    marginRight: 2,
-    fontSize: 18,
-    fontWeight: "bold",
-    fontFamily: "Roboto",
-  },
-  playerInfoRight: {
-    marginLeft: 2,
-    fontSize: 18,
-    fontFamily: "Roboto",
-  },
-  bgImage: {
-    flex: 1,
-    resizeMode: "cover",
-  },
-  playerPic: {
-    borderWidth: 2,
-    overflow: "hidden",
-    borderColor: "black",
-    borderRadius: 50,
-    alignItems: "center",
-    alignSelf: "center",
-    marginTop: 10,
-    marginBottom: 3,
-    height: 100,
-    width: 100,
-  },
-});
 
 export default ExtendedProfile;

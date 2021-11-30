@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { StyleSheet, Keyboard, View, Dimensions } from "react-native";
+import { Keyboard, View, Dimensions } from "react-native";
 import {
   Input,
   InputGroup,
@@ -56,7 +56,12 @@ const PlayerSearch = ({ handleInput, handleReset }) => {
                 base: "90%",
                 md: "100%",
               }}
-              style={styles.textForm}
+              alignSelf="center"
+              borderWidth={1}
+              borderColor="#C32F27"
+              borderRadius={3}
+              m={2}
+              h={windowHeight * 0.057}
             >
               <InputLeftAddon bg="#000">
                 <Icon name="user" size={24} color="#F7B538" />
@@ -90,17 +95,5 @@ const PlayerSearch = ({ handleInput, handleReset }) => {
     </Flex>
   );
 };
-
-const styles = StyleSheet.create({
-  textForm: {
-    borderWidth: 1,
-    borderColor: "#C32F27",
-    borderRadius: 3,
-    textAlign: "auto",
-    alignSelf: "center",
-    margin: 7,
-    height: windowHeight * 0.057,
-  },
-});
 
 export default PlayerSearch;

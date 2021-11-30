@@ -1,6 +1,15 @@
 import React, { Component } from "react";
-import { Box, Container, Flex, Heading, Text, Image } from "native-base";
-import { StyleSheet, Dimensions } from "react-native";
+import {
+  Box,
+  Container,
+  Flex,
+  Heading,
+  Text,
+  Image,
+  VStack,
+  HStack,
+} from "native-base";
+import { Dimensions } from "react-native";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -14,66 +23,50 @@ const StatLeaders = ({
   homeP,
 }) => {
   return (
-    <Flex>
-      <Box size="xl" style={styles.statsHeader}>
+    <VStack alignItems="center" justifyContent="center">
+      <Box size="xl" p={1} w={windowWidth * 0.45} h={35} bg="darkgrey">
         <Heading>{state} Leaders</Heading>
       </Box>
-      <Container style={styles.scoreLeadersContainer}>
-        <Box style={styles.scoreLeaders}>
+      <HStack alignItems="center" justifyContent="center" m={2}>
+        <VStack alignItems="center" m={3} bg="transparent">
           <Heading size="sm" bold>
             Away
           </Heading>
-          <Image style={styles.playerPic} src={awayP} alt="Away Player" />
+          <Image
+            h={65}
+            w={65}
+            borderColor="black"
+            borderStyle="solid"
+            borderWidth={0.6}
+            borderRadius={50}
+            src={awayP}
+            alt="Away Player"
+          />
           <Heading size="md">{scorerAway}</Heading>
           <Text fontSize="md">
             {awayLeaders.StatValue} {state}
           </Text>
-        </Box>
-        <Box style={styles.scoreLeaders}>
+        </VStack>
+        <VStack alignItems="center" m={3} bg="transparent">
           <Heading size="sm">Home</Heading>
-          <Image style={styles.playerPic} src={homeP} alt="Home Player" />
+          <Image
+            h={65}
+            w={65}
+            borderColor="black"
+            borderStyle="solid"
+            borderWidth={0.6}
+            borderRadius={50}
+            src={homeP}
+            alt="Home Player"
+          />
           <Heading size="md">{scorerHome}</Heading>
           <Text fontSize="md">
             {homeLeaders.StatValue} {state}
           </Text>
-        </Box>
-      </Container>
-    </Flex>
+        </VStack>
+      </HStack>
+    </VStack>
   );
 };
-
-const styles = StyleSheet.create({
-  statsHeader: {
-    alignSelf: "center",
-    alignItems: "center",
-    padding: 1,
-    width: windowWidth * 0.45,
-    height: 30,
-    backgroundColor: "darkgrey",
-    borderColor: "darkgrey",
-  },
-  scoreLeadersContainer: {
-    marginTop: 1,
-    width: windowWidth,
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  scoreLeaders: {
-    margin: 3,
-    flex: 1,
-    backgroundColor: "transparent",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  playerPic: {
-    width: 65,
-    height: 65,
-    alignSelf: "center",
-    borderColor: "black",
-    borderStyle: "solid",
-    borderWidth: 0.6,
-    borderRadius: 50,
-  },
-});
 
 export default StatLeaders;

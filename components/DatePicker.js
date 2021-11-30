@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Platform, StyleSheet } from "react-native";
+import { Platform } from "react-native";
 import { Text } from "native-base";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { RaisedButton } from "./Buttons";
@@ -29,7 +29,18 @@ const DatePicker = ({ onSubmit }) => {
 
   return (
     <>
-      <RaisedButton style={styles.button} onPress={showMode}>
+      <RaisedButton
+        alignSelf="center"
+        borderRadius={3}
+        h={9}
+        w={200}
+        shadowColor="#000"
+        shadowOffset={{ width: 1, height: 2 }}
+        shadowOpacity={0.55}
+        shadowRadius={1.84}
+        elevation={3}
+        onPress={showMode}
+      >
         <Text>CHANGE DATE</Text>
       </RaisedButton>
       {show && (
@@ -45,23 +56,5 @@ const DatePicker = ({ onSubmit }) => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    alignSelf: "center",
-    fontFamily: "Roboto",
-    borderRadius: 3,
-    height: 40,
-    width: 200,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 4,
-      height: 4,
-    },
-    shadowOpacity: 0.45,
-    shadowRadius: 1.84,
-    elevation: 6,
-  },
-});
 
 export default DatePicker;
