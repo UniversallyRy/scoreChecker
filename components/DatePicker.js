@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Platform, StyleSheet } from "react-native";
+import { Text } from "native-base";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { RaisedButton } from "./Buttons";
 // todos: fix laggy picker, sometimes jumps a day
@@ -29,7 +30,7 @@ const DatePicker = ({ onSubmit }) => {
   return (
     <>
       <RaisedButton style={styles.button} onPress={showMode}>
-        CHANGE DATE
+        <Text>CHANGE DATE</Text>
       </RaisedButton>
       {show && (
         <DateTimePicker
@@ -52,6 +53,14 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     height: 40,
     width: 200,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 4,
+      height: 4,
+    },
+    shadowOpacity: 0.45,
+    shadowRadius: 1.84,
+    elevation: 6,
   },
 });
 

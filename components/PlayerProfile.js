@@ -53,10 +53,15 @@ const Profile = ({ playerInfo, navigation }) => {
           />
           {Object.entries(infoList).map(([item, value]) => (
             <HStack key={item} marginBottom={2} textAlignVertical="auto">
-              <Text lineHeight="lg" fontSize="xl" bold>
+              <Text color="#780116" lineHeight="lg" fontSize="xl" bold>
                 {item}
               </Text>
-              <Text marginLeft={1} lineHeight="xl" fontSize="lg">
+              <Text
+                color="#F7B538"
+                marginLeft={1}
+                lineHeight="lg"
+                fontSize="lg"
+              >
                 {value}
               </Text>
             </HStack>
@@ -90,10 +95,18 @@ const styles = StyleSheet.create({
     width: windowWidth * 0.98,
     height: windowHeight * 0.65,
     justifyContent: "center",
-    borderRadius: 7,
+    borderRadius: 3,
     padding: 10,
     marginTop: 3,
     backgroundColor: "#C32F27",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 1,
+      height: 0.34,
+    },
+    shadowOpacity: 0.85,
+    shadowRadius: 6.6,
+    elevation: 5,
   },
   picBorder: {
     borderWidth: 1,
@@ -102,7 +115,7 @@ const styles = StyleSheet.create({
   playerPic: {
     borderWidth: 2,
     overflow: "hidden",
-    borderColor: "black",
+    borderColor: "#780116",
     borderRadius: 50,
     alignItems: "center",
     alignSelf: "center",
@@ -115,6 +128,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     alignSelf: "center",
+    color: "#F7B538",
   },
   teamLogo: {
     width: 50,

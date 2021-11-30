@@ -27,5 +27,14 @@ const styles = StyleSheet.create({
     marginBottom: 9,
     fontFamily: "Roboto",
     color: "#F7B538",
+    shadowColor: "#000",
+    borderRadius: 5,
+    shadowOffset: {
+      width: 1,
+      height: 2,
+    },
+    shadowOpacity: 0.95,
+    shadowRadius: 8.84,
+    elevation: 6,
   },
 });

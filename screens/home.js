@@ -83,9 +83,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#273e47",
   },
   titleContainer: {
-    width: windowWidth * 0.999999,
+    width: windowWidth * 0.98,
     height: windowHeight * 0.14,
-    margin: 2,
+    margin: 4,
     borderRadius: 3,
     padding: 10,
     alignSelf: "center",
@@ -97,18 +97,18 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
-    fontFamily: "Roboto",
-    color: "silver",
+    color: "#F7B538",
+    margin: 3,
   },
   text: {
     alignSelf: "center",
-    color: "silver",
+    color: "#F7B538",
     marginBottom: 10,
-    fontFamily: "Roboto",
-    fontSize: 8,
+    fontSize: 12,
   },
   divider: {
-    width: windowWidth * 0.98,
+    backgroundColor: "#D8572A",
+    width: windowWidth * 0.93,
   },
   bgImage: {
     flex: 1,

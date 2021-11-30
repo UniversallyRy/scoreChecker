@@ -150,7 +150,6 @@ const ScoreCard = ({ item, date, navigation }) => {
 
   return (
     <Flex style={styles.scoreContainer}>
-      <Divider style={styles.divider} />
       <Text style={styles.gameCount}>{numOfGames} Games Today</Text>
       {!loading ? (
         <SafeAreaView style={styles.container}>
@@ -188,7 +187,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   divider: {
-    backgroundColor: "black",
+    backgroundColor: "#D8572A",
     width: windowWidth * 0.8,
     alignSelf: "center",
     height: 1,
@@ -197,7 +196,7 @@ const styles = StyleSheet.create({
   gameCount: {
     fontSize: 16,
     alignSelf: "center",
-    color: "#C32F27",
+    color: "#F7B538",
   },
   scoreCard: {
     width: windowWidth * 0.935,

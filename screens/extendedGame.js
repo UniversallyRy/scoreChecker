@@ -18,6 +18,7 @@ import logos from "../logoManager";
 import ScoreCard from "../components/ScoreCard";
 import { LoadingButton } from "../components/Buttons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import StatLeaders from "../components/StatLeaders";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -104,44 +105,6 @@ const extendedGame = ({ navigation, route }) => {
     initData();
   }, []);
 
-  const StatLeader = () => {
-    return (
-      <Flex>
-        <Box size="xl" style={styles.statsHeader}>
-          <Heading>{statState} Leaders</Heading>
-        </Box>
-        <Container style={styles.scoreLeadersContainer}>
-          <Box style={styles.scoreLeaders}>
-            <Heading size="sm" bold>
-              Away
-            </Heading>
-            <Image
-              style={styles.playerPic}
-              source={{ uri: `${PROFILE_PIC_URL_PREFIX}/${awayPic}.png` }}
-              alt="Player"
-            />
-            <Heading size="md">{scorerAway}</Heading>
-            <Text fontSize="md">
-              {awayLeaders.StatValue} {statState}
-            </Text>
-          </Box>
-          <Box style={styles.scoreLeaders}>
-            <Heading size="sm">Home</Heading>
-            <Image
-              style={styles.playerPic}
-              source={{ uri: `${PROFILE_PIC_URL_PREFIX}/${homePic}.png` }}
-              alt="Player"
-            />
-            <Heading size="md">{scorerHome}</Heading>
-            <Text fontSize="md">
-              {homeLeaders.StatValue} {statState}
-            </Text>
-          </Box>
-        </Container>
-      </Flex>
-    );
-  };
-
   const LineScores = () => {
     let awayArr = [];
     let homeArr = [];
@@ -193,8 +156,8 @@ const extendedGame = ({ navigation, route }) => {
   };
 
   return (
-    <Flex alignItems="center" style={styles.container}>
-      <VStack wrapperStyle={styles.scoreCard} style={styles.scoreCard}>
+    <Flex style={styles.container}>
+      <VStack m={5} style={styles.scoreCard} style={styles.scoreCard}>
         <HStack style={styles.teamVersus}>
           <VStack>
             <Text style={styles.title}>
@@ -254,7 +217,6 @@ const extendedGame = ({ navigation, route }) => {
             style={{ height: 40, margin: 5 }}
             itemStyle={{
               justifyContent: "flex-start",
-              zIndex: 1,
             }}
             items={[
               {
@@ -304,7 +266,15 @@ const extendedGame = ({ navigation, route }) => {
             defaultValue={statState}
           />
         </Flex>
-        <StatLeader />
+        <StatLeaders
+          awayLeaders={awayLeaders}
+          homeLeaders={homeLeaders}
+          state={statState}
+          scorerAway={scorerAway}
+          scorerHome={scorerHome}
+          awayP={`${PROFILE_PIC_URL_PREFIX}/${awayPic}.png`}
+          homeP={`${PROFILE_PIC_URL_PREFIX}/${homePic}.png`}
+        />
         <LineScores />
       </VStack>
     </Flex>
@@ -313,6 +283,7 @@ const extendedGame = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
   container: {
+    height: windowHeight,
     flex: 1,
     backgroundColor: "#273e47",
   },
@@ -322,10 +293,20 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   scoreCard: {
+    alignSelf: "center",
     backgroundColor: "#C32F27",
-    width: windowWidth,
-    borderColor: "#C32F27",
+    height: windowHeight * 0.9,
+    width: windowWidth * 0.97,
     alignItems: "center",
+    borderRadius: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 1,
+      height: 3,
+    },
+    shadowOpacity: 0.85,
+    shadowRadius: 5.84,
+    elevation: 6,
   },
   title: {
     fontWeight: "bold",
@@ -340,10 +321,10 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   quarterCard: {
+    bottom: 0,
     width: windowWidth * 0.75,
     flexDirection: "column",
     alignItems: "center",
-    alignSelf: "center",
     marginBottom: 10,
     borderColor: "darkgrey",
     backgroundColor: "darkgrey",
@@ -359,40 +340,9 @@ const styles = StyleSheet.create({
     backgroundColor: "darkgrey",
     borderColor: "darkgrey",
   },
-  scoreLeadersContainer: {
-    marginTop: 1,
-    width: windowWidth,
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  scoreLeaders: {
-    margin: 3,
-    flex: 1,
-    backgroundColor: "transparent",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  playerPic: {
-    width: 65,
-    height: 65,
-    alignSelf: "center",
-    borderColor: "black",
-    borderStyle: "solid",
-    borderWidth: 0.6,
-    borderRadius: 50,
-  },
   dropDown: {
     alignItems: "center",
     backgroundColor: "#C32F27",
-    borderColor: "darkgrey",
-  },
-  statsHeader: {
-    alignSelf: "center",
-    alignItems: "center",
-    padding: 1,
-    width: windowWidth * 0.45,
-    height: 30,
-    backgroundColor: "darkgrey",
     borderColor: "darkgrey",
   },
 });
