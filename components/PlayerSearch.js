@@ -1,6 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { StyleSheet, Keyboard, View, Dimensions } from "react-native";
-import { Input, InputGroup, InputLeftAddon, Flex, Stack } from "native-base";
+import {
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  Flex,
+  Stack,
+  VStack,
+} from "native-base";
 import { Formik } from "formik";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { RaisedButton } from "./Buttons";
@@ -32,7 +39,7 @@ const PlayerSearch = ({ handleInput, handleReset }) => {
   }, []);
 
   return (
-    <Flex align="center">
+    <Flex h={windowHeight * 0.242}>
       <Formik
         initialValues={{ player: "" }}
         onSubmit={(values, actions) => {
@@ -67,12 +74,12 @@ const PlayerSearch = ({ handleInput, handleReset }) => {
                 placeholder="Search for Player"
               />
             </InputGroup>
-            <View style={styles.allButtons}>
+            <VStack>
               <RaisedButton key="submitButton" onPress={handleSubmit}>
                 Submit
               </RaisedButton>
               <RaisedButton onPress={handleReset}>Reset</RaisedButton>
-            </View>
+            </VStack>
           </Stack>
         )}
       </Formik>
@@ -82,12 +89,11 @@ const PlayerSearch = ({ handleInput, handleReset }) => {
 
 const styles = StyleSheet.create({
   textForm: {
-    borderColor: "transparent",
     borderWidth: 1,
     borderColor: "#696969",
     textAlign: "auto",
     alignSelf: "center",
-    margin: 5,
+    margin: 7,
     height: windowHeight * 0.057,
   },
 });

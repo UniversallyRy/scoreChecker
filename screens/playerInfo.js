@@ -10,6 +10,7 @@ import nba from "nba";
 import PlayerProfile from "../components/PlayerProfile";
 import PlayerSearch from "../components/PlayerSearch";
 import { DEFAULT_PLAYER_INFO } from "../constants";
+import { Box, Flex } from "native-base";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const initialState = {
@@ -17,7 +18,7 @@ const initialState = {
   playerInfo: DEFAULT_PLAYER_INFO,
 };
 
-const PlayerStats = ({ navigation }) => {
+const PlayerInfo = ({ navigation }) => {
   const [playerObj, setPlayerObj] = useState(initialState);
   const image = require("../assets/double-bubble-dark.png");
 
@@ -70,24 +71,26 @@ const PlayerStats = ({ navigation }) => {
 
   return (
     //ScrollView added for ability to view all content while keyboard is open
-    <ScrollView>
-      <KeyboardAvoidingView>
-        <ImageBackground
-          source={image}
-          style={{ flex: 1, resizeMode: "cover" }}
-        >
-          <PlayerProfile
-            navigation={navigation}
-            playerInfo={playerObj.playerInfo}
-          />
-          <PlayerSearch
-            handleInput={handleInput}
-            handleReset={() => handleReset(0)}
-          />
-        </ImageBackground>
-      </KeyboardAvoidingView>
-    </ScrollView>
+    <Box>
+      <ScrollView>
+        <KeyboardAvoidingView>
+          <ImageBackground
+            source={image}
+            style={{ flex: 1, resizeMode: "cover" }}
+          >
+            <PlayerProfile
+              navigation={navigation}
+              playerInfo={playerObj.playerInfo}
+            />
+            <PlayerSearch
+              handleInput={handleInput}
+              handleReset={() => handleReset(0)}
+            />
+          </ImageBackground>
+        </KeyboardAvoidingView>
+      </ScrollView>
+    </Box>
   );
 };
 
-export default PlayerStats;
+export default PlayerInfo;

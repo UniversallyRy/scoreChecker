@@ -42,22 +42,20 @@ const MyTabs = () => (
     }}
   >
     <Tab.Screen
-      style={styles.tabText}
       name="Home"
       component={Home}
       options={{
-        tabBarLabel: "Home",
+        headerShown: false,
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="basketball" color={color} size={size} />
         ),
       }}
     />
     <Tab.Screen
-      style={styles.tabText}
       name="Player Info"
       component={PlayerInfo}
       options={{
-        tabBarLabel: "Player Info",
+        headerShown: false,
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="account" color={color} size={size} />
         ),
@@ -120,6 +118,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  tabText: {
+    backgroundColor: "#696969",
+    flex: 1,
   },
 });
 
