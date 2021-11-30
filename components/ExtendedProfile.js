@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Dimensions, ImageBackground, View } from "react-native";
+import { StyleSheet, Dimensions, View } from "react-native";
 import { Flex, Image, Text, HStack, Box } from "native-base";
 import { PROFILE_PIC_URL_PREFIX } from "../constants";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -49,7 +49,7 @@ const ExtendedProfile = ({ route, navigation }) => {
   };
 
   return (
-    <ImageBackground source={image} style={styles.bgImage}>
+    <Box h="100%" style={{ backgroundColor: "#273e47" }}>
       <Flex style={styles.container}>
         <Image
           style={styles.playerPic}
@@ -65,7 +65,7 @@ const ExtendedProfile = ({ route, navigation }) => {
           </View>
         ))}
       </Flex>
-    </ImageBackground>
+    </Box>
   );
 };
 
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     width: windowWidth * 0.98,
     height: windowHeight * 0.88,
-    backgroundColor: "#696969",
+    backgroundColor: "#C32F27",
     margin: 10,
     borderRadius: 3,
   },

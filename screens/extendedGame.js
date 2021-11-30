@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Dimensions,
-  ImageBackground,
-  View,
-  ActivityIndicator,
-} from "react-native";
+import { StyleSheet, Dimensions, View, ActivityIndicator } from "react-native";
 import {
   Box,
   Container,
@@ -200,121 +194,119 @@ const extendedGame = ({ navigation, route }) => {
 
   return (
     <Flex alignItems="center" style={styles.container}>
-      <ImageBackground source={image} style={styles.bgImage}>
-        <VStack wrapperStyle={styles.scoreCard} style={styles.scoreCard}>
-          <HStack style={styles.teamVersus}>
-            <VStack>
-              <Text style={styles.title}>
-                {awayTeam} - {awayScore}
-              </Text>
-              <Image
-                accessibilityLabel={awayTeam}
-                source={awayLogo}
-                style={{ width: 50, height: 50, margin: 5 }}
-                PlaceholderContent={<ActivityIndicator />}
-                alt="Away Team Logo"
-              />
-            </VStack>
-
-            <Text
-              style={{
-                justifyContent: "center",
-                fontWeight: "bold",
-                marginLeft: 25,
-                marginRight: 25,
-              }}
-            >
-              At
+      <VStack wrapperStyle={styles.scoreCard} style={styles.scoreCard}>
+        <HStack style={styles.teamVersus}>
+          <VStack>
+            <Text style={styles.title}>
+              {awayTeam} - {awayScore}
             </Text>
+            <Image
+              accessibilityLabel={awayTeam}
+              source={awayLogo}
+              style={{ width: 50, height: 50, margin: 5 }}
+              PlaceholderContent={<ActivityIndicator />}
+              alt="Away Team Logo"
+            />
+          </VStack>
 
-            <VStack>
-              <Text style={styles.title}>
-                {homeTeam} - {homeScore}{" "}
-              </Text>
-              <Image
-                accessibilityLabel={homeTeam}
-                source={homeLogo}
-                style={{ width: 50, height: 50, margin: 5 }}
-                PlaceholderContent={<ActivityIndicator />}
-                alt="Home Team Logo"
-              />
-            </VStack>
-          </HStack>
-          <Text m={3}>Arena: {gameData.arena}</Text>
-          <Text m={3}>
-            City: {gameData.city}, {gameData.country}
-          </Text>
-
-          <Flex
+          <Text
             style={{
-              width: windowWidth * 0.8,
-              minHeight: 100,
-              margin: 5,
-              ...(Platform.OS !== "android" && {
-                zIndex: 10,
-                margin: 5,
-                width: windowWidth * 0.8,
-              }),
+              justifyContent: "center",
+              fontWeight: "bold",
+              marginLeft: 25,
+              marginRight: 25,
             }}
           >
-            <DropDownPicker
-              style={{ height: 40, margin: 5 }}
-              itemStyle={{
-                justifyContent: "flex-start",
-                zIndex: 1,
-              }}
-              items={[
-                {
-                  label: "Points",
-                  value: "Points",
-                  icon: () => (
-                    <MaterialCommunityIcons
-                      name="basketball"
-                      size={18}
-                      color="#900"
-                      style={{ marginRight: 10 }}
-                    />
-                  ),
-                },
-                {
-                  label: "Rebounds",
-                  value: "Rebounds",
-                  icon: () => (
-                    <MaterialCommunityIcons
-                      name="basketball"
-                      size={18}
-                      color="#900"
-                      style={{ marginRight: 10 }}
-                    />
-                  ),
-                },
-                {
-                  label: "Assists",
-                  value: "Assists",
-                  icon: () => (
-                    <MaterialCommunityIcons
-                      name="basketball"
-                      size={18}
-                      color="#900"
-                      style={{ marginRight: 10 }}
-                    />
-                  ),
-                },
-              ]}
-              dropDownStyle={{ backgroundColor: "darkgrey", marginTop: 1 }}
-              style={styles.dropDown}
-              controller={(instance) => (controller = instance)}
-              onChangeItem={(item) => {
-                setDropdown({ value: item.value });
-                changeStats(item.value);
-              }}
-              defaultValue={statState}
+            At
+          </Text>
+
+          <VStack>
+            <Text style={styles.title}>
+              {homeTeam} - {homeScore}{" "}
+            </Text>
+            <Image
+              accessibilityLabel={homeTeam}
+              source={homeLogo}
+              style={{ width: 50, height: 50, margin: 5 }}
+              PlaceholderContent={<ActivityIndicator />}
+              alt="Home Team Logo"
             />
-          </Flex>
-          <StatLeader />
-          <LineScores />
-        </VStack>
-      </ImageBackground>
+          </VStack>
+        </HStack>
+        <Text m={3}>Arena: {gameData.arena}</Text>
+        <Text m={3}>
+          City: {gameData.city}, {gameData.country}
+        </Text>
+
+        <Flex
+          style={{
+            width: windowWidth * 0.8,
+            minHeight: 100,
+            margin: 5,
+            ...(Platform.OS !== "android" && {
+              zIndex: 10,
+              margin: 5,
+              width: windowWidth * 0.8,
+            }),
+          }}
+        >
+          <DropDownPicker
+            style={{ height: 40, margin: 5 }}
+            itemStyle={{
+              justifyContent: "flex-start",
+              zIndex: 1,
+            }}
+            items={[
+              {
+                label: "Points",
+                value: "Points",
+                icon: () => (
+                  <MaterialCommunityIcons
+                    name="basketball"
+                    size={18}
+                    color="#900"
+                    style={{ marginRight: 10 }}
+                  />
+                ),
+              },
+              {
+                label: "Rebounds",
+                value: "Rebounds",
+                icon: () => (
+                  <MaterialCommunityIcons
+                    name="basketball"
+                    size={18}
+                    color="#900"
+                    style={{ marginRight: 10 }}
+                  />
+                ),
+              },
+              {
+                label: "Assists",
+                value: "Assists",
+                icon: () => (
+                  <MaterialCommunityIcons
+                    name="basketball"
+                    size={18}
+                    color="#900"
+                    style={{ marginRight: 10 }}
+                  />
+                ),
+              },
+            ]}
+            dropDownStyle={{ backgroundColor: "darkgrey", marginTop: 1 }}
+            style={styles.dropDown}
+            controller={(instance) => (controller = instance)}
+            onChangeItem={(item) => {
+              setDropdown({ value: item.value });
+              changeStats(item.value);
+            }}
+            defaultValue={statState}
+          />
+        </Flex>
+        <StatLeader />
+        <LineScores />
+      </VStack>
     </Flex>
   );
 };
@@ -322,6 +314,7 @@ const extendedGame = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#273e47",
   },
   bgImage: {
     flex: 1,
@@ -329,9 +322,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   scoreCard: {
-    backgroundColor: "#696969",
+    backgroundColor: "#C32F27",
     width: windowWidth,
-    borderColor: "#696969",
+    borderColor: "#C32F27",
     alignItems: "center",
   },
   title: {
@@ -390,7 +383,7 @@ const styles = StyleSheet.create({
   },
   dropDown: {
     alignItems: "center",
-    backgroundColor: "#696969",
+    backgroundColor: "#C32F27",
     borderColor: "darkgrey",
   },
   statsHeader: {

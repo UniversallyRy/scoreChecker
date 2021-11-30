@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { StyleSheet, Dimensions, ImageBackground } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { Flex, Text, Divider, VStack } from "native-base";
 import moment from "moment";
 import NBA from "nba";
@@ -57,22 +57,20 @@ const Home = ({ navigation }) => {
 
   return (
     <Flex style={styles.container}>
-      <ImageBackground source={image} style={styles.bgImage}>
-        <VStack style={styles.titleContainer}>
-          <Text style={styles.title}>Scores for {todaysDate}</Text>
-          <Divider style={styles.divider} />
-          <Text style={styles.text}>Quickly stay updated</Text>
-          <DatePicker onSubmit={onSubmit} />
-        </VStack>
-        {/* scorecard list component showcasing today's scores*/}
-        {loading ? (
-          <>
-            <Text> Loading. . .</Text>
-          </>
-        ) : (
-          <ScoreCard navigation={navigation} date={todaysDate} item={state} />
-        )}
-      </ImageBackground>
+      <VStack style={styles.titleContainer}>
+        <Text style={styles.title}>Scores for {todaysDate}</Text>
+        <Divider style={styles.divider} />
+        <Text style={styles.text}>Quickly stay updated</Text>
+        <DatePicker onSubmit={onSubmit} />
+      </VStack>
+      {/* scorecard list component showcasing today's scores*/}
+      {loading ? (
+        <>
+          <Text> Loading. . .</Text>
+        </>
+      ) : (
+        <ScoreCard navigation={navigation} date={todaysDate} item={state} />
+      )}
     </Flex>
   );
 };
@@ -82,6 +80,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: windowHeight,
     width: windowWidth,
+    backgroundColor: "#273e47",
   },
   titleContainer: {
     width: windowWidth * 0.999999,
@@ -92,7 +91,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#696969",
+    backgroundColor: "#C32F27",
     marginBottom: 30,
   },
   title: {

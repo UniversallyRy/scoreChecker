@@ -7,3 +7,17 @@ export const DEFAULT_PLAYER_INFO = {
   fullName: "Obi Toppin",
   teamAbbreviation: "NYK",
 };
+
+const colorScheme = {
+  UPMaroon: "#780116",
+  MaximumYellowRed: "#F7B538",
+  Ochre: "#273e47",
+  Flame: "#D8572A",
+  InternationalOrangeGoldenGateBridge: "#C32F27",
+  // top/naviagtion/item container color
+  //  button color
+  // background color
+  //  textinput color
+  //
+  //
+};

@@ -62,7 +62,7 @@ const Profile = ({ playerInfo, navigation }) => {
             </HStack>
           ))}
           <RaisedButton
-            containerStyle={styles.button}
+            m={5}
             onPress={() => {
               /* 1. Navigate to the Extended Profile route with params */
               navigation.navigate("Extended Profile", {
@@ -71,12 +71,12 @@ const Profile = ({ playerInfo, navigation }) => {
               });
             }}
           >
-            CLICK FOR MORE INFO
+            <Text color="#F7B538">CLICK FOR MORE INFO </Text>
           </RaisedButton>
         </Flex>
       ) : (
         <View style={{ alignContent: "center" }}>
-          <Text>Loading</Text>
+          <Text color="#F7B538">Loading</Text>
           <LoadingButton />
         </View>
       )}
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     padding: 10,
     marginTop: 3,
-    backgroundColor: "#696969",
+    backgroundColor: "#C32F27",
   },
   picBorder: {
     borderWidth: 1,
@@ -116,26 +116,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     alignSelf: "center",
   },
-  playerInfoLeft: {
-    textAlignVertical: "auto",
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  playerInfoRight: {
-    textAlignVertical: "auto",
-    fontSize: 20,
-    marginLeft: 10,
-    marginBottom: 10,
-  },
   teamLogo: {
     width: 50,
     height: 50,
     margin: 10,
     alignSelf: "center",
-  },
-  button: {
-    margin: 5,
   },
 });
 

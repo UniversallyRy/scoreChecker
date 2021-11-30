@@ -23,15 +23,15 @@ const Tab = createBottomTabNavigator();
 
 const MyTabs = () => (
   <Tab.Navigator
-    initialRouteName="Player Info"
+    initialRouteName="#C32F27"
     screenOptions={{
-      tabBarActiveTintColor: "white",
-      tabBarInactiveTintColor: "black",
+      tabBarActiveTintColor: "#F7B538",
+      tabBarInactiveTintColor: "grey",
       tabBarLabelStyle: {
         fontSize: 12,
       },
       tabBarItemStyle: {
-        backgroundColor: "#696969",
+        backgroundColor: "#C32F27",
       },
       tabBarStyle: [
         {
@@ -70,7 +70,7 @@ const AuthStack = () => (
       name="NBA Check-In"
       component={MyTabs}
       options={{
-        headerStyle: { backgroundColor: "#696969" },
+        headerStyle: { backgroundColor: "#C32F27" },
         headerTitleContainerStyle: {
           marginLeft: 15,
         },
@@ -80,14 +80,14 @@ const AuthStack = () => (
       name="Extended Profile"
       component={ExtendedProfile}
       options={{
-        headerStyle: { backgroundColor: "#696969" },
+        headerStyle: { backgroundColor: "#C32F27" },
       }}
     />
     <Stack.Screen
       name="Extended Score"
       component={ExtendedScore}
       options={{
-        headerStyle: { backgroundColor: "#696969" },
+        headerStyle: { backgroundColor: "#C32F27" },
       }}
     />
   </Stack.Navigator>
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   tabText: {
-    backgroundColor: "#696969",
+    backgroundColor: "#C32F27",
     flex: 1,
   },
 });

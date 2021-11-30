@@ -7,6 +7,7 @@ import {
   Flex,
   Stack,
   VStack,
+  Text,
 } from "native-base";
 import { Formik } from "formik";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -57,8 +58,8 @@ const PlayerSearch = ({ handleInput, handleReset }) => {
               }}
               style={styles.textForm}
             >
-              <InputLeftAddon>
-                <Icon name="user" size={24} color="#696969" />
+              <InputLeftAddon bg="#000">
+                <Icon name="user" size={24} color="#F7B538" />
               </InputLeftAddon>
               <Input
                 w={{
@@ -70,15 +71,18 @@ const PlayerSearch = ({ handleInput, handleReset }) => {
                 value={values.player}
                 enablesReturnKeyAutomatically={true}
                 color="white"
+                onSubmitEditing={handleSubmit}
                 importantForAutofill="auto"
                 placeholder="Search for Player"
               />
             </InputGroup>
             <VStack>
               <RaisedButton key="submitButton" onPress={handleSubmit}>
-                Submit
+                <Text color="#F7B538">SUBMIT</Text>
               </RaisedButton>
-              <RaisedButton onPress={handleReset}>Reset</RaisedButton>
+              <RaisedButton onPress={handleReset}>
+                <Text color="#F7B538">RESET</Text>
+              </RaisedButton>
             </VStack>
           </Stack>
         )}
@@ -90,7 +94,8 @@ const PlayerSearch = ({ handleInput, handleReset }) => {
 const styles = StyleSheet.create({
   textForm: {
     borderWidth: 1,
-    borderColor: "#696969",
+    borderColor: "#C32F27",
+    borderRadius: 3,
     textAlign: "auto",
     alignSelf: "center",
     margin: 7,

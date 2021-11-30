@@ -197,11 +197,11 @@ const styles = StyleSheet.create({
   gameCount: {
     fontSize: 16,
     alignSelf: "center",
-    color: "#696969",
+    color: "#C32F27",
   },
   scoreCard: {
     width: windowWidth * 0.935,
-    backgroundColor: "#696969",
+    backgroundColor: "#C32F27",
     justifyContent: "center",
     alignSelf: "center",
     borderColor: "black",
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
   },
   loadingContainer: {
-    backgroundColor: "#696969",
+    backgroundColor: "#C32F27",
     height: windowHeight * 0.35,
   },
   lButton: {

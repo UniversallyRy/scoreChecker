@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Dimensions,
   ScrollView,
-  ImageBackground,
   KeyboardAvoidingView,
 } from "react-native";
 import nba from "nba";
@@ -71,22 +70,17 @@ const PlayerInfo = ({ navigation }) => {
 
   return (
     //ScrollView added for ability to view all content while keyboard is open
-    <Box>
+    <Box style={{ backgroundColor: "#273e47" }}>
       <ScrollView>
         <KeyboardAvoidingView>
-          <ImageBackground
-            source={image}
-            style={{ flex: 1, resizeMode: "cover" }}
-          >
-            <PlayerProfile
-              navigation={navigation}
-              playerInfo={playerObj.playerInfo}
-            />
-            <PlayerSearch
-              handleInput={handleInput}
-              handleReset={() => handleReset(0)}
-            />
-          </ImageBackground>
+          <PlayerProfile
+            navigation={navigation}
+            playerInfo={playerObj.playerInfo}
+          />
+          <PlayerSearch
+            handleInput={handleInput}
+            handleReset={() => handleReset(0)}
+          />
         </KeyboardAvoidingView>
       </ScrollView>
     </Box>
