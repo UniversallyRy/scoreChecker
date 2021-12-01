@@ -8,7 +8,7 @@ const Tab = createBottomTabNavigator();
 
 const BottomTabs = () => (
   <Tab.Navigator
-    initialRouteName="Player Info"
+    initialRouteName="Scores"
     screenOptions={{
       tabBarActiveTintColor: "#F7B538",
       tabBarInactiveTintColor: "grey",

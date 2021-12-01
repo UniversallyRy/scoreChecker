@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Dimensions } from "react-native";
 import { Flex, Image, Button, Text, HStack, Box, VStack } from "native-base";
-import { PROFILE_PIC_URL_PREFIX } from "../../constants";
 import { RaisedButton, LoadingButton } from "../Buttons";
 import logos from "../../logoManager";
+import { PROFILE_PIC_URL_PREFIX } from "../../constants";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -71,25 +71,20 @@ const Profile = ({ playerInfo, navigation }) => {
             {`${playerInfo.playerName}`}
           </Text>
           <Image
-            width={50}
-            height={50}
-            margin={5}
+            w={50}
+            h={50}
+            m={5}
             alignSelf="center"
             source={logos[playerInfo.teamAbbreviation]}
             key={playerInfo.teamAbbreviation}
             alt="Team"
           />
           {Object.entries(infoList).map(([item, value]) => (
-            <HStack key={item} marginBottom={2} textAlignVertical="auto">
+            <HStack key={item + "key"} mb={2} textAlignVertical="auto">
               <Text color="#780116" lineHeight="lg" fontSize="xl" bold>
                 {item}
               </Text>
-              <Text
-                color="#F7B538"
-                marginLeft={1}
-                lineHeight="lg"
-                fontSize="lg"
-              >
+              <Text color="#F7B538" ml={1} lineHeight="lg" fontSize="lg">
                 {value}
               </Text>
             </HStack>
