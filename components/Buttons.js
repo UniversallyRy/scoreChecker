@@ -34,7 +34,7 @@ export const LoadingButton = (props) => {
       shadowOpacity={0.95}
       shadowRadius={8.84}
       elevation={6}
-      isLoadingText="Searching"
+      isLoadingText="Loading"
       isLoading
       {...props}
     />

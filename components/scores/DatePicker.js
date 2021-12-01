@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Platform } from "react-native";
 import { Text } from "native-base";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { RaisedButton } from "./Buttons";
+import { RaisedButton } from "../Buttons";
 // todos: fix laggy picker, sometimes jumps a day
 
 const DatePicker = ({ onSubmit }) => {

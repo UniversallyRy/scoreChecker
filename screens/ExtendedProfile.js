@@ -3,7 +3,7 @@ import { Dimensions } from "react-native";
 import { Flex, Image, Text, HStack, Box } from "native-base";
 import { PROFILE_PIC_URL_PREFIX } from "../constants";
 import Icon from "react-native-vector-icons/FontAwesome";
-import Button from "./Buttons";
+import Button from "../components/Buttons";
 // todos: Years/year conditional, better list styling
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const image = require("../assets/double-bubble-dark.png");

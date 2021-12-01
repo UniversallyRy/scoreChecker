@@ -15,7 +15,7 @@ import NBA from "nba";
 import moment from "moment";
 import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from "../constants";
 import logos from "../logoManager";
-import ScoreCard from "../components/ScoreCard";
+import Scores from "../components/scores";
 import { LoadingButton } from "../components/Buttons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import StatLeaders from "../components/StatLeaders";

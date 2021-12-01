@@ -22,7 +22,7 @@ const Tab = createBottomTabNavigator();
 
 const MyTabs = () => (
   <Tab.Navigator
-    initialRouteName="#C32F27"
+    initialRouteName="Player Info"
     screenOptions={{
       tabBarActiveTintColor: "#F7B538",
       tabBarInactiveTintColor: "grey",
@@ -41,8 +41,8 @@ const MyTabs = () => (
     }}
   >
     <Tab.Screen
-      name="Home"
-      component={Home}
+      name="Scores"
+      component={ScoreScreen}
       options={{
         headerShown: false,
         tabBarIcon: ({ color, size }) => (

@@ -3,9 +3,9 @@ import { Dimensions } from "react-native";
 import { Flex, Text, Divider, VStack } from "native-base";
 import moment from "moment";
 import NBA from "nba";
-import ScoreCard from "../components/ScoreCard";
+import Scores from "../components/scores";
 import { LoadingButton } from "../components/Buttons";
-import DatePicker from "../components/DatePicker";
+import Header from "../components/scores/Header";
 // todo: possible team screen/standings
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -63,34 +63,14 @@ const ScoreScreen = ({ navigation }) => {
       w="100%"
       h="100%"
     >
-      <VStack
-        justifyContent="space-between"
-        alignContent="center"
-        alignItems="center"
-        bg="#C32F27"
-        w={windowWidth * 0.98}
-        h={windowHeight * 0.14}
-        mb={30}
-        m={4}
-        p={3}
-        br={3}
-      >
-        <Text m={1} fontSize="2xl" color="#F7B538" bold>
-          Scores for {todaysDate}
-        </Text>
-        <Divider bg="#D8572A" w={windowWidth + 0.93} />
-        <Text color="#F7B538" mb={1} fontSize="sm">
-          Quickly stay updated
-        </Text>
-        <DatePicker onSubmit={onSubmit} />
-      </VStack>
+      <Header onSubmit={onSubmit} todaysDate={todaysDate} />
       {/* scorecard list component showcasing today's scores*/}
       {loading ? (
         <>
           <Text> Loading. . .</Text>
         </>
       ) : (
-        <ScoreCard navigation={navigation} date={todaysDate} item={state} />
+        <Scores navigation={navigation} date={todaysDate} item={state} />
       )}
     </Flex>
   );

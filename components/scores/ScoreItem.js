@@ -1,30 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Dimensions, ActivityIndicator } from "react-native";
 import {
-  Flex,
   Text,
   Image,
   Divider,
-  InfoIcon,
   VStack,
-  Pressable,
   Stack,
-  Container,
   HStack,
   Heading,
-  FlatList,
 } from "native-base";
+import InfoButton from "./InfoButton";
 import NBA from "nba";
-import moment from "moment";
-import logos from "../logoManager";
-import { LoadingButton } from "./Buttons";
+import logos from "../../logoManager";
 
-// WebP only images currently, todo: png/jpeg backups
-// logo 35 x 50
-const todaysDate = moment().format("L");
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const Score = ({ u, navigation }) => {
+const ScoreItem = ({ u, navigation }) => {
   const [homeScore, setHome] = useState(0);
   const [extendedState, setExtended] = useState(0);
   const [awayScore, setAway] = useState(0);
@@ -121,93 +112,10 @@ const Score = ({ u, navigation }) => {
             ? u.livePeriodTimeBcast
             : ""}
         </Text>
-        <Pressable>
-          <InfoIcon
-            size="7"
-            onPress={() => {
-              // When game status is still showing a start time, or postponed, no routing and returns null
-              if (u.gameStatusText.length > 7 || u.gameStatusText == "PPD") {
-                return null;
-              } else {
-                // Navigate to the Extended Score route with params
-                navigation.navigate("Extended Score", {
-                  itemId: 10,
-                  scoreInfo: u,
-                });
-              }
-            }}
-          />
-        </Pressable>
+        <InfoButton navigation={navigation} u={u} />
       </VStack>
     </VStack>
   );
 };
 
-const ScoreCard = ({ item, date, navigation }) => {
-  const [loading, setLoading] = useState(true);
-  const numOfGames = item.length;
-
-  const renderItem = ({ item }) => (
-    <Score key={item.gameId} u={item} navigation={navigation} />
-  );
-
-  useEffect(() => {
-    const checkInfo = () => {
-      if (item !== undefined) {
-        setLoading(false);
-      } else {
-        setLoading(true);
-      }
-    };
-    return () => {
-      checkInfo();
-    };
-  }, [item]);
-
-  return (
-    <VStack
-      alignSelf="center"
-      alignContent="center"
-      justifyContent="center"
-      flex={1}
-      w={windowWidth}
-      m={3}
-    >
-      <Text fontSize="md" m={1} alignSelf="center" color="#F7B538">
-        {numOfGames} Games Today
-      </Text>
-      {!loading ? (
-        <VStack m={4} mb={2} safeArea>
-          <FlatList
-            data={item}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.gameId.toString()}
-          />
-        </VStack>
-      ) : (
-        <Container
-          alignSelf="center"
-          alignItems="center"
-          bg="#C32F27"
-          h={windowHeight * 0.35}
-        >
-          <VStack alignItems="center">
-            <Heading fontSize="xl" color="#F7B538">
-              Loading
-            </Heading>
-            <Divider
-              bg="#D8572A"
-              w={windowWidth * 0.8}
-              h={1}
-              alignSelf="center"
-              mb={5}
-            />
-            <LoadingButton h={300} alignSelf="center" />
-          </VStack>
-        </Container>
-      )}
-    </VStack>
-  );
-};
-
-export default ScoreCard;
+export default ScoreItem;
