@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import ExtendedGame from "../screens/ExtendedGame";
-import ExtendedProfile from "../screens/ExtendedProfile";
+import ExtendedGame from "../../screens/ExtendedGame";
+import ExtendedProfile from "../../screens/ExtendedProfile";
 import BottomTabs from "./BottomTabs";
 
 const Stack = createStackNavigator();
