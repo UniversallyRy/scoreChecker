@@ -27,23 +27,23 @@ const ExtendedGame = ({ navigation, route }) => {
   // todos: will need to break down in seperate components(seperate statsleader/linescores possibly)
   // need to fix player leaders pictures
   const [statState, setStat] = useState("Points");
-  const [gameData, setData] = useState({});
-  const [homeScore, setHome] = useState(0);
-  const [awayScore, setAway] = useState(0);
-  const [homeLeaders, setHomeLeaders] = useState({});
-  const [awayLeaders, setAwayLeaders] = useState({});
-  const [homePic, setHomePic] = useState({});
-  const [awayPic, setAwayPic] = useState({});
+  const [gameData, setGameData] = useState({});
+  const [homeScore, setHomeScore] = useState(0);
+  const [awayScore, setAwayScore] = useState(0);
+  const [homeLeadValue, setHomeLeaders] = useState({});
+  const [awayLeadValue, setAwayLeaders] = useState({});
+  const [homePlayerPic, setHomePic] = useState({});
+  const [awayPlayerPic, setAwayPic] = useState({});
   const { itemId, scoreInfo } = route.params;
   const [homeLines, setHomeLines] = useState([]);
   const [awayLines, setAwayLines] = useState([]);
-  const [scorerHome, setScorerHome] = useState("");
-  const [scorerAway, setScorerAway] = useState("");
-  const image = require("../assets/double-bubble-dark.png");
+  const [homePlayer, setHomePlayer] = useState("");
+  const [awayPlayer, setAwayPlayer] = useState("");
+
   const splitAt = (index) => (x) => [x.slice(0, index), x.slice(index)];
-  let comp = scoreInfo.gamecode.slice(-6);
+  let teams = scoreInfo.gamecode.slice(-6);
   let date = scoreInfo.gamecode.slice(0, 8);
-  let splitTeam = splitAt(3)(comp);
+  let splitTeam = splitAt(3)(teams);
   let [awayTeam, homeTeam] = [splitTeam[0], splitTeam[1]];
   let [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
 
@@ -57,19 +57,19 @@ const ExtendedGame = ({ navigation, route }) => {
         .then((res) => {
           setHomePic(res.home.Leaders.Points.leader[0].PersonID);
           setAwayPic(res.visitor.Leaders.Points.leader[0].PersonID);
-          setHome(res.home.score);
-          setAway(res.visitor.score);
+          setHomeScore(res.home.score);
+          setAwayScore(res.visitor.score);
           setHomeLeaders(res.home.Leaders.Points);
           setAwayLeaders(res.visitor.Leaders.Points);
           setHomeLines(res.home.linescores.period);
           setAwayLines(res.visitor.linescores.period);
-          setData(res);
-          setScorerHome(
+          setGameData(res);
+          setHomePlayer(
             res.home.Leaders.Points.leader[0].FirstName +
               " " +
               res.home.Leaders.Points.leader[0].LastName
           );
-          setScorerAway(
+          setAwayPlayer(
             res.visitor.Leaders.Points.leader[0].FirstName +
               " " +
               res.visitor.Leaders.Points.leader[0].LastName
@@ -91,12 +91,12 @@ const ExtendedGame = ({ navigation, route }) => {
         setAwayPic(res.visitor.Leaders[newStat].leader[0].PersonID);
         setHomeLeaders(res.home.Leaders[newStat]);
         setAwayLeaders(res.visitor.Leaders[newStat]);
-        setScorerHome(
+        setHomePlayer(
           res.home.Leaders[newStat].leader[0].FirstName +
             " " +
             res.home.Leaders[newStat].leader[0].LastName
         );
-        setScorerAway(
+        setAwayPlayer(
           res.visitor.Leaders[newStat].leader[0].FirstName +
             " " +
             res.visitor.Leaders[newStat].leader[0].LastName
@@ -120,23 +120,23 @@ const ExtendedGame = ({ navigation, route }) => {
         elevation={6}
       >
         <Header
+          gameData={gameData}
           awayTeam={awayTeam}
           awayLogo={awayLogo}
           awayScore={awayScore}
           homeTeam={homeTeam}
           homeLogo={homeLogo}
           homeScore={homeScore}
-          gameData={gameData}
         />
         <StatLeaders
-          awayLeaders={awayLeaders}
-          homeLeaders={homeLeaders}
-          changeStats={changeStats}
-          scorerAway={scorerAway}
-          scorerHome={scorerHome}
+          awayPic={{ uri: `${PROFILE_PIC_URL_PREFIX}/${awayPlayerPic}.png` }}
+          awayLeadValue={awayLeadValue}
+          awayPlayer={awayPlayer}
+          homePic={{ uri: `${PROFILE_PIC_URL_PREFIX}/${homePlayerPic}.png` }}
+          homePlayer={homePlayer}
+          homeLeadValue={homeLeadValue}
           statState={statState}
-          awayP={{ uri: `${PROFILE_PIC_URL_PREFIX}/${awayPic}.png` }}
-          homeP={{ uri: `${PROFILE_PIC_URL_PREFIX}/${homePic}.png` }}
+          changeStats={changeStats}
         />
         <QuarterLogs awayLines={awayLines} homeLines={homeLines} />
       </VStack>

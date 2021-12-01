@@ -6,27 +6,26 @@ import DropDown from "./DropDown";
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const StatLeaders = ({
-  homeLeaders,
-  awayLeaders,
+  awayLeadValue,
+  awayPic,
+  awayPlayer,
+  homePlayer,
+  homeLeadValue,
+  homePic,
   statState,
-  changeStats,
-  scorerHome,
-  scorerAway,
-  awayKey,
-  awayP,
-  homeP,
-  date,
   scoreInfo,
+  changeStats,
+  date,
 }) => {
   const [awayPicture, setAwayPicture] = useState({});
   const [homePicture, setHomePicture] = useState({});
   useEffect(() => {
     async function initData() {
-      setAwayPicture(awayP);
-      setHomePicture(homeP);
+      setAwayPicture(awayPic);
+      setHomePicture(homePic);
     }
     initData();
-  }, [awayP, homeP]);
+  }, [awayPic, homePic]);
 
   return (
     <VStack alignItems="center" justifyContent="center">
@@ -49,7 +48,7 @@ const StatLeaders = ({
           {statState} Leaders
         </Heading>
       </Box>
-      <HStack key={awayKey} alignItems="center" justifyContent="center" m={2}>
+      <HStack alignItems="center" justifyContent="center" m={2}>
         <VStack alignItems="center" m={3} bg="transparent">
           <Heading color="#F7B538" size="sm" bold>
             Away
@@ -64,10 +63,10 @@ const StatLeaders = ({
             alt="Away Player"
           />
           <Heading color="#F7B538" size="md">
-            {scorerAway}
+            {awayPlayer}
           </Heading>
           <Text color="#F7B538" fontSize="md">
-            {awayLeaders.StatValue} {statState}
+            {awayLeadValue.StatValue} {statState}
           </Text>
         </VStack>
         <VStack alignItems="center" m={3} bg="transparent">
@@ -84,10 +83,10 @@ const StatLeaders = ({
             alt="Home Player"
           />
           <Heading size="md" color="#F7B538">
-            {scorerHome}
+            {homePlayer}
           </Heading>
           <Text fontSize="md" color="#F7B538">
-            {homeLeaders.StatValue} {statState}
+            {homeLeadValue.StatValue} {statState}
           </Text>
         </VStack>
       </HStack>
