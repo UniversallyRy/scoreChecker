@@ -6,8 +6,6 @@ import ScoreItem from "./ScoreItem";
 import ScoresLoading from "./ScoresLoading";
 import InfoButton from "./InfoButton";
 
-// WebP only images currently, todo: png/jpeg backups
-// logo 35 x 50
 const todaysDate = moment().format("L");
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 

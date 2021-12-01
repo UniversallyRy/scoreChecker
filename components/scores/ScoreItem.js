@@ -13,6 +13,8 @@ import InfoButton from "./InfoButton";
 import NBA from "nba";
 import logos from "../../logoManager";
 
+// WebP only images currently, todo: png/jpeg backups
+// logo 35 x 50
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const ScoreItem = ({ u, navigation }) => {
