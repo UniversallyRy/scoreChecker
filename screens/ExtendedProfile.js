@@ -6,7 +6,6 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Button from "../components/Buttons";
 // todos: Years/year conditional, better list styling
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
-const image = require("../assets/double-bubble-dark.png");
 
 const ExtendedProfile = ({ route, navigation }) => {
   const { itemId, playerInfo } = route.params;

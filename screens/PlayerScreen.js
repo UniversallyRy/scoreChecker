@@ -14,7 +14,6 @@ const initialState = {
 
 const PlayerScreen = ({ navigation }) => {
   const [playerObj, setPlayerObj] = useState(initialState);
-  const image = require("../assets/double-bubble-dark.png");
 
   const loadPlayerInfo = (playerName) => {
     nba.stats

@@ -24,7 +24,6 @@ const ScoreScreen = ({ navigation }) => {
   const [state, setState] = useState(initialState);
   const [newObj, setNewObj] = useState([]);
   const [loading, setLoading] = useState(true);
-  const image = require("../assets/double-bubble-dark.png");
 
   const loader = () => {
     setState(newObj);
