@@ -40,7 +40,7 @@ const Scores = ({ item, date, navigation }) => {
       m={3}
     >
       {!loading ? (
-        <VStack m={4} mb={2} safeArea>
+        <VStack safeArea>
           <Text fontSize="md" m={1} alignSelf="center" color="#F7B538">
             {numOfGames} Games Today
           </Text>

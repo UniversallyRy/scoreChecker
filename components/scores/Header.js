@@ -21,7 +21,7 @@ const Header = ({ todaysDate, onSubmit }) => (
     <Text m={1} fontSize="2xl" color="#F7B538" bold>
       Scores for {todaysDate}
     </Text>
-    <Divider bg="#D8572A" w={windowWidth + 0.93} />
+    <Divider bg="#D8572A" h={1.8} w={windowWidth * 0.93} />
     <Text color="#F7B538" mb={1} fontSize="sm">
       Quickly stay updated
     </Text>
