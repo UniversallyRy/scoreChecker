@@ -9,10 +9,10 @@ import { NativeBaseProvider } from "native-base";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
-import Home from "./screens/home";
-import PlayerInfo from "./screens/playerInfo";
+import ScoreScreen from "./screens/ScoreScreen";
+import PlayerScreen from "./screens/PlayerScreen";
 import ExtendedScore from "./screens/extendedGame";
-import ExtendedProfile from "./components/ExtendedProfile";
+import ExtendedProfile from "./screens/ExtendedProfile";
 import { useFonts, Inter_900Black } from "@expo-google-fonts/inter";
 import AppLoading from "expo-app-loading";
 
@@ -52,7 +52,7 @@ const MyTabs = () => (
     />
     <Tab.Screen
       name="Player Info"
-      component={PlayerInfo}
+      component={PlayerScreen}
       options={{
         headerShown: false,
         tabBarIcon: ({ color, size }) => (

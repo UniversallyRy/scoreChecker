@@ -12,7 +12,7 @@ const initialState = {
   playerInfo: DEFAULT_PLAYER_INFO,
 };
 
-const PlayerInfo = ({ navigation }) => {
+const PlayerScreen = ({ navigation }) => {
   const [playerObj, setPlayerObj] = useState(initialState);
   const image = require("../assets/double-bubble-dark.png");
 
@@ -82,4 +82,4 @@ const PlayerInfo = ({ navigation }) => {
   );
 };
 
-export default PlayerInfo;
+export default PlayerScreen;

@@ -19,7 +19,7 @@ const initialState = [
   },
 ];
 
-const Home = ({ navigation }) => {
+const ScoreScreen = ({ navigation }) => {
   const [todaysDate, setTodaysDate] = useState(moment().format("L"));
   const [state, setState] = useState(initialState);
   const [newObj, setNewObj] = useState([]);
@@ -96,4 +96,4 @@ const Home = ({ navigation }) => {
   );
 };
 
-export default Home;
+export default ScoreScreen;
