@@ -46,7 +46,6 @@ const ExtendedGame = ({ navigation, route }) => {
   let splitTeam = splitAt(3)(comp);
   let [awayTeam, homeTeam] = [splitTeam[0], splitTeam[1]];
   let [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
-  let controller;
 
   useEffect(() => {
     async function initData() {
@@ -88,6 +87,8 @@ const ExtendedGame = ({ navigation, route }) => {
       .then((res) => res.sports_content)
       .then((res) => res.game)
       .then((res) => {
+        setHomePic(res.home.Leaders[newStat].leader[0].PersonID);
+        setAwayPic(res.visitor.Leaders[newStat].leader[0].PersonID);
         setHomeLeaders(res.home.Leaders[newStat]);
         setAwayLeaders(res.visitor.Leaders[newStat]);
         setScorerHome(
@@ -100,8 +101,6 @@ const ExtendedGame = ({ navigation, route }) => {
             " " +
             res.visitor.Leaders[newStat].leader[0].LastName
         );
-        setHomePic(res.home.Leaders[newStat].leader[0].PersonID);
-        setAwayPic(res.visitor.Leaders[newStat].leader[0].PersonID);
       });
   };
 
@@ -136,8 +135,8 @@ const ExtendedGame = ({ navigation, route }) => {
           scorerAway={scorerAway}
           scorerHome={scorerHome}
           statState={statState}
-          awayP={`${PROFILE_PIC_URL_PREFIX}/${awayPic}.png`}
-          homeP={`${PROFILE_PIC_URL_PREFIX}/${homePic}.png`}
+          awayP={{ uri: `${PROFILE_PIC_URL_PREFIX}/${awayPic}.png` }}
+          homeP={{ uri: `${PROFILE_PIC_URL_PREFIX}/${homePic}.png` }}
         />
         <QuarterLogs awayLines={awayLines} homeLines={homeLines} />
       </VStack>

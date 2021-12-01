@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { Box, VStack, HStack, Heading, Text, Image } from "native-base";
-import { Dimensions } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Box, VStack, HStack, Heading, Text } from "native-base";
+import { Dimensions, Image } from "react-native";
 import DropDown from "./DropDown";
-import NBA from "nba";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -13,11 +12,22 @@ const StatLeaders = ({
   changeStats,
   scorerHome,
   scorerAway,
+  awayKey,
   awayP,
   homeP,
   date,
   scoreInfo,
 }) => {
+  const [awayPicture, setAwayPicture] = useState({});
+  const [homePicture, setHomePicture] = useState({});
+  useEffect(() => {
+    async function initData() {
+      setAwayPicture(awayP);
+      setHomePicture(homeP);
+    }
+    initData();
+  }, [awayP, homeP]);
+
   return (
     <VStack alignItems="center" justifyContent="center">
       <DropDown statState={statState} changeStats={changeStats} />
@@ -39,19 +49,18 @@ const StatLeaders = ({
           {statState} Leaders
         </Heading>
       </Box>
-      <HStack alignItems="center" justifyContent="center" m={2}>
+      <HStack key={awayKey} alignItems="center" justifyContent="center" m={2}>
         <VStack alignItems="center" m={3} bg="transparent">
           <Heading color="#F7B538" size="sm" bold>
             Away
           </Heading>
           <Image
-            h={65}
-            w={65}
+            height={65}
+            width={65}
             borderColor="black"
-            borderStyle="solid"
             borderWidth={0.6}
             borderRadius={50}
-            src={awayP}
+            source={awayPicture}
             alt="Away Player"
           />
           <Heading color="#F7B538" size="md">
@@ -66,13 +75,12 @@ const StatLeaders = ({
             Home
           </Heading>
           <Image
-            h={65}
-            w={65}
+            height={65}
+            width={65}
             borderColor="black"
-            borderStyle="solid"
             borderWidth={0.6}
             borderRadius={50}
-            src={homeP}
+            source={homePicture}
             alt="Home Player"
           />
           <Heading size="md" color="#F7B538">
