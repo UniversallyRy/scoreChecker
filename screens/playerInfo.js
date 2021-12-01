@@ -1,15 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
-import {
-  StyleSheet,
-  Dimensions,
-  ScrollView,
-  KeyboardAvoidingView,
-} from "react-native";
+import { Dimensions } from "react-native";
+import { Box, Flex, ScrollView, KeyboardAvoidingView } from "native-base";
 import nba from "nba";
 import PlayerProfile from "../components/PlayerProfile";
 import PlayerSearch from "../components/PlayerSearch";
 import { DEFAULT_PLAYER_INFO } from "../constants";
-import { Box, Flex } from "native-base";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const initialState = {

@@ -1,5 +1,4 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import {
   createStackNavigator,
@@ -103,7 +102,11 @@ const App = () => {
   } else {
     return (
       <NativeBaseProvider>
-        <NavigationContainer style={styles.container}>
+        <NavigationContainer
+          flex={1}
+          alignItems="center"
+          justifyContent="center"
+        >
           <StatusBar style="auto" />
           <AuthStack />
         </NavigationContainer>
@@ -111,18 +114,5 @@ const App = () => {
     );
   }
 };
-
-const styles = StyleSheet.create({
-  container: {
-    fontFamily: "Roboto",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  tabText: {
-    backgroundColor: "#C32F27",
-    flex: 1,
-  },
-});
 
 export default App;

@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Dimensions,
-  SafeAreaView,
-  FlatList,
-  ActivityIndicator,
-} from "react-native";
+import { Dimensions, ActivityIndicator } from "react-native";
 import {
   Flex,
   Text,
@@ -16,6 +10,9 @@ import {
   Pressable,
   Stack,
   Container,
+  HStack,
+  Heading,
+  FlatList,
 } from "native-base";
 import NBA from "nba";
 import moment from "moment";
@@ -53,77 +50,96 @@ const Score = ({ u, navigation }) => {
   }, []);
 
   return (
-    <Flex topDivider={true} p={1} style={styles.scoreCard}>
-      <Stack>
-        {/* Team Logos */}
-        <VStack style={styles.teamVersus}>
-          <VStack>
-            <Text style={styles.teams}>
-              {awayTeam} - {awayScore}
-            </Text>
-            <Image
-              accessibilityLabel={awayTeam}
-              source={awayLogo}
-              style={{ width: 50, height: 50, margin: 5 }}
-              PlaceholderContent={<ActivityIndicator />}
-              alt="Away Logo"
-            />
-          </VStack>
-
-          <Text style={{ fontWeight: "bold", marginLeft: 25, marginRight: 25 }}>
-            At
-          </Text>
-
-          <VStack>
-            <Text style={styles.teams}>
-              {homeTeam} - {homeScore}{" "}
-            </Text>
-            <Image
-              accessibilityLabel={homeTeam}
-              source={homeLogo}
-              style={{ width: 50, height: 50, margin: 5 }}
-              PlaceholderContent={<ActivityIndicator />}
-              alt="Home Logo"
-            />
-          </VStack>
+    <VStack
+      width={windowWidth * 0.935}
+      bg="#C32F27"
+      alignItems="center"
+      alignSelf="center"
+      justifyContent="center"
+      borderRadius={6}
+      mb={20}
+      bottom={0}
+      shadowColor="#000"
+      shadowOffset={{ width: 0, height: 2 }}
+      shadowOpacity={0.55}
+      shadowRadius={3.84}
+      elevation={5}
+      p={1}
+    >
+      <HStack alignItems="center" my={5}>
+        <VStack alignItems="center">
+          <Heading fontSize="lg" mb={2} bold>
+            {awayTeam} - {awayScore}
+          </Heading>
+          {/* Team Logos */}
+          <Image
+            accessibilityLabel={awayTeam}
+            source={awayLogo}
+            w={50}
+            h={50}
+            m={1}
+            PlaceholderContent={<ActivityIndicator />}
+            alt="Away Logo"
+          />
         </VStack>
 
-        {/* Game Status(Shows postponed, game times in EST and info is selectable only if game is already played ) */}
-        <Text style={styles.quarter}>
-          {u.gameStatusText != "PPD" ? u.gameStatusText : "Postponed"}
-        </Text>
-        <Divider style={styles.divider} />
-        <Text style={styles.broadcast}>
+        <Heading ml={25} mr={25} bold>
+          @
+        </Heading>
+
+        <VStack alignItems="center">
+          <Heading fontSize="lg" mb={2} bold>
+            {homeTeam} - {homeScore}{" "}
+          </Heading>
+          <Image
+            accessibilityLabel={homeTeam}
+            source={homeLogo}
+            w={50}
+            h={50}
+            m={1}
+            PlaceholderContent={<ActivityIndicator />}
+            alt="Home Logo"
+          />
+        </VStack>
+      </HStack>
+      {/* Game Status(Shows postponed, game times in EST and info is selectable only if game is already played ) */}
+      <Text alignSelf="center" fontSize="lg" bold>
+        {u.gameStatusText != "PPD" ? u.gameStatusText : "Postponed"}
+      </Text>
+      <Divider
+        bg="#D8572A"
+        w={windowWidth * 0.8}
+        h={1}
+        alignSelf="center"
+        mb={5}
+      />
+      <VStack alignItems="center">
+        <Text alignSelf="center" fontSize="md">
           {u.gameStatusText != "Final" &&
           u.gameStatusText != "PPD" &&
           u.livePeriodTimeBcast.charAt(1) != "0"
             ? u.livePeriodTimeBcast
             : ""}
-          {
-            <Pressable>
-              <InfoIcon
-                size="7"
-                onPress={() => {
-                  // When game status is still showing a start time, or postponed, no routing and returns null
-                  if (
-                    u.gameStatusText.length > 7 ||
-                    u.gameStatusText == "PPD"
-                  ) {
-                    return null;
-                  } else {
-                    // Navigate to the Extended Score route with params
-                    navigation.navigate("Extended Score", {
-                      itemId: 10,
-                      scoreInfo: u,
-                    });
-                  }
-                }}
-              />
-            </Pressable>
-          }
         </Text>
-      </Stack>
-    </Flex>
+        <Pressable>
+          <InfoIcon
+            size="7"
+            onPress={() => {
+              // When game status is still showing a start time, or postponed, no routing and returns null
+              if (u.gameStatusText.length > 7 || u.gameStatusText == "PPD") {
+                return null;
+              } else {
+                // Navigate to the Extended Score route with params
+                navigation.navigate("Extended Score", {
+                  itemId: 10,
+                  scoreInfo: u,
+                });
+              }
+            }}
+          />
+        </Pressable>
+      </VStack>
+    </VStack>
   );
 };
 
@@ -149,112 +165,49 @@ const ScoreCard = ({ item, date, navigation }) => {
   }, [item]);
 
   return (
-    <Flex style={styles.scoreContainer}>
-      <Text style={styles.gameCount}>{numOfGames} Games Today</Text>
+    <VStack
+      alignSelf="center"
+      alignContent="center"
+      justifyContent="center"
+      flex={1}
+      w={windowWidth}
+      m={3}
+    >
+      <Text fontSize="md" m={1} alignSelf="center" color="#F7B538">
+        {numOfGames} Games Today
+      </Text>
       {!loading ? (
-        <SafeAreaView style={styles.container}>
+        <VStack m={4} mb={2} safeArea>
           <FlatList
             data={item}
             renderItem={renderItem}
             keyExtractor={(item) => item.gameId.toString()}
           />
-        </SafeAreaView>
+        </VStack>
       ) : (
-        <Container topDivider={true} containerStyle={styles.loadingContainer}>
-          <Flex>
-            <Text style={styles.title}>Loading</Text>
-            <Divider style={styles.divider} />
-            <Divider style={styles.divider} />
-            <LoadingButton containerStyle={styles.lButton} />
-          </Flex>
+        <Container
+          alignSelf="center"
+          alignItems="center"
+          bg="#C32F27"
+          h={windowHeight * 0.35}
+        >
+          <VStack alignItems="center">
+            <Heading fontSize="xl" color="#F7B538">
+              Loading
+            </Heading>
+            <Divider
+              bg="#D8572A"
+              w={windowWidth * 0.8}
+              h={1}
+              alignSelf="center"
+              mb={5}
+            />
+            <LoadingButton h={300} alignSelf="center" />
+          </VStack>
         </Container>
       )}
-    </Flex>
+    </VStack>
   );
 };
-
-const styles = StyleSheet.create({
-  scoreContainer: {
-    flex: 1,
-    width: windowWidth,
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    margin: 10,
-  },
-  container: {
-    margin: 10,
-    marginBottom: 40,
-  },
-  divider: {
-    backgroundColor: "#D8572A",
-    width: windowWidth * 0.8,
-    alignSelf: "center",
-    height: 1,
-    marginBottom: 5,
-  },
-  gameCount: {
-    fontSize: 16,
-    alignSelf: "center",
-    color: "#F7B538",
-  },
-  scoreCard: {
-    width: windowWidth * 0.935,
-    backgroundColor: "#C32F27",
-    justifyContent: "center",
-    alignSelf: "center",
-    borderColor: "black",
-    borderRadius: 6,
-    marginBottom: 20,
-    bottom: 0,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.55,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  teamVersus: {
-    flexDirection: "row",
-    alignItems: "center",
-    alignSelf: "center",
-    marginBottom: 10,
-  },
-  title: {
-    fontWeight: "bold",
-    fontFamily: "Roboto",
-    marginBottom: 10,
-  },
-  teams: {
-    fontWeight: "bold",
-    fontFamily: "Roboto",
-    marginBottom: 10,
-    borderColor: "black",
-    borderWidth: 0.5,
-    borderRadius: 2,
-  },
-  quarter: {
-    alignSelf: "center",
-    fontWeight: "bold",
-    fontFamily: "Roboto",
-    fontSize: 16,
-  },
-  broadcast: {
-    alignSelf: "center",
-    justifyContent: "space-around",
-    fontSize: 14,
-    fontFamily: "Roboto",
-  },
-  loadingContainer: {
-    backgroundColor: "#C32F27",
-    height: windowHeight * 0.35,
-  },
-  lButton: {
-    height: 300,
-    alignSelf: "center",
-  },
-});
 
 export default ScoreCard;
