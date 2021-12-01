@@ -11,7 +11,7 @@ import {
 } from "native-base";
 import { Formik } from "formik";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { RaisedButton } from "./Buttons";
+import { RaisedButton } from "../Buttons";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 

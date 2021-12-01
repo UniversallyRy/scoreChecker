@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Dimensions } from "react-native";
 import { Flex, Image, Button, Text, HStack, Box, VStack } from "native-base";
-import { PROFILE_PIC_URL_PREFIX } from "../constants";
-import { RaisedButton, LoadingButton } from "./Buttons";
-import logos from "../logoManager";
+import { PROFILE_PIC_URL_PREFIX } from "../../constants";
+import { RaisedButton, LoadingButton } from "../Buttons";
+import logos from "../../logoManager";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 

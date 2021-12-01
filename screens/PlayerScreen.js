@@ -2,8 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { Dimensions } from "react-native";
 import { Box, Flex, ScrollView, KeyboardAvoidingView } from "native-base";
 import nba from "nba";
-import PlayerProfile from "../components/PlayerProfile";
-import PlayerSearch from "../components/PlayerSearch";
+import PlayerProfile from "../components/players/PlayerProfile";
+import PlayerSearch from "../components/players/PlayerSearch";
 import { DEFAULT_PLAYER_INFO } from "../constants";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");

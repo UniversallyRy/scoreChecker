@@ -22,7 +22,7 @@ import StatLeaders from "../components/StatLeaders";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const extendedGame = ({ navigation, route }) => {
+const ExtendedGame = ({ navigation, route }) => {
   // todos: will need to break down in seperate components(seperate statsleader/linescores possibly)
   // seperate screen from components
   const [leaderDropdown, setDropdown] = useState({ value: "Points" });
@@ -347,4 +347,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default extendedGame;
+export default ExtendedGame;
