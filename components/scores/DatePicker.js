@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Platform } from "react-native";
-import { Text } from "native-base";
+import { Box, Text } from "native-base";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { RaisedButton } from "../Buttons";
 // todos: fix laggy picker, sometimes jumps a day
@@ -28,7 +28,7 @@ const DatePicker = ({ onSubmit }) => {
   };
 
   return (
-    <>
+    <Box>
       <RaisedButton
         alignSelf="center"
         borderRadius={3}
@@ -53,7 +53,7 @@ const DatePicker = ({ onSubmit }) => {
           minimumDate={new Date(1980, 0, 1)}
         />
       )}
-    </>
+    </Box>
   );
 };
 

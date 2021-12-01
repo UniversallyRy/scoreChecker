@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Dimensions, View, ActivityIndicator } from "react-native";
+import { Dimensions, ActivityIndicator } from "react-native";
 import {
   Box,
   Container,
@@ -55,6 +55,7 @@ const ExtendedGame = ({ navigation, route }) => {
         .then((res) => res.sports_content)
         .then((res) => res.game)
         .then((res) => {
+          setGameData(res);
           setHomePic(res.home.Leaders.Points.leader[0].PersonID);
           setAwayPic(res.visitor.Leaders.Points.leader[0].PersonID);
           setHomeScore(res.home.score);
@@ -63,7 +64,6 @@ const ExtendedGame = ({ navigation, route }) => {
           setAwayLeaders(res.visitor.Leaders.Points);
           setHomeLines(res.home.linescores.period);
           setAwayLines(res.visitor.linescores.period);
-          setGameData(res);
           setHomePlayer(
             res.home.Leaders.Points.leader[0].FirstName +
               " " +
