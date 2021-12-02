@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, VStack, HStack, Heading, Text } from "native-base";
 import { Dimensions, Image } from "react-native";
+import { colorScheme } from "../../../constants";
 import DropDown from "./DropDown";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -19,6 +20,7 @@ const StatLeaders = ({
 }) => {
   const [awayPicture, setAwayPicture] = useState({});
   const [homePicture, setHomePicture] = useState({});
+  const leaderHeading = statState.slice(0, -1);
   useEffect(() => {
     async function initData() {
       setAwayPicture(awayPic);
@@ -37,20 +39,20 @@ const StatLeaders = ({
         p={2.2}
         w={windowWidth * 0.45}
         h={39}
-        bg="#780116"
+        bg={colorScheme.button}
         shadowColor="#000"
         shadowOffset={{ width: 1, height: 2 }}
         shadowOpacity={0.65}
         shadowRadius={2.84}
-        elevation={3}
+        elevation={4}
       >
-        <Heading color="#F7B538" fontSize="lg">
-          {statState} Leaders
+        <Heading color={colorScheme.text} fontSize="lg">
+          {leaderHeading} Leaders
         </Heading>
       </Box>
       <HStack alignItems="center" justifyContent="center" m={2}>
         <VStack alignItems="center" m={3} bg="transparent">
-          <Heading color="#F7B538" size="sm" bold>
+          <Heading color={colorScheme.text} size="sm" bold>
             Away
           </Heading>
           <Image
@@ -62,15 +64,15 @@ const StatLeaders = ({
             source={awayPicture}
             alt="Away Player"
           />
-          <Heading color="#F7B538" size="md">
+          <Heading color={colorScheme.text} size="md">
             {awayPlayer}
           </Heading>
-          <Text color="#F7B538" fontSize="md">
+          <Text color={colorScheme.text} fontSize="md">
             {awayLeadValue.StatValue} {statState}
           </Text>
         </VStack>
         <VStack alignItems="center" m={3} bg="transparent">
-          <Heading color="#F7B538" size="sm">
+          <Heading color={colorScheme.text} size="sm">
             Home
           </Heading>
           <Image
@@ -82,10 +84,10 @@ const StatLeaders = ({
             source={homePicture}
             alt="Home Player"
           />
-          <Heading size="md" color="#F7B538">
+          <Heading size="md" color={colorScheme.text}>
             {homePlayer}
           </Heading>
-          <Text fontSize="md" color="#F7B538">
+          <Text fontSize="md" color={colorScheme.text}>
             {homeLeadValue.StatValue} {statState}
           </Text>
         </VStack>

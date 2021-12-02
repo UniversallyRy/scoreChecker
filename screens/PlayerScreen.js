@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Dimensions } from "react-native";
 import { Box, Flex, ScrollView, KeyboardAvoidingView } from "native-base";
-import nba from "nba";
+import NBA from "nba";
 import PlayerProfile from "../components/players/PlayerProfile";
 import PlayerSearch from "../components/players/PlayerSearch";
-import { DEFAULT_PLAYER_INFO } from "../constants";
+import { DEFAULT_PLAYER_INFO, colorScheme } from "../constants";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+
 const initialState = {
   // Obi Toppin as default profile
   playerInfo: DEFAULT_PLAYER_INFO,
@@ -16,8 +17,8 @@ const PlayerScreen = ({ navigation }) => {
   const [playerObj, setPlayerObj] = useState(initialState);
 
   const loadPlayerInfo = (playerName) => {
-    nba.stats
-      .playerInfo({ PlayerID: nba.findPlayer(playerName).playerId })
+    NBA.stats
+      .playerInfo({ PlayerID: NBA.findPlayer(playerName).playerId })
       .then((info) => {
         const playerInfo = Object.assign(
           info.commonPlayerInfo[0],
@@ -26,6 +27,7 @@ const PlayerScreen = ({ navigation }) => {
         setPlayerObj({ playerInfo });
       });
   };
+
   // cycles through reset twice to trigger promise rerender
   const handleReset = (n) => {
     let count = n;
@@ -35,15 +37,16 @@ const PlayerScreen = ({ navigation }) => {
       loadPlayerInfo(initialState.playerInfo.fullName);
     }
     count++;
-    handleReset(n + 1);
+    handleReset(n++);
   };
-  const handleInput = (item) => {
-    // regex to test if 2 words were inputted
-    const regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
-    let trimmedInput = item.player.trim();
-    let newPlayer = nba.findPlayer(trimmedInput);
 
-    if (!regName.test(trimmedInput)) {
+  const handleInput = (item) => {
+    // regex to test if 2 words were submitted
+    const regNameTest = /^[a-zA-Z]+ [a-zA-Z]+$/;
+    let trimmedInput = item.player.trim();
+    let newPlayer = NBA.findPlayer(trimmedInput);
+
+    if (!regNameTest.test(trimmedInput)) {
       alert("Please enter the full name of the player.");
       return false;
     } else {
@@ -54,7 +57,7 @@ const PlayerScreen = ({ navigation }) => {
       }
     }
   };
-  // initial load of default Harden profile
+  // initial call to default Toppin profile
   useEffect(() => {
     const initData = loadPlayerInfo(initialState.playerInfo.fullName);
     return () => {
@@ -63,8 +66,7 @@ const PlayerScreen = ({ navigation }) => {
   }, []);
 
   return (
-    //ScrollView added for ability to view all content while keyboard is open
-    <Box bg="#273e47">
+    <Box bg={colorScheme.background}>
       <ScrollView>
         <KeyboardAvoidingView>
           <PlayerProfile

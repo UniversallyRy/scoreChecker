@@ -5,6 +5,7 @@ import moment from "moment";
 import ScoreItem from "./ScoreItem";
 import ScoresLoading from "./ScoresLoading";
 import InfoButton from "./InfoButton";
+import { colorScheme } from "../../constants";
 
 const todaysDate = moment().format("L");
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -13,9 +14,13 @@ const Scores = ({ item, date, navigation }) => {
   const [loading, setLoading] = useState(true);
   const numOfGames = item.length;
 
+  const renderItem = ({ item }) => (
+    <ScoreItem key={item.gameId} u={item} navigation={navigation} />
+  );
+
   useEffect(() => {
     const checkInfo = () => {
-      if (item !== undefined) {
+      if (item !== undefined && item.gameId == item.gameId) {
         setLoading(false);
       } else {
         setLoading(true);
@@ -26,33 +31,29 @@ const Scores = ({ item, date, navigation }) => {
     };
   }, [item]);
 
-  const renderItem = ({ item }) => (
-    <ScoreItem key={item.gameId} u={item} navigation={navigation} />
-  );
-
   return (
     <VStack
-      alignSelf="center"
-      alignContent="center"
-      justifyContent="center"
       flex={1}
       w={windowWidth}
       m={3}
+      alignSelf="center"
+      alignContent="center"
+      justifyContent="center"
     >
-      {!loading ? (
-        <VStack safeArea>
-          <Text fontSize="md" m={1} alignSelf="center" color="#F7B538">
-            {numOfGames} Games Today
+      <VStack safeArea>
+        {numOfGames >= 1 ? (
+          <Text alignSelf="center" fontSize="md" m={1} color={colorScheme.text}>
+            {numOfGames + " Games"}
           </Text>
-          <FlatList
-            data={item}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.gameId.toString()}
-          />
-        </VStack>
-      ) : (
-        <ScoresLoading />
-      )}
+        ) : (
+          <ScoresLoading />
+        )}
+        <FlatList
+          data={item}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.gameId.toString()}
+        />
+      </VStack>
     </VStack>
   );
 };

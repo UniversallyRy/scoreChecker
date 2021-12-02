@@ -1,9 +1,10 @@
 import React from "react";
 import { ActivityIndicator } from "react-native";
 import { HStack, Image, Text, VStack } from "native-base";
+import { colorScheme } from "../../../constants";
 
 const Header = ({
-  gameData,
+  gameArena,
   awayTeam,
   awayLogo,
   awayScore,
@@ -15,7 +16,7 @@ const Header = ({
     <VStack alignItems="center">
       <HStack alignItems="center" alignSelf="center" m={5} mb={5}>
         <VStack>
-          <Text mb={5} bold>
+          <Text color={colorScheme.text} mb={5} bold>
             {awayTeam} - {awayScore}
           </Text>
           <Image
@@ -29,12 +30,18 @@ const Header = ({
           />
         </VStack>
 
-        <Text justifyContent="center" ml={5} mr={5} bold>
+        <Text
+          color={colorScheme.text}
+          justifyContent="center"
+          ml={5}
+          mr={5}
+          bold
+        >
           @
         </Text>
 
         <VStack>
-          <Text mb={5} bold>
+          <Text color={colorScheme.text} mb={5} bold>
             {homeTeam} - {homeScore}{" "}
           </Text>
           <Image
@@ -48,9 +55,11 @@ const Header = ({
           />
         </VStack>
       </HStack>
-      <Text m={1}>Arena: {gameData.arena}</Text>
-      <Text mb={3}>
-        City: {gameData.city}, {gameData.country}
+      <Text color={colorScheme.text} m={1}>
+        Arena: {gameArena.arena}
+      </Text>
+      <Text color={colorScheme.text} mb={3}>
+        City: {gameArena.city}, {gameArena.country}
       </Text>
     </VStack>
   );

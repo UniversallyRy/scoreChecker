@@ -6,11 +6,13 @@ import NBA from "nba";
 import Scores from "../components/scores";
 import { LoadingButton } from "../components/Buttons";
 import Header from "../components/scores/Header";
+import ScoresLoading from "../components/scores/ScoresLoading";
+import { colorScheme } from "../constants";
 // todo: possible team screen/standings
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-//Initial object to use before the nba api's async is fulfilled
+//Initial state before NBA api's async is fulfilled
 const initialState = [
   {
     gamecode: "Games Loading",
@@ -20,9 +22,9 @@ const initialState = [
 ];
 
 const ScoreScreen = ({ navigation }) => {
-  const [todaysDate, setTodaysDate] = useState(moment().format("L"));
   const [state, setState] = useState(initialState);
   const [newObj, setNewObj] = useState([]);
+  const [todaysDate, setTodaysDate] = useState(moment().format("L"));
   const [loading, setLoading] = useState(true);
 
   const loader = () => {
@@ -31,7 +33,7 @@ const ScoreScreen = ({ navigation }) => {
   };
   setTimeout(() => {
     loader();
-  }, 1000);
+  }, 100);
 
   useEffect(() => {
     async function initData() {
@@ -41,9 +43,11 @@ const ScoreScreen = ({ navigation }) => {
     }
     initData();
   }, [todaysDate]);
-  // callback for datepicker changes
+
+  // callback for date changes
   const onSubmit = useCallback((item) => {
     let changedDate = item;
+    setLoading(true);
     setTodaysDate(changedDate);
     async function newDay() {
       setNewObj([]);
@@ -58,18 +62,17 @@ const ScoreScreen = ({ navigation }) => {
     <Flex
       justifyContent="center"
       alignItems="center"
-      bg="#273e47"
+      bg={colorScheme.background}
       w="100%"
       h="100%"
     >
-      <Header onSubmit={onSubmit} todaysDate={todaysDate} />
-      {/* scorecard list component showcasing today's scores*/}
+      <Header loading={loading} onSubmit={onSubmit} todaysDate={todaysDate} />
       {loading ? (
         <>
-          <Text> Loading. . .</Text>
+          <ScoresLoading />
         </>
       ) : (
-        <Scores navigation={navigation} date={todaysDate} item={state} />
+        <Scores item={state} navigation={navigation} date={todaysDate} />
       )}
     </Flex>
   );

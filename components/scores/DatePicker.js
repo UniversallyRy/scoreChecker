@@ -3,11 +3,12 @@ import { Platform } from "react-native";
 import { Box, Text } from "native-base";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { RaisedButton } from "../Buttons";
+import { colorScheme } from "../../constants";
 // todos: fix laggy picker, sometimes jumps a day
 
-const DatePicker = ({ onSubmit }) => {
-  let [date, setDate] = useState(new Date());
-  let [show, setShow] = useState(false);
+const DatePicker = ({ onSubmit, loading }) => {
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
 
   const showMode = () => {
     setShow(true);
@@ -34,14 +35,14 @@ const DatePicker = ({ onSubmit }) => {
         borderRadius={3}
         h={9}
         w={200}
-        shadowColor="#000"
-        shadowOffset={{ width: 1, height: 2 }}
-        shadowOpacity={0.55}
-        shadowRadius={1.84}
-        elevation={3}
+        shadowOffset={{ width: 0, height: 3 }}
+        shadowOpacity={0.7}
+        shadowRadius={3.84}
+        elevation={4}
         onPress={showMode}
+        isDisabled={loading}
       >
-        <Text>CHANGE DATE</Text>
+        <Text color={colorScheme.text}>CHANGE DATE</Text>
       </RaisedButton>
       {show && (
         <DateTimePicker

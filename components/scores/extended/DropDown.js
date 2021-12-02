@@ -3,51 +3,34 @@ import React, { useState } from "react";
 import { View, Dimensions } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { colorScheme } from "../../../constants";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
+const initialLabels = (labels) => {
+  let mappedLabels = labels.map((label) => {
+    return {
+      label: label,
+      value: label,
+      icon: () => (
+        <MaterialCommunityIcons
+          name="basketball"
+          size={18}
+          color={colorScheme.text}
+          style={{ marginRight: 10 }}
+        />
+      ),
+    };
+  });
+  return mappedLabels;
+};
+
 const DropDown = ({ statState, changeStats }) => {
-  const [leaderDropdown, setDropdown] = useState({ value: "Points" });
-  const [open, setOpen] = useState(false);
+  const [labels, setLabels] = useState(
+    initialLabels(["Points", "Assists", "Rebounds"])
+  );
   const [value, setValue] = useState("Points");
-  const [items, setItems] = useState([
-    {
-      label: "Points",
-      value: "Points",
-      icon: () => (
-        <MaterialCommunityIcons
-          name="basketball"
-          size={18}
-          color="#900"
-          style={{ marginRight: 10 }}
-        />
-      ),
-    },
-    {
-      label: "Rebounds",
-      value: "Rebounds",
-      icon: () => (
-        <MaterialCommunityIcons
-          name="basketball"
-          size={18}
-          color="#900"
-          style={{ marginRight: 10 }}
-        />
-      ),
-    },
-    {
-      label: "Assists",
-      value: "Assists",
-      icon: () => (
-        <MaterialCommunityIcons
-          name="basketball"
-          size={18}
-          color="#900"
-          style={{ marginRight: 10 }}
-        />
-      ),
-    },
-  ]);
+  const [open, setOpen] = useState(false);
 
   return (
     <Flex
@@ -64,26 +47,27 @@ const DropDown = ({ statState, changeStats }) => {
       }}
     >
       <DropDownPicker
-        items={items}
-        setItems={setItems}
+        items={labels}
+        setItems={setLabels}
         value={value}
         setValue={setValue}
         open={open}
         setOpen={setOpen}
         onChangeValue={(item) => {
-          setDropdown({ value: value });
           changeStats(value);
         }}
+        textStyle={{ color: colorScheme.text }}
         style={{
           height: 40,
           margin: 5,
           alignItems: "center",
-          backgroundColor: "#C32F27",
-          borderColor: "darkgrey",
+          backgroundColor: colorScheme.foreground,
+          borderColor: colorScheme.divider,
         }}
         dropDownContainerStyle={{
           alignContent: "center",
-          backgroundColor: "#900",
+          backgroundColor: colorScheme.button,
+          borderColor: colorScheme.divider,
         }}
       />
     </Flex>

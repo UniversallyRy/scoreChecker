@@ -1,11 +1,12 @@
 import React from "react";
-import { View, Text } from "react-native";
 import { InfoIcon, Pressable } from "native-base";
+import { colorScheme } from "../../constants";
 
 const InfoButton = ({ navigation, u }) => {
   return (
     <Pressable>
       <InfoIcon
+        color={colorScheme.text}
         size="7"
         onPress={() => {
           // When game status is still showing a start time, or postponed, no routing and returns null

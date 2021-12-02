@@ -12,7 +12,7 @@ import {
 import InfoButton from "./InfoButton";
 import NBA from "nba";
 import logos from "../../logoManager";
-
+import { colorScheme } from "../../constants";
 // WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -45,7 +45,7 @@ const ScoreItem = ({ u, navigation }) => {
   return (
     <VStack
       width={windowWidth * 0.935}
-      bg="#C32F27"
+      bg={colorScheme.foreground}
       alignItems="center"
       alignSelf="center"
       justifyContent="center"
@@ -61,8 +61,8 @@ const ScoreItem = ({ u, navigation }) => {
     >
       <HStack alignItems="center" my={5}>
         <VStack alignItems="center">
-          <Heading fontSize="lg" mb={2} bold>
-            {awayTeam} - {awayScore}
+          <Heading color={colorScheme.text} fontSize="lg" mb={2} bold>
+            {awayTeam} {awayScore == 0 ? "" : "-  " + awayScore}
           </Heading>
           {/* Team Logos */}
           <Image
@@ -76,13 +76,13 @@ const ScoreItem = ({ u, navigation }) => {
           />
         </VStack>
 
-        <Heading ml={25} mr={25} bold>
+        <Heading color={colorScheme.text} ml={25} mr={25} bold>
           @
         </Heading>
 
         <VStack alignItems="center">
-          <Heading fontSize="lg" mb={2} bold>
-            {homeTeam} - {homeScore}{" "}
+          <Heading color={colorScheme.text} fontSize="lg" mb={2} bold>
+            {homeTeam} {homeScore == 0 ? "" : "-  " + homeScore}
           </Heading>
           <Image
             accessibilityLabel={homeTeam}
@@ -96,7 +96,7 @@ const ScoreItem = ({ u, navigation }) => {
         </VStack>
       </HStack>
       {/* Game Status(Shows postponed, game times in EST and info is selectable only if game is already played ) */}
-      <Text alignSelf="center" fontSize="lg" bold>
+      <Text color={colorScheme.text} alignSelf="center" fontSize="lg" bold>
         {u.gameStatusText != "PPD" ? u.gameStatusText : "Postponed"}
       </Text>
       <Divider

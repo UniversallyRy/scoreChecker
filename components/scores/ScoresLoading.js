@@ -2,6 +2,7 @@ import React from "react";
 import { Dimensions } from "react-native";
 import { Container, VStack, Divider, Heading } from "native-base";
 import { LoadingButton } from "../Buttons";
+import { colorScheme } from "../../constants";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -11,15 +12,15 @@ const ScoresLoading = () => {
       alignSelf="center"
       alignItems="center"
       borderRadius={3}
-      bg="#C32F27"
+      bg={colorScheme.foreground}
       h={windowHeight * 0.55}
     >
       <VStack alignItems="center">
-        <Heading my={2} fontSize="xl" color="#F7B538">
+        <Heading my={2} fontSize="xl" color={colorScheme.text}>
           Please Wait . .
         </Heading>
         <Divider
-          bg="#D8572A"
+          bg={colorScheme.divider}
           w={windowWidth * 0.8}
           h={1}
           alignSelf="center"

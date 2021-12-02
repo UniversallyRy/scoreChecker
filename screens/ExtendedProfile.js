@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
 import { Flex, Image, Text, HStack, Box } from "native-base";
-import { PROFILE_PIC_URL_PREFIX } from "../constants";
+import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../constants";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Button from "../components/Buttons";
-// todos: Years/year conditional, better list styling
+// todos: better list styling
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const ExtendedProfile = ({ route, navigation }) => {
   const { itemId, playerInfo } = route.params;
-  // Object container for player information
 
   const experience = (item) => {
     if (item < 1) return "Rookie";
@@ -18,6 +17,7 @@ const ExtendedProfile = ({ route, navigation }) => {
     } else return "1 Previous Season";
   };
 
+  // Object container for player information
   const profileState = {
     Name: playerInfo.displayFirstLast,
     Team: playerInfo.teamCity + " " + playerInfo.teamName,
@@ -43,17 +43,17 @@ const ExtendedProfile = ({ route, navigation }) => {
       !itemData ||
       (typeof itemData === "string" && itemData.includes("HS"))
     ) {
-      return "High School";
+      return "Drafted out of High School";
     } else return item;
   };
 
   return (
-    <Box h="100%" bg="#273e47">
+    <Box h="100%" bg={colorScheme.background}>
       <Flex
         alignSelf="center"
         w={windowWidth * 0.98}
         h={windowHeight * 0.88}
-        bg="#C32F27"
+        bg={colorScheme.foreground}
         m={10}
         p={2}
         borderRadius={5}
@@ -72,14 +72,17 @@ const ExtendedProfile = ({ route, navigation }) => {
           source={{
             uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`,
           }}
+          key={playerInfo.playerId}
           alt="Profile"
         />
         {Object.entries(profileState).map(([key, data]) => (
           <HStack m={1} textAlign="auto" key={key}>
-            <Text mr={1} fontSize="lg" bold>
+            <Text color={colorScheme.text} mr={1} fontSize="lg" bold>
               {onlyHS(key, data)}:{" "}
             </Text>
-            <Text ml={2} fontSize="lg">{`${data}`}</Text>
+            <Text color={colorScheme.text} ml={2} fontSize="lg">
+              {`${data}`}
+            </Text>
           </HStack>
         ))}
       </Flex>

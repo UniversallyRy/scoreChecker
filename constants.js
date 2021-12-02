@@ -8,16 +8,15 @@ export const DEFAULT_PLAYER_INFO = {
   teamAbbreviation: "NYK",
 };
 
-const colorScheme = {
-  UPMaroon: "#780116",
-  MaximumYellowRed: "#F7B538",
-  Ochre: "#273e47",
-  Flame: "#D8572A",
-  InternationalOrangeGoldenGateBridge: "#C32F27",
-  // top/naviagtion/item container color
-  //  button color
-  // background color
-  //  textinput color
-  //
-  //
+export const colorScheme = {
+  //  Background color Ochre
+  background: "#273e47",
+  //  Top/Naviagtion/Container color International Orange Golden Gate Bridge
+  foreground: "#C32F27",
+  //  Text color Maximum Yellow Red
+  text: "#F7B538",
+  //  Button color UP Maroon
+  button: "#780116",
+  // Divider color Flame
+  divider: "#D8572A",
 };
