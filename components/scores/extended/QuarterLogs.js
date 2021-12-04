@@ -24,7 +24,7 @@ const QuarterLogs = ({ awayLines, homeLines }) => {
       borderRadius={4}
       alignItems="center"
       mb={10}
-      bg={colorScheme.button}
+      bg={colorScheme.foreground}
       shadowColor="#000"
       shadowOffset={{ width: 0, height: 0 }}
       shadowOpacity={0.45}

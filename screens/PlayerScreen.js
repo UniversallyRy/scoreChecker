@@ -37,7 +37,7 @@ const PlayerScreen = ({ navigation }) => {
       loadPlayerInfo(initialState.playerInfo.fullName);
     }
     count++;
-    handleReset(n++);
+    handleReset(n + 1);
   };
 
   const handleInput = (item) => {

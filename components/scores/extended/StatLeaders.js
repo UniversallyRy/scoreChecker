@@ -36,10 +36,11 @@ const StatLeaders = ({
         justifyContent="center"
         alignItems="center"
         borderRadius={3}
+        mb={5}
         p={2.2}
         w={windowWidth * 0.45}
         h={39}
-        bg={colorScheme.button}
+        bg={colorScheme.foreground}
         shadowColor="#000"
         shadowOffset={{ width: 1, height: 2 }}
         shadowOpacity={0.65}
@@ -50,7 +51,7 @@ const StatLeaders = ({
           {leaderHeading} Leaders
         </Heading>
       </Box>
-      <HStack alignItems="center" justifyContent="center" m={2}>
+      <HStack mb={10} alignItems="center" justifyContent="center" m={2}>
         <VStack alignItems="center" m={3} bg="transparent">
           <Heading color={colorScheme.text} size="sm" bold>
             Away

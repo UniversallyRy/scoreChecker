@@ -106,29 +106,31 @@ const ExtendedGame = ({ navigation, route }) => {
   };
 
   return (
-    <Flex h={windowHeight} bg={colorScheme.background} p={2}>
-      <VStack
-        h={windowHeight * 0.9}
-        w={windowWidth * 0.97}
-        bg={colorScheme.foreground}
+    <VStack
+      h={windowHeight}
+      w={windowWidth}
+      alignItems="center"
+      alignSelf="center"
+      bg={colorScheme.foreground}
+    >
+      <Header
+        gameArena={gameArena}
+        awayTeam={awayTeam}
+        awayLogo={awayLogo}
+        awayScore={awayScore}
+        homeTeam={homeTeam}
+        homeLogo={homeLogo}
+        homeScore={homeScore}
+      />
+      <Box
+        bg={colorScheme.button}
+        m={1}
+        w={windowWidth}
+        h={windowHeight * 0.79}
         alignItems="center"
-        alignSelf="center"
-        borderRadius={5}
-        shadowColor="#000"
-        shadowOffset={{ width: 1, height: 3 }}
-        shadowOpacity={0.85}
-        shadowRadius={5.84}
-        elevation={6}
+        borderRadius={50}
+        transform={[{ translateY: 0.6 }]}
       >
-        <Header
-          gameArena={gameArena}
-          awayTeam={awayTeam}
-          awayLogo={awayLogo}
-          awayScore={awayScore}
-          homeTeam={homeTeam}
-          homeLogo={homeLogo}
-          homeScore={homeScore}
-        />
         <StatLeaders
           awayPic={{ uri: `${PROFILE_PIC_URL_PREFIX}/${awayPlayerPic}.png` }}
           awayLeadValue={awayLeadValue}
@@ -140,8 +142,8 @@ const ExtendedGame = ({ navigation, route }) => {
           changeStats={changeStats}
         />
         <QuarterLogs awayLines={awayLines} homeLines={homeLines} />
-      </VStack>
-    </Flex>
+      </Box>
+    </VStack>
   );
 };
 

@@ -36,8 +36,8 @@ const DropDown = ({ statState, changeStats }) => {
     <Flex
       style={{
         width: windowWidth * 0.8,
-        minHeight: 175,
-        margin: 5,
+        minHeight: 150,
+        margin: 10,
         zIndex: 999,
         ...(Platform.OS !== "android" && {
           zIndex: 10,
