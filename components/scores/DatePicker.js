@@ -4,10 +4,10 @@ import { Box, Text } from "native-base";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { RaisedButton } from "../Buttons";
 import { colorScheme } from "../../constants";
-// todos: fix laggy picker, sometimes jumps a day
 
 const DatePicker = ({ onSubmit, loading }) => {
   const [date, setDate] = useState(new Date());
+  const [savedDate, setSDate] = useState(false);
   const [show, setShow] = useState(false);
 
   const showMode = () => {
@@ -20,8 +20,14 @@ const DatePicker = ({ onSubmit, loading }) => {
       let formattedItem = currentDate.split("-");
       let formattedDate =
         formattedItem[1] + "/" + formattedItem[2] + "/" + formattedItem[0];
-      setShow(Platform.OS === "ios");
-      onSubmit(formattedDate);
+      if (formattedDate == savedDate) {
+        setShow(false);
+      } else {
+        setSDate(formattedDate);
+        setDate(selectedDate);
+        setShow(Platform.OS === "ios");
+        onSubmit(formattedDate);
+      }
     } else {
       // handles cancelled date
       setShow(false);
@@ -46,7 +52,6 @@ const DatePicker = ({ onSubmit, loading }) => {
       </RaisedButton>
       {show && (
         <DateTimePicker
-          placeHolderText={new Date().toLocaleDateString()}
           testID="datePicker"
           value={date}
           display="default"
