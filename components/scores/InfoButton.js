@@ -6,7 +6,7 @@ const InfoButton = ({ navigation, u }) => {
   return (
     <Pressable>
       <InfoIcon
-        color={colorScheme.text}
+        color={colorScheme.button}
         size="7"
         onPress={() => {
           // When game status is still showing a start time, or postponed, no routing and returns null
