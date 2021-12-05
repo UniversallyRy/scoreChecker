@@ -16,6 +16,7 @@ import { colorScheme } from "../../constants";
 // WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+import { MotiView, MotiText } from "moti";
 
 const ScoreItem = ({ u, navigation }) => {
   const [homeScore, setHome] = useState(0);
@@ -61,19 +62,29 @@ const ScoreItem = ({ u, navigation }) => {
     >
       <HStack alignItems="center" my={5}>
         <VStack alignItems="center">
-          <Heading color={colorScheme.text} fontSize="lg" mb={2} bold>
-            {awayTeam} {awayScore == 0 ? "" : "-  " + awayScore}
-          </Heading>
-          {/* Team Logos */}
-          <Image
-            accessibilityLabel={awayTeam}
-            source={awayLogo}
-            w={50}
-            h={50}
-            m={1}
-            PlaceholderContent={<ActivityIndicator />}
-            alt="Away Logo"
-          />
+          <MotiView
+            alignItems="center"
+            from={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              type: "timing",
+              duration: 450,
+            }}
+          >
+            <Heading color={colorScheme.text} fontSize="lg" mb={2} bold>
+              {awayTeam} {awayScore == 0 ? "" : "-  " + awayScore}
+            </Heading>
+            {/* Team Logos */}
+            <Image
+              accessibilityLabel={awayTeam}
+              source={awayLogo}
+              w={50}
+              h={50}
+              m={1}
+              PlaceholderContent={<ActivityIndicator />}
+              alt="Away Logo"
+            />
+          </MotiView>
         </VStack>
 
         <Heading color={colorScheme.text} ml={25} mr={25} bold>
@@ -81,18 +92,28 @@ const ScoreItem = ({ u, navigation }) => {
         </Heading>
 
         <VStack alignItems="center">
-          <Heading color={colorScheme.text} fontSize="lg" mb={2} bold>
-            {homeTeam} {homeScore == 0 ? "" : "-  " + homeScore}
-          </Heading>
-          <Image
-            accessibilityLabel={homeTeam}
-            source={homeLogo}
-            w={50}
-            h={50}
-            m={1}
-            PlaceholderContent={<ActivityIndicator />}
-            alt="Home Logo"
-          />
+          <MotiView
+            alignItems="center"
+            from={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              type: "timing",
+              duration: 450,
+            }}
+          >
+            <Heading color={colorScheme.text} fontSize="lg" mb={2} bold>
+              {homeTeam} {homeScore == 0 ? "" : "-  " + homeScore}
+            </Heading>
+            <Image
+              accessibilityLabel={homeTeam}
+              source={homeLogo}
+              w={50}
+              h={50}
+              m={1}
+              PlaceholderContent={<ActivityIndicator />}
+              alt="Home Logo"
+            />
+          </MotiView>
         </VStack>
       </HStack>
       {/* Game Status(Shows postponed, game times in EST and info is selectable only if game is already played ) */}

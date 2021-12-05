@@ -45,17 +45,22 @@ const ScoreScreen = ({ navigation }) => {
   }, [todaysDate]);
 
   // callback for date changes
-  const onSubmit = useCallback((item) => {
-    let changedDate = item;
-    setLoading(true);
-    setTodaysDate(changedDate);
-    async function newDay() {
-      NBA.stats
-        .scoreboard({ gameDate: changedDate })
-        .then((res) => setNewObj(res.gameHeader));
-    }
-    newDay();
-  }, []);
+  const onSubmit = useCallback(
+    (item) => {
+      setNewObj({});
+      let changedDate = item;
+      async function newDay() {
+        NBA.stats
+          .scoreboard({ gameDate: changedDate })
+          .then((res) => setNewObj(res.gameHeader));
+
+        setLoading(true);
+        setTodaysDate(changedDate);
+      }
+      newDay();
+    },
+    [todaysDate]
+  );
 
   return (
     <Flex
