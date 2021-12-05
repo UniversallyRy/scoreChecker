@@ -8,7 +8,7 @@ import { LoadingButton } from "../components/Buttons";
 import Header from "../components/scores/Header";
 import ScoresLoading from "../components/scores/ScoresLoading";
 import { colorScheme } from "../constants";
-// todo: possible team screen/standings
+// todo: possible team screen/standings, make card transition into extended game screen
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
