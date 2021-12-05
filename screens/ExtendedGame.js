@@ -24,6 +24,7 @@ import QuarterLogs from "../components/scores/extended/QuarterLogs";
 import { LoadingButton } from "../components/Buttons";
 import DropDown from "../components/scores/extended/DropDown";
 import logos from "../logoManager";
+import { MotiView, MotiText } from "moti";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 

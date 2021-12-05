@@ -26,7 +26,7 @@ const Header = ({ todaysDate, onSubmit, loading }) => (
     <Text color={colorScheme.text} mb={1} fontSize="sm">
       Quickly stay updated
     </Text>
-    <DatePicker loading={loading} onSubmit={onSubmit} />
+    <DatePicker todaysDate={todaysDate} loading={loading} onSubmit={onSubmit} />
   </VStack>
 );
 

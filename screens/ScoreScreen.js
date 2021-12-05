@@ -33,7 +33,7 @@ const ScoreScreen = ({ navigation }) => {
   };
   setTimeout(() => {
     loader();
-  }, 100);
+  }, 10);
 
   useEffect(() => {
     async function initData() {
@@ -50,7 +50,6 @@ const ScoreScreen = ({ navigation }) => {
     setLoading(true);
     setTodaysDate(changedDate);
     async function newDay() {
-      setNewObj([]);
       NBA.stats
         .scoreboard({ gameDate: changedDate })
         .then((res) => setNewObj(res.gameHeader));

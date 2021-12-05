@@ -5,26 +5,28 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { RaisedButton } from "../Buttons";
 import { colorScheme } from "../../constants";
 
-const DatePicker = ({ onSubmit, loading }) => {
+const DatePicker = ({ todaysDate, onSubmit, loading }) => {
   const [date, setDate] = useState(new Date());
-  const [savedDate, setSDate] = useState(false);
   const [show, setShow] = useState(false);
-
   const showMode = () => {
     setShow(true);
   };
 
   const onChange = (event, selectedDate) => {
     if (event.type == "set") {
-      let currentDate = selectedDate.toISOString().split("T")[0] || date;
+      let offSet = new Date(
+        selectedDate.setMinutes(
+          selectedDate.getMinutes() - selectedDate.getTimezoneOffset()
+        )
+      );
+      let currentDate = offSet.toISOString().split("T")[0];
       let formattedItem = currentDate.split("-");
       let formattedDate =
         formattedItem[1] + "/" + formattedItem[2] + "/" + formattedItem[0];
-      if (formattedDate == savedDate) {
+      if (formattedDate == todaysDate) {
         setShow(false);
       } else {
-        setSDate(formattedDate);
-        setDate(selectedDate);
+        setDate(offSet);
         setShow(Platform.OS === "ios");
         onSubmit(formattedDate);
       }

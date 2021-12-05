@@ -40,7 +40,7 @@ const ScoreItem = ({ u, navigation }) => {
         });
     }
     initData();
-  }, []);
+  }, [u.gameId]);
 
   return (
     <VStack
