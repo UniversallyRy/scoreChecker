@@ -68,7 +68,7 @@ const ScoreItem = ({ u, navigation }) => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{
               type: "timing",
-              duration: 450,
+              duration: 1050,
             }}
           >
             <Heading color={colorScheme.text} fontSize="lg" mb={2} bold>
@@ -98,7 +98,7 @@ const ScoreItem = ({ u, navigation }) => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{
               type: "timing",
-              duration: 450,
+              duration: 1050,
             }}
           >
             <Heading color={colorScheme.text} fontSize="lg" mb={2} bold>

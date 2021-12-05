@@ -33,7 +33,7 @@ const ScoreScreen = ({ navigation }) => {
   };
   setTimeout(() => {
     loader();
-  }, 10);
+  }, 600);
 
   useEffect(() => {
     async function initData() {
