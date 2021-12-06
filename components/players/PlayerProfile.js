@@ -49,7 +49,7 @@ const Profile = ({ playerInfo, navigation }) => {
       elevation={5}
     >
       {!loading ? (
-        <VStack>
+        <VStack mt={5}>
           <Image
             borderWidth={2}
             overflow="hidden"
@@ -57,8 +57,6 @@ const Profile = ({ playerInfo, navigation }) => {
             borderRadius={50}
             alignItems="center"
             alignSelf="center"
-            mt={1}
-            mb={1}
             h={100}
             w={100}
             key={playerInfo.playerId}

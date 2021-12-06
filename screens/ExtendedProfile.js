@@ -48,14 +48,14 @@ const ExtendedProfile = ({ route, navigation }) => {
   };
 
   return (
-    <Box h="100%" bg={colorScheme.background}>
+    <Box h={windowHeight} bg={colorScheme.background}>
       <Flex
         alignSelf="center"
         w={windowWidth * 0.98}
         h={windowHeight * 0.88}
         bg={colorScheme.foreground}
-        m={10}
-        p={2}
+        m={5}
+        px={2}
         borderRadius={5}
       >
         <Image
@@ -65,8 +65,8 @@ const ExtendedProfile = ({ route, navigation }) => {
           borderRadius={50}
           alignItems="center"
           alignSelf="center"
-          mt={10}
-          mb={5}
+          mt={3}
+          mb={3}
           h={100}
           w={100}
           source={{

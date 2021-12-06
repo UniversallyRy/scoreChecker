@@ -15,15 +15,14 @@ const Header = ({ todaysDate, onSubmit, loading }) => (
     w={windowWidth * 0.99}
     h={windowHeight * 0.14}
     mb={30}
-    m={4}
-    p={3}
+    m={3}
     borderRadius={3}
   >
     <Text m={1} fontSize="2xl" color={colorScheme.text} bold>
       Scores for {todaysDate}
     </Text>
     <Divider bg={colorScheme.divider} h={1.8} w={windowWidth * 0.93} />
-    <Text color={colorScheme.text} mb={1} fontSize="sm">
+    <Text color={colorScheme.text} fontSize="sm">
       Quickly stay updated
     </Text>
     <DatePicker todaysDate={todaysDate} loading={loading} onSubmit={onSubmit} />

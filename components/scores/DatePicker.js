@@ -26,9 +26,9 @@ const DatePicker = ({ todaysDate, onSubmit, loading }) => {
       if (formattedDate == todaysDate) {
         setShow(false);
       } else {
-        setDate(offSet);
         setShow(Platform.OS === "ios");
         onSubmit(formattedDate);
+        setDate(offSet);
       }
     } else {
       // handles cancelled date

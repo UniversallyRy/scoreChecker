@@ -30,16 +30,16 @@ const StatLeaders = ({
   }, [awayPic, homePic]);
 
   return (
-    <VStack alignItems="center" justifyContent="center">
+    <VStack w={windowWidth} alignItems="center" justifyContent="center">
       <DropDown statState={statState} changeStats={changeStats} />
       <Box
         justifyContent="center"
         alignItems="center"
         borderRadius={3}
-        mb={5}
+        mb={1}
         p={2.2}
         w={windowWidth * 0.45}
-        h={39}
+        h={25}
         bg={colorScheme.foreground}
         shadowColor="#000"
         shadowOffset={{ width: 1, height: 2 }}
@@ -51,8 +51,8 @@ const StatLeaders = ({
           {leaderHeading} Leaders
         </Heading>
       </Box>
-      <HStack mb={10} alignItems="center" justifyContent="center" m={2}>
-        <VStack alignItems="center" m={3} bg="transparent">
+      <HStack mb={1} alignItems="center" justifyContent="center" m={2}>
+        <VStack alignItems="center" m={1} bg="transparent">
           <Heading color={colorScheme.text} size="sm" bold>
             Away
           </Heading>
@@ -72,7 +72,7 @@ const StatLeaders = ({
             {awayLeadValue.StatValue} {statState}
           </Text>
         </VStack>
-        <VStack alignItems="center" m={3} bg="transparent">
+        <VStack alignItems="center" m={1} bg="transparent">
           <Heading color={colorScheme.text} size="sm">
             Home
           </Heading>
