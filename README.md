@@ -1,4 +1,4 @@
-<h1 align="center">React Native app made to replace having to google basic NBA schedules and stats</h1>
+<h1 align="center">React Native app made with Expo, created to replace having to google basic NBA schedules and stats</h1>
 <p>
   <a href="https://twitter.com/universallyry" target="_blank">
     <img alt="Twitter: universallyry" src="https://img.shields.io/twitter/follow/universallyry.svg?style=social" />
@@ -7,20 +7,23 @@
 
 > Check NBA schedules, scores and stats
 
-## Resources Used
+## Main Resources Used
 
 - [NodeJS](https://nodejs.org/en/download/)
-- [Node.js client for nba.com API endpoints](https://github.com/bttmly/nba)
 - [expo](https://expo.io/)
-- [react-native-elements](https://reactnativeelements.com/)
-- [formik](https://formik.org/docs/guides/react-native)
-- [momentjs](https://momentjs.com/)
-- Background img pattern from [Toptal Subtle Patterns](https://www.toptal.com/designers/subtlepatterns/)
+- [native-base](https://nativebase.io/)
+- [NBA api's Github](https://github.com/bttmly/nba)
 
 ## Install
 
 ```sh
 npm install
+```
+
+**or**
+
+```sh
+yarn
 ```
 
 ## Usage
@@ -37,7 +40,7 @@ npm start
 
 ## About
 
-React native app created with Expo and styled with react-native-elements. Made for my friends, and I, to keep up with the NBA. Feel free to use and take anything for your own sports app.:thumbsup::thumbsup:
+React native app created with Expo and styled with native-base. Made for my friends, and I, to keep up with the NBA. Feel free to use and take anything for your own sports app.:thumbsup::thumbsup:
 
 Only previewed/used in Expo, so no idea on how the NBA api handles in production. Paths sometimes change due to official API changes/bugs.
 
@@ -47,12 +50,12 @@ Only previewed/used in Expo, so no idea on how the NBA api handles in production
   <tr>
     <td>Player Profile</td>
     <td>Scores</td>
-    <td>Extended Scorecard</td>
+    <td>Date Change</td>
   </tr>
   <tr>
-    <td valign="top"><img src="demo/sExtendedProfile.gif"></td>
-    <td valign="top"><img src="demo/sScoreCard.gif"></td>
-    <td valign="top"><img src="demo/sExtendedScore.gif"></td>
+    <td valign="top"><img src="demo/playerScreen.gif"></td>
+    <td valign="top"><img src="demo/sScoreScreen.gif"></td>
+    <td valign="top"><img src="demo/dateChange.gif"></td>
   </tr>
  </table>
 
