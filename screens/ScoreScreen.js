@@ -8,11 +8,11 @@ import { LoadingButton } from "../components/Buttons";
 import Header from "../components/scores/Header";
 import ScoresLoading from "../components/scores/ScoresLoading";
 import { colorScheme } from "../constants";
-// todo: possible team screen/standings, make card transition into extended game screen
+// todos: possible team screen component/team standings, make card transition into extended game screen
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-//Initial state before NBA api's async is fulfilled
+// Initial state before NBA api's async is fulfilled
 const initialState = [
   {
     gamecode: "Games Loading",
@@ -27,14 +27,6 @@ const ScoreScreen = ({ navigation }) => {
   const [todaysDate, setTodaysDate] = useState(moment().format("L"));
   const [loading, setLoading] = useState(true);
 
-  const loader = () => {
-    setState(newObj);
-    setLoading(false);
-  };
-  setTimeout(() => {
-    loader();
-  }, 600);
-
   useEffect(() => {
     async function initData() {
       NBA.stats.scoreboard({ gameDate: todaysDate }).then((res) => {
@@ -43,6 +35,14 @@ const ScoreScreen = ({ navigation }) => {
     }
     initData();
   }, [todaysDate]);
+
+  const loader = () => {
+    setState(newObj);
+    setLoading(false);
+  };
+  setTimeout(() => {
+    loader();
+  }, 600);
 
   // callback for date changes
   const onSubmit = useCallback(
