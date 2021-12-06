@@ -46,6 +46,8 @@ Only previewed/used in Expo, so no idea on how the NBA api handles in production
 
 ## Demo
 
+Laggy due to Android Studio on small notebook, updating soon.
+
 <table>
   <tr>
     <td>Player Profile</td>
