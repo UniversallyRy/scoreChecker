@@ -54,7 +54,7 @@ Only previewed/used in Expo, so no idea on how the NBA api handles in production
   </tr>
   <tr>
     <td valign="top"><img src="demo/playerScreen.gif"></td>
-    <td valign="top"><img src="demo/sScoreScreen.gif"></td>
+    <td valign="top"><img src="demo/scoreScreen.gif"></td>
     <td valign="top"><img src="demo/dateChange.gif"></td>
   </tr>
  </table>
