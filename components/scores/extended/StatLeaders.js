@@ -47,13 +47,13 @@ const StatLeaders = ({
         shadowRadius={2.84}
         elevation={4}
       >
-        <Heading color={colorScheme.text} fontSize="lg">
+        <Heading color={colorScheme.text} fontSize="lg" fontWeight={900}>
           {leaderHeading} Leaders
         </Heading>
       </Box>
       <HStack mb={1} alignItems="center" justifyContent="center" m={2}>
         <VStack alignItems="center" m={1} bg="transparent">
-          <Heading color={colorScheme.text} size="sm" bold>
+          <Heading color={colorScheme.text} size="sm" fontWeight={500}>
             Away
           </Heading>
           <Image
@@ -65,15 +65,15 @@ const StatLeaders = ({
             source={awayPicture}
             alt="Away Player"
           />
-          <Heading color={colorScheme.text} size="md">
+          <Heading color={colorScheme.text} size="md" fontWeight={900}>
             {awayPlayer}
           </Heading>
-          <Text color={colorScheme.text} fontSize="md">
+          <Text color={colorScheme.text} fontSize="md" fontWeight={400}>
             {awayLeadValue.StatValue} {statState}
           </Text>
         </VStack>
         <VStack alignItems="center" m={1} bg="transparent">
-          <Heading color={colorScheme.text} size="sm">
+          <Heading color={colorScheme.text} size="sm" fontWeight={500}>
             Home
           </Heading>
           <Image
@@ -85,10 +85,10 @@ const StatLeaders = ({
             source={homePicture}
             alt="Home Player"
           />
-          <Heading size="md" color={colorScheme.text}>
+          <Heading size="md" color={colorScheme.text} fontWeight={900}>
             {homePlayer}
           </Heading>
-          <Text fontSize="md" color={colorScheme.text}>
+          <Text fontSize="md" color={colorScheme.text} fontWeight={400}>
             {homeLeadValue.StatValue} {statState}
           </Text>
         </VStack>

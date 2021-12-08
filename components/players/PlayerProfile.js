@@ -65,7 +65,12 @@ const Profile = ({ playerInfo, navigation }) => {
             }}
             alt="Profile"
           />
-          <Text alignSelf="center" fontSize="xl" color="#F7B538">
+          <Text
+            alignSelf="center"
+            fontSize="xl"
+            fontWeight={700}
+            color="#F7B538"
+          >
             {`${playerInfo.playerName}`}
           </Text>
           <Image
@@ -78,11 +83,22 @@ const Profile = ({ playerInfo, navigation }) => {
             alt="Team"
           />
           {Object.entries(infoList).map(([item, value]) => (
-            <HStack key={item + "key"} mb={2} textAlignVertical="auto">
-              <Text color="#780116" lineHeight="lg" fontSize="xl" bold>
+            <HStack key={item + "key"} textAlign="auto" mb={2}>
+              <Text
+                color="#780116"
+                lineHeight="lg"
+                fontSize="xl"
+                fontWeight={900}
+              >
                 {item}
               </Text>
-              <Text color="#F7B538" ml={1} lineHeight="lg" fontSize="lg">
+              <Text
+                color="#F7B538"
+                ml={1}
+                lineHeight="lg"
+                fontSize="lg"
+                fontWeight={400}
+              >
                 {value}
               </Text>
             </HStack>
@@ -97,12 +113,16 @@ const Profile = ({ playerInfo, navigation }) => {
               });
             }}
           >
-            <Text color="#F7B538">CLICK FOR MORE INFO </Text>
+            <Text color="#F7B538" fontStyle="italic" fontWeight={300}>
+              CLICK FOR MORE INFO{" "}
+            </Text>
           </RaisedButton>
         </VStack>
       ) : (
         <Box alignContent="center">
-          <Text color="#F7B538">Loading</Text>
+          <Text color="#F7B538" fontWeight={900}>
+            Loading
+          </Text>
           <LoadingButton />
         </Box>
       )}

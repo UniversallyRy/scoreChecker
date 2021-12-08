@@ -16,7 +16,14 @@ const ScoresLoading = () => {
       h={windowHeight * 0.55}
     >
       <VStack alignItems="center">
-        <Heading my={2} fontSize="xl" color={colorScheme.text}>
+        <Heading
+          my={2}
+          fontSize="xl"
+          fontWeight={900}
+          fontStyle="italic"
+          fontFamily="body"
+          color={colorScheme.text}
+        >
           Please Wait . .
         </Heading>
         <Divider

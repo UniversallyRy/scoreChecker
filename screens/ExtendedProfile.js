@@ -77,10 +77,15 @@ const ExtendedProfile = ({ route, navigation }) => {
         />
         {Object.entries(profileState).map(([key, data]) => (
           <HStack m={1} textAlign="auto" key={key}>
-            <Text color={colorScheme.text} mr={1} fontSize="lg" bold>
+            <Text
+              color={colorScheme.button}
+              mr={1}
+              fontSize="lg"
+              fontWeight={900}
+            >
               {onlyHS(key, data)}:{" "}
             </Text>
-            <Text color={colorScheme.text} ml={2} fontSize="lg">
+            <Text color={colorScheme.text} fontSize="lg" fontWeight={400}>
               {`${data}`}
             </Text>
           </HStack>

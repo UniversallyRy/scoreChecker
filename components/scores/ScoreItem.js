@@ -71,7 +71,13 @@ const ScoreItem = ({ u, navigation }) => {
               duration: 1050,
             }}
           >
-            <Heading color={colorScheme.text} fontSize="lg" mb={2} bold>
+            <Heading
+              color={colorScheme.text}
+              fontSize="xl"
+              fontFamily="heading"
+              fontWeight={700}
+              mb={2}
+            >
               {awayTeam} {awayScore == 0 ? "" : "-  " + awayScore}
             </Heading>
             {/* Team Logos */}
@@ -87,7 +93,12 @@ const ScoreItem = ({ u, navigation }) => {
           </MotiView>
         </VStack>
 
-        <Heading color={colorScheme.text} ml={25} mr={25} bold>
+        <Heading
+          color={colorScheme.text}
+          mx={25}
+          fontWeight={700}
+          fontFamily="body"
+        >
           @
         </Heading>
 
@@ -101,7 +112,13 @@ const ScoreItem = ({ u, navigation }) => {
               duration: 1050,
             }}
           >
-            <Heading color={colorScheme.text} fontSize="lg" mb={2} bold>
+            <Heading
+              color={colorScheme.text}
+              fontSize="xl"
+              mb={2}
+              fontFamily="heading"
+              fontWeight={700}
+            >
               {homeTeam} {homeScore == 0 ? "" : "-  " + homeScore}
             </Heading>
             <Image
@@ -117,7 +134,13 @@ const ScoreItem = ({ u, navigation }) => {
         </VStack>
       </HStack>
       {/* Game Status(Shows postponed, game times in EST and info is selectable only if game is already played ) */}
-      <Text color={colorScheme.text} alignSelf="center" fontSize="lg" bold>
+      <Text
+        color={colorScheme.text}
+        alignSelf="center"
+        fontSize="lg"
+        fontWeight={500}
+        fontStyle="italic"
+      >
         {u.gameStatusText != "PPD" ? u.gameStatusText : "Postponed"}
       </Text>
       <Divider
@@ -128,7 +151,7 @@ const ScoreItem = ({ u, navigation }) => {
         mb={5}
       />
       <VStack alignItems="center">
-        <Text alignSelf="center" fontSize="md">
+        <Text alignSelf="center" fontSize="md" fontWeight="light">
           {u.gameStatusText != "Final" &&
           u.gameStatusText != "PPD" &&
           u.livePeriodTimeBcast.charAt(1) != "0"

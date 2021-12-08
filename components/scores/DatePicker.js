@@ -50,7 +50,9 @@ const DatePicker = ({ todaysDate, onSubmit, loading }) => {
         onPress={showMode}
         isDisabled={loading}
       >
-        <Text color={colorScheme.text}>CHANGE DATE</Text>
+        <Text color={colorScheme.text} fontFamily="heading" fontWeight={600}>
+          CHANGE DATE
+        </Text>
       </RaisedButton>
       {show && (
         <DateTimePicker

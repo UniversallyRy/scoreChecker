@@ -35,14 +35,20 @@ const Scores = ({ item, date, navigation }) => {
     <VStack
       flex={1}
       w={windowWidth}
-      m={3}
       alignSelf="center"
       alignContent="center"
       justifyContent="center"
     >
       <VStack safeArea>
         {numOfGames >= 1 ? (
-          <Text alignSelf="center" fontSize="md" m={1} color={colorScheme.text}>
+          <Text
+            alignSelf="center"
+            fontSize="md"
+            fontWeight={100}
+            fontStyle="italic"
+            mb={4}
+            color={colorScheme.text}
+          >
             {numOfGames + " Games"}
           </Text>
         ) : (

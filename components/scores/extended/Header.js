@@ -16,7 +16,7 @@ const Header = ({
     <VStack alignItems="center">
       <HStack alignItems="center" alignSelf="center" m={5} mb={5}>
         <VStack>
-          <Text color={colorScheme.text} mb={5} bold>
+          <Text color={colorScheme.text} mb={5} fontWeight={900}>
             {awayTeam} - {awayScore}
           </Text>
           <Image
@@ -35,13 +35,13 @@ const Header = ({
           justifyContent="center"
           ml={5}
           mr={5}
-          bold
+          fontWeight={500}
         >
           @
         </Text>
 
         <VStack>
-          <Text color={colorScheme.text} mb={5} bold>
+          <Text color={colorScheme.text} mb={5} fontWeight={900}>
             {homeTeam} - {homeScore}{" "}
           </Text>
           <Image
@@ -55,10 +55,10 @@ const Header = ({
           />
         </VStack>
       </HStack>
-      <Text color={colorScheme.text} m={1}>
+      <Text color={colorScheme.text} m={1} fontWeight={300} fontStyle="italic">
         Arena: {gameArena.arena}
       </Text>
-      <Text color={colorScheme.text} mb={3}>
+      <Text color={colorScheme.text} mb={3} fontWeight={300} fontStyle="italic">
         City: {gameArena.city}, {gameArena.country}
       </Text>
     </VStack>

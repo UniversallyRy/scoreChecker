@@ -18,11 +18,22 @@ const Header = ({ todaysDate, onSubmit, loading }) => (
     m={3}
     borderRadius={3}
   >
-    <Text m={1} fontSize="2xl" color={colorScheme.text} bold>
+    <Text
+      m={1}
+      fontSize="2xl"
+      color={colorScheme.text}
+      fontWeight={900}
+      fontFamily="heading"
+    >
       Scores for {todaysDate}
     </Text>
     <Divider bg={colorScheme.divider} h={1.8} w={windowWidth * 0.93} />
-    <Text color={colorScheme.text} fontSize="sm">
+    <Text
+      color={colorScheme.text}
+      fontSize="sm"
+      fontStyle="italic"
+      fontWeight={300}
+    >
       Quickly stay updated
     </Text>
     <DatePicker todaysDate={todaysDate} loading={loading} onSubmit={onSubmit} />

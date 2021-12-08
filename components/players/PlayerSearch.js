@@ -83,10 +83,14 @@ const PlayerSearch = ({ handleInput, handleReset }) => {
             </InputGroup>
             <VStack>
               <RaisedButton key="submitButton" onPress={handleSubmit}>
-                <Text color="#F7B538">SUBMIT</Text>
+                <Text color="#F7B538" fontWeight={700}>
+                  SUBMIT
+                </Text>
               </RaisedButton>
               <RaisedButton onPress={handleReset}>
-                <Text color="#F7B538">RESET</Text>
+                <Text color="#F7B538" fontWeight={700}>
+                  RESET
+                </Text>
               </RaisedButton>
             </VStack>
           </Stack>
