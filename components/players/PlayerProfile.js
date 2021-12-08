@@ -83,7 +83,12 @@ const Profile = ({ playerInfo, navigation }) => {
             alt="Team"
           />
           {Object.entries(infoList).map(([item, value]) => (
-            <HStack key={item + "key"} textAlign="auto" mb={2}>
+            <HStack
+              key={item + "key"}
+              textAlign="auto"
+              alignItems="center"
+              mb={2}
+            >
               <Text
                 color="#780116"
                 lineHeight="lg"
