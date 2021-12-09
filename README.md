@@ -46,16 +46,16 @@ Only previewed/used in Expo, so no idea on how the NBA api handles in production
 
 ## Demo
 
-Laggy due to Android Studio on small notebook, updating soon.
-
 <table>
   <tr>
     <td>Player Profile</td>
-    <td>Scores</td>
+    <td>Search Check</td>
+    <td>Extended Game Summary</td>
     <td>Date Change</td>
   </tr>
   <tr>
     <td valign="top"><img src="demo/playerScreen.gif"></td>
+    <td valign="top"><img src="demo/errorChecks.gif"></td>
     <td valign="top"><img src="demo/scoreScreen.gif"></td>
     <td valign="top"><img src="demo/dateChange.gif"></td>
   </tr>
