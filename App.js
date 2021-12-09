@@ -17,6 +17,7 @@ import {
   Rubik_900Black,
   Rubik_900Black_Italic,
 } from "@expo-google-fonts/rubik";
+import BottomTabs from "./components/navigation/BottomTabs";
 
 const theme = extendTheme({
   fontConfig: {
@@ -91,7 +92,7 @@ const App = () => {
           justifyContent="center"
         >
           <StatusBar style="auto" />
-          <Stacks />
+          <BottomTabs />
         </NavigationContainer>
       </NativeBaseProvider>
     );

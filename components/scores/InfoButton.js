@@ -14,8 +14,8 @@ const InfoButton = ({ navigation, u }) => {
             return null;
           } else {
             // Navigate to the Extended Score route with params
-            navigation.navigate("Extended Score", {
-              itemId: 10,
+            navigation.navigate("Extended Game", {
+              itemId: u.gameId,
               scoreInfo: u,
             });
           }

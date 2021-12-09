@@ -1,14 +1,12 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import ScoreScreen from "../../screens/ScoreScreen";
-import PlayerScreen from "../../screens/PlayerScreen";
+import { Stack1Screen, Stack2Screen } from "../navigation/Stacks";
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabs = () => (
   <Tab.Navigator
-    initialRouteName="Scores"
     screenOptions={{
       tabBarActiveTintColor: "#F7B538",
       tabBarInactiveTintColor: "grey",
@@ -28,7 +26,7 @@ const BottomTabs = () => (
   >
     <Tab.Screen
       name="Scores"
-      component={ScoreScreen}
+      component={Stack1Screen}
       options={{
         headerShown: false,
         tabBarIcon: ({ color, size }) => (
@@ -38,7 +36,7 @@ const BottomTabs = () => (
     />
     <Tab.Screen
       name="Player Info"
-      component={PlayerScreen}
+      component={Stack2Screen}
       options={{
         headerShown: false,
         tabBarIcon: ({ color, size }) => (

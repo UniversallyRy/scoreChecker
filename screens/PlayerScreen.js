@@ -5,6 +5,7 @@ import NBA from "nba";
 import PlayerProfile from "../components/players/PlayerProfile";
 import PlayerSearch from "../components/players/PlayerSearch";
 import { DEFAULT_PLAYER_INFO, colorScheme } from "../constants";
+import { SharedElement } from "react-native-shared-element";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 

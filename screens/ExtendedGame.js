@@ -9,6 +9,7 @@ import {
   Text,
   VStack,
   Image,
+  ScrollView,
 } from "native-base";
 import NBA from "nba";
 import moment from "moment";
@@ -25,6 +26,7 @@ import { LoadingButton } from "../components/Buttons";
 import DropDown from "../components/scores/extended/DropDown";
 import logos from "../logoManager";
 import { MotiView, MotiText } from "moti";
+import { SharedElement } from "react-native-shared-element";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -115,6 +117,7 @@ const ExtendedGame = ({ navigation, route }) => {
       bg={colorScheme.foreground}
     >
       <Header
+        gameId={scoreInfo.gameId}
         gameArena={gameArena}
         awayTeam={awayTeam}
         awayLogo={awayLogo}
@@ -123,27 +126,29 @@ const ExtendedGame = ({ navigation, route }) => {
         homeLogo={homeLogo}
         homeScore={homeScore}
       />
-      <Box
-        bg={colorScheme.button}
-        m={1}
-        w={windowWidth}
-        h={windowHeight * 0.79}
-        alignItems="center"
-        borderRadius={50}
-        transform={[{ translateY: 0.6 }]}
-      >
-        <StatLeaders
-          awayPic={{ uri: `${PROFILE_PIC_URL_PREFIX}/${awayPlayerPic}.png` }}
-          awayLeadValue={awayLeadValue}
-          awayPlayer={awayPlayer}
-          homePic={{ uri: `${PROFILE_PIC_URL_PREFIX}/${homePlayerPic}.png` }}
-          homePlayer={homePlayer}
-          homeLeadValue={homeLeadValue}
-          statState={statState}
-          changeStats={changeStats}
-        />
-        <QuarterLogs awayLines={awayLines} homeLines={homeLines} />
-      </Box>
+      <SharedElement id={`item.${scoreInfo.gameId}.bg`}>
+        <Box
+          bg={colorScheme.button}
+          mt={1}
+          w={windowWidth}
+          h={windowHeight}
+          alignItems="center"
+          borderRadius={32}
+          transform={[{ translateY: windowHeight / 40 }]}
+        >
+          <StatLeaders
+            awayPic={{ uri: `${PROFILE_PIC_URL_PREFIX}/${awayPlayerPic}.png` }}
+            awayLeadValue={awayLeadValue}
+            awayPlayer={awayPlayer}
+            homePic={{ uri: `${PROFILE_PIC_URL_PREFIX}/${homePlayerPic}.png` }}
+            homePlayer={homePlayer}
+            homeLeadValue={homeLeadValue}
+            statState={statState}
+            changeStats={changeStats}
+          />
+          <QuarterLogs awayLines={awayLines} homeLines={homeLines} />
+        </Box>
+      </SharedElement>
     </VStack>
   );
 };

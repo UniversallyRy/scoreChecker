@@ -2,6 +2,7 @@ import React from "react";
 import { ActivityIndicator } from "react-native";
 import { HStack, Image, Text, VStack, Heading } from "native-base";
 import { colorScheme } from "../../../constants";
+import { SharedElement } from "react-native-shared-element";
 
 const Header = ({
   gameArena,
@@ -11,81 +12,94 @@ const Header = ({
   homeTeam,
   homeLogo,
   homeScore,
+  gameId,
 }) => {
   return (
     <VStack mb={2}>
-      <HStack alignItems="center" alignSelf="center" m={2}>
-        <VStack alignItems="center">
-          <Text color={colorScheme.text} mb={2} fontSize="lg" fontWeight={900}>
-            {awayTeam} - {awayScore}
-          </Text>
-          <Image
-            accessibilityLabel={awayTeam}
-            source={awayLogo}
-            w={50}
-            h={50}
-            m={2}
-            PlaceholderContent={<ActivityIndicator />}
-            alt="Away Team Logo"
-          />
-        </VStack>
+      <SharedElement id={`item.${gameId}.name`}>
+        <HStack alignItems="center" alignSelf="center" m={2}>
+          <VStack alignItems="center">
+            <Text
+              color={colorScheme.text}
+              mb={2}
+              fontSize="lg"
+              fontWeight={900}
+            >
+              {awayTeam} - {awayScore}
+            </Text>
+            <Image
+              accessibilityLabel={awayTeam}
+              source={awayLogo}
+              w={50}
+              h={50}
+              m={2}
+              PlaceholderContent={<ActivityIndicator />}
+              alt="Away Team Logo"
+            />
+          </VStack>
 
-        <Text
-          color={colorScheme.text}
-          justifyContent="center"
-          ml={5}
-          mr={5}
-          fontWeight={700}
-        >
-          @
-        </Text>
-
-        <VStack alignItems="center">
-          <Text color={colorScheme.text} mb={2} fontSize="lg" fontWeight={900}>
-            {homeTeam} - {homeScore}{" "}
+          <Text
+            color={colorScheme.text}
+            justifyContent="center"
+            ml={5}
+            mr={5}
+            fontWeight={700}
+          >
+            @
           </Text>
-          <Image
-            accessibilityLabel={homeTeam}
-            source={homeLogo}
-            w={50}
-            h={50}
-            m={2}
-            PlaceholderContent={<ActivityIndicator />}
-            alt="Home Team Logo"
-          />
-        </VStack>
-      </HStack>
-      <HStack alignItems="center" ml={5}>
-        <Heading
-          fontSize="lg"
-          fontStyle="italic"
-          color={colorScheme.button}
-          fontWeight={400}
-        >
-          Arena:{" "}
-        </Heading>
-        <Text
-          color={colorScheme.text}
-          m={0}
-          fontWeight={400}
-          fontStyle="italic"
-        >
-          {gameArena.arena}
-        </Text>
-      </HStack>
-      <HStack alignItems="center" ml={5}>
-        <Heading
-          fontSize="lg"
-          fontWeight={400}
-          fontStyle="italic"
-          color={colorScheme.button}
-        >
-          City:{" "}
-        </Heading>
-        <Text color={colorScheme.text} fontWeight={400} fontStyle="italic">
-          {gameArena.city}, {gameArena.country}
-        </Text>
-      </HStack>
+
+          <VStack alignItems="center">
+            <Text
+              color={colorScheme.text}
+              mb={2}
+              fontSize="lg"
+              fontWeight={900}
+            >
+              {homeTeam} - {homeScore}{" "}
+            </Text>
+            <Image
+              accessibilityLabel={homeTeam}
+              source={homeLogo}
+              w={50}
+              h={50}
+              m={2}
+              PlaceholderContent={<ActivityIndicator />}
+              alt="Home Team Logo"
+            />
+          </VStack>
+        </HStack>
+        <HStack alignItems="center" ml={5}>
+          <Heading
+            fontSize="lg"
+            fontStyle="italic"
+            color={colorScheme.button}
+            fontWeight={400}
+          >
+            Arena:{" "}
+          </Heading>
+          <Text
+            color={colorScheme.text}
+            m={0}
+            fontWeight={400}
+            fontStyle="italic"
+          >
+            {gameArena.arena}
+          </Text>
+        </HStack>
+        <HStack alignItems="center" ml={5}>
+          <Heading
+            fontSize="lg"
+            fontWeight={400}
+            fontStyle="italic"
+            color={colorScheme.button}
+          >
+            City:{" "}
+          </Heading>
+          <Text color={colorScheme.text} fontWeight={400} fontStyle="italic">
+            {gameArena.city}, {gameArena.country}
+          </Text>
+        </HStack>
+      </SharedElement>
     </VStack>
   );
 };

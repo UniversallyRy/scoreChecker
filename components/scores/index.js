@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Dimensions } from "react-native";
-import { VStack, FlatList, Text } from "native-base";
+import { VStack, FlatList, Text, Box } from "native-base";
 import moment from "moment";
 import ScoreItem from "./ScoreItem";
 import ScoresLoading from "./ScoresLoading";
 import InfoButton from "./InfoButton";
 import { colorScheme } from "../../constants";
+import { height } from "dom-helpers";
+import { SharedElement } from "react-native-shared-element";
 
 const todaysDate = moment().format("L");
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -59,6 +61,18 @@ const Scores = ({ item, date, navigation }) => {
           renderItem={renderItem}
           keyExtractor={(item) => item.gameId.toString()}
         />
+        <SharedElement id={`item.${item.gameId}.bg`}>
+          <Box
+            position="absolute"
+            bg={colorScheme.button}
+            mt={1}
+            w={windowWidth}
+            h={windowHeight}
+            alignItems="center"
+            borderRadius={32}
+            transform={[{ translateY: windowHeight / 40 }]}
+          />
+        </SharedElement>
       </VStack>
     </VStack>
   );

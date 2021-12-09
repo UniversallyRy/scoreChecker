@@ -13,6 +13,7 @@ import InfoButton from "./InfoButton";
 import NBA from "nba";
 import logos from "../../logoManager";
 import { colorScheme } from "../../constants";
+import { SharedElement } from "react-native-shared-element";
 // WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -71,25 +72,27 @@ const ScoreItem = ({ u, navigation }) => {
               duration: 1050,
             }}
           >
-            <Heading
-              color={colorScheme.text}
-              fontSize="xl"
-              fontFamily="heading"
-              fontWeight={700}
-              mb={2}
-            >
-              {awayTeam} {awayScore == 0 ? "" : "-  " + awayScore}
-            </Heading>
-            {/* Team Logos */}
-            <Image
-              accessibilityLabel={awayTeam}
-              source={awayLogo}
-              w={50}
-              h={50}
-              m={1}
-              PlaceholderContent={<ActivityIndicator />}
-              alt="Away Logo"
-            />
+            <SharedElement id={`item.${awayTeam}.name`}>
+              <Heading
+                color={colorScheme.text}
+                fontSize="xl"
+                fontFamily="heading"
+                fontWeight={700}
+                mb={2}
+              >
+                {awayTeam} {awayScore == 0 ? "" : "-  " + awayScore}
+              </Heading>
+              {/* Team Logos */}
+              <Image
+                accessibilityLabel={awayTeam}
+                source={awayLogo}
+                w={50}
+                h={50}
+                m={1}
+                PlaceholderContent={<ActivityIndicator />}
+                alt="Away Logo"
+              />
+            </SharedElement>
           </MotiView>
         </VStack>
 
@@ -112,24 +115,26 @@ const ScoreItem = ({ u, navigation }) => {
               duration: 1050,
             }}
           >
-            <Heading
-              color={colorScheme.text}
-              fontSize="xl"
-              mb={2}
-              fontFamily="heading"
-              fontWeight={700}
-            >
-              {homeTeam} {homeScore == 0 ? "" : "-  " + homeScore}
-            </Heading>
-            <Image
-              accessibilityLabel={homeTeam}
-              source={homeLogo}
-              w={50}
-              h={50}
-              m={1}
-              PlaceholderContent={<ActivityIndicator />}
-              alt="Home Logo"
-            />
+            <SharedElement id={`item.${homeTeam}.name`}>
+              <Heading
+                color={colorScheme.text}
+                fontSize="xl"
+                mb={2}
+                fontFamily="heading"
+                fontWeight={700}
+              >
+                {homeTeam} {homeScore == 0 ? "" : "-  " + homeScore}
+              </Heading>
+              <Image
+                accessibilityLabel={homeTeam}
+                source={homeLogo}
+                w={50}
+                h={50}
+                m={1}
+                PlaceholderContent={<ActivityIndicator />}
+                alt="Home Logo"
+              />
+            </SharedElement>
           </MotiView>
         </VStack>
       </HStack>
