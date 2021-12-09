@@ -126,29 +126,27 @@ const ExtendedGame = ({ navigation, route }) => {
         homeLogo={homeLogo}
         homeScore={homeScore}
       />
-      <SharedElement id={`item.${scoreInfo.gameId}.bg`}>
-        <Box
-          bg={colorScheme.button}
-          mt={1}
-          w={windowWidth}
-          h={windowHeight}
-          alignItems="center"
-          borderRadius={32}
-          transform={[{ translateY: windowHeight / 40 }]}
-        >
-          <StatLeaders
-            awayPic={{ uri: `${PROFILE_PIC_URL_PREFIX}/${awayPlayerPic}.png` }}
-            awayLeadValue={awayLeadValue}
-            awayPlayer={awayPlayer}
-            homePic={{ uri: `${PROFILE_PIC_URL_PREFIX}/${homePlayerPic}.png` }}
-            homePlayer={homePlayer}
-            homeLeadValue={homeLeadValue}
-            statState={statState}
-            changeStats={changeStats}
-          />
-          <QuarterLogs awayLines={awayLines} homeLines={homeLines} />
-        </Box>
-      </SharedElement>
+      <Box
+        bg={colorScheme.button}
+        mt={1}
+        w={windowWidth}
+        h={windowHeight}
+        alignItems="center"
+        borderRadius={32}
+        transform={[{ translateY: windowHeight * 0.02 }]}
+      >
+        <StatLeaders
+          awayPic={{ uri: `${PROFILE_PIC_URL_PREFIX}/${awayPlayerPic}.png` }}
+          awayLeadValue={awayLeadValue}
+          awayPlayer={awayPlayer}
+          homePic={{ uri: `${PROFILE_PIC_URL_PREFIX}/${homePlayerPic}.png` }}
+          homePlayer={homePlayer}
+          homeLeadValue={homeLeadValue}
+          statState={statState}
+          changeStats={changeStats}
+        />
+        <QuarterLogs awayLines={awayLines} homeLines={homeLines} />
+      </Box>
     </VStack>
   );
 };

@@ -14,10 +14,10 @@ const ScoresLoading = () => {
       animate={{ opacity: 1, scale: 1 }}
       transition={{
         type: "timing",
-        duration: 10,
+        duration: 550,
         scale: {
           type: "spring",
-          delay: 50,
+          delay: 550,
         },
       }}
       alignItems="center"

@@ -61,18 +61,6 @@ const Scores = ({ item, date, navigation }) => {
           renderItem={renderItem}
           keyExtractor={(item) => item.gameId.toString()}
         />
-        <SharedElement id={`item.${item.gameId}.bg`}>
-          <Box
-            position="absolute"
-            bg={colorScheme.button}
-            mt={1}
-            w={windowWidth}
-            h={windowHeight}
-            alignItems="center"
-            borderRadius={32}
-            transform={[{ translateY: windowHeight / 40 }]}
-          />
-        </SharedElement>
       </VStack>
     </VStack>
   );
