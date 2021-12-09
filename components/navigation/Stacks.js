@@ -23,12 +23,12 @@ export const iosTransitionSpec = {
 
 const Stack1 = createSharedElementStackNavigator({
   name,
-  debug: true,
+  // debug: true,
 });
 
 const Stack2 = createSharedElementStackNavigator({
   name,
-  debug: true,
+  // debug: true,
 });
 
 export const Stack1Screen = () => (
@@ -76,10 +76,7 @@ export const Stack1Screen = () => (
       }}
       sharedElements={(route) => {
         const { scoreInfo } = route.params;
-        return [
-          { id: `item.${scoreInfo.gameId}.bg`, animation: "fade" },
-          { id: `item.${scoreInfo.gameId}.name`, animation: "fade" },
-        ];
+        return [{ id: `item.${scoreInfo.gameId}.name`, animation: "fade" }];
       }}
     />
   </Stack1.Navigator>
