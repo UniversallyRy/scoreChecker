@@ -6,6 +6,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Button from "../components/Buttons";
 // todos: better list styling
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+import { MotiText } from "moti";
 
 const ExtendedProfile = ({ route, navigation }) => {
   const { itemId, playerInfo } = route.params;
@@ -43,7 +44,7 @@ const ExtendedProfile = ({ route, navigation }) => {
       !itemData ||
       (typeof itemData === "string" && itemData.includes("HS"))
     ) {
-      return "Drafted out of High School";
+      return "High School";
     } else return item;
   };
 
@@ -77,17 +78,30 @@ const ExtendedProfile = ({ route, navigation }) => {
         />
         {Object.entries(profileState).map(([key, data]) => (
           <HStack m={1} textAlign="auto" key={key}>
-            <Text
-              color={colorScheme.button}
-              mr={1}
-              fontSize="lg"
-              fontWeight={900}
+            <MotiText
+              from={{ opacity: 0.4, scale: 0.7 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                type: "timing",
+                duration: 350,
+                scale: {
+                  type: "spring",
+                  delay: 200,
+                },
+              }}
             >
-              {onlyHS(key, data)}:{" "}
-            </Text>
-            <Text color={colorScheme.text} fontSize="lg" fontWeight={400}>
-              {`${data}`}
-            </Text>
+              <Text
+                color={colorScheme.button}
+                mr={1}
+                fontSize="lg"
+                fontWeight={900}
+              >
+                {onlyHS(key, data)}:{" "}
+              </Text>
+              <Text color={colorScheme.text} fontSize="lg" fontWeight={400}>
+                {`${data}`}
+              </Text>
+            </MotiText>
           </HStack>
         ))}
       </Flex>
