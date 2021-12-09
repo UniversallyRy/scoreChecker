@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import ExtendedGame from "../../screens/ExtendedGame";
 import ExtendedProfile from "../../screens/ExtendedProfile";
 import BottomTabs from "./BottomTabs";
+import { colorScheme } from "../../constants";
 
 const Stack = createStackNavigator();
 
@@ -13,8 +14,12 @@ const Stacks = () => (
       name="NBA Check-In"
       component={BottomTabs}
       options={{
-        fontSize: 20,
         headerStyle: { backgroundColor: "#C32F27" },
+        headerTintColor: colorScheme.text,
+        headerTitleStyle: {
+          fontWeight: "bold",
+          fontSize: 26,
+        },
         headerTitleContainerStyle: {
           marginLeft: 20,
         },
@@ -25,6 +30,11 @@ const Stacks = () => (
       component={ExtendedProfile}
       options={{
         headerStyle: { backgroundColor: "#C32F27" },
+        headerTintColor: colorScheme.text,
+        headerTitleStyle: {
+          fontWeight: "bold",
+          fontSize: 26,
+        },
         headerTitleContainerStyle: {
           marginLeft: 1,
         },
@@ -35,6 +45,11 @@ const Stacks = () => (
       component={ExtendedGame}
       options={{
         headerStyle: { backgroundColor: "#C32F27" },
+        headerTintColor: colorScheme.text,
+        headerTitleStyle: {
+          fontWeight: "bold",
+          fontSize: 26,
+        },
         headerTitleContainerStyle: {
           marginLeft: 1,
         },
