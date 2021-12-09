@@ -14,8 +14,7 @@ const Header = ({ todaysDate, onSubmit, loading }) => (
     bg={colorScheme.foreground}
     w={windowWidth * 0.99}
     h={windowHeight * 0.14}
-    mb={30}
-    m={3}
+    my={3}
     borderRadius={3}
   >
     <Text
