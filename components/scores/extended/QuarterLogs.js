@@ -31,7 +31,7 @@ const QuarterLogs = ({ awayLines, homeLines }) => {
       shadowRadius={4.84}
       elevation={3.3}
     >
-      <Heading color={colorScheme.text} m={1}>
+      <Heading color={colorScheme.text} m={1} fontWeight={500}>
         Quarter Logs
       </Heading>
       <HStack>
@@ -42,7 +42,7 @@ const QuarterLogs = ({ awayLines, homeLines }) => {
                 const quarter = `Q${i + 1}: ` + u;
                 const overtime = `OT ${i - 4}: ` + u;
                 return (
-                  <Text color={colorScheme.text} key={i} m={1} fontWeight={700}>
+                  <Text color={colorScheme.text} key={i} m={1} fontWeight={500}>
                     {i < 5 ? quarter : overtime}
                   </Text>
                 );
@@ -53,7 +53,7 @@ const QuarterLogs = ({ awayLines, homeLines }) => {
                 const quarter = `Q${i + 1}: ` + u;
                 const overtime = `OT ${i - 4}: ` + u;
                 return (
-                  <Text color={colorScheme.text} key={i} m={1} fontWeight={700}>
+                  <Text color={colorScheme.text} key={i} m={1} fontWeight={500}>
                     {i < 5 ? quarter : overtime}
                   </Text>
                 );

@@ -1,6 +1,6 @@
 import React from "react";
 import { ActivityIndicator } from "react-native";
-import { HStack, Image, Text, VStack } from "native-base";
+import { HStack, Image, Text, VStack, Heading } from "native-base";
 import { colorScheme } from "../../../constants";
 
 const Header = ({
@@ -13,10 +13,10 @@ const Header = ({
   homeScore,
 }) => {
   return (
-    <VStack alignItems="center">
-      <HStack alignItems="center" alignSelf="center" m={5} mb={5}>
-        <VStack>
-          <Text color={colorScheme.text} mb={5} fontWeight={900}>
+    <VStack mb={2}>
+      <HStack alignItems="center" alignSelf="center" m={2}>
+        <VStack alignItems="center">
+          <Text color={colorScheme.text} mb={2} fontSize="lg" fontWeight={900}>
             {awayTeam} - {awayScore}
           </Text>
           <Image
@@ -35,13 +35,13 @@ const Header = ({
           justifyContent="center"
           ml={5}
           mr={5}
-          fontWeight={500}
+          fontWeight={700}
         >
           @
         </Text>
 
-        <VStack>
-          <Text color={colorScheme.text} mb={5} fontWeight={900}>
+        <VStack alignItems="center">
+          <Text color={colorScheme.text} mb={2} fontSize="lg" fontWeight={900}>
             {homeTeam} - {homeScore}{" "}
           </Text>
           <Image
@@ -55,12 +55,37 @@ const Header = ({
           />
         </VStack>
       </HStack>
-      <Text color={colorScheme.text} m={1} fontWeight={300} fontStyle="italic">
-        Arena: {gameArena.arena}
-      </Text>
-      <Text color={colorScheme.text} mb={3} fontWeight={300} fontStyle="italic">
-        City: {gameArena.city}, {gameArena.country}
-      </Text>
+      <HStack alignItems="center" ml={5}>
+        <Heading
+          fontSize="lg"
+          fontStyle="italic"
+          color={colorScheme.button}
+          fontWeight={400}
+        >
+          Arena:{" "}
+        </Heading>
+        <Text
+          color={colorScheme.text}
+          m={0}
+          fontWeight={400}
+          fontStyle="italic"
+        >
+          {gameArena.arena}
+        </Text>
+      </HStack>
+      <HStack alignItems="center" ml={5}>
+        <Heading
+          fontSize="lg"
+          fontWeight={400}
+          fontStyle="italic"
+          color={colorScheme.button}
+        >
+          City:{" "}
+        </Heading>
+        <Text color={colorScheme.text} fontWeight={400} fontStyle="italic">
+          {gameArena.city}, {gameArena.country}
+        </Text>
+      </HStack>
     </VStack>
   );
 };

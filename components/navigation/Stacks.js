@@ -13,9 +13,10 @@ const Stacks = () => (
       name="NBA Check-In"
       component={BottomTabs}
       options={{
+        fontSize: 20,
         headerStyle: { backgroundColor: "#C32F27" },
         headerTitleContainerStyle: {
-          marginLeft: 15,
+          marginLeft: 20,
         },
       }}
     />
@@ -24,6 +25,9 @@ const Stacks = () => (
       component={ExtendedProfile}
       options={{
         headerStyle: { backgroundColor: "#C32F27" },
+        headerTitleContainerStyle: {
+          marginLeft: 1,
+        },
       }}
     />
     <Stack.Screen
@@ -31,6 +35,9 @@ const Stacks = () => (
       component={ExtendedGame}
       options={{
         headerStyle: { backgroundColor: "#C32F27" },
+        headerTitleContainerStyle: {
+          marginLeft: 1,
+        },
       }}
     />
   </Stack.Navigator>
