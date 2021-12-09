@@ -6,12 +6,26 @@ import ExtendedProfile from "../../screens/ExtendedProfile";
 import { colorScheme } from "../../constants";
 import ScoreScreen from "../../screens/ScoreScreen";
 
-const Stack = createSharedElementStackNavigator();
 const name = "NBA Check-Up";
+
+// This Spec makes it so that the animation goes from 1000ms (very slow) to 500ms (acceptable) speed! You can also remove it if you want.
+export const iosTransitionSpec = {
+  animation: "spring",
+  config: {
+    stiffness: 1000,
+    damping: 500,
+    mass: 3,
+    overshootClamping: true,
+    restDisplacementThreshold: 10,
+    restSpeedThreshold: 10,
+  },
+};
+
 const Stack1 = createSharedElementStackNavigator({
   name,
   debug: true,
 });
+
 const Stack2 = createSharedElementStackNavigator({
   name,
   debug: true,
@@ -23,7 +37,7 @@ export const Stack1Screen = () => (
       name={name}
       component={ScoreScreen}
       options={{
-        headerStyle: { backgroundColor: "#C32F27" },
+        headerStyle: { backgroundColor: colorScheme.foreground },
         headerTintColor: colorScheme.text,
         headerTitleStyle: {
           fontWeight: "bold",
@@ -31,6 +45,12 @@ export const Stack1Screen = () => (
         },
         headerTitleContainerStyle: {
           marginLeft: 7,
+        },
+      }}
+      screenOptions={{
+        transitionSpec: {
+          open: iosTransitionSpec,
+          close: iosTransitionSpec,
         },
       }}
     />
@@ -38,7 +58,7 @@ export const Stack1Screen = () => (
       name="Extended Game"
       component={ExtendedGame}
       options={{
-        headerStyle: { backgroundColor: "#C32F27" },
+        headerStyle: { backgroundColor: colorScheme.foreground },
         headerTintColor: colorScheme.text,
         headerTitleStyle: {
           fontWeight: "bold",
@@ -48,9 +68,18 @@ export const Stack1Screen = () => (
           marginLeft: 7,
         },
       }}
+      screenOptions={{
+        transitionSpec: {
+          open: iosTransitionSpec,
+          close: iosTransitionSpec,
+        },
+      }}
       sharedElements={(route) => {
         const { scoreInfo } = route.params;
-        return [`item.${scoreInfo.gameId}.bg`, `item.${scoreInfo.gameId}.name`];
+        return [
+          { id: `item.${scoreInfo.gameId}.bg`, animation: "fade" },
+          { id: `item.${scoreInfo.gameId}.name`, animation: "fade" },
+        ];
       }}
     />
   </Stack1.Navigator>
@@ -62,7 +91,7 @@ export const Stack2Screen = () => (
       name={name}
       component={PlayerScreen}
       options={{
-        headerStyle: { backgroundColor: "#C32F27" },
+        headerStyle: { backgroundColor: colorScheme.foreground },
         headerTintColor: colorScheme.text,
         headerTitleStyle: {
           fontWeight: "bold",
@@ -77,7 +106,7 @@ export const Stack2Screen = () => (
       name="Extended Profile"
       component={ExtendedProfile}
       options={{
-        headerStyle: { backgroundColor: "#C32F27" },
+        headerStyle: { backgroundColor: colorScheme.foreground },
         headerTintColor: colorScheme.text,
         headerTitleStyle: {
           fontWeight: "bold",
@@ -90,8 +119,9 @@ export const Stack2Screen = () => (
       sharedElements={(route, showing) => {
         const { playerInfo } = route.params;
         return [
-          `item.${playerInfo.playerId}.name`,
-          `item.${playerInfo.playerId}.info`,
+          { id: `item.${playerInfo.playerId}.image` },
+          { id: `item.${playerInfo.playerId}.name` },
+          { id: `item.${playerInfo.playerId}.team` },
         ];
       }}
     />

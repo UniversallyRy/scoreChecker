@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Dimensions } from "react-native";
+import { SharedElement } from "react-native-shared-element";
 import { Flex, Image, Button, Text, HStack, Box, VStack } from "native-base";
 import {
   MotiView,
@@ -8,9 +9,8 @@ import {
   useDynamicAnimation,
 } from "moti";
 import { RaisedButton, LoadingButton } from "../Buttons";
-import logos from "../../logoManager";
 import { PROFILE_PIC_URL_PREFIX } from "../../constants";
-import { SharedElement } from "react-native-shared-element";
+import logos from "../../logoManager";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -85,7 +85,7 @@ const Profile = ({ playerInfo, navigation }) => {
             }}
             exit={{ opacity: 0 }}
           >
-            <SharedElement id={`item.${playerInfo.playerId}.name`}>
+            <SharedElement id={`item.${playerInfo.playerId}.image`}>
               <Image
                 mt={1}
                 borderWidth={2}
@@ -102,6 +102,8 @@ const Profile = ({ playerInfo, navigation }) => {
                 }}
                 alt="Profile"
               />
+            </SharedElement>
+            <SharedElement id={`item.${playerInfo.playerId}.name`}>
               <Text
                 alignSelf="center"
                 fontSize="xl"
@@ -110,6 +112,8 @@ const Profile = ({ playerInfo, navigation }) => {
               >
                 {`${playerInfo.playerName}`}
               </Text>
+            </SharedElement>
+            <SharedElement id={`item.${playerInfo.playerId}.team`}>
               <Image
                 w={50}
                 h={50}
@@ -120,34 +124,32 @@ const Profile = ({ playerInfo, navigation }) => {
                 alt="Team"
               />
             </SharedElement>
-            <SharedElement id={`item.${playerInfo.playerId}.info`}>
-              {Object.entries(infoList).map(([item, value]) => (
-                <HStack
-                  key={item + "key"}
-                  textAlign="auto"
-                  alignItems="center"
-                  mb={2}
+            {Object.entries(infoList).map(([item, value]) => (
+              <HStack
+                key={item + "key"}
+                textAlign="auto"
+                alignItems="center"
+                mb={2}
+              >
+                <Text
+                  color="#780116"
+                  lineHeight="lg"
+                  fontSize="xl"
+                  fontWeight={900}
                 >
-                  <Text
-                    color="#780116"
-                    lineHeight="lg"
-                    fontSize="xl"
-                    fontWeight={900}
-                  >
-                    {item}
-                  </Text>
-                  <Text
-                    color="#F7B538"
-                    ml={1}
-                    lineHeight="lg"
-                    fontSize="lg"
-                    fontWeight={400}
-                  >
-                    {value}
-                  </Text>
-                </HStack>
-              ))}
-            </SharedElement>
+                  {item}
+                </Text>
+                <Text
+                  color="#F7B538"
+                  ml={1}
+                  lineHeight="lg"
+                  fontSize="lg"
+                  fontWeight={400}
+                >
+                  {value}
+                </Text>
+              </HStack>
+            ))}
             <RaisedButton
               m={5}
               onPress={() => {

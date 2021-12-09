@@ -23,8 +23,8 @@ const ExtendedProfile = ({ route, navigation }) => {
   // Object container for player information
   const profileState = {
     Team: playerInfo.teamCity + " " + playerInfo.teamName,
-    Weight: playerInfo.weight,
     Height: playerInfo.height,
+    Weight: playerInfo.weight,
     PPG: playerInfo.pts,
     RPG: playerInfo.reb,
     APG: playerInfo.ast,
@@ -60,7 +60,7 @@ const ExtendedProfile = ({ route, navigation }) => {
         px={2}
         borderRadius={5}
       >
-        <SharedElement id={`item.${playerInfo.playerId}.name`}>
+        <SharedElement id={`item.${playerInfo.playerId}.image`}>
           <Image
             mt={1}
             borderWidth={2}
@@ -77,6 +77,8 @@ const ExtendedProfile = ({ route, navigation }) => {
             }}
             alt="Profile"
           />
+        </SharedElement>
+        <SharedElement id={`item.${playerInfo.playerId}.name`}>
           <Text
             alignSelf="center"
             fontSize="xl"
@@ -85,6 +87,8 @@ const ExtendedProfile = ({ route, navigation }) => {
           >
             {`${playerInfo.playerName}`}
           </Text>
+        </SharedElement>
+        <SharedElement id={`item.${playerInfo.playerId}.team`}>
           <Image
             w={50}
             h={50}
@@ -95,36 +99,34 @@ const ExtendedProfile = ({ route, navigation }) => {
             alt="Team"
           />
         </SharedElement>
-        <SharedElement id={`item.${playerInfo.playerId}.info`}>
-          {Object.entries(profileState).map(([key, data]) => (
-            <HStack m={1} textAlign="auto" key={key}>
-              <MotiText
-                from={{ opacity: 0.4, scale: 0.7 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{
-                  type: "timing",
-                  duration: 350,
-                  scale: {
-                    type: "spring",
-                    delay: 200,
-                  },
-                }}
+        {Object.entries(profileState).map(([key, data]) => (
+          <HStack m={1} textAlign="auto" key={key}>
+            <MotiText
+              from={{ opacity: 0.4, scale: 0.7 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                type: "timing",
+                duration: 350,
+                scale: {
+                  type: "spring",
+                  delay: 200,
+                },
+              }}
+            >
+              <Text
+                color={colorScheme.button}
+                mr={1}
+                fontSize="lg"
+                fontWeight={900}
               >
-                <Text
-                  color={colorScheme.button}
-                  mr={1}
-                  fontSize="lg"
-                  fontWeight={900}
-                >
-                  {onlyHS(key, data)}:{" "}
-                </Text>
-                <Text color={colorScheme.text} fontSize="lg" fontWeight={400}>
-                  {`${data}`}
-                </Text>
-              </MotiText>
-            </HStack>
-          ))}
-        </SharedElement>
+                {onlyHS(key, data)}:{" "}
+              </Text>
+              <Text color={colorScheme.text} fontSize="lg" fontWeight={400}>
+                {`${data}`}
+              </Text>
+            </MotiText>
+          </HStack>
+        ))}
       </Flex>
     </Box>
   );

@@ -2,19 +2,20 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Stack1Screen, Stack2Screen } from "../navigation/Stacks";
+import { colorScheme } from "../../constants";
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabs = () => (
   <Tab.Navigator
     screenOptions={{
-      tabBarActiveTintColor: "#F7B538",
+      tabBarActiveTintColor: colorScheme.text,
       tabBarInactiveTintColor: "grey",
       tabBarLabelStyle: {
         fontSize: 14,
       },
       tabBarItemStyle: {
-        backgroundColor: "#C32F27",
+        backgroundColor: colorScheme.foreground,
       },
       tabBarStyle: [
         {
