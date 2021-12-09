@@ -72,7 +72,7 @@ const ScoreItem = ({ u, navigation }) => {
               duration: 1050,
             }}
           >
-            <SharedElement id={`item.${awayTeam}.name`}>
+            <SharedElement alignItems="center" id={`item.${awayTeam}.name`}>
               <Heading
                 color={colorScheme.text}
                 fontSize="xl"
@@ -115,7 +115,7 @@ const ScoreItem = ({ u, navigation }) => {
               duration: 1050,
             }}
           >
-            <SharedElement id={`item.${homeTeam}.name`}>
+            <SharedElement alignItems="center" id={`item.${homeTeam}.name`}>
               <Heading
                 color={colorScheme.text}
                 fontSize="xl"
