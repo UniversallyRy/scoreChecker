@@ -16,7 +16,7 @@ const initialState = {
 
 const PlayerScreen = ({ navigation }) => {
   const [playerObj, setPlayerObj] = useState(initialState);
-
+  console.log("hi");
   const loadPlayerInfo = (playerName) => {
     NBA.stats
       .playerInfo({ PlayerID: NBA.findPlayer(playerName).playerId })
@@ -27,18 +27,6 @@ const PlayerScreen = ({ navigation }) => {
         );
         setPlayerObj({ playerInfo });
       });
-  };
-
-  // cycles through reset twice to trigger promise rerender
-  const handleReset = (n) => {
-    let count = n;
-    if (count > 1) {
-      return null;
-    } else {
-      loadPlayerInfo(initialState.playerInfo.fullName);
-    }
-    count++;
-    handleReset(n + 1);
   };
 
   const handleInput = (item) => {
@@ -58,13 +46,13 @@ const PlayerScreen = ({ navigation }) => {
       }
     }
   };
-  // initial call to default Toppin profile
+  // initial api call to set Toppin profile
   useEffect(() => {
     const initData = loadPlayerInfo(initialState.playerInfo.fullName);
     return () => {
       initData;
     };
-  }, []);
+  }, [initialState]);
 
   return (
     <Box bg={colorScheme.background}>
@@ -74,10 +62,7 @@ const PlayerScreen = ({ navigation }) => {
             navigation={navigation}
             playerInfo={playerObj.playerInfo}
           />
-          <PlayerSearch
-            handleInput={handleInput}
-            handleReset={() => handleReset(0)}
-          />
+          <PlayerSearch handleInput={handleInput} />
         </KeyboardAvoidingView>
       </ScrollView>
     </Box>

@@ -12,10 +12,11 @@ import {
 import { Formik } from "formik";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { RaisedButton } from "../Buttons";
+import { colorScheme } from "../../constants";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const PlayerSearch = ({ handleInput, handleReset }) => {
+const PlayerSearch = ({ handleInput }) => {
   const [keyboardOffset, setKeyboardOffset] = useState(0);
   const onKeyboardShow = (event) =>
     setKeyboardOffset(event.endCoordinates.height);
@@ -50,25 +51,21 @@ const PlayerSearch = ({ handleInput, handleReset }) => {
         }}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
-          <Stack>
+          <Stack mt={5} alignItems="center">
             <InputGroup
-              w={{
-                base: "90%",
-                md: "100%",
-              }}
-              alignSelf="center"
               borderWidth={1}
-              borderColor="#C32F27"
+              borderColor={colorScheme.foreground}
               borderRadius={3}
               m={2}
+              mb={10}
               h={windowHeight * 0.057}
             >
               <InputLeftAddon bg="#000">
-                <Icon name="user" size={24} color="#F7B538" />
+                <Icon name="user" size={24} color={colorScheme.text} />
               </InputLeftAddon>
               <Input
                 w={{
-                  base: "100%",
+                  base: "90%",
                 }}
                 key="inputPlayer"
                 onChangeText={handleChange("player")}
@@ -81,18 +78,14 @@ const PlayerSearch = ({ handleInput, handleReset }) => {
                 placeholder="Search for Player"
               />
             </InputGroup>
-            <VStack>
-              <RaisedButton key="submitButton" onPress={handleSubmit}>
-                <Text color="#F7B538" fontWeight={700}>
-                  SUBMIT
-                </Text>
-              </RaisedButton>
-              <RaisedButton onPress={handleReset}>
-                <Text color="#F7B538" fontWeight={700}>
-                  RESET
-                </Text>
-              </RaisedButton>
-            </VStack>
+            <RaisedButton
+              h={50}
+              w={100}
+              key="submitButton"
+              onPress={handleSubmit}
+            >
+              <Icon name="search" size={28} color={colorScheme.text} />
+            </RaisedButton>
           </Stack>
         )}
       </Formik>

@@ -9,13 +9,13 @@ import {
   useDynamicAnimation,
 } from "moti";
 import { RaisedButton, LoadingButton } from "../Buttons";
-import { PROFILE_PIC_URL_PREFIX } from "../../constants";
+import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../../constants";
 import logos from "../../logoManager";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const Profile = ({ playerInfo, navigation }) => {
-  let [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const infoList = {
     "Team:": `${playerInfo.teamCity} ${playerInfo.teamName}`,
@@ -47,8 +47,8 @@ const Profile = ({ playerInfo, navigation }) => {
       borderRadius={3}
       px={5}
       mt={2}
-      bg="#C32F27"
-      shadowColor="#C32F27"
+      bg={colorScheme.foreground}
+      shadowColor={colorScheme.foreground}
       shadowOffset={{ width: 1, height: 0.34 }}
       shadowOpacity={0.95}
       shadowRadius={3.6}
@@ -90,7 +90,7 @@ const Profile = ({ playerInfo, navigation }) => {
                 mt={1}
                 borderWidth={2}
                 overflow="hidden"
-                borderColor="#780116"
+                borderColor={colorScheme.title}
                 borderRadius={50}
                 alignItems="center"
                 alignSelf="center"
@@ -108,7 +108,7 @@ const Profile = ({ playerInfo, navigation }) => {
                 alignSelf="center"
                 fontSize="xl"
                 fontWeight={700}
-                color="#F7B538"
+                color={colorScheme.text}
               >
                 {`${playerInfo.playerName}`}
               </Text>
@@ -132,7 +132,7 @@ const Profile = ({ playerInfo, navigation }) => {
                 mb={2}
               >
                 <Text
-                  color="#780116"
+                  color={colorScheme.title}
                   lineHeight="lg"
                   fontSize="xl"
                   fontWeight={900}
@@ -140,7 +140,7 @@ const Profile = ({ playerInfo, navigation }) => {
                   {item}
                 </Text>
                 <Text
-                  color="#F7B538"
+                  color={colorScheme.text}
                   ml={1}
                   lineHeight="lg"
                   fontSize="lg"
@@ -159,7 +159,11 @@ const Profile = ({ playerInfo, navigation }) => {
                 });
               }}
             >
-              <Text color="#F7B538" fontStyle="italic" fontWeight={300}>
+              <Text
+                color={colorScheme.text}
+                fontStyle="italic"
+                fontWeight={300}
+              >
                 CLICK FOR MORE INFO{" "}
               </Text>
             </RaisedButton>
