@@ -16,7 +16,7 @@ export const colorScheme = {
   //  Text color Maximum Yellow Red
   text: "#F7B538",
   //  Button color UP Maroon
-  button: "#780116",
+  title: "#780116",
   // Divider color Flame
   divider: "#D8572A",
 };

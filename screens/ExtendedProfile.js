@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Dimensions } from "react-native";
 import { Flex, Image, Text, HStack, Box } from "native-base";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../constants";
 import Icon from "react-native-vector-icons/FontAwesome";
 import logos from "../logoManager";
 import Button from "../components/Buttons";
-// todos: better list styling
+// todos: better list styling, better shared element screen transition
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 import { MotiText } from "moti";
 import { SharedElement } from "react-native-shared-element";
 
 const ExtendedProfile = ({ route, navigation }) => {
-  const { itemId, playerInfo } = route.params;
+  const { playerInfo } = route.params;
 
   const experience = (item) => {
     if (item < 1) return "Rookie";
@@ -20,7 +20,7 @@ const ExtendedProfile = ({ route, navigation }) => {
     } else return "1 Previous Season";
   };
 
-  // Object container for player information
+  // player information obj
   const profileState = {
     Team: playerInfo.teamCity + " " + playerInfo.teamName,
     Height: playerInfo.height,
@@ -38,9 +38,9 @@ const ExtendedProfile = ({ route, navigation }) => {
     "Draft Year": playerInfo.draftYear,
     Country: playerInfo.country,
   };
-
-  // checks for college skippers
-  const onlyHS = (item, itemData) => {
+  // console.log(playerInfo);
+  const titleCheck = (item, itemData) => {
+    // changes school title if no college(future needed for euroleaguers?)
     if (
       !itemData ||
       (typeof itemData === "string" && itemData.includes("HS"))
@@ -65,17 +65,17 @@ const ExtendedProfile = ({ route, navigation }) => {
             mt={1}
             borderWidth={2}
             overflow="hidden"
-            borderColor="#780116"
+            borderColor={colorScheme.title}
             borderRadius={50}
             alignItems="center"
             alignSelf="center"
             h={100}
             w={100}
-            key={playerInfo.playerId}
             source={{
               uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`,
             }}
-            alt="Profile"
+            key={playerInfo.playerName + "_imgKey"}
+            alt={playerInfo.playerName + " image"}
           />
         </SharedElement>
         <SharedElement id={`item.${playerInfo.playerId}.name`}>
@@ -83,7 +83,7 @@ const ExtendedProfile = ({ route, navigation }) => {
             alignSelf="center"
             fontSize="xl"
             fontWeight={700}
-            color="#F7B538"
+            color={colorScheme.text}
           >
             {`${playerInfo.playerName}`}
           </Text>
@@ -95,8 +95,8 @@ const ExtendedProfile = ({ route, navigation }) => {
             mb={10}
             alignSelf="center"
             source={logos[playerInfo.teamAbbreviation]}
-            key={playerInfo.teamAbbreviation}
-            alt="Team"
+            key={playerInfo.teamAbbreviation + "_logoKey"}
+            alt={playerInfo.teamName}
           />
         </SharedElement>
         {Object.entries(profileState).map(([key, data]) => (
@@ -114,12 +114,12 @@ const ExtendedProfile = ({ route, navigation }) => {
               }}
             >
               <Text
-                color={colorScheme.button}
+                color={colorScheme.title}
                 mr={1}
                 fontSize="lg"
                 fontWeight={900}
               >
-                {onlyHS(key, data)}:{" "}
+                {titleCheck(key, data)}:{" "}
               </Text>
               <Text color={colorScheme.text} fontSize="lg" fontWeight={400}>
                 {`${data}`}

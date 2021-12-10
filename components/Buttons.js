@@ -8,7 +8,7 @@ export const RaisedButton = (props) => {
     <Button
       margin={2}
       mb={9}
-      bg={colorScheme.button}
+      bg={colorScheme.title}
       shadowColor="#000"
       borderRadius={5}
       shadowOffset={{ width: 1, height: 2 }}
@@ -23,7 +23,7 @@ export const RaisedButton = (props) => {
 export const LoadingButton = (props) => {
   return (
     <Button
-      bg={colorScheme.button}
+      bg={colorScheme.title}
       isLoading
       isLoadingText="Loading. ."
       margin={2}

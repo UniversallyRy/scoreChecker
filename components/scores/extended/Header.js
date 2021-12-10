@@ -72,7 +72,7 @@ const Header = ({
           <Heading
             fontSize="lg"
             fontStyle="italic"
-            color={colorScheme.button}
+            color={colorScheme.title}
             fontWeight={400}
           >
             Arena:{" "}
@@ -91,7 +91,7 @@ const Header = ({
             fontSize="lg"
             fontWeight={400}
             fontStyle="italic"
-            color={colorScheme.button}
+            color={colorScheme.title}
           >
             City:{" "}
           </Heading>

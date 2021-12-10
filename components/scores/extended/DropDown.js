@@ -66,7 +66,7 @@ const DropDown = ({ statState, changeStats }) => {
         }}
         dropDownContainerStyle={{
           alignContent: "center",
-          backgroundColor: colorScheme.button,
+          backgroundColor: colorScheme.title,
           borderColor: colorScheme.divider,
         }}
       />

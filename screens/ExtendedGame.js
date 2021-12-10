@@ -112,7 +112,7 @@ const ExtendedGame = ({ navigation, route }) => {
         homeScore={homeScore}
       />
       <Box
-        bg={colorScheme.button}
+        bg={colorScheme.title}
         mt={1}
         w={windowWidth}
         h={windowHeight}
