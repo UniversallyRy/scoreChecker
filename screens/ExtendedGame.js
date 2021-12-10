@@ -1,69 +1,68 @@
 import React, { useState, useEffect } from "react";
 import { Dimensions } from "react-native";
-import { Box, Text, VStack } from "native-base";
+import { Box, VStack } from "native-base";
 import NBA from "nba";
-import moment from "moment";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../constants";
-import Scores from "../components/scores";
 import Header from "../components/scores/extended/Header";
+import logos from "../logoManager";
+import DropDown from "../components/scores/extended/DropDown";
 import StatLeaders from "../components/scores/extended/StatLeaders";
 import QuarterLogs from "../components/scores/extended/QuarterLogs";
-import DropDown from "../components/scores/extended/DropDown";
-import logos from "../logoManager";
-import { MotiView, MotiText } from "moti";
-import { SharedElement } from "react-native-shared-element";
+// import { MotiView, MotiText } from "moti";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const ExtendedGame = ({ navigation, route }) => {
   const { itemId, scoreInfo } = route.params;
-  const [statState, setStat] = useState("Points");
-  const [gameArena, setArena] = useState({});
-  const [homeScore, setHomeScore] = useState(0);
-  const [awayScore, setAwayScore] = useState(0);
-  const [homeLeadValue, setHomeLeaders] = useState({});
-  const [awayLeadValue, setAwayLeaders] = useState({});
-  const [homePlayerPic, setHomePic] = useState({});
-  const [awayPlayerPic, setAwayPic] = useState({});
-  const [homeLines, setHomeLines] = useState([]);
-  const [awayLines, setAwayLines] = useState([]);
-  const [homePlayer, setHomePlayer] = useState("");
-  const [awayPlayer, setAwayPlayer] = useState("");
-
+  const gameDate = scoreInfo.gamecode.slice(0, 8);
+  const gameTeams = scoreInfo.gamecode.slice(-6);
   const splitAt = (index) => (x) => [x.slice(0, index), x.slice(index)];
-  let teams = scoreInfo.gamecode.slice(-6);
-  let date = scoreInfo.gamecode.slice(0, 8);
-  let splitTeam = splitAt(3)(teams);
-  let [awayTeam, homeTeam] = [splitTeam[0], splitTeam[1]];
-  let [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
+  const [awayTeam, homeTeam] = splitAt(3)(gameTeams);
+  const [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
+
+  const [gameInfo, setGameInfo] = useState({
+    gameArena: "",
+    statName: "",
+    awayScore: 0,
+    homeScore: 0,
+    awayPlayer: "",
+    homePlayer: "",
+    awayPlayerPic: "",
+    homePlayerPic: "",
+    awayLeadValue: 0,
+    homeLeadValue: 0,
+    awayLines: [],
+    homeLines: [],
+  });
 
   useEffect(() => {
     async function initData() {
-      // fetches data needed for single scorecard and gives values to above states.
+      // on initial render, async call for more game data using gameId
       NBA.data
-        .boxScore(date, scoreInfo.gameId)
+        .boxScore(gameDate, scoreInfo.gameId)
         .then((res) => res.sports_content)
         .then((res) => res.game)
         .then((res) => {
-          setArena(res);
-          setHomePic(res.home.Leaders.Points.leader[0].PersonID);
-          setAwayPic(res.visitor.Leaders.Points.leader[0].PersonID);
-          setHomeScore(res.home.score);
-          setAwayScore(res.visitor.score);
-          setHomeLeaders(res.home.Leaders.Points);
-          setAwayLeaders(res.visitor.Leaders.Points);
-          setHomeLines(res.home.linescores.period);
-          setAwayLines(res.visitor.linescores.period);
-          setHomePlayer(
-            res.home.Leaders.Points.leader[0].FirstName +
+          setGameInfo({
+            gameArena: res,
+            awayScore: res.visitor.score,
+            homeScore: res.home.score,
+            statName: "Points",
+            awayPlayerPic: res.visitor.Leaders.Points.leader[0].PersonID,
+            homePlayerPic: res.home.Leaders.Points.leader[0].PersonID,
+            awayPlayer:
+              res.visitor.Leaders.Points.leader[0].FirstName +
               " " +
-              res.home.Leaders.Points.leader[0].LastName
-          );
-          setAwayPlayer(
-            res.visitor.Leaders.Points.leader[0].FirstName +
+              res.visitor.Leaders.Points.leader[0].LastName,
+            homePlayer:
+              res.home.Leaders.Points.leader[0].FirstName +
               " " +
-              res.visitor.Leaders.Points.leader[0].LastName
-          );
+              res.home.Leaders.Points.leader[0].LastName,
+            awayLeadValue: res.visitor.Leaders.Points,
+            homeLeadValue: res.home.Leaders.Points,
+            awayLines: res.visitor.linescores.period,
+            homeLines: res.home.linescores.period,
+          });
         });
     }
     initData();
@@ -71,26 +70,27 @@ const ExtendedGame = ({ navigation, route }) => {
 
   const changeStats = (stat) => {
     NBA.data
-      .boxScore(date, scoreInfo.gameId)
+      .boxScore(gameDate, scoreInfo.gameId)
       .then((res) => res.sports_content)
       .then((res) => res.game)
       .then((res) => {
-        setHomePic(res.home.Leaders[stat].leader[0].PersonID);
-        setAwayPic(res.visitor.Leaders[stat].leader[0].PersonID);
-        setHomeLeaders(res.home.Leaders[stat]);
-        setAwayLeaders(res.visitor.Leaders[stat]);
-        setHomePlayer(
-          res.home.Leaders[stat].leader[0].FirstName +
+        setGameInfo((prevState) => ({
+          ...prevState,
+          statName: stat,
+          awayPlayerPic: res.visitor.Leaders[stat].leader[0].PersonID,
+          homePlayerPic: res.home.Leaders[stat].leader[0].PersonID,
+          awayPlayer:
+            res.visitor.Leaders[stat].leader[0].FirstName +
             " " +
-            res.home.Leaders[stat].leader[0].LastName
-        );
-        setAwayPlayer(
-          res.visitor.Leaders[stat].leader[0].FirstName +
+            res.visitor.Leaders[stat].leader[0].LastName,
+          homePlayer:
+            res.home.Leaders[stat].leader[0].FirstName +
             " " +
-            res.visitor.Leaders[stat].leader[0].LastName
-        );
+            res.home.Leaders[stat].leader[0].LastName,
+          awayLeadValue: res.visitor.Leaders[stat],
+          homeLeadValue: res.home.Leaders[stat],
+        }));
       });
-    setStat(stat);
   };
 
   return (
@@ -100,16 +100,18 @@ const ExtendedGame = ({ navigation, route }) => {
       alignItems="center"
       alignSelf="center"
       bg={colorScheme.foreground}
+      key={itemId + "_extendedPage"}
     >
       <Header
-        gameId={scoreInfo.gameId}
-        gameArena={gameArena}
+        gameId={gameInfo.gameId}
+        gameArena={gameInfo.gameArena}
         awayTeam={awayTeam}
         awayLogo={awayLogo}
-        awayScore={awayScore}
+        awayScore={gameInfo.awayScore}
         homeTeam={homeTeam}
         homeLogo={homeLogo}
-        homeScore={homeScore}
+        homeScore={gameInfo.homeScore}
+        key="header"
       />
       <Box
         bg={colorScheme.title}
@@ -119,18 +121,28 @@ const ExtendedGame = ({ navigation, route }) => {
         alignItems="center"
         borderRadius={32}
         transform={[{ translateY: windowHeight * 0.02 }]}
+        key="body"
       >
         <StatLeaders
-          awayPic={{ uri: `${PROFILE_PIC_URL_PREFIX}/${awayPlayerPic}.png` }}
-          awayLeadValue={awayLeadValue}
-          awayPlayer={awayPlayer}
-          homePic={{ uri: `${PROFILE_PIC_URL_PREFIX}/${homePlayerPic}.png` }}
-          homePlayer={homePlayer}
-          homeLeadValue={homeLeadValue}
-          statState={statState}
+          statState={gameInfo.statName}
+          key="statsLeaders"
+          awayPic={{
+            uri: `${PROFILE_PIC_URL_PREFIX}/${gameInfo.awayPlayerPic}.png`,
+          }}
+          awayPlayer={gameInfo.awayPlayer}
+          awayLeadValue={gameInfo.awayLeadValue}
+          homePic={{
+            uri: `${PROFILE_PIC_URL_PREFIX}/${gameInfo.homePlayerPic}.png`,
+          }}
+          homePlayer={gameInfo.homePlayer}
+          homeLeadValue={gameInfo.homeLeadValue}
           changeStats={changeStats}
         />
-        <QuarterLogs awayLines={awayLines} homeLines={homeLines} />
+        <QuarterLogs
+          awayLines={gameInfo.awayLines}
+          homeLines={gameInfo.homeLines}
+          key="quarterLogs"
+        />
       </Box>
     </VStack>
   );
