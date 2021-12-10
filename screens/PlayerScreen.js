@@ -16,7 +16,7 @@ const initialState = {
 
 const PlayerScreen = ({ navigation }) => {
   const [playerObj, setPlayerObj] = useState(initialState);
-  console.log("hi");
+
   const loadPlayerInfo = (playerName) => {
     NBA.stats
       .playerInfo({ PlayerID: NBA.findPlayer(playerName).playerId })
@@ -52,7 +52,7 @@ const PlayerScreen = ({ navigation }) => {
     return () => {
       initData;
     };
-  }, [initialState]);
+  }, []);
 
   return (
     <Box bg={colorScheme.background}>

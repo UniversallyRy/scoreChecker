@@ -1,14 +1,15 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React from "react";
 import { Dimensions } from "react-native";
 import { Flex, Image, Text, HStack, Box } from "native-base";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../constants";
 import Icon from "react-native-vector-icons/FontAwesome";
 import logos from "../logoManager";
 import Button from "../components/Buttons";
-// todos: better list styling, better shared element screen transition
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 import { MotiText } from "moti";
 import { SharedElement } from "react-native-shared-element";
+
+// todos: better list styling, better shared element screen transition
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const ExtendedProfile = ({ route, navigation }) => {
   const { playerInfo } = route.params;
@@ -19,7 +20,6 @@ const ExtendedProfile = ({ route, navigation }) => {
       return item + " Previous Seasons";
     } else return "1 Previous Season";
   };
-
   // player information obj
   const profileState = {
     Team: playerInfo.teamCity + " " + playerInfo.teamName,
