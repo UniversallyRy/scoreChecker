@@ -50,10 +50,10 @@ const theme = extendTheme({
         normal: "Rubik_700Bold",
         italic: "Rubik_700Bold_Italic",
       },
-      //   800: {
-      //     normal: 'Roboto-Bold',
-      //     italic: 'Roboto-BoldItalic',
-      //   },
+      800: {
+        normal: "Rubik_700Bold",
+        italic: "Rubik_700Bold_Italic",
+      },
       900: {
         normal: "Rubik_900Black",
         italic: "Rubik_900Black_Italic",

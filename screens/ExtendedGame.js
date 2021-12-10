@@ -1,23 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Dimensions, ActivityIndicator } from "react-native";
-import {
-  Box,
-  Container,
-  Flex,
-  Heading,
-  HStack,
-  Text,
-  VStack,
-  Image,
-  ScrollView,
-} from "native-base";
+import { Dimensions } from "react-native";
+import { Box, Text, VStack } from "native-base";
 import NBA from "nba";
 import moment from "moment";
-import {
-  PROFILE_PIC_URL_PREFIX,
-  TEAM_PIC_URL_PREFIX,
-  colorScheme,
-} from "../constants";
+import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../constants";
 import Scores from "../components/scores";
 import Header from "../components/scores/extended/Header";
 import StatLeaders from "../components/scores/extended/StatLeaders";
