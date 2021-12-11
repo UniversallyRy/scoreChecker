@@ -126,14 +126,10 @@ const ExtendedGame = ({ navigation, route }) => {
         <StatLeaders
           statState={gameInfo.statName}
           key="statsLeaders"
-          awayPic={{
-            uri: `${PROFILE_PIC_URL_PREFIX}/${gameInfo.awayPlayerPic}.png`,
-          }}
+          awayPic={`${PROFILE_PIC_URL_PREFIX}/${gameInfo.awayPlayerPic}.png`}
           awayPlayer={gameInfo.awayPlayer}
           awayLeadValue={gameInfo.awayLeadValue}
-          homePic={{
-            uri: `${PROFILE_PIC_URL_PREFIX}/${gameInfo.homePlayerPic}.png`,
-          }}
+          homePic={`${PROFILE_PIC_URL_PREFIX}/${gameInfo.homePlayerPic}.png`}
           homePlayer={gameInfo.homePlayer}
           homeLeadValue={gameInfo.homeLeadValue}
           changeStats={changeStats}

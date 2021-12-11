@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Box, VStack, HStack, Heading, Text } from "native-base";
-import { Dimensions, Image } from "react-native";
+import { Box, VStack, HStack, Heading, Text, Image } from "native-base";
+import { Dimensions } from "react-native";
 import { colorScheme } from "../../../constants";
 import DropDown from "./DropDown";
 import { color } from "react-native-reanimated";
@@ -19,17 +19,7 @@ const StatLeaders = ({
   changeStats,
   date,
 }) => {
-  const [awayPicture, setAwayPicture] = useState({});
-  const [homePicture, setHomePicture] = useState({});
   const leaderHeading = statState.slice(0, -1);
-
-  useEffect(() => {
-    async function initData() {
-      setAwayPicture(awayPic);
-      setHomePicture(homePic);
-    }
-    initData();
-  }, [awayPic, homePic]);
 
   return (
     <VStack w={windowWidth} alignItems="center" justifyContent="center">
@@ -64,9 +54,9 @@ const StatLeaders = ({
             borderColor={colorScheme.divider}
             borderWidth={0.6}
             borderRadius={50}
-            source={awayPicture}
+            source={{ uri: awayPic }}
             key={awayPlayer + "_img"}
-            alt={awayPlayer}
+            alt="Away Player"
           />
           <Heading color={colorScheme.text} size="md" fontWeight={700}>
             {awayPlayer}
@@ -90,9 +80,9 @@ const StatLeaders = ({
             borderColor={colorScheme.divider}
             borderWidth={0.6}
             borderRadius={50}
-            source={homePicture}
+            source={{ uri: homePic }}
             key={homePlayer + "_img"}
-            alt={homePlayer}
+            alt="Home Player"
           />
           <Heading size="md" color={colorScheme.text} fontWeight={700}>
             {homePlayer}
