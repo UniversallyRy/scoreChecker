@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useReducer } from "react";
 import { Dimensions } from "react-native";
 import { Box, Flex, ScrollView, KeyboardAvoidingView } from "native-base";
 import NBA from "nba";
+import { SharedElement } from "react-native-shared-element";
 import PlayerProfile from "../components/players/PlayerProfile";
 import PlayerSearch from "../components/players/PlayerSearch";
 import { DEFAULT_PLAYER_INFO, colorScheme } from "../constants";
-import { SharedElement } from "react-native-shared-element";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -14,18 +14,39 @@ const initialState = {
   playerInfo: DEFAULT_PLAYER_INFO,
 };
 
-const PlayerScreen = ({ navigation }) => {
-  const [playerObj, setPlayerObj] = useState(initialState);
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "FETCH_SUCCESS":
+      return {
+        playerInfo: action.payload,
+        error: "",
+      };
+    case "FETCH_ERROR":
+      return {
+        playerInfo: {},
+        error: "Something went wrong",
+      };
+    default:
+      return state;
+  }
+};
 
+const PlayerScreen = ({ navigation }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
   const loadPlayerInfo = (playerName) => {
     NBA.stats
       .playerInfo({ PlayerID: NBA.findPlayer(playerName).playerId })
-      .then((info) => {
-        const playerInfo = Object.assign(
-          info.commonPlayerInfo[0],
-          info.playerHeadlineStats[0]
-        );
-        setPlayerObj({ playerInfo });
+      .then((res) => {
+        dispatch({
+          type: "FETCH_SUCCESS",
+          payload: Object.assign(
+            res.commonPlayerInfo[0],
+            res.playerHeadlineStats[0]
+          ),
+        });
+      })
+      .catch((error) => {
+        dispatch({ type: "FETCH_ERROR" });
       });
   };
 
@@ -59,8 +80,8 @@ const PlayerScreen = ({ navigation }) => {
       <ScrollView>
         <KeyboardAvoidingView>
           <PlayerProfile
+            playerInfo={state.playerInfo}
             navigation={navigation}
-            playerInfo={playerObj.playerInfo}
           />
           <PlayerSearch handleInput={handleInput} />
         </KeyboardAvoidingView>
