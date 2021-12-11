@@ -19,6 +19,7 @@ import {
 } from "@expo-google-fonts/rubik";
 import BottomTabs from "./components/navigation/BottomTabs";
 
+// Todos: useReducer + context addition?
 const theme = extendTheme({
   fontConfig: {
     Rubik: {
