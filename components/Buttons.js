@@ -2,7 +2,6 @@ import React from "react";
 import { Button } from "native-base";
 import { colorScheme } from "../constants";
 
-// Custom Button components
 export const RaisedButton = (props) => {
   return (
     <Button

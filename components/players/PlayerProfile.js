@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Dimensions } from "react-native";
 import { SharedElement } from "react-native-shared-element";
-import { Flex, Image, Button, Text, HStack, Box, VStack } from "native-base";
-import {
-  MotiView,
-  useAnimationState,
-  AnimatePresence,
-  useDynamicAnimation,
-} from "moti";
+import { Image, Button, Text, HStack, Box } from "native-base";
+import { MotiView, AnimatePresence } from "moti";
 import { RaisedButton, LoadingButton } from "../Buttons";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../../constants";
 import logos from "../../logoManager";
@@ -28,11 +23,7 @@ const Profile = ({ playerInfo, navigation }) => {
 
   useEffect(() => {
     const checkInfo = () => {
-      if (playerInfo !== undefined) {
-        setLoading(false);
-      } else {
-        setLoading(true);
-      }
+      return playerInfo !== undefined ? setLoading(false) : setLoading(true);
     };
     return () => {
       checkInfo();
@@ -96,11 +87,11 @@ const Profile = ({ playerInfo, navigation }) => {
                 alignSelf="center"
                 h={100}
                 w={100}
-                key={playerInfo.playerId}
+                key={playerInfo.playerName + "_img"}
                 source={{
                   uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`,
                 }}
-                alt="Profile"
+                alt={playerInfo.playerName}
               />
             </SharedElement>
             <SharedElement id={`item.${playerInfo.playerId}.name`}>
@@ -120,13 +111,13 @@ const Profile = ({ playerInfo, navigation }) => {
                 mb={10}
                 alignSelf="center"
                 source={logos[playerInfo.teamAbbreviation]}
-                key={playerInfo.teamAbbreviation}
-                alt="Team"
+                key={playerInfo.teamAbbreviation + "_logoKey"}
+                alt={playerInfo.teamName}
               />
             </SharedElement>
             {Object.entries(infoList).map(([item, value]) => (
               <HStack
-                key={item + "key"}
+                key={item + "_key"}
                 textAlign="auto"
                 alignItems="center"
                 mb={2}
@@ -153,7 +144,7 @@ const Profile = ({ playerInfo, navigation }) => {
             <RaisedButton
               m={5}
               onPress={() => {
-                /* 1. Navigate to the Extended Profile route with params */
+                /* Navigate to the Extended Profile route with params */
                 navigation.navigate("Extended Profile", {
                   playerInfo: playerInfo,
                 });
