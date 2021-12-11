@@ -3,6 +3,7 @@ import { Box, VStack, HStack, Heading, Text } from "native-base";
 import { Dimensions, Image } from "react-native";
 import { colorScheme } from "../../../constants";
 import DropDown from "./DropDown";
+import { color } from "react-native-reanimated";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -21,6 +22,7 @@ const StatLeaders = ({
   const [awayPicture, setAwayPicture] = useState({});
   const [homePicture, setHomePicture] = useState({});
   const leaderHeading = statState.slice(0, -1);
+
   useEffect(() => {
     async function initData() {
       setAwayPicture(awayPic);
@@ -59,11 +61,12 @@ const StatLeaders = ({
           <Image
             height={65}
             width={65}
-            borderColor="black"
+            borderColor={colorScheme.divider}
             borderWidth={0.6}
             borderRadius={50}
             source={awayPicture}
-            alt="Away Player"
+            key={awayPlayer + "_img"}
+            alt={awayPlayer}
           />
           <Heading color={colorScheme.text} size="md" fontWeight={700}>
             {awayPlayer}
@@ -84,11 +87,12 @@ const StatLeaders = ({
           <Image
             height={65}
             width={65}
-            borderColor="black"
+            borderColor={colorScheme.divider}
             borderWidth={0.6}
             borderRadius={50}
             source={homePicture}
-            alt="Home Player"
+            key={homePlayer + "_img"}
+            alt={homePlayer}
           />
           <Heading size="md" color={colorScheme.text} fontWeight={700}>
             {homePlayer}

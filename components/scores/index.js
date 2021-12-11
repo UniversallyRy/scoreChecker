@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Dimensions } from "react-native";
-import { VStack, FlatList, Text, Box } from "native-base";
+import { VStack, FlatList, Text } from "native-base";
 import moment from "moment";
 import ScoreItem from "./ScoreItem";
 import ScoresLoading from "./ScoresLoading";
 import InfoButton from "./InfoButton";
 import { colorScheme } from "../../constants";
-import { height } from "dom-helpers";
 import { SharedElement } from "react-native-shared-element";
 
 const todaysDate = moment().format("L");
@@ -34,13 +33,7 @@ const Scores = ({ item, date, navigation }) => {
   }, [item]);
 
   return (
-    <VStack
-      flex={1}
-      w={windowWidth}
-      alignSelf="center"
-      alignContent="center"
-      justifyContent="center"
-    >
+    <VStack flex={1} w={windowWidth} alignSelf="center" justifyContent="center">
       <VStack safeArea>
         {numOfGames >= 1 ? (
           <Text

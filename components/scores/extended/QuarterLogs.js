@@ -1,6 +1,6 @@
 import React from "react";
 import { Dimensions } from "react-native";
-import { Container, Heading, HStack, VStack, Text } from "native-base";
+import { HStack, VStack, Heading, Text } from "native-base";
 import { colorScheme } from "../../../constants";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");

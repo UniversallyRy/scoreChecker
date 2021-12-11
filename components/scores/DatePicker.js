@@ -14,12 +14,12 @@ const DatePicker = ({ todaysDate, onSubmit, loading }) => {
 
   const onChange = (event, selectedDate) => {
     if (event.type == "set") {
-      let offSet = new Date(
+      let offSetTimeZone = new Date(
         selectedDate.setMinutes(
           selectedDate.getMinutes() - selectedDate.getTimezoneOffset()
         )
       );
-      let currentDate = offSet.toISOString().split("T")[0];
+      let currentDate = offSetTimeZone.toISOString().split("T")[0];
       let formattedItem = currentDate.split("-");
       let formattedDate =
         formattedItem[1] + "/" + formattedItem[2] + "/" + formattedItem[0];
@@ -28,10 +28,10 @@ const DatePicker = ({ todaysDate, onSubmit, loading }) => {
       } else {
         setShow(Platform.OS === "ios");
         onSubmit(formattedDate);
-        setDate(offSet);
+        setDate(offSetTimeZone);
       }
     } else {
-      // handles cancelled date
+      // handles cancel press
       setShow(false);
     }
   };

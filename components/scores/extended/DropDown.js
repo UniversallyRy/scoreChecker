@@ -1,6 +1,6 @@
-import { Flex } from "native-base";
 import React, { useState } from "react";
-import { View, Dimensions } from "react-native";
+import { Dimensions } from "react-native";
+import { Flex } from "native-base";
 import DropDownPicker from "react-native-dropdown-picker";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { colorScheme } from "../../../constants";
@@ -26,11 +26,11 @@ const initialLabels = (labels) => {
 };
 
 const DropDown = ({ statState, changeStats }) => {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("Points");
   const [labels, setLabels] = useState(
     initialLabels(["Points", "Assists", "Rebounds"])
   );
-  const [value, setValue] = useState("Points");
-  const [open, setOpen] = useState(false);
 
   return (
     <Flex
@@ -50,12 +50,12 @@ const DropDown = ({ statState, changeStats }) => {
         items={labels}
         setItems={setLabels}
         value={value}
-        setValue={setValue}
-        open={open}
-        setOpen={setOpen}
         onChangeValue={(item) => {
           changeStats(value);
         }}
+        setValue={setValue}
+        open={open}
+        setOpen={setOpen}
         textStyle={{ color: colorScheme.text }}
         style={{
           height: 40,

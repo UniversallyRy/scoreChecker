@@ -1,44 +1,38 @@
 import React, { useState, useEffect } from "react";
-import { Dimensions, ActivityIndicator } from "react-native";
-import {
-  Text,
-  Image,
-  Divider,
-  VStack,
-  Stack,
-  HStack,
-  Heading,
-} from "native-base";
-import InfoButton from "./InfoButton";
+import { Dimensions } from "react-native";
+import { Text, Image, Divider, VStack, HStack, Heading } from "native-base";
+import { MotiView, MotiText } from "moti";
+import { SharedElement } from "react-native-shared-element";
 import NBA from "nba";
 import logos from "../../logoManager";
 import { colorScheme } from "../../constants";
-import { SharedElement } from "react-native-shared-element";
+import InfoButton from "./InfoButton";
 // WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
-import { MotiView, MotiText } from "moti";
 
 const ScoreItem = ({ u, navigation }) => {
-  const [homeScore, setHome] = useState(0);
-  const [extendedState, setExtended] = useState(0);
-  const [awayScore, setAway] = useState(0);
-  const splitAt = (index) => (x) => [x.slice(0, index), x.slice(index)];
+  const [scores, setScores] = useState({
+    awayScore: 0,
+    homeScore: 0,
+  });
   let comp = u.gamecode.slice(-6);
-  let date = u.gamecode.slice(0, 8);
-  let splitTeam = splitAt(3)(comp);
-  let [awayTeam, homeTeam] = [splitTeam[0], splitTeam[1]];
+  let gameDate = u.gamecode.slice(0, 8);
+  const splitAt = (index) => (x) => [x.slice(0, index), x.slice(index)];
+  let [awayTeam, homeTeam] = splitAt(3)(comp);
   let [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
 
   useEffect(() => {
     async function initData() {
       NBA.data
-        .boxScore(date, u.gameId)
+        .boxScore(gameDate, u.gameId)
         .then((res) => res.sports_content)
         .then((res) => res.game)
         .then((res) => {
-          setAway(res.visitor.score);
-          setHome(res.home.score);
+          setScores(() => ({
+            awayScore: res.visitor.score,
+            homeScore: res.home.score,
+          }));
         });
     }
     initData();
@@ -72,7 +66,10 @@ const ScoreItem = ({ u, navigation }) => {
               duration: 1050,
             }}
           >
-            <SharedElement alignItems="center" id={`item.${awayTeam}.name`}>
+            <SharedElement
+              alignItems="center"
+              id={`item.${scores.awayTeam}.name`}
+            >
               <Heading
                 color={colorScheme.text}
                 fontSize="xl"
@@ -80,7 +77,8 @@ const ScoreItem = ({ u, navigation }) => {
                 fontWeight={700}
                 mb={2}
               >
-                {awayTeam} {awayScore == 0 ? "" : "-  " + awayScore}
+                {awayTeam}{" "}
+                {scores.awayScore == 0 ? "" : "-  " + scores.awayScore}
               </Heading>
               {/* Team Logos */}
               <Image
@@ -89,7 +87,6 @@ const ScoreItem = ({ u, navigation }) => {
                 w={50}
                 h={50}
                 m={1}
-                PlaceholderContent={<ActivityIndicator />}
                 alt="Away Logo"
               />
             </SharedElement>
@@ -123,7 +120,8 @@ const ScoreItem = ({ u, navigation }) => {
                 fontFamily="heading"
                 fontWeight={700}
               >
-                {homeTeam} {homeScore == 0 ? "" : "-  " + homeScore}
+                {homeTeam}{" "}
+                {scores.homeScore == 0 ? "" : "-  " + scores.homeScore}
               </Heading>
               <Image
                 accessibilityLabel={homeTeam}
@@ -131,7 +129,6 @@ const ScoreItem = ({ u, navigation }) => {
                 w={50}
                 h={50}
                 m={1}
-                PlaceholderContent={<ActivityIndicator />}
                 alt="Home Logo"
               />
             </SharedElement>
@@ -149,7 +146,7 @@ const ScoreItem = ({ u, navigation }) => {
         {u.gameStatusText != "PPD" ? u.gameStatusText : "Postponed"}
       </Text>
       <Divider
-        bg="#D8572A"
+        bg={colorScheme.divider}
         w={windowWidth * 0.8}
         h={1}
         alignSelf="center"

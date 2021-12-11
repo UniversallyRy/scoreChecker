@@ -1,5 +1,4 @@
 import React from "react";
-import { ActivityIndicator } from "react-native";
 import { HStack, Image, Text, VStack, Heading } from "native-base";
 import { colorScheme } from "../../../constants";
 import { SharedElement } from "react-native-shared-element";
@@ -33,7 +32,6 @@ const Header = ({
               w={50}
               h={50}
               m={2}
-              PlaceholderContent={<ActivityIndicator />}
               alt="Away Team Logo"
             />
           </VStack>
@@ -63,7 +61,6 @@ const Header = ({
               w={50}
               h={50}
               m={2}
-              PlaceholderContent={<ActivityIndicator />}
               alt="Home Team Logo"
             />
           </VStack>

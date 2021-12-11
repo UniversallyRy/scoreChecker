@@ -9,7 +9,7 @@ const InfoButton = ({ navigation, u }) => {
         color={colorScheme.title}
         size="7"
         onPress={() => {
-          // When game status is still showing a start time, or postponed, no routing and returns null
+          // When game status is still showing a start/current time, postponed, no routing and returns null
           if (u.gameStatusText.length > 7 || u.gameStatusText == "PPD") {
             return null;
           } else {
