@@ -9,34 +9,11 @@ import StatLeaders from "../components/scores/extended/StatLeaders";
 import QuarterLogs from "../components/scores/extended/QuarterLogs";
 import { ParamListBase } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { GameRouteType } from "../types";
 // import { MotiView, MotiText } from "moti";
 type Props = {
   navigation: StackNavigationProp<ParamListBase>;
-  route: {
-    "key": string;
-    "name": string;
-    "params": {
-      "itemId": string;
-      "scoreInfo": {
-        "gameDateEst": string;
-        "gameId": string;
-        "gameSequence": number;
-        "gameStatusId": number;
-        "gameStatusText": string;
-        "gamecode": string;
-        "homeTeamId": number;
-        "livePcTime": string;
-        "livePeriod": number;
-        "livePeriodTimeBcast": string;
-        "natlTvBroadcasterAbbreviation": string;
-        "season": string;
-        "visitorTeamId": number;
-        "whStatus": number,
-      },
-    },
-    "path": undefined,
-  }
-
+  route: GameRouteType;
 }
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -150,7 +127,6 @@ const ExtendedGame = ({ route }: Props) => {
         h={windowHeight}
         alignItems="center"
         borderRadius={32}
-        transform={[{ translateY: windowHeight * 0.02 }]}
         key="extgamebody"
       >
         <StatLeaders

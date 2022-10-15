@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Keyboard, View, Dimensions } from "react-native";
+import { Keyboard, Dimensions } from "react-native";
 import { Input, InputGroup, InputLeftAddon, Flex, Stack } from "native-base";
 import { Formik } from "formik";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { RaisedButton } from "../Buttons";
 import { colorScheme } from "../../constants";
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+const { height: windowHeight } = Dimensions.get("window");
 
-const PlayerSearch = ({ handleInput }) => {
+const PlayerSearch = ({ handleInput }: { handleInput: (string) => void }) => {
   const [keyboardOffset, setKeyboardOffset] = useState(0);
   const onKeyboardShow = (event) =>
     setKeyboardOffset(event.endCoordinates.height);
@@ -71,9 +71,6 @@ const PlayerSearch = ({ handleInput }) => {
               />
             </InputGroup>
             <RaisedButton
-              h={50}
-              w={100}
-              key="submitButton"
               onPress={handleSubmit}
             >
               <Icon name="search" size={28} color={colorScheme.text} />

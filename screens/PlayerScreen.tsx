@@ -1,17 +1,32 @@
 import React, { useEffect, useReducer } from "react";
-import { Box, Flex, ScrollView, KeyboardAvoidingView } from "native-base";
+import { StackNavigationProp } from '@react-navigation/stack';
+import { Box, ScrollView, KeyboardAvoidingView } from "native-base";
 import NBA from "nba";
-import { SharedElement } from "react-native-shared-element";
 import PlayerProfile from "../components/players/PlayerProfile";
 import PlayerSearch from "../components/players/PlayerSearch";
 import { DEFAULT_PLAYER_INFO, colorScheme } from "../constants";
+import { PlayerInfoType, PlayerStatsType } from "../types";
+
+
+type PlayerProps = {
+  "availableSeasons"?:
+  {
+    "seasonId": string;
+  }[],
+  "commonPlayerInfo"?: PlayerInfoType
+  "playerHeadlineStats"?: PlayerStatsType
+}
+
+type ScreenProps = {
+  navigation: StackNavigationProp<{ item: object }>
+}
 
 const initialState = {
   // Obi Toppin as default profile
   playerInfo: DEFAULT_PLAYER_INFO,
 };
 
-const reducer = (state, action) => {
+const reducer = (state: any, action: { type: string; payload: string }) => {
   switch (action.type) {
     case "FETCH_SUCCESS":
       return {
@@ -24,16 +39,18 @@ const reducer = (state, action) => {
         error: "Something went wrong",
       };
     default:
+      console.log(state);
       return state;
   }
 };
 
-const PlayerScreen = ({ navigation }) => {
+const PlayerScreen = ({ navigation }: ScreenProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const loadPlayerInfo = (playerName) => {
+
+  const loadPlayerInfo = (playerName: string) => {
     NBA.stats
       .playerInfo({ PlayerID: NBA.findPlayer(playerName).playerId })
-      .then((res) => {
+      .then((res: PlayerProps) => {
         dispatch({
           type: "FETCH_SUCCESS",
           payload: Object.assign(
@@ -42,12 +59,12 @@ const PlayerScreen = ({ navigation }) => {
           ),
         });
       })
-      .catch((error) => {
-        dispatch({ type: "FETCH_ERROR" });
+      .catch((error: string) => {
+        dispatch({ type: "FETCH_ERROR", payload: error });
       });
   };
 
-  const handleInput = (item) => {
+  const handleInput = (item: { player: string }) => {
     // regex to test if 2 words were submitted
     const regNameTest = /^[a-zA-Z]+ [a-zA-Z]+$/;
     let trimmedInput = item.player.trim();

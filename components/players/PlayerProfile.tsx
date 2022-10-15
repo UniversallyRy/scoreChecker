@@ -7,7 +7,6 @@ import { RaisedButton, LoadingButton } from "../Buttons";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../../constants";
 import logos from "../../logoManager";
 
-
 type Props = {
   playerInfo: {
     playerName: string;
@@ -20,7 +19,6 @@ type Props = {
     pts: string;
     ast: string;
     reb: string;
-
   }
   navigation: {
     navigate: (arg0: string, arg1: object) => void;
@@ -59,11 +57,7 @@ const Profile = ({ playerInfo, navigation }: Props) => {
       px={5}
       mt={2}
       bg={colorScheme.foreground}
-      shadowColor={colorScheme.foreground}
-      shadowOffset={{ width: 1, height: 0.34 }}
-      shadowOpacity={0.95}
-      shadowRadius={3.6}
-      elevation={4}
+      shadow="4"
     >
       <AnimatePresence exitBeforeEnter>
         {loading && (
@@ -79,10 +73,8 @@ const Profile = ({ playerInfo, navigation }: Props) => {
             exit={{
               opacity: 0,
             }}
-            alignItems="center"
-            justifyContent="center"
           >
-            <LoadingButton mt={275} />
+            <LoadingButton />
           </MotiView>
         )}
         {!loading && (
@@ -162,7 +154,6 @@ const Profile = ({ playerInfo, navigation }: Props) => {
               </HStack>
             ))}
             <RaisedButton
-              m={5}
               onPress={() => {
                 /* Navigate to the Extended Profile route with params */
                 navigation.navigate("Extended Profile", {

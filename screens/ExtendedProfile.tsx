@@ -1,20 +1,22 @@
 import React from "react";
 import { Dimensions } from "react-native";
-import { Flex, Image, Text, HStack, Box } from "native-base";
-import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../constants";
-import Icon from "react-native-vector-icons/FontAwesome";
-import logos from "../logoManager";
-import Button from "../components/Buttons";
-import { MotiText } from "moti";
 import { SharedElement } from "react-native-shared-element";
+import { Flex, Image, Text, HStack, Box } from "native-base";
+import { MotiText } from "moti";
+import logos from "../logoManager";
+import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../constants";
+import { ExtendedStatsType } from "../types";
 
+type Props = {
+  route: ExtendedStatsType;
+}
 // todos: better list styling, better shared element screen transition
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const ExtendedProfile = ({ route, navigation }) => {
+const ExtendedProfile = ({ route }: Props) => {
   const { playerInfo } = route.params;
 
-  const experience = (item) => {
+  const experience = (item: number) => {
     if (item < 1) return "Rookie";
     if (typeof item === "number" && item > 1) {
       return item + " Previous Seasons";
@@ -39,7 +41,7 @@ const ExtendedProfile = ({ route, navigation }) => {
     Country: playerInfo.country,
   };
   // console.log(playerInfo);
-  const titleCheck = (item, itemData) => {
+  const titleCheck = (item: string, itemData: string | number) => {
     // changes school title if no college(future needed for euroleaguers?)
     if (
       !itemData ||
