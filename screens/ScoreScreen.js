@@ -1,17 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Dimensions } from "react-native";
-import { Flex, Text, VStack } from "native-base";
 import moment from "moment";
 import NBA from "nba";
 import Scores from "../components/scores";
-import { LoadingButton } from "../components/Buttons";
 import Header from "../components/scores/Header";
 import ScoresLoading from "../components/scores/ScoresLoading";
 import { colorScheme } from "../constants";
 import { MotiView, AnimatePresence } from "moti";
 // todos: possible team screen component/team standings, make card transition into extended game screen
-
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 // Initial state before NBA api's async is fulfilled
 const initialState = [

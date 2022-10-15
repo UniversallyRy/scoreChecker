@@ -1,9 +1,8 @@
-import React from "react";
-import { NativeBaseProvider, extendTheme } from "native-base";
+import React, { useCallback } from "react";
+import { NativeBaseProvider, Flex, extendTheme } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";
-import AppLoading from "expo-app-loading";
 import { StatusBar } from "expo-status-bar";
-import Stacks from "./components/navigation/Stacks";
+import * as SplashScreen from 'expo-splash-screen';
 import {
   useFonts,
   Rubik_300Light,
@@ -18,6 +17,9 @@ import {
   Rubik_900Black_Italic,
 } from "@expo-google-fonts/rubik";
 import BottomTabs from "./components/navigation/BottomTabs";
+
+// Keep the splash screen visible while we fetch resources
+SplashScreen.preventAutoHideAsync();
 
 // Todos: useReducer + context addition?
 const theme = extendTheme({
@@ -69,7 +71,8 @@ const theme = extendTheme({
 });
 
 const App = () => {
-  let [fontsLoaded] = useFonts({
+
+  const [fontsLoaded] = useFonts({
     Rubik_300Light,
     Rubik_300Light_Italic,
     Rubik_400Regular,
@@ -82,22 +85,45 @@ const App = () => {
     Rubik_900Black_Italic,
   });
 
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      // This tells the splash screen to hide immediately! If we call this after
+      // `setAppIsReady`, then we may see a blank screen while the app is
+      // loading its initial state and rendering its first pixels. So instead,
+      // we hide the splash screen once we know the root view has already
+      // performed layout.
+      await SplashScreen.hideAsync();
+    } else {
+      return null;
+    }
+  }, [fontsLoaded]);
+
   if (!fontsLoaded) {
-    return <AppLoading />;
-  } else {
-    return (
-      <NativeBaseProvider theme={theme}>
-        <NavigationContainer
-          flex={1}
-          alignItems="center"
-          justifyContent="center"
+    return null;
+  }
+
+  return (
+
+    <NativeBaseProvider
+      theme={theme}
+    >
+      <NavigationContainer
+        flex={1}
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Flex
+          height="full"
+          width="full"
+          onLayout={onLayoutRootView}
         >
           <StatusBar style="auto" />
-          <BottomTabs />
-        </NavigationContainer>
-      </NativeBaseProvider>
-    );
-  }
+          <BottomTabs
+          />
+        </Flex>
+      </NavigationContainer>
+    </NativeBaseProvider>
+  );
 };
 
 export default App;
