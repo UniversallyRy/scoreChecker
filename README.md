@@ -44,6 +44,8 @@ React native app created with Expo and styled with native-base. Made for my frie
 
 Only previewed/used in Expo, so no idea on how the NBA api handles in production. Paths sometimes change due to official API changes/bugs.
 
+Bugs- No Preseason support(Team scores, game stats, playerstats).
+
 ## Demo
 
 <table>
