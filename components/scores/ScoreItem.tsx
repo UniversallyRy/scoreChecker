@@ -7,27 +7,12 @@ import NBA from "nba";
 import logos from "../../logoManager";
 import { colorScheme } from "../../constants";
 import InfoButton from "./InfoButton";
+import { GameType } from "../../types";
 // WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
 const { width: windowWidth } = Dimensions.get("window");
-export type GameProps = {
-  "gameDateEst"?: string | undefined;
-  "gameId"?: string;
-  "gameSequence"?: number;
-  "gameStatusId"?: number;
-  "gameStatusText"?: string;
-  "gamecode"?: string;
-  "homeTeamId"?: number;
-  "livePcTime"?: string;
-  "livePeriod"?: number;
-  "livePeriodTimeBcast"?: string;
-  "natlTvBroadcasterAbbreviation"?: null;
-  "season"?: "string";
-  "visitorTeamId"?: number;
-  "whStatus"?: number;
-  "length"?: number;
-}
-const ScoreItem = ({ game }: { game: GameProps }) => {
+
+const ScoreItem = ({ game }: { game: GameType }) => {
   const [scores, setScores] = useState({
     awayScore: 0,
     homeScore: 0,

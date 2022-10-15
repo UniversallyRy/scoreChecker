@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { InfoIcon, Pressable } from "native-base";
 import { colorScheme } from "../../constants";
 import { ScreenNavContext } from "../../GameContext";
-import { GameProps } from "./ScoreItem";
+import { GameType } from "../../types";
 
 type Props = {
-  game: GameProps
+  game: GameType
 }
 
 const InfoButton = ({ game }: Props) => {
