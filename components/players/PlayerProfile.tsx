@@ -3,11 +3,9 @@ import { Dimensions } from "react-native";
 import { SharedElement } from "react-native-shared-element";
 import { Image, Text, HStack, Box } from "native-base";
 import { MotiView, AnimatePresence } from "moti";
-import { StackScreenProps } from "@react-navigation/stack";
 import { RaisedButton, LoadingButton } from "../Buttons";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../../constants";
 import logos from "../../logoManager";
-import { ParamListBase } from "@react-navigation/native";
 
 
 type Props = {
