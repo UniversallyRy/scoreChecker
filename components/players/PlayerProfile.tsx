@@ -1,15 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { Dimensions } from "react-native";
 import { SharedElement } from "react-native-shared-element";
-import { Image, Button, Text, HStack, Box } from "native-base";
+import { Image, Text, HStack, Box } from "native-base";
 import { MotiView, AnimatePresence } from "moti";
+import { StackScreenProps } from "@react-navigation/stack";
 import { RaisedButton, LoadingButton } from "../Buttons";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../../constants";
 import logos from "../../logoManager";
+import { ParamListBase } from "@react-navigation/native";
+
+
+type Props = {
+  playerInfo: {
+    playerName: string;
+    playerId: number;
+    teamCity: string
+    teamName: string;
+    teamAbbreviation: string;
+    height: string;
+    weight: string;
+    pts: string;
+    ast: string;
+    reb: string;
+
+  }
+  navigation: {
+    navigate: (arg0: string, arg1: object) => void;
+  }
+}
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const Profile = ({ playerInfo, navigation }) => {
+const Profile = ({ playerInfo, navigation }: Props) => {
   const [loading, setLoading] = useState(true);
 
   const infoList = {

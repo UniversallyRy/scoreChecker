@@ -8,7 +8,7 @@ import ScoreScreen from "../../screens/ScoreScreen";
 
 const name = "NBA Check-Up";
 
-// This Spec makes it so that the animation goes from 1000ms (very slow) to 500ms (acceptable) speed! You can also remove it if you want.
+// This spec makes it so that the animation goes from 1000ms (very slow) to 500ms (acceptable) speed! You can also remove it if you want.
 export const iosTransitionSpec = {
   animation: "spring",
   config: {
@@ -113,7 +113,7 @@ export const Stack2Screen = () => (
           marginLeft: 7,
         },
       }}
-      sharedElements={(route, showing) => {
+      sharedElements={(route) => {
         const { playerInfo } = route.params;
         return [
           { id: `item.${playerInfo.playerId}.image` },
