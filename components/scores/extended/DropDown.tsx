@@ -6,7 +6,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { colorScheme } from "../../../constants";
 
 type Props = {
-  changeStats: (stat: any) => void;
+  changeStats: (stat: string) => void;
 }
 
 const { width: windowWidth } = Dimensions.get("window");

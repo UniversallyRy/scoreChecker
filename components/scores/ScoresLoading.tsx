@@ -1,8 +1,8 @@
 import React from "react";
 import { Heading } from "native-base";
+import { MotiView } from "moti";
 import { LoadingButton } from "../Buttons";
 import { colorScheme } from "../../constants";
-import { MotiView } from "moti";
 
 const ScoresLoading = () => {
   return (
@@ -17,7 +17,6 @@ const ScoresLoading = () => {
           delay: 550,
         },
       }}
-      alignItems="center"
     >
       <Heading
         my={6}
@@ -26,6 +25,7 @@ const ScoresLoading = () => {
         fontStyle="italic"
         fontFamily="body"
         color={colorScheme.text}
+        alignSelf="center"
       >
         Please Wait . .
       </Heading>

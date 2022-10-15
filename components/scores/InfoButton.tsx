@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
 import { InfoIcon, Pressable } from "native-base";
 import { colorScheme } from "../../constants";
-import { ScreenNavContext } from "../../screens/ScoreScreen";
+import { ScreenNavContext } from "../../GameContext";
 import { GameProps } from "./ScoreItem";
 
-const InfoButton = ({ game }: {game: GameProps} ) => {
+type Props = {
+  game: GameProps
+}
+
+const InfoButton = ({ game }: Props) => {
 
   const navContext = useContext(ScreenNavContext);
   return (

@@ -78,7 +78,7 @@ const ScoreItem = ({ game }: { game: GameProps }) => {
             }}
           >
             <SharedElement
-              id={`item.${awayTeam}.name`}
+              id={`item.${game.gameId}`}
             >
               <Heading
                 color={colorScheme.text}

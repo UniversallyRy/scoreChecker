@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React, { useCallback } from "react";
 import { NativeBaseProvider, Flex, extendTheme } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";

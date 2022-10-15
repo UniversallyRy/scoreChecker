@@ -1,13 +1,10 @@
 import React, { useEffect, useReducer } from "react";
-import { Dimensions } from "react-native";
 import { Box, Flex, ScrollView, KeyboardAvoidingView } from "native-base";
 import NBA from "nba";
 import { SharedElement } from "react-native-shared-element";
 import PlayerProfile from "../components/players/PlayerProfile";
 import PlayerSearch from "../components/players/PlayerSearch";
 import { DEFAULT_PLAYER_INFO, colorScheme } from "../constants";
-
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const initialState = {
   // Obi Toppin as default profile

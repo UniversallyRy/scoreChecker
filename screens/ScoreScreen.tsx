@@ -1,17 +1,19 @@
-import React, { useState, useEffect, createContext, useCallback } from "react";
-import moment from "moment";
-import NBA from "nba";
-import Scores from "../components/scores";
-import Header from "../components/scores/Header";
-import ScoresLoading from "../components/scores/ScoresLoading";
-import { colorScheme } from "../constants";
-import { MotiView, AnimatePresence } from "moti";
+import React, { useState, useEffect, useCallback } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { ParamListBase } from "@react-navigation/native";
+import { MotiView, AnimatePresence } from "moti";
+import moment from "moment";
+import NBA from "nba";
+import Header from "../components/scores/Header";
+import Scores from "../components/scores";
+import ScoresLoading from "../components/scores/ScoresLoading";
+import { colorScheme } from "../constants";
+import { ScreenNavContext } from "../GameContext";
+
 // todos: possible team screen component/team standings, make card transition into extended game screen
 
-interface ContextInterface {
-  navigation: StackNavigationProp<ParamListBase>;
+export interface ContextInterface {
+  navigation: StackNavigationProp<ParamListBase, string, undefined>;
 }
 
 export type GamesProps = {
@@ -49,7 +51,6 @@ export type GamesProps = {
     "wPct": number;
   }[]
 }
-export const ScreenNavContext = createContext<ContextInterface | null>(null);
 
 const ScoreScreen = ({ navigation }: any) => {
   const [state, setState] = useState([
@@ -85,10 +86,8 @@ const ScoreScreen = ({ navigation }: any) => {
       setNewObj(Object.create({}));
       let changedDate = item;
       async function newDay() {
-        NBA.stats
-          .scoreboard({ gameDate: changedDate })
+        NBA.stats.scoreboard({ gameDate: changedDate })
           .then((res: GamesProps) => setNewObj(res.gameHeader));
-
         setLoading(true);
         setTodaysDate(changedDate);
       }
@@ -103,7 +102,7 @@ const ScoreScreen = ({ navigation }: any) => {
         from={{ opacity: 0.7, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{
-          type: "spring",
+          type: "timing",
           duration: 20,
         }}
         style={{
@@ -138,3 +137,4 @@ const ScoreScreen = ({ navigation }: any) => {
 };
 
 export default ScoreScreen;
+

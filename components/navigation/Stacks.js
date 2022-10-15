@@ -1,10 +1,10 @@
-import * as React from "react";
+import React from "react";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
+import ScoreScreen from "../../screens/ScoreScreen";
 import PlayerScreen from "../../screens/PlayerScreen";
 import ExtendedGame from "../../screens/ExtendedGame";
 import ExtendedProfile from "../../screens/ExtendedProfile";
 import { colorScheme } from "../../constants";
-import ScoreScreen from "../../screens/ScoreScreen";
 
 const name = "NBA Check-Up";
 
@@ -75,8 +75,16 @@ export const Stack1Screen = () => (
         },
       }}
       sharedElements={(route) => {
-        const { scoreInfo } = route.params;
-        return [{ id: `item.${scoreInfo.gameId}.name`, animation: "fade" }];
+        const { itemId, scoreInfo } = route.params;
+        console.log(scoreInfo);
+        return [
+          {
+            id: `item.${scoreInfo.gameId}`, animation: "fade"
+          },
+          {
+            id: `item.${itemId}`, animation: "fade"
+          }
+        ];
       }}
     />
   </Stack1.Navigator>

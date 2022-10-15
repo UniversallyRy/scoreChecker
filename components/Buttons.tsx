@@ -2,24 +2,20 @@ import React from "react";
 import { Button } from "native-base";
 import { colorScheme } from "../constants";
 
-export const RaisedButton = (props) => {
+export const RaisedButton = (props: React.ReactNode) => {
   return (
     <Button
       margin={2}
       mb={9}
       bg={colorScheme.title}
-      shadowColor="#000"
       borderRadius={5}
-      shadowOffset={{ width: 1, height: 2 }}
-      shadowOpacity={0.95}
-      shadowRadius={8.84}
-      elevation={6}
+      shadow="5"
       {...props}
     />
   );
 };
 
-export const LoadingButton = (props) => {
+export const LoadingButton = (props: React.ReactNode) => {
   return (
     <Button
       bg={colorScheme.title}
@@ -27,12 +23,8 @@ export const LoadingButton = (props) => {
       isLoadingText="Loading. ."
       margin={2}
       mb={9}
-      shadowColor="#000"
       borderRadius={5}
-      shadowOffset={{ width: 1, height: 2 }}
-      shadowOpacity={0.95}
-      shadowRadius={8.84}
-      elevation={6}
+      shadow="3"
       {...props}
     />
   );

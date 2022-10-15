@@ -9,7 +9,6 @@ type Props = {
     arena: string;
     city: string;
     country: string;
-
   }
   awayTeam: string;
   awayLogo: ImageSourcePropType;
