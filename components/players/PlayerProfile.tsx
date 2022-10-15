@@ -7,18 +7,19 @@ import { RaisedButton, LoadingButton } from "../Buttons";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../../constants";
 import logos from "../../logoManager";
 
-type Props = {
+export type ProfileProps = {
   playerInfo: {
-    playerName: string;
+    playerName?: string;
     playerId: number;
-    teamCity: string
-    teamName: string;
+    fullname: string;
+    teamCity?: string
+    teamName?: string;
     teamAbbreviation: string;
-    height: string;
-    weight: string;
-    pts: string;
-    ast: string;
-    reb: string;
+    height?: string;
+    weight?: string;
+    pts?: string;
+    ast?: string;
+    reb?: string;
   }
   navigation: {
     navigate: (arg0: string, arg1: object) => void;
@@ -27,7 +28,7 @@ type Props = {
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const Profile = ({ playerInfo, navigation }: Props) => {
+const Profile = ({ playerInfo, navigation }: ProfileProps) => {
   const [loading, setLoading] = useState(true);
 
   const infoList = {

@@ -21,12 +21,16 @@ type ScreenProps = {
   navigation: StackNavigationProp<{ item: object }>
 }
 
+type ACTIONTYPE =
+  | { type: "FETCH_SUCCESS"; payload: any }
+  | { type: "FETCH_ERROR"; payload: string };
+
 const initialState = {
   // Obi Toppin as default profile
   playerInfo: DEFAULT_PLAYER_INFO,
 };
 
-const reducer = (state: any, action: { type: string; payload: string }) => {
+const reducer = (state: typeof initialState, action: ACTIONTYPE) => {
   switch (action.type) {
     case "FETCH_SUCCESS":
       return {
