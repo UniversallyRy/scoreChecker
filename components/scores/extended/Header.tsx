@@ -2,6 +2,23 @@ import React from "react";
 import { HStack, Image, Text, VStack, Heading } from "native-base";
 import { colorScheme } from "../../../constants";
 import { SharedElement } from "react-native-shared-element";
+import { ImageSourcePropType } from "react-native";
+
+type Props = {
+  gameArena: {
+    arena: string;
+    city: string;
+    country: string;
+
+  }
+  awayTeam: string;
+  awayLogo: ImageSourcePropType;
+  awayScore: number;
+  homeTeam: string;
+  homeLogo: ImageSourcePropType;
+  homeScore: number;
+  gameId: string;
+}
 
 const Header = ({
   gameArena,
@@ -12,7 +29,7 @@ const Header = ({
   homeLogo,
   homeScore,
   gameId,
-}) => {
+}: Props) => {
   return (
     <VStack mb={2}>
       <SharedElement id={`item.${gameId}.name`}>

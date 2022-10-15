@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { InfoIcon, Pressable } from "native-base";
 import { colorScheme } from "../../constants";
+import { ScreenNavContext } from "../../screens/ScoreScreen";
+import { GameProps } from "./ScoreItem";
 
-const InfoButton = ({ navigation, u }) => {
+const InfoButton = ({ game }: {game: GameProps} ) => {
+
+  const navContext = useContext(ScreenNavContext);
   return (
     <Pressable>
       <InfoIcon
@@ -10,13 +14,13 @@ const InfoButton = ({ navigation, u }) => {
         size="7"
         onPress={() => {
           // When game status is still showing a start/current time, postponed, no routing and returns null
-          if (u.gameStatusText.length > 7 || u.gameStatusText == "PPD") {
+          if (game.gameStatusText.length > 7 || game.gameStatusText == "PPD") {
             return null;
           } else {
             // Navigate to the Extended Score route with params
-            navigation.navigate("Extended Game", {
-              itemId: u.gameId,
-              scoreInfo: u,
+            navContext.navigate("Extended Game", {
+              itemId: game.gameId,
+              scoreInfo: game,
             });
           }
         }}

@@ -4,9 +4,15 @@ import { Text, Divider, VStack } from "native-base";
 import DatePicker from "./DatePicker";
 import { colorScheme } from "../../constants";
 
+type HeaderProps = {
+  todaysDate: string;
+  onSubmit: (item: string) => void;
+  loading: boolean
+}
+
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const Header = ({ todaysDate, onSubmit, loading }) => (
+const Header = ({ todaysDate, onSubmit, loading }: HeaderProps) => (
   <VStack
     justifyContent="space-between"
     alignContent="center"

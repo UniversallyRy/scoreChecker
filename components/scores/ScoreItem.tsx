@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Dimensions } from "react-native";
 import { Text, Image, Divider, VStack, HStack, Heading } from "native-base";
-import { MotiView, MotiText } from "moti";
+import { MotiView } from "moti";
 import { SharedElement } from "react-native-shared-element";
 import NBA from "nba";
 import logos from "../../logoManager";
@@ -9,23 +9,39 @@ import { colorScheme } from "../../constants";
 import InfoButton from "./InfoButton";
 // WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
-
-const ScoreItem = ({ u, navigation }) => {
+const { width: windowWidth } = Dimensions.get("window");
+export type GameProps = {
+  "gameDateEst"?: string | undefined;
+  "gameId"?: string;
+  "gameSequence"?: number;
+  "gameStatusId"?: number;
+  "gameStatusText"?: string;
+  "gamecode"?: string;
+  "homeTeamId"?: number;
+  "livePcTime"?: string;
+  "livePeriod"?: number;
+  "livePeriodTimeBcast"?: string;
+  "natlTvBroadcasterAbbreviation"?: null;
+  "season"?: "string";
+  "visitorTeamId"?: number;
+  "whStatus"?: number;
+  "length"?: number;
+}
+const ScoreItem = ({ game }: { game: GameProps }) => {
   const [scores, setScores] = useState({
     awayScore: 0,
     homeScore: 0,
   });
-  let comp = u.gamecode.slice(-6);
-  let gameDate = u.gamecode.slice(0, 8);
-  const splitAt = (index) => (x) => [x.slice(0, index), x.slice(index)];
+  let comp = game.gamecode.slice(-6);
+  let gameDate = game.gamecode.slice(0, 8);
+  const splitAt = (index: number) => (x: string) => [x.slice(0, index), x.slice(index)];
   let [awayTeam, homeTeam] = splitAt(3)(comp);
   let [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
 
   useEffect(() => {
     async function initData() {
       NBA.data
-        .boxScore(gameDate, u.gameId)
+        .boxScore(gameDate, game.gameId)
         .then((res) => res.sports_content)
         .then((res) => res.game)
         .then((res) => {
@@ -36,7 +52,7 @@ const ScoreItem = ({ u, navigation }) => {
         });
     }
     initData();
-  }, [u.gameId]);
+  }, [game.gameId]);
 
   return (
     <VStack
@@ -48,17 +64,12 @@ const ScoreItem = ({ u, navigation }) => {
       borderRadius={6}
       mb={20}
       bottom={0}
-      shadowColor="#000"
-      shadowOffset={{ width: 0, height: 2 }}
-      shadowOpacity={0.55}
-      shadowRadius={3.84}
-      elevation={5}
+      shadow="5"
       p={1}
     >
       <HStack alignItems="center" my={5}>
         <VStack alignItems="center">
           <MotiView
-            alignItems="center"
             from={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
@@ -67,8 +78,7 @@ const ScoreItem = ({ u, navigation }) => {
             }}
           >
             <SharedElement
-              alignItems="center"
-              id={`item.${scores.awayTeam}.name`}
+              id={`item.${awayTeam}.name`}
             >
               <Heading
                 color={colorScheme.text}
@@ -104,7 +114,6 @@ const ScoreItem = ({ u, navigation }) => {
 
         <VStack alignItems="center">
           <MotiView
-            alignItems="center"
             from={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
@@ -112,7 +121,7 @@ const ScoreItem = ({ u, navigation }) => {
               duration: 1050,
             }}
           >
-            <SharedElement alignItems="center" id={`item.${homeTeam}.name`}>
+            <SharedElement id={`item.${homeTeam}.name`}>
               <Heading
                 color={colorScheme.text}
                 fontSize="xl"
@@ -143,7 +152,7 @@ const ScoreItem = ({ u, navigation }) => {
         fontWeight={500}
         fontStyle="italic"
       >
-        {u.gameStatusText != "PPD" ? u.gameStatusText : "Postponed"}
+        {game.gameStatusText != "PPD" ? game.gameStatusText : "Postponed"}
       </Text>
       <Divider
         bg={colorScheme.divider}
@@ -154,13 +163,13 @@ const ScoreItem = ({ u, navigation }) => {
       />
       <VStack alignItems="center">
         <Text alignSelf="center" fontSize="md" fontWeight="light">
-          {u.gameStatusText != "Final" &&
-          u.gameStatusText != "PPD" &&
-          u.livePeriodTimeBcast.charAt(1) != "0"
-            ? u.livePeriodTimeBcast
+          {game.gameStatusText != "Final" &&
+            game.gameStatusText != "PPD" &&
+            game.livePeriodTimeBcast.charAt(1) != "0"
+            ? game.livePeriodTimeBcast
             : ""}
         </Text>
-        <InfoButton navigation={navigation} u={u} />
+        <InfoButton game={game} />
       </VStack>
     </VStack>
   );

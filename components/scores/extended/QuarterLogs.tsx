@@ -3,9 +3,14 @@ import { Dimensions } from "react-native";
 import { HStack, VStack, Heading, Text } from "native-base";
 import { colorScheme } from "../../../constants";
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+type Props = {
+  awayLines: string[]
+  homeLines: string[]
+}
 
-const QuarterLogs = ({ awayLines, homeLines }) => {
+const { width: windowWidth } = Dimensions.get("window");
+
+const QuarterLogs = ({ awayLines, homeLines }: Props) => {
   const awayArr = [];
   const homeArr = [];
 
@@ -25,11 +30,7 @@ const QuarterLogs = ({ awayLines, homeLines }) => {
       alignItems="center"
       mb={10}
       bg={colorScheme.foreground}
-      shadowColor="#000"
-      shadowOffset={{ width: 0, height: 0 }}
-      shadowOpacity={0.45}
-      shadowRadius={4.84}
-      elevation={3.3}
+      shadow="3"
     >
       <Heading color={colorScheme.text} m={1} fontWeight={500}>
         Quarter Logs

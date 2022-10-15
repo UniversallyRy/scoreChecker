@@ -1,11 +1,8 @@
 import React from "react";
-import { Dimensions } from "react-native";
 import { Heading } from "native-base";
 import { LoadingButton } from "../Buttons";
 import { colorScheme } from "../../constants";
 import { MotiView } from "moti";
-
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const ScoresLoading = () => {
   return (

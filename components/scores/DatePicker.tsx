@@ -1,18 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Platform } from "react-native";
 import { Box, Text } from "native-base";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 import { RaisedButton } from "../Buttons";
 import { colorScheme } from "../../constants";
 
-const DatePicker = ({ todaysDate, onSubmit, loading }) => {
+type DateProps = {
+  todaysDate: any;
+  onSubmit: (item: string) => void;
+  loading: boolean
+}
+
+const DatePicker = ({ todaysDate, onSubmit, loading }: DateProps) => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const showMode = () => {
     setShow(true);
   };
 
-  const onChange = (event, selectedDate) => {
+  const onChange = (event: DateTimePickerEvent, selectedDate: Date) => {
     if (event.type == "set") {
       let offSetTimeZone = new Date(
         selectedDate.setMinutes(

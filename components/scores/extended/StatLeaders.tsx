@@ -1,11 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box, VStack, HStack, Heading, Text, Image } from "native-base";
 import { Dimensions } from "react-native";
 import { colorScheme } from "../../../constants";
 import DropDown from "./DropDown";
-import { color } from "react-native-reanimated";
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+type Props = {
+  awayLeadValue: {
+    StatValue: number;
+  }
+  awayPic: string;
+  awayPlayer: string;
+  homePlayer: string;
+  homeLeadValue: {
+    StatValue: number;
+  }
+  homePic: string;
+  statState: string;
+  changeStats: (stat: any) => void;
+}
+
+const { width: windowWidth } = Dimensions.get("window");
 
 const StatLeaders = ({
   awayLeadValue,
@@ -15,15 +29,13 @@ const StatLeaders = ({
   homeLeadValue,
   homePic,
   statState,
-  scoreInfo,
   changeStats,
-  date,
-}) => {
+}: Props) => {
   const leaderHeading = statState.slice(0, -1);
 
   return (
     <VStack w={windowWidth} alignItems="center" justifyContent="center">
-      <DropDown statState={statState} changeStats={changeStats} />
+      <DropDown changeStats={changeStats} />
       <Box
         justifyContent="center"
         alignItems="center"
@@ -33,11 +45,7 @@ const StatLeaders = ({
         w={windowWidth * 0.45}
         h={25}
         bg={colorScheme.foreground}
-        shadowColor="#000"
-        shadowOffset={{ width: 1, height: 2 }}
-        shadowOpacity={0.65}
-        shadowRadius={2.84}
-        elevation={4}
+        shadow="3"
       >
         <Heading color={colorScheme.text} fontSize="lg" fontWeight={600}>
           {leaderHeading} Leaders

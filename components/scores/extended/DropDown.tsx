@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import { Dimensions } from "react-native";
+import { Dimensions, Platform } from "react-native";
 import { Flex } from "native-base";
 import DropDownPicker from "react-native-dropdown-picker";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { colorScheme } from "../../../constants";
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+type Props = {
+  changeStats: (stat: any) => void;
+}
 
-const initialLabels = (labels) => {
+const { width: windowWidth } = Dimensions.get("window");
+
+const initialLabels = (labels: string[]) => {
   let mappedLabels = labels.map((label) => {
     return {
       label: label,
@@ -25,7 +29,7 @@ const initialLabels = (labels) => {
   return mappedLabels;
 };
 
-const DropDown = ({ statState, changeStats }) => {
+const DropDown = ({ changeStats }: Props) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Points");
   const [labels, setLabels] = useState(
@@ -50,7 +54,7 @@ const DropDown = ({ statState, changeStats }) => {
         items={labels}
         setItems={setLabels}
         value={value}
-        onChangeValue={(item) => {
+        onChangeValue={() => {
           changeStats(value);
         }}
         setValue={setValue}

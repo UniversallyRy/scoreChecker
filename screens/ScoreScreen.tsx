@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, createContext, useCallback } from "react";
 import moment from "moment";
 import NBA from "nba";
 import Scores from "../components/scores";
@@ -6,32 +6,71 @@ import Header from "../components/scores/Header";
 import ScoresLoading from "../components/scores/ScoresLoading";
 import { colorScheme } from "../constants";
 import { MotiView, AnimatePresence } from "moti";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { ParamListBase } from "@react-navigation/native";
 // todos: possible team screen component/team standings, make card transition into extended game screen
 
-// Initial state before NBA api's async is fulfilled
-const initialState = [
-  {
-    gamecode: "Games Loading",
-    gameStatusText: "",
-    livePeriodTimeBcast: "",
-  },
-];
+interface ContextInterface {
+  navigation: StackNavigationProp<ParamListBase>;
+}
 
-const ScoreScreen = ({ navigation }) => {
-  const [state, setState] = useState(initialState);
+export type GamesProps = {
+  "available": [],
+  "eastConfStandingsByDay": {
+    "conference": string;
+    "g": number;
+    "homeRecord": string;
+    "l": number;
+    "leagueId": string;
+    "roadRecord": string;
+    "seasonId": string;
+    "standingsdate": string;
+    "team": string;
+    "teamId": number;
+    "w": number;
+    "wPct": number;
+  }[]
+  "gameHeader": [],
+  "lastMeeting": [],
+  "lineScore": [],
+  "seriesStandings": [],
+  "westConfStandingsByDay": {
+    "conference": string;
+    "g": number;
+    "homeRecord": string;
+    "l": number;
+    "leagueId": string;
+    "roadRecord": string;
+    "seasonId": string;
+    "standingsdate": string;
+    "team": string;
+    "teamId": number;
+    "w": number;
+    "wPct": number;
+  }[]
+}
+export const ScreenNavContext = createContext<ContextInterface | null>(null);
+
+const ScoreScreen = ({ navigation }: any) => {
+  const [state, setState] = useState([
+    {
+      gamecode: "Games Loading",
+      gameStatusText: "",
+      livePeriodTimeBcast: "",
+    },
+  ]);
   const [newObj, setNewObj] = useState([]);
   const [todaysDate, setTodaysDate] = useState(moment().format("L"));
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function initData() {
-      NBA.stats.scoreboard({ gameDate: todaysDate }).then((res) => {
+      NBA.stats.scoreboard({ gameDate: todaysDate }).then((res: GamesProps) => {
         setNewObj(res.gameHeader);
       });
     }
     initData();
   }, [todaysDate]);
-
   const loader = () => {
     setState(newObj);
     setLoading(false);
@@ -43,12 +82,12 @@ const ScoreScreen = ({ navigation }) => {
   // callback for date changes
   const onSubmit = useCallback(
     (item) => {
-      setNewObj({});
+      setNewObj(Object.create({}));
       let changedDate = item;
       async function newDay() {
         NBA.stats
           .scoreboard({ gameDate: changedDate })
-          .then((res) => setNewObj(res.gameHeader));
+          .then((res: GamesProps) => setNewObj(res.gameHeader));
 
         setLoading(true);
         setTodaysDate(changedDate);
@@ -86,15 +125,12 @@ const ScoreScreen = ({ navigation }) => {
           </MotiView>
         )}
         {!loading && (
-          <Scores
-            key="scores"
-            exit={{
-              opacity: 0,
-            }}
-            item={state}
-            navigation={navigation}
-            date={todaysDate}
-          />
+          <ScreenNavContext.Provider value={navigation}>
+            <Scores
+              key="scores"
+              games={state}
+            />
+          </ScreenNavContext.Provider>
         )}
       </MotiView>
     </AnimatePresence>

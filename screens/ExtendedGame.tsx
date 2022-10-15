@@ -5,23 +5,50 @@ import NBA from "nba";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../constants";
 import Header from "../components/scores/extended/Header";
 import logos from "../logoManager";
-import DropDown from "../components/scores/extended/DropDown";
 import StatLeaders from "../components/scores/extended/StatLeaders";
 import QuarterLogs from "../components/scores/extended/QuarterLogs";
+import { ParamListBase } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 // import { MotiView, MotiText } from "moti";
+type Props = {
+  navigation: StackNavigationProp<ParamListBase>;
+  route: {
+    "key": string;
+    "name": string;
+    "params": {
+      "itemId": string;
+      "scoreInfo": {
+        "gameDateEst": string;
+        "gameId": string;
+        "gameSequence": number;
+        "gameStatusId": number;
+        "gameStatusText": string;
+        "gamecode": string;
+        "homeTeamId": number;
+        "livePcTime": string;
+        "livePeriod": number;
+        "livePeriodTimeBcast": string;
+        "natlTvBroadcasterAbbreviation": string;
+        "season": string;
+        "visitorTeamId": number;
+        "whStatus": number,
+      },
+    },
+    "path": undefined,
+  }
 
+}
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const ExtendedGame = ({ navigation, route }) => {
+const ExtendedGame = ({ route }: Props) => {
   const { itemId, scoreInfo } = route.params;
   const gameDate = scoreInfo.gamecode.slice(0, 8);
   const gameTeams = scoreInfo.gamecode.slice(-6);
-  const splitAt = (index) => (x) => [x.slice(0, index), x.slice(index)];
+  const splitAt = (index: number) => (x: string) => [x.slice(0, index), x.slice(index)];
   const [awayTeam, homeTeam] = splitAt(3)(gameTeams);
   const [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
-
   const [gameInfo, setGameInfo] = useState({
-    gameArena: "",
+    gameArena: { arena: "", city: "", country: "" },
     statName: "",
     awayScore: 0,
     homeScore: 0,
@@ -29,18 +56,21 @@ const ExtendedGame = ({ navigation, route }) => {
     homePlayer: "",
     awayPlayerPic: "",
     homePlayerPic: "",
-    awayLeadValue: 0,
-    homeLeadValue: 0,
+    awayLeadValue: { StatValue: 0 },
+    homeLeadValue: { StatValue: 0 },
     awayLines: [],
     homeLines: [],
   });
-
   useEffect(() => {
     async function initData() {
       // on initial render, async call for more game data using gameId
       NBA.data
         .boxScore(gameDate, scoreInfo.gameId)
-        .then((res) => res.sports_content)
+        .then((res) => {
+          console.log(res);
+          res.sports_content;
+        }
+        )
         .then((res) => res.game)
         .then((res) => {
           setGameInfo({
@@ -68,7 +98,7 @@ const ExtendedGame = ({ navigation, route }) => {
     initData();
   }, []);
 
-  const changeStats = (stat) => {
+  const changeStats = (stat: string) => {
     NBA.data
       .boxScore(gameDate, scoreInfo.gameId)
       .then((res) => res.sports_content)
@@ -103,7 +133,7 @@ const ExtendedGame = ({ navigation, route }) => {
       key={itemId + "_extendedPage"}
     >
       <Header
-        gameId={gameInfo.gameId}
+        gameId={scoreInfo.gameId}
         gameArena={gameInfo.gameArena}
         awayTeam={awayTeam}
         awayLogo={awayLogo}
@@ -121,7 +151,7 @@ const ExtendedGame = ({ navigation, route }) => {
         alignItems="center"
         borderRadius={32}
         transform={[{ translateY: windowHeight * 0.02 }]}
-        key="body"
+        key="extgamebody"
       >
         <StatLeaders
           statState={gameInfo.statName}

@@ -17,7 +17,7 @@
     "react/jsx-uses-vars": 2,
      "no-underscore-dangle": "off",
     "class-methods-use-this": "off",
-    "no-undef": 2,
+    "no-undef": "off",
     "semi": 2,
     "react/prop-types": 2,
      "react/jsx-no-duplicate-props": 2,
