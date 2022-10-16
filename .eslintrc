@@ -14,12 +14,12 @@
   "rules": {
     "react/no-did-mount-set-state": 2,
     "react/no-direct-mutation-state": 2,
-    "react/jsx-uses-vars": 2,
+    "react/jsx-uses-vars": 1,
      "no-underscore-dangle": "off",
     "class-methods-use-this": "off",
     "no-undef": "off",
-    "semi": 2,
-    "react/prop-types": 2,
+    "semi": 1,
+    "react/prop-types": 1,
      "react/jsx-no-duplicate-props": 2,
   },
   "globals": {
