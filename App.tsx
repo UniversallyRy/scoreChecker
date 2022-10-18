@@ -22,7 +22,7 @@ import BottomTabs from "./components/navigation/BottomTabs";
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
-// Todos: useReducer + context addition?
+// Todos: more hook usage, better animations, extend theme further added basic sizes for fonts, containers, buttons, etc
 const theme = extendTheme({
   fontConfig: {
     Rubik: {
@@ -104,22 +104,17 @@ const App = () => {
   }
 
   return (
-    <NativeBaseProvider
-      theme={theme}
-    >
-      <NavigationContainer
-        flex={1}
-        alignItems="center"
-        justifyContent="center"
-      >
+    <NativeBaseProvider theme={theme}>
+      <NavigationContainer>
         <Flex
+          alignItems="center"
+          justifyContent="center"
           height="full"
           width="full"
           onLayout={onLayoutRootView}
         >
           <StatusBar style="auto" />
-          <BottomTabs
-          />
+          <BottomTabs />
         </Flex>
       </NavigationContainer>
     </NativeBaseProvider>
