@@ -1,10 +1,11 @@
 import React from "react";
+import { ParamListBase } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Stack1Screen, Stack2Screen } from "../navigation/Stacks";
 import { colorScheme } from "../../constants";
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<ParamListBase>();
 
 const BottomTabs = () => (
   <Tab.Navigator
