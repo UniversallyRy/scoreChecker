@@ -1,3 +1,17 @@
+export type PlayerProfileType = {
+  playerName?: string;
+  playerId: number;
+  fullname: string;
+  teamCity?: string
+  teamName?: string;
+  teamAbbreviation: string;
+  height?: string;
+  weight?: string;
+  pts?: string;
+  ast?: string;
+  reb?: string;
+}
+
 export type PlayerInfoType = {
   "birthdate": string;
   "country": string;
