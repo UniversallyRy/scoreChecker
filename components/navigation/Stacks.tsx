@@ -1,8 +1,8 @@
 import React from "react";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
 import ScoreScreen from "../../screens/ScoreScreen";
-import PlayerScreen from "../../screens/PlayerScreen";
 import ExtendedGame from "../../screens/ExtendedGame";
+import PlayerScreen from "../../screens/PlayerScreen";
 import ExtendedProfile from "../../screens/ExtendedProfile";
 import { colorScheme } from "../../constants";
 
