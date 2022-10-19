@@ -6,12 +6,21 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { RaisedButton } from "../Buttons";
 import { colorScheme } from "../../constants";
 
+type InputProp = {
+  handleInput: (item: object) => void;
+}
+
 const { height: windowHeight } = Dimensions.get("window");
 
-const PlayerSearch = ({ handleInput }: { handleInput: (string) => void }) => {
+const PlayerSearch = ({ handleInput }: InputProp) => {
   const [keyboardOffset, setKeyboardOffset] = useState(0);
-  const onKeyboardShow = (event) =>
-    setKeyboardOffset(event.endCoordinates.height);
+  const onKeyboardShow = (event: any) => {
+    if (event.endCoordinates) {
+      setKeyboardOffset(event.endCoordinates.height);
+    } else {
+      return keyboardOffset;
+    }
+  };
   const onKeyboardHide = () => setKeyboardOffset(0);
   const keyboardDidShowListener = useRef();
   const keyboardDidHideListener = useRef();
@@ -65,7 +74,6 @@ const PlayerSearch = ({ handleInput }: { handleInput: (string) => void }) => {
                 value={values.player}
                 enablesReturnKeyAutomatically={true}
                 color="white"
-                onSubmitEditing={handleSubmit}
                 importantForAutofill="auto"
                 placeholder="Search for Player"
               />

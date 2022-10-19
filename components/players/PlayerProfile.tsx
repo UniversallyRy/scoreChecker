@@ -6,21 +6,10 @@ import { MotiView, AnimatePresence } from "moti";
 import { RaisedButton, LoadingButton } from "../Buttons";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../../constants";
 import logos from "../../logoManager";
+import { PlayerProfileType } from "../../types";
 
 export type ProfileProps = {
-  playerInfo: {
-    playerName?: string;
-    playerId: number;
-    fullname: string;
-    teamCity?: string
-    teamName?: string;
-    teamAbbreviation: string;
-    height?: string;
-    weight?: string;
-    pts?: string;
-    ast?: string;
-    reb?: string;
-  }
+  playerInfo: PlayerProfileType;
   navigation: {
     navigate: (arg0: string, arg1: object) => void;
   }
