@@ -107,8 +107,6 @@ const App = () => {
     <NativeBaseProvider theme={theme}>
       <NavigationContainer>
         <Flex
-          alignItems="center"
-          justifyContent="center"
           height="full"
           width="full"
           onLayout={onLayoutRootView}
