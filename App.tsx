@@ -6,12 +6,8 @@ import { StatusBar } from "expo-status-bar";
 import * as SplashScreen from 'expo-splash-screen';
 import {
   useFonts,
-  Rubik_300Light,
-  Rubik_300Light_Italic,
   Rubik_400Regular,
   Rubik_400Regular_Italic,
-  Rubik_500Medium,
-  Rubik_500Medium_Italic,
   Rubik_700Bold,
   Rubik_700Bold_Italic,
   Rubik_900Black,
@@ -26,35 +22,11 @@ SplashScreen.preventAutoHideAsync();
 const theme = extendTheme({
   fontConfig: {
     Rubik: {
-      100: {
-        normal: "Rubik_300Light",
-        italic: "Rubik_300Light_Italic",
-      },
-      200: {
-        normal: "Rubik_300Light",
-        italic: "Rubik_300Light_Italic",
-      },
-      300: {
-        normal: "Rubik_300Light",
-        italic: "Rubik_300Light_Italic",
-      },
       400: {
         normal: "Rubik_400Regular",
         italic: "Rubik_400Regular_Italic",
       },
-      500: {
-        normal: "Rubik_500Medium",
-        italic: "Rubik_500Medium_Italic",
-      },
-      600: {
-        normal: "Rubik_500Medium",
-        italic: "Rubik_500Medium_Italic",
-      },
       700: {
-        normal: "Rubik_700Bold",
-        italic: "Rubik_700Bold_Italic",
-      },
-      800: {
         normal: "Rubik_700Bold",
         italic: "Rubik_700Bold_Italic",
       },
@@ -74,12 +46,8 @@ const theme = extendTheme({
 const App = () => {
 
   const [fontsLoaded] = useFonts({
-    Rubik_300Light,
-    Rubik_300Light_Italic,
     Rubik_400Regular,
     Rubik_400Regular_Italic,
-    Rubik_500Medium,
-    Rubik_500Medium_Italic,
     Rubik_700Bold,
     Rubik_700Bold_Italic,
     Rubik_900Black,
