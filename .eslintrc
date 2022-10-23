@@ -20,7 +20,7 @@
     "no-undef": "off",
     "semi": 1,
     "react/prop-types": 1,
-     "react/jsx-no-duplicate-props": 2,
+    "react/jsx-no-duplicate-props": 2,
   },
   "globals": {
     "GLOBAL": false,
