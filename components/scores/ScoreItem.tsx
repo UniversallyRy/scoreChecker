@@ -7,19 +7,16 @@ import NBA from "nba";
 import logos from "../../logoManager";
 import { colorScheme } from "../../constants";
 import InfoButton from "./InfoButton";
-import { GameType } from "../../types";
+import type { GameType } from "../../types";
 // WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
 const { width: windowWidth } = Dimensions.get("window");
 
 const ScoreItem = ({ game }: { game: GameType }) => {
-  const [scores, setScores] = useState({
-    awayScore: 0,
-    homeScore: 0,
-  });
+  const splitAt = (index: number) => (x: string) => [x.slice(0, index), x.slice(index)];
+  const [scores, setScores] = useState({ awayScore: 0, homeScore: 0 });
   let comp = game.gamecode.slice(-6);
   let gameDate = game.gamecode.slice(0, 8);
-  const splitAt = (index: number) => (x: string) => [x.slice(0, index), x.slice(index)];
   let [awayTeam, homeTeam] = splitAt(3)(comp);
   let [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
 

@@ -1,25 +1,26 @@
 import React from "react";
 import { Dimensions } from "react-native";
 import { VStack, FlatList, Text } from "native-base";
-import ScoreItem, { GameProps } from "./ScoreItem";
+import ScoreItem from "./ScoreItem";
 import ScoresLoading from "./ScoresLoading";
 import { colorScheme } from "../../constants";
+import type { GameType } from "../../types";
 
-type Props = {
-  games: GameProps[];
-}
-
-const { width: windowWidth } = Dimensions.get("window");
-
-const Scores = ({ games }: Props) => {
+const Scores = ({ games }: { games: GameType[] }) => {
+  const { width: windowWidth } = Dimensions.get("window");
   const numOfGames = games.length;
 
-  const renderGame = ({ item }) => (
+  const renderGame = ({ item }: { item: GameType }) => (
     <ScoreItem key={item.gameId} game={item} />
   );
 
   return (
-    <VStack flex={1} w={windowWidth} alignSelf="center" justifyContent="center">
+    <VStack
+      flex={1}
+      w={windowWidth}
+      alignSelf="center"
+      justifyContent="center"
+    >
       <VStack safeArea>
         {numOfGames >= 1 ? (
           <Text
