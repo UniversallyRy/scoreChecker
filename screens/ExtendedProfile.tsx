@@ -4,25 +4,15 @@ import { SharedElement } from "react-native-shared-element";
 import { Flex, Image, Text, HStack, Box } from "native-base";
 import { MotiText } from "moti";
 import logos from "../logoManager";
+import { getPlayerInfo, collegeCheck } from "../utils/player";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../constants";
 import type { ExtendedStatsType } from "../types";
-import { getPlayerInfo } from "../utils";
 
 // todos: better list styling, better shared element screen transition
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const ExtendedProfile = ({ route }: { route: ExtendedStatsType }) => {
   const { playerInfo } = route.params;
-
-  const titleCheck = (item: string, itemData: string | number) => {
-    // changes school title if no college(future needed for euroleaguers?)
-    if (
-      !itemData ||
-      (typeof itemData === "string" && itemData.includes("HS"))
-    ) {
-      return "High School";
-    } else return item;
-  };
 
   return (
     <Box h={windowHeight} bg={colorScheme.background}>
@@ -90,7 +80,7 @@ const ExtendedProfile = ({ route }: { route: ExtendedStatsType }) => {
                 fontSize="lg"
                 fontWeight={900}
               >
-                {titleCheck(key, data)}:{" "}
+                {collegeCheck(key, data)}:{" "}
               </Text>
               <Text color={colorScheme.text} fontSize="lg" fontWeight={400}>
                 {`${data}`}

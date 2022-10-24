@@ -112,7 +112,7 @@ export type ExtendedStatsType = {
       "gamesPlayedFlag": string;
       "greatest75Flag": string;
       "height": string;
-      "jersey": string;
+      "jersey": number;
       "lastAffiliation": string;
       "lastName": string;
       "nbaFlag": string;

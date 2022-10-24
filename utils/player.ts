@@ -31,6 +31,17 @@ const experience = (item: number) => {
   } else return "1 Previous Season";
 };
 
+
+export const collegeCheck = (item: string, itemData: string | number) => {
+  // changes school title if no college(future needed for euroleaguers?)
+  if (
+    !itemData ||
+    (typeof itemData === "string" && itemData.includes("HS"))
+  ) {
+    return "High School";
+  } else return item;
+};
+
 export const getPlayerInfo = (player: ExtendedInfoType) => {
   return {
     Team: player.teamCity + " " + player.teamName,
