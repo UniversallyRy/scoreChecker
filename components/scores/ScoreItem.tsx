@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Dimensions } from "react-native";
 import { Text, Image, Divider, VStack, HStack, Heading } from "native-base";
 import { MotiView } from "moti";
-import { SharedElement } from "react-native-shared-element";
 import NBA from "nba";
 import logos from "../../logoManager";
 import { colorScheme } from "../../constants";
@@ -59,29 +58,25 @@ const ScoreItem = ({ game }: { game: GameType }) => {
               duration: 1050,
             }}
           >
-            <SharedElement
-              id={`item.${game.gameId}`}
+            <Heading
+              color={colorScheme.text}
+              fontSize="xl"
+              fontFamily="heading"
+              fontWeight={700}
+              mb={2}
             >
-              <Heading
-                color={colorScheme.text}
-                fontSize="xl"
-                fontFamily="heading"
-                fontWeight={700}
-                mb={2}
-              >
-                {awayTeam}{" "}
-                {scores.awayScore == 0 ? "" : "-  " + scores.awayScore}
-              </Heading>
-              {/* Team Logos */}
-              <Image
-                accessibilityLabel={awayTeam}
-                source={awayLogo}
-                w={50}
-                h={50}
-                m={1}
-                alt="Away Logo"
-              />
-            </SharedElement>
+              {awayTeam}{" "}
+              {scores.awayScore == 0 ? "" : "-  " + scores.awayScore}
+            </Heading>
+            {/* Team Logos */}
+            <Image
+              accessibilityLabel={awayTeam}
+              source={awayLogo}
+              w={50}
+              h={50}
+              m={1}
+              alt="Away Logo"
+            />
           </MotiView>
         </VStack>
 
@@ -103,26 +98,24 @@ const ScoreItem = ({ game }: { game: GameType }) => {
               duration: 1050,
             }}
           >
-            <SharedElement id={`item.${homeTeam}.name`}>
-              <Heading
-                color={colorScheme.text}
-                fontSize="xl"
-                mb={2}
-                fontFamily="heading"
-                fontWeight={700}
-              >
-                {homeTeam}{" "}
-                {scores.homeScore == 0 ? "" : "-  " + scores.homeScore}
-              </Heading>
-              <Image
-                accessibilityLabel={homeTeam}
-                source={homeLogo}
-                w={50}
-                h={50}
-                m={1}
-                alt="Home Logo"
-              />
-            </SharedElement>
+            <Heading
+              color={colorScheme.text}
+              fontSize="xl"
+              mb={2}
+              fontFamily="heading"
+              fontWeight={700}
+            >
+              {homeTeam}{" "}
+              {scores.homeScore == 0 ? "" : "-  " + scores.homeScore}
+            </Heading>
+            <Image
+              accessibilityLabel={homeTeam}
+              source={homeLogo}
+              w={50}
+              h={50}
+              m={1}
+              alt="Home Logo"
+            />
           </MotiView>
         </VStack>
       </HStack>

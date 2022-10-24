@@ -1,4 +1,5 @@
 import React from "react";
+import { createStackNavigator } from '@react-navigation/stack';
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
 //import { StackScreenProps, StackHeaderProps } from "@react-navigation/stack";
 import ScoreScreen from "../../screens/ScoreScreen";
@@ -19,10 +20,7 @@ type PlayerStackParams = {
   ["Extended Profile"]: { playerId: string };
 };
 
-const ScoreStack = createSharedElementStackNavigator<ScoreStackParams>({
-  name,
-  // debug: true,
-});
+const ScoreStack = createStackNavigator<ScoreStackParams>();
 
 const PlayerStack = createSharedElementStackNavigator<PlayerStackParams>({
   name,
@@ -50,14 +48,6 @@ export const ScoreScreens = () => (
         headerTitleStyle: { fontWeight: "bold", fontSize: 26 },
         headerTitleContainerStyle: { marginLeft: 7 }
       }}
-      sharedElements={(route) => {
-        // route.params.itemId == route.params.scoreInfo.gameId
-        const { itemId, scoreInfo } = route.params;
-        return [
-          { id: `item.${scoreInfo.gameId}`, animation: "fade" },
-          { id: `item.${itemId}`, animation: "fade" }
-        ];
-      }}
     />
   </ScoreStack.Navigator>
 );
@@ -82,13 +72,6 @@ export const PlayerScreens = () => (
         headerTintColor: colorScheme.text,
         headerTitleStyle: { fontWeight: "bold", fontSize: 26 },
         headerTitleContainerStyle: { marginLeft: 7 }
-      }}
-      sharedElements={(route) => {
-        const { playerInfo } = route.params;
-        console.log(route);
-        return [
-          { id: playerInfo.displayFirstLast, animation: "fade" }
-        ];
       }}
     />
   </PlayerStack.Navigator>

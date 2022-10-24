@@ -9,7 +9,7 @@ import Scores from "../components/scores";
 import ScoresLoading from "../components/scores/ScoresLoading";
 import { colorScheme } from "../constants";
 import { ScreenNavContext } from "../GameContext";
-import { ScoreBoardType } from "../types";
+import type { ScoreBoardType } from "../types";
 
 // todos: possible team screen component/team standings, make card transition into extended game screen
 

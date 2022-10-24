@@ -7,17 +7,10 @@ import Header from "../components/scores/extended/Header";
 import logos from "../logoManager";
 import StatLeaders from "../components/scores/extended/StatLeaders";
 import QuarterLogs from "../components/scores/extended/QuarterLogs";
-import { ParamListBase } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { GameRouteType } from "../types";
 // import { MotiView, MotiText } from "moti";
-type Props = {
-  navigation: StackNavigationProp<ParamListBase>;
-  route: GameRouteType;
-}
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const ExtendedGame = ({ route }: Props) => {
+const ExtendedGame = ({ route }: any) => {
   const { itemId, scoreInfo } = route.params;
   const gameDate = scoreInfo.gamecode.slice(0, 8);
   const gameTeams = scoreInfo.gamecode.slice(-6);

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { InfoIcon, Pressable } from "native-base";
 import { colorScheme } from "../../constants";
 import { ScreenNavContext } from "../../GameContext";
-import { GameType } from "../../types";
+import type { GameType } from "../../types";
 
 type Props = {
   game: GameType

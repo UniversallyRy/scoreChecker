@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Dimensions } from "react-native";
-import { SharedElement } from "react-native-shared-element";
 import { Image, Text, HStack, Box } from "native-base";
 import { MotiView, AnimatePresence } from "moti";
 import { RaisedButton, LoadingButton } from "../Buttons";
@@ -78,45 +77,39 @@ const Profile = ({ playerInfo, navigation }: ProfileProps) => {
             }}
             exit={{ opacity: 0 }}
           >
-            <SharedElement id={`item.${playerInfo.playerId}.image`}>
-              <Image
-                mt={1}
-                borderWidth={2}
-                overflow="hidden"
-                borderColor={colorScheme.title}
-                borderRadius={50}
-                alignItems="center"
-                alignSelf="center"
-                h={100}
-                w={100}
-                key={playerInfo.playerName + "_img"}
-                source={{
-                  uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`,
-                }}
-                alt={playerInfo.playerName}
-              />
-            </SharedElement>
-            <SharedElement id={`item.${playerInfo.playerId}.name`}>
-              <Text
-                alignSelf="center"
-                fontSize="xl"
-                fontWeight={700}
-                color={colorScheme.text}
-              >
-                {`${playerInfo.playerName}`}
-              </Text>
-            </SharedElement>
-            <SharedElement id={`item.${playerInfo.playerId}.team`}>
-              <Image
-                w={50}
-                h={50}
-                mb={10}
-                alignSelf="center"
-                source={logos[playerInfo.teamAbbreviation]}
-                key={playerInfo.teamAbbreviation + "_logoKey"}
-                alt={playerInfo.teamName}
-              />
-            </SharedElement>
+            <Image
+              mt={1}
+              borderWidth={2}
+              overflow="hidden"
+              borderColor={colorScheme.title}
+              borderRadius={50}
+              alignItems="center"
+              alignSelf="center"
+              h={100}
+              w={100}
+              key={playerInfo.playerName + "_img"}
+              source={{
+                uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`,
+              }}
+              alt={playerInfo.playerName}
+            />
+            <Text
+              alignSelf="center"
+              fontSize="xl"
+              fontWeight={700}
+              color={colorScheme.text}
+            >
+              {`${playerInfo.playerName}`}
+            </Text>
+            <Image
+              w={50}
+              h={50}
+              mb={10}
+              alignSelf="center"
+              source={logos[playerInfo.teamAbbreviation]}
+              key={playerInfo.teamAbbreviation + "_logoKey"}
+              alt={playerInfo.teamName}
+            />
             {Object.entries(infoList).map(([item, value]) => (
               <HStack
                 key={item + "_key"}
