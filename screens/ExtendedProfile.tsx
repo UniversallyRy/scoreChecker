@@ -5,42 +5,15 @@ import { Flex, Image, Text, HStack, Box } from "native-base";
 import { MotiText } from "moti";
 import logos from "../logoManager";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../constants";
-import { ExtendedStatsType } from "../types";
+import type { ExtendedStatsType } from "../types";
+import { getPlayerInfo } from "../utils";
 
-type Props = {
-  route: ExtendedStatsType;
-}
 // todos: better list styling, better shared element screen transition
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const ExtendedProfile = ({ route }: Props) => {
+const ExtendedProfile = ({ route }: { route: ExtendedStatsType }) => {
   const { playerInfo } = route.params;
 
-  const experience = (item: number) => {
-    if (item < 1) return "Rookie";
-    if (typeof item === "number" && item > 1) {
-      return item + " Previous Seasons";
-    } else return "1 Previous Season";
-  };
-  // player information obj
-  const profileState = {
-    Team: playerInfo.teamCity + " " + playerInfo.teamName,
-    Height: playerInfo.height,
-    Weight: playerInfo.weight,
-    PPG: playerInfo.pts,
-    RPG: playerInfo.reb,
-    APG: playerInfo.ast,
-    Season: playerInfo.timeFrame,
-    Experience: experience(playerInfo.seasonExp),
-    Position: playerInfo.position,
-    "Jersey #": playerInfo.jersey,
-    College: playerInfo.school,
-    "Draft Round": playerInfo.draftRound,
-    "Draft Number": playerInfo.draftNumber,
-    "Draft Year": playerInfo.draftYear,
-    Country: playerInfo.country,
-  };
-  // console.log(playerInfo);
   const titleCheck = (item: string, itemData: string | number) => {
     // changes school title if no college(future needed for euroleaguers?)
     if (
@@ -62,7 +35,7 @@ const ExtendedProfile = ({ route }: Props) => {
         px={2}
         borderRadius={5}
       >
-        <SharedElement id={`item.${playerInfo.playerId}.image`}>
+        <SharedElement id={playerInfo.displayFirstLast}>
           <Image
             mt={1}
             borderWidth={2}
@@ -79,8 +52,6 @@ const ExtendedProfile = ({ route }: Props) => {
             key={playerInfo.playerName + "_imgKey"}
             alt={playerInfo.playerName + " image"}
           />
-        </SharedElement>
-        <SharedElement id={`item.${playerInfo.playerId}.name`}>
           <Text
             alignSelf="center"
             fontSize="xl"
@@ -89,8 +60,6 @@ const ExtendedProfile = ({ route }: Props) => {
           >
             {`${playerInfo.playerName}`}
           </Text>
-        </SharedElement>
-        <SharedElement id={`item.${playerInfo.playerId}.team`}>
           <Image
             w={50}
             h={50}
@@ -101,7 +70,7 @@ const ExtendedProfile = ({ route }: Props) => {
             alt={playerInfo.teamName}
           />
         </SharedElement>
-        {Object.entries(profileState).map(([key, data]) => (
+        {Object.entries(getPlayerInfo(playerInfo)).map(([key, data]) => (
           <HStack m={1} textAlign="auto" key={key}>
             <MotiText
               from={{ opacity: 0.4, scale: 0.7 }}

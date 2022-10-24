@@ -1,3 +1,7 @@
+export type ACTIONTYPE =
+  | { type: "FETCH_SUCCESS"; payload: any }
+  | { type: "FETCH_ERROR"; payload: string };
+
 export type PlayerProfileType = {
   playerName?: string;
   playerId: number;
@@ -10,6 +14,26 @@ export type PlayerProfileType = {
   pts?: string;
   ast?: string;
   reb?: string;
+}
+
+export type ExtendedInfoType = {
+  teamCity: string
+  teamName: string;
+  teamAbbreviation: string;
+  height: string;
+  weight: string;
+  pts: number;
+  ast: number;
+  reb: number;
+  position: string;
+  seasonExp: number;
+  timeFrame: string;
+  jersey: number;
+  school: string;
+  draftNumber: string;
+  draftRound: string;
+  draftYear: string;
+  country: string;
 }
 
 export type PlayerInfoType = {
@@ -48,7 +72,6 @@ export type PlayerInfoType = {
   "weight": string;
 }[]
 
-
 export type PlayerStatsType = {
   "ast": number;
   "pie": number;
@@ -57,6 +80,15 @@ export type PlayerStatsType = {
   "pts": number;
   "reb": number;
   "timeFrame": string;
+}
+
+export type PlayerResType = {
+  "availableSeasons"?:
+  {
+    "seasonId": string;
+  }[],
+  "commonPlayerInfo"?: PlayerInfoType
+  "playerHeadlineStats"?: PlayerStatsType
 }
 
 export type ExtendedStatsType = {
