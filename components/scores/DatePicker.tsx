@@ -48,11 +48,6 @@ const DatePicker = ({ todaysDate, onSubmit, loading }: DateProps) => {
         alignSelf="center"
         borderRadius={3}
         h={9}
-        w={200}
-        shadowOffset={{ width: 0, height: 3 }}
-        shadowOpacity={0.7}
-        shadowRadius={3.84}
-        elevation={4}
         onPress={showMode}
         isDisabled={loading}
       >

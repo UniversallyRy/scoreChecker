@@ -1,14 +1,16 @@
 import React, { ReactElement } from "react";
-import { Button } from "native-base";
+import { Button, IButtonProps } from "native-base";
 import { colorScheme } from "../constants";
 
 type SubmitType = {
   onPress: () => void;
   children: ReactElement;
-  props?: React.ReactNode;
+  props?: React.ReactNode[];
 }
 
-export const RaisedButton = ({ onPress, children, ...props }: SubmitType) => {
+type Props = SubmitType & IButtonProps
+
+export const RaisedButton = ({ onPress, children, ...props }: Props) => {
   return (
     <Button
       h={50}
@@ -25,11 +27,10 @@ export const RaisedButton = ({ onPress, children, ...props }: SubmitType) => {
     >
       {children}
     </Button>
-
   );
 };
 
-export const LoadingButton = (props: React.ReactNode) => {
+export const LoadingButton = (props: React.ReactNode[]) => {
   return (
     <Button
       bg={colorScheme.title}
