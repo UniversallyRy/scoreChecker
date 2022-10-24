@@ -1,6 +1,5 @@
 import React from "react";
 import { Dimensions } from "react-native";
-import { SharedElement } from "react-native-shared-element";
 import { Flex, Image, Text, HStack, Box } from "native-base";
 import { MotiText } from "moti";
 import logos from "../logoManager";
@@ -25,41 +24,39 @@ const ExtendedProfile = ({ route }: { route: ExtendedStatsType }) => {
         px={2}
         borderRadius={5}
       >
-        <SharedElement id={playerInfo.displayFirstLast}>
-          <Image
-            mt={1}
-            borderWidth={2}
-            overflow="hidden"
-            borderColor={colorScheme.title}
-            borderRadius={50}
-            alignItems="center"
-            alignSelf="center"
-            h={100}
-            w={100}
-            source={{
-              uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`,
-            }}
-            key={playerInfo.playerName + "_imgKey"}
-            alt={playerInfo.playerName + " image"}
-          />
-          <Text
-            alignSelf="center"
-            fontSize="xl"
-            fontWeight={700}
-            color={colorScheme.text}
-          >
-            {`${playerInfo.playerName}`}
-          </Text>
-          <Image
-            w={50}
-            h={50}
-            mb={10}
-            alignSelf="center"
-            source={logos[playerInfo.teamAbbreviation]}
-            key={playerInfo.teamAbbreviation + "_logoKey"}
-            alt={playerInfo.teamName}
-          />
-        </SharedElement>
+        <Image
+          mt={1}
+          borderWidth={2}
+          overflow="hidden"
+          borderColor={colorScheme.title}
+          borderRadius={50}
+          alignItems="center"
+          alignSelf="center"
+          h={100}
+          w={100}
+          source={{
+            uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`,
+          }}
+          key={playerInfo.playerName + "_imgKey"}
+          alt={playerInfo.playerName + " image"}
+        />
+        <Text
+          alignSelf="center"
+          fontSize="xl"
+          fontWeight={700}
+          color={colorScheme.text}
+        >
+          {`${playerInfo.playerName}`}
+        </Text>
+        <Image
+          w={50}
+          h={50}
+          mb={10}
+          alignSelf="center"
+          source={logos[playerInfo.teamAbbreviation]}
+          key={playerInfo.teamAbbreviation + "_logoKey"}
+          alt={playerInfo.teamName}
+        />
         {Object.entries(getPlayerInfo(playerInfo)).map(([key, data]) => (
           <HStack m={1} textAlign="auto" key={key}>
             <MotiText

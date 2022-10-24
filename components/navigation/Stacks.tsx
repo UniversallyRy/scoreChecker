@@ -1,7 +1,5 @@
 import React from "react";
 import { createStackNavigator } from '@react-navigation/stack';
-import { createSharedElementStackNavigator } from "react-navigation-shared-element";
-//import { StackScreenProps, StackHeaderProps } from "@react-navigation/stack";
 import ScoreScreen from "../../screens/ScoreScreen";
 import ExtendedGame from "../../screens/ExtendedGame";
 import PlayerScreen from "../../screens/PlayerScreen";
@@ -11,21 +9,18 @@ import { colorScheme } from "../../constants";
 const name = "NBA Check-Up";
 
 type ScoreStackParams = {
-  [name]: { name: string }
+  [name]: { name: string };
   ["Extended Game"]: { playerId: string };
-};
+}
 
 type PlayerStackParams = {
   [name]: { playerId: string };
   ["Extended Profile"]: { playerId: string };
-};
+}
 
 const ScoreStack = createStackNavigator<ScoreStackParams>();
 
-const PlayerStack = createSharedElementStackNavigator<PlayerStackParams>({
-  name,
-  // debug: true,
-});
+const PlayerStack = createStackNavigator<PlayerStackParams>();
 
 export const ScoreScreens = () => (
   <ScoreStack.Navigator initialRouteName={name}>
