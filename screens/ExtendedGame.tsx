@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Dimensions } from "react-native";
 import { Box, VStack } from "native-base";
 import NBA from "nba";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../constants";
@@ -7,16 +6,12 @@ import Header from "../components/scores/extended/Header";
 import logos from "../logoManager";
 import StatLeaders from "../components/scores/extended/StatLeaders";
 import QuarterLogs from "../components/scores/extended/QuarterLogs";
+import { windowHeight, windowWidth } from "../utils/dimensions";
+import { GameRouteType } from "../types";
 // import { MotiView, MotiText } from "moti";
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const ExtendedGame = ({ route }: any) => {
-  const { itemId, scoreInfo } = route.params;
-  const gameDate = scoreInfo.gamecode.slice(0, 8);
-  const gameTeams = scoreInfo.gamecode.slice(-6);
-  const splitAt = (index: number) => (x: string) => [x.slice(0, index), x.slice(index)];
-  const [awayTeam, homeTeam] = splitAt(3)(gameTeams);
-  const [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
+const ExtendedGame = ({ route }: { route: GameRouteType }) => {
+
   const [gameInfo, setGameInfo] = useState({
     gameArena: { arena: "", city: "", country: "" },
     statName: "",
@@ -31,6 +26,14 @@ const ExtendedGame = ({ route }: any) => {
     awayLines: [],
     homeLines: [],
   });
+
+  const { itemId, scoreInfo } = route.params;
+  const gameDate = scoreInfo.gamecode.slice(0, 8);
+  const gameTeams = scoreInfo.gamecode.slice(-6);
+  const splitAt = (index: number) => (x: string) => [x.slice(0, index), x.slice(index)];
+  const [awayTeam, homeTeam] = splitAt(3)(gameTeams);
+  const [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
+
   useEffect(() => {
     async function initData() {
       // on initial render, async call for more game data using gameId

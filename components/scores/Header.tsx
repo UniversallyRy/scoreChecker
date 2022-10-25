@@ -1,16 +1,14 @@
 import React from "react";
-import { Dimensions } from "react-native";
 import { Text, Divider, VStack } from "native-base";
 import DatePicker from "./DatePicker";
 import { colorScheme } from "../../constants";
+import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 type HeaderProps = {
   todaysDate: string;
   onSubmit: (item: string) => void;
   loading: boolean
 }
-
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const Header = ({ todaysDate, onSubmit, loading }: HeaderProps) => (
   <VStack

@@ -1,14 +1,16 @@
 import React from "react";
-import { Dimensions } from "react-native";
 import { HStack, VStack, Heading, Text } from "native-base";
 import { colorScheme } from "../../../constants";
+import { windowWidth } from "../../../utils/dimensions";
 
 type Props = {
-  awayLines: string[]
-  homeLines: string[]
+  awayLines: {
+    score: number[]
+  }[]
+  homeLines: {
+    score: number[]
+  }[]
 }
-
-const { width: windowWidth } = Dimensions.get("window");
 
 const QuarterLogs = ({ awayLines, homeLines }: Props) => {
   const awayArr = [];

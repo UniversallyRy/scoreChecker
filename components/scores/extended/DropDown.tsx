@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { Dimensions, Platform } from "react-native";
+import { Platform } from "react-native";
 import { Flex } from "native-base";
 import DropDownPicker from "react-native-dropdown-picker";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { colorScheme } from "../../../constants";
+import { windowWidth } from "../../../utils/dimensions";
 
 type Props = {
   changeStats: (stat: string) => void;
 }
-
-const { width: windowWidth } = Dimensions.get("window");
 
 const initialLabels = (labels: string[]) => {
   let mappedLabels = labels.map((label) => {

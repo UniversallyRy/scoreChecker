@@ -1,15 +1,13 @@
 import React from "react";
-import { Dimensions } from "react-native";
 import { Flex, Image, Text, HStack, Box } from "native-base";
 import { MotiText } from "moti";
 import logos from "../logoManager";
 import { getPlayerInfo, collegeCheck } from "../utils/player";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../constants";
+import { windowHeight, windowWidth } from "../utils/dimensions";
 import type { ExtendedStatsType } from "../types";
 
 // todos: better list styling, better shared element screen transition
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
-
 const ExtendedProfile = ({ route }: { route: ExtendedStatsType }) => {
   const { playerInfo } = route.params;
 

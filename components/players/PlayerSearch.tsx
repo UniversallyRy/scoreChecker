@@ -1,16 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Keyboard, Dimensions } from "react-native";
+import { Keyboard } from "react-native";
 import { Input, InputGroup, InputLeftAddon, Flex, Stack } from "native-base";
 import { Formik } from "formik";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { SubmitButton } from "../Buttons";
 import { colorScheme } from "../../constants";
+import { windowHeight } from "../../utils/dimensions";
 
 type InputProp = {
   handleInput: (item: object) => void;
 }
-
-const { height: windowHeight } = Dimensions.get("window");
 
 const PlayerSearch = ({ handleInput }: InputProp) => {
   const [keyboardOffset, setKeyboardOffset] = useState(0);

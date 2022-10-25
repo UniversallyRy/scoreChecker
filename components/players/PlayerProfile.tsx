@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Dimensions } from "react-native";
 import { Image, Text, HStack, Box } from "native-base";
 import { MotiView, AnimatePresence } from "moti";
 import { SubmitButton, LoadingButton } from "../Buttons";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../../constants";
 import logos from "../../logoManager";
-import { PlayerProfileType } from "../../types";
+import { windowHeight, windowWidth } from "../../utils/dimensions";
+import type { PlayerProfileType } from "../../types";
 
 export type ProfileProps = {
   playerInfo: PlayerProfileType;
@@ -13,8 +13,6 @@ export type ProfileProps = {
     navigate: (arg0: string, arg1: object) => void;
   }
 }
-
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const Profile = ({ playerInfo, navigation }: ProfileProps) => {
   const [loading, setLoading] = useState(true);

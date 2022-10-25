@@ -1,13 +1,12 @@
 import React from "react";
-import { Dimensions } from "react-native";
 import { VStack, FlatList, Text } from "native-base";
 import ScoreItem from "./ScoreItem";
 import ScoresLoading from "./ScoresLoading";
 import { colorScheme } from "../../constants";
+import { windowWidth } from "../../utils/dimensions";
 import type { GameType } from "../../types";
 
 const Scores = ({ games }: { games: GameType[] }) => {
-  const { width: windowWidth } = Dimensions.get("window");
   const numOfGames = games.length;
 
   const renderGame = ({ item }: { item: GameType }) => (

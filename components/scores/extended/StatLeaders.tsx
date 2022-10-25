@@ -1,8 +1,8 @@
 import React from "react";
 import { Box, VStack, HStack, Heading, Text, Image } from "native-base";
-import { Dimensions } from "react-native";
-import { colorScheme } from "../../../constants";
 import DropDown from "./DropDown";
+import { colorScheme } from "../../../constants";
+import { windowWidth } from "../../../utils/dimensions";
 
 type Props = {
   awayLeadValue: {
@@ -18,8 +18,6 @@ type Props = {
   statState: string;
   changeStats: (stat: any) => void;
 }
-
-const { width: windowWidth } = Dimensions.get("window");
 
 const StatLeaders = ({
   awayLeadValue,
