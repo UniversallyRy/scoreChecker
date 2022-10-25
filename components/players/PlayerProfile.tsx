@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Dimensions } from "react-native";
 import { Image, Text, HStack, Box } from "native-base";
 import { MotiView, AnimatePresence } from "moti";
-import { RaisedButton, LoadingButton } from "../Buttons";
+import { SubmitButton, LoadingButton } from "../Buttons";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../../constants";
 import logos from "../../logoManager";
 import { PlayerProfileType } from "../../types";
@@ -136,7 +136,7 @@ const Profile = ({ playerInfo, navigation }: ProfileProps) => {
                 </Text>
               </HStack>
             ))}
-            <RaisedButton
+            <SubmitButton
               onPress={() => {
                 /* Navigate to the Extended Profile route with params */
                 navigation.navigate("Extended Profile", {
@@ -151,7 +151,7 @@ const Profile = ({ playerInfo, navigation }: ProfileProps) => {
               >
                 CLICK FOR MORE INFO{" "}
               </Text>
-            </RaisedButton>
+            </SubmitButton>
           </MotiView>
         )}
       </AnimatePresence>

@@ -1,16 +1,16 @@
-import React, { ReactElement } from "react";
-import { Button, IButtonProps } from "native-base";
+import React, { FormEvent, ReactElement } from "react";
+import { GestureResponderEvent } from "react-native";
+import { Button, IButtonProps, IIconProps } from "native-base";
 import { colorScheme } from "../constants";
 
-type SubmitType = {
-  onPress: () => void;
-  children: ReactElement;
-  props?: React.ReactNode[];
+type SubmitButtonProps = {
+  onPress: ((e?: FormEvent<HTMLFormElement>) => void) & ((event: GestureResponderEvent) => void)
+  children: ReactElement | IIconProps;
 }
 
-type Props = SubmitType & IButtonProps
+type Props = SubmitButtonProps & IButtonProps
 
-export const RaisedButton = ({ onPress, children, ...props }: Props) => {
+export const SubmitButton = ({ onPress, children, ...props }: Props) => {
   return (
     <Button
       h={50}
@@ -30,7 +30,7 @@ export const RaisedButton = ({ onPress, children, ...props }: Props) => {
   );
 };
 
-export const LoadingButton = (props: React.ReactNode[]) => {
+export const LoadingButton = (props: IButtonProps) => {
   return (
     <Button
       bg={colorScheme.title}

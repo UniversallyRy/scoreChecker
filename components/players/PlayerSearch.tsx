@@ -3,7 +3,7 @@ import { Keyboard, Dimensions } from "react-native";
 import { Input, InputGroup, InputLeftAddon, Flex, Stack } from "native-base";
 import { Formik } from "formik";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { RaisedButton } from "../Buttons";
+import { SubmitButton } from "../Buttons";
 import { colorScheme } from "../../constants";
 
 type InputProp = {
@@ -78,11 +78,9 @@ const PlayerSearch = ({ handleInput }: InputProp) => {
                 placeholder="Search for Player"
               />
             </InputGroup>
-            <RaisedButton
-              onPress={handleSubmit}
-            >
+            <SubmitButton onPress={handleSubmit}>
               <Icon name="search" size={28} color={colorScheme.text} />
-            </RaisedButton>
+            </SubmitButton>
           </Stack>
         )}
       </Formik>
