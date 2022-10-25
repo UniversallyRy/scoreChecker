@@ -22,25 +22,12 @@ SplashScreen.preventAutoHideAsync();
 const theme = extendTheme({
   fontConfig: {
     Rubik: {
-      400: {
-        normal: "Rubik_400Regular",
-        italic: "Rubik_400Regular_Italic",
-      },
-      700: {
-        normal: "Rubik_700Bold",
-        italic: "Rubik_700Bold_Italic",
-      },
-      900: {
-        normal: "Rubik_900Black",
-        italic: "Rubik_900Black_Italic",
-      },
+      400: { normal: "Rubik_400Regular", italic: "Rubik_400Regular_Italic" },
+      700: { normal: "Rubik_700Bold", italic: "Rubik_700Bold_Italic" },
+      900: { normal: "Rubik_900Black", italic: "Rubik_900Black_Italic" },
     },
   },
-  fonts: {
-    heading: "Rubik",
-    body: "Rubik",
-    mono: "Rubik",
-  },
+  fonts: { heading: "Rubik", body: "Rubik", mono: "Rubik" },
 });
 
 const App = () => {
@@ -56,11 +43,6 @@ const App = () => {
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
-      // This tells the splash screen to hide immediately! If we call this after
-      // `setAppIsReady`, then we may see a blank screen while the app is
-      // loading its initial state and rendering its first pixels. So instead,
-      // we hide the splash screen once we know the root view has already
-      // performed layout.
       await SplashScreen.hideAsync();
     } else {
       return null;
