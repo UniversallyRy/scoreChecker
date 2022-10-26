@@ -1,35 +1,28 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Box, VStack, HStack, Heading, Text, Image } from "native-base";
 import DropDown from "./DropDown";
 import { colorScheme } from "../../../constants";
 import { windowWidth } from "../../../utils/dimensions";
+import { ScoreLeaderContext } from "../../../LeaderContext";
 
 type Props = {
-  awayLeadValue: {
-    StatValue: number;
-  }
   awayPic: string;
-  awayPlayer: string;
-  homePlayer: string;
-  homeLeadValue: {
-    StatValue: number;
-  }
   homePic: string;
   statState: string;
   changeStats: (stat: any) => void;
 }
 
 const StatLeaders = ({
-  awayLeadValue,
   awayPic,
-  awayPlayer,
-  homePlayer,
-  homeLeadValue,
   homePic,
   statState,
   changeStats,
 }: Props) => {
+
+  const { players } = useContext(ScoreLeaderContext);
   const leaderHeading = statState.slice(0, -1);
+  let awayPlayer = players[0];
+  let homePlayer = players[1];
 
   return (
     <VStack w={windowWidth} alignItems="center" justifyContent="center">
@@ -65,7 +58,7 @@ const StatLeaders = ({
             alt="Away Player"
           />
           <Heading color={colorScheme.text} size="md" fontWeight={700}>
-            {awayPlayer}
+            {awayPlayer.fn + " " + awayPlayer.ln}
           </Heading>
           <Text
             color={colorScheme.text}
@@ -73,7 +66,9 @@ const StatLeaders = ({
             fontWeight={300}
             fontStyle="italic"
           >
-            {awayLeadValue.StatValue} {statState}
+            {statState == "Points" ? (awayPlayer.pts + " " + statState) : null}
+            {statState == "Assists" ? (awayPlayer.ast + " " + statState) : null}
+            {statState == "Rebounds" ? (awayPlayer.reb + " " + statState) : null}
           </Text>
         </VStack>
         <VStack alignItems="center" m={2} bg="transparent">
@@ -91,7 +86,7 @@ const StatLeaders = ({
             alt="Home Player"
           />
           <Heading size="md" color={colorScheme.text} fontWeight={700}>
-            {homePlayer}
+            {homePlayer.fn + " " + homePlayer.ln}
           </Heading>
 
           <Text
@@ -100,7 +95,9 @@ const StatLeaders = ({
             fontWeight={300}
             fontStyle="italic"
           >
-            {homeLeadValue.StatValue} {statState}
+            {statState == "Points" ? (homePlayer.pts + " " + statState) : null}
+            {statState == "Assists" ? (homePlayer.ast + " " + statState) : null}
+            {statState == "Rebounds" ? (homePlayer.reb + " " + statState) : null}
           </Text>
         </VStack>
       </HStack>

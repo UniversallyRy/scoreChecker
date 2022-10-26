@@ -1,10 +1,10 @@
 import React from "react";
 import { Flex, Image, Text, HStack, Box } from "native-base";
 import { MotiText } from "moti";
-import logos from "../logoManager";
-import { getPlayerInfo, collegeCheck } from "../utils/player";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../constants";
 import { windowHeight, windowWidth } from "../utils/dimensions";
+import { getPlayerInfo, collegeCheck } from "../utils/player";
+import logos from "../logoManager";
 import type { ExtendedStatsType } from "../types";
 
 // todos: better list styling, better shared element screen transition

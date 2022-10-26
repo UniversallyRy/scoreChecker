@@ -3,7 +3,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { ParamListBase } from "@react-navigation/native";
 import { MotiView, AnimatePresence } from "moti";
 import moment from "moment";
-import NBA from "nba";
+import { getGamesByDate } from "../api";
 import Header from "../components/scores/Header";
 import Scores from "../components/scores";
 import ScoresLoading from "../components/scores/ScoresLoading";
@@ -26,14 +26,15 @@ const ScoreScreen = ({ navigation }: any) => {
     },
   ]);
   const [newObj, setNewObj] = useState([]);
-  const [todaysDate, setTodaysDate] = useState(moment().format("L"));
+  const [todaysDate, setTodaysDate] = useState(moment().format("YYYYMMDD"));
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function initData() {
-      NBA.stats.scoreboard({ gameDate: todaysDate }).then((res: ScoreBoardType) => {
-        setNewObj(res.gameHeader);
-      });
+      await getGamesByDate(todaysDate)
+        .then((res) => {
+          setNewObj(res.data.games);
+        });
     }
     initData();
   }, [todaysDate]);
@@ -51,14 +52,15 @@ const ScoreScreen = ({ navigation }: any) => {
       setNewObj(Object.create({}));
       let changedDate = item;
       async function newDay() {
-        NBA.stats.scoreboard({ gameDate: changedDate })
-          .then((res: ScoreBoardType) => setNewObj(res.gameHeader));
-        setLoading(true);
-        setTodaysDate(changedDate);
+        await getGamesByDate(changedDate)
+          .then((res) => {
+            setTodaysDate(changedDate);
+            setLoading(true);
+          });
       }
       newDay();
-    },
-    [todaysDate]
+    }
+    , [todaysDate]
   );
 
   return (
@@ -93,6 +95,7 @@ const ScoreScreen = ({ navigation }: any) => {
             <Scores
               key="scores"
               games={state}
+              todaysDate={todaysDate}
             />
           </ScreenNavContext.Provider>
         )}

@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Platform } from "react-native";
 import { Box, Text } from "native-base";
 import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker";
-import { RaisedButton } from "../Buttons";
+import { SubmitButton } from "../Buttons";
 import { colorScheme } from "../../constants";
 
 type DateProps = {
-  todaysDate: any;
+  todaysDate: string;
   onSubmit: (item: string) => void;
   loading: boolean
 }
@@ -28,7 +28,7 @@ const DatePicker = ({ todaysDate, onSubmit, loading }: DateProps) => {
       let currentDate = offSetTimeZone.toISOString().split("T")[0];
       let formattedItem = currentDate.split("-");
       let formattedDate =
-        formattedItem[1] + "/" + formattedItem[2] + "/" + formattedItem[0];
+        formattedItem[0] + formattedItem[1] + formattedItem[2];
       if (formattedDate == todaysDate) {
         setShow(false);
       } else {
@@ -44,7 +44,7 @@ const DatePicker = ({ todaysDate, onSubmit, loading }: DateProps) => {
 
   return (
     <Box>
-      <RaisedButton
+      <SubmitButton
         alignSelf="center"
         borderRadius={3}
         h={9}
@@ -54,7 +54,7 @@ const DatePicker = ({ todaysDate, onSubmit, loading }: DateProps) => {
         <Text color={colorScheme.text} fontFamily="heading" fontWeight={600}>
           CHANGE DATE
         </Text>
-      </RaisedButton>
+      </SubmitButton>
       {show && (
         <DateTimePicker
           testID="datePicker"

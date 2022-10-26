@@ -4,11 +4,9 @@ import { HStack, Image, Text, VStack, Heading } from "native-base";
 import { colorScheme } from "../../../constants";
 
 type Props = {
-  gameArena: {
-    arena: string;
-    city: string;
-    country: string;
-  }
+  arenaName: string;
+  arenaCity: string;
+  arenaState: string;
   awayTeam: string;
   awayLogo: ImageSourcePropType;
   awayScore: number;
@@ -19,7 +17,9 @@ type Props = {
 }
 
 const Header = ({
-  gameArena,
+  arenaName,
+  arenaCity,
+  arenaState,
   awayTeam,
   awayLogo,
   awayScore,
@@ -93,7 +93,7 @@ const Header = ({
           fontWeight={400}
           fontStyle="italic"
         >
-          {gameArena.arena}
+          {arenaName}
         </Text>
       </HStack>
       <HStack alignItems="center" ml={5}>
@@ -106,7 +106,7 @@ const Header = ({
           City:{" "}
         </Heading>
         <Text color={colorScheme.text} fontWeight={400} fontStyle="italic">
-          {gameArena.city}, {gameArena.country}
+          {arenaCity}, {arenaState}
         </Text>
       </HStack>
     </VStack>

@@ -1,3 +1,5 @@
+import { GameType } from "./scores";
+
 export type ACTIONTYPE =
   | { type: "FETCH_SUCCESS"; payload: any }
   | { type: "FETCH_ERROR"; payload: string };
@@ -146,22 +148,7 @@ export type GameRouteType = {
   "name": string;
   "params": {
     "itemId": string;
-    "scoreInfo": {
-      "gameDateEst": string;
-      "gameId": string;
-      "gameSequence": number;
-      "gameStatusId": number;
-      "gameStatusText": string;
-      "gamecode": string;
-      "homeTeamId": number;
-      "livePcTime": string;
-      "livePeriod": number;
-      "livePeriodTimeBcast": string;
-      "natlTvBroadcasterAbbreviation": string;
-      "season": string;
-      "visitorTeamId": number;
-      "whStatus": number,
-    },
+    "scoreInfo": GameType
   },
   "path": undefined
 }
@@ -202,20 +189,3 @@ export type ScoreBoardType = {
   }[]
 }
 
-export type GameType = {
-  "gameDateEst"?: string | undefined;
-  "gameId"?: string;
-  "gameSequence"?: number;
-  "gameStatusId"?: number;
-  "gameStatusText"?: string;
-  "gamecode"?: string;
-  "homeTeamId"?: number;
-  "livePcTime"?: string;
-  "livePeriod"?: number;
-  "livePeriodTimeBcast"?: string;
-  "natlTvBroadcasterAbbreviation"?: null;
-  "season"?: "string";
-  "visitorTeamId"?: number;
-  "whStatus"?: number;
-  "length"?: number;
-}

@@ -78,3 +78,22 @@ export const loadPlayerInfo = (playerName: string, dispatch: (value: ACTIONTYPE)
       dispatch({ type: "FETCH_ERROR", payload: error });
     });
 };
+
+
+export const handleInput = (item: { player: string }, dispatch: (value: ACTIONTYPE) => void) => {
+  // regex to test if 2 words were submitted
+  const regNameTest = /^[a-zA-Z]+ [a-zA-Z]+$/;
+  let trimmedInput = item.player.trim();
+  let newPlayer = NBA.findPlayer(trimmedInput);
+
+  if (!regNameTest.test(trimmedInput)) {
+    alert("Please enter the full name of the player.");
+    return false;
+  } else {
+    if (newPlayer != undefined) {
+      loadPlayerInfo(trimmedInput, dispatch);
+    } else {
+      alert("Player not found, Try again.");
+    }
+  }
+};

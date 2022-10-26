@@ -7,7 +7,7 @@ import logos from "../../logoManager";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 import type { PlayerProfileType } from "../../types";
 
-export type ProfileProps = {
+type ProfileProps = {
   playerInfo: PlayerProfileType;
   navigation: {
     navigate: (arg0: string, arg1: object) => void;

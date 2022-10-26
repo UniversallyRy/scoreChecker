@@ -6,12 +6,14 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { SubmitButton } from "../Buttons";
 import { colorScheme } from "../../constants";
 import { windowHeight } from "../../utils/dimensions";
+import type { ACTIONTYPE } from "../../types";
 
 type InputProp = {
-  handleInput: (item: object) => void;
+  handleInput: (item: { player: string; }, dispatch: (value: ACTIONTYPE) => void) => boolean;
+  dispatch: React.Dispatch<ACTIONTYPE>
 }
 
-const PlayerSearch = ({ handleInput }: InputProp) => {
+const PlayerSearch = ({ handleInput, dispatch }: InputProp) => {
   const [keyboardOffset, setKeyboardOffset] = useState(0);
   const onKeyboardShow = (event: any) => {
     if (event.endCoordinates) {
@@ -45,7 +47,7 @@ const PlayerSearch = ({ handleInput }: InputProp) => {
       <Formik
         initialValues={{ player: "" }}
         onSubmit={(values, actions) => {
-          handleInput(values);
+          handleInput(values, dispatch);
           actions.resetForm();
           Keyboard.dismiss();
         }}

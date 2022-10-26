@@ -1,34 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { Text, Image, Divider, VStack, HStack, Heading } from "native-base";
 import { MotiView } from "moti";
-import NBA from "nba";
 import logos from "../../logoManager";
 import { colorScheme } from "../../constants";
 import InfoButton from "./InfoButton";
 import { windowWidth } from "../../utils/dimensions";
-import type { GameType } from "../../types";
+import type { GameType } from "../../types/scores";
+import { getGameDetails } from "../../api";
 
 // WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
-const ScoreItem = ({ game }: { game: GameType }) => {
+const ScoreItem = ({ game, todaysDate }: { game: GameType, todaysDate: string }) => {
+
   const splitAt = (index: number) => (x: string) => [x.slice(0, index), x.slice(index)];
   const [scores, setScores] = useState({ awayScore: 0, homeScore: 0 });
-  let comp = game.gamecode.slice(-6);
-  let gameDate = game.gamecode.slice(0, 8);
+  let comp = game.gameUrlCode.slice(-6);
+  let gameYear = game.gameUrlCode.slice(0, 4);
   let [awayTeam, homeTeam] = splitAt(3)(comp);
   let [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
 
   useEffect(() => {
     async function initData() {
-      NBA.data
-        .boxScore(gameDate, game.gameId)
-        .then((res) => res.sports_content)
-        .then((res) => res.game)
+      await getGameDetails(gameYear, game.gameId)
         .then((res) => {
-          setScores(() => ({
-            awayScore: res.visitor.score,
-            homeScore: res.home.score,
-          }));
+          console.log(res.data[0]);
         });
     }
     initData();
@@ -137,10 +132,10 @@ const ScoreItem = ({ game }: { game: GameType }) => {
       />
       <VStack alignItems="center">
         <Text alignSelf="center" fontSize="md" fontWeight="light">
-          {game.gameStatusText != "Final" &&
-            game.gameStatusText != "PPD" &&
-            game.livePeriodTimeBcast.charAt(1) != "0"
-            ? game.livePeriodTimeBcast
+          {!game.isGameActivated &&
+            (Number(game.homeStartDate) >= Number(todaysDate)) &&
+            (game.homeStartDate = todaysDate)
+            ? game.startTimeEastern
             : ""}
         </Text>
         <InfoButton game={game} />

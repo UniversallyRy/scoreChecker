@@ -4,11 +4,10 @@ import ScoreItem from "./ScoreItem";
 import ScoresLoading from "./ScoresLoading";
 import { colorScheme } from "../../constants";
 import { windowWidth } from "../../utils/dimensions";
-import type { GameType } from "../../types";
+import type { GameType } from "../../types/scores";
 
 const Scores = ({ games }: { games: GameType[] }) => {
   const numOfGames = games.length;
-
   const renderGame = ({ item }: { item: GameType }) => (
     <ScoreItem key={item.gameId} game={item} />
   );
