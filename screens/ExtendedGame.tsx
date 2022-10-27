@@ -77,7 +77,7 @@ const ExtendedGame = ({ route }: { route: GameRouteType }) => {
             <GameSummary game={gameInfo.res} />
             <View>
               <ScrollView>
-                <Text>{JSON.stringify(gameInfo ? "sss" : 'No data')}</Text>
+                <Text>{JSON.stringify(gameInfo ? gameInfo.res : 'No data')}</Text>
               </ScrollView>
             </View>)
           </Box>

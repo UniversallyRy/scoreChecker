@@ -70,7 +70,7 @@ const ScoreItem = ({ game, todaysDate }: { game: GameType, todaysDate: string })
               mb={2}
             >
               {awayTeam}{" "}
-              {scores.awayScore == 0 ? "" : "-  " + scores.awayScore}
+              {scores.awayScore == undefined ? "" : "-  " + scores.awayScore}
             </Heading>
             {/* Team Logos */}
             <Image
@@ -111,7 +111,7 @@ const ScoreItem = ({ game, todaysDate }: { game: GameType, todaysDate: string })
               fontWeight={700}
             >
               {homeTeam}{" "}
-              {scores.homeScore == 0 ? "" : "-  " + scores.homeScore}
+              {scores.homeScore == undefined ? "" : "-  " + scores.homeScore}
             </Heading>
             <Image
               alignSelf="center"

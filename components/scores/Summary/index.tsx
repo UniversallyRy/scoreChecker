@@ -3,6 +3,7 @@ import { HStack } from 'native-base';
 import React from 'react';
 import { Text } from 'react-native';
 import { Grid, GridItem, GridHead } from "../Grid";
+import { OvertimeHead, OvertimeScore } from '../OverTime';
 
 //import type { TeamScore } from '~/types'
 
@@ -25,7 +26,7 @@ export const GameSummary = ({ game }: any) => {
           <GridItem>Q2</GridItem>
           <GridItem>Q3</GridItem>
           <GridItem>Q4</GridItem>
-          {/* <OvertimeHead period={game.period} /> */}
+          <OvertimeHead period={game.p} />
         </GridHead>
         <HStack>
           <GridItem>{game.hls.ta}</GridItem>
@@ -33,7 +34,7 @@ export const GameSummary = ({ game }: any) => {
           <GridItem>{game.hls.q2}</GridItem>
           <GridItem>{game.hls.q3}</GridItem>
           <GridItem>{game.hls.q4}</GridItem>
-          {/* <OvertimeScore period={game.period} team={game.hTeam} /> */}
+          <OvertimeScore period={game.p} team={game.hls} />
         </HStack>
         <HStack>
           <GridItem>{game.vls.ta}</GridItem>
@@ -41,7 +42,7 @@ export const GameSummary = ({ game }: any) => {
           <GridItem>{game.vls.q2}</GridItem>
           <GridItem>{game.vls.q3}</GridItem>
           <GridItem>{game.vls.q4}</GridItem>
-          {/* <OvertimeScore period={game.period} team={game.vTeam} /> */}
+          <OvertimeScore period={game.p} team={game.vls} />
         </HStack>
       </Grid>
     </>
