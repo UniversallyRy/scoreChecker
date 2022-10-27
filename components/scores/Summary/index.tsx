@@ -1,21 +1,11 @@
-//import { OvertimeHead, OvertimeScore } from '~/components/Overtime'
-import { Flex, HStack, VStack } from 'native-base';
 import React from 'react';
 import { Text } from 'react-native';
-import { Grid, GridItem, GridHead } from "../Grid";
+import { Flex, HStack, VStack } from 'native-base';
+import { Grid, GridItem } from "../Grid";
 import { OvertimeHead, OvertimeScore } from '../OverTime';
+import type { GameSummaryType } from '../../../types/gameSummary';
 
-//import type { TeamScore } from '~/types'
-
-//export type GameSummaryProps = {
-//  game: {
-//  period: number
-// hTeam: TeamScore
-//    vTeam: TeamScore
-//  }
-//}
-
-export const GameSummary = ({ game }: any) => {
+export const GameSummary = ({ game }: { game: GameSummaryType }) => {
   return (
     <Flex py={5} minW="full" alignItems="center">
       <Text>Game Summary</Text>

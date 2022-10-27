@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Box, HStack, VStack } from "native-base";
-import { colorScheme } from "../constants";
+import { Box, HStack, VStack, ScrollView, Text } from "native-base";
 import Header from "../components/scores/extended/Header";
-import logos from "../logoManager";
-import { windowHeight, windowWidth } from "../utils/dimensions";
-import { GameRouteType } from "../types";
-import { getGameDetails } from "../api";
 import { GameSummary } from "../components/scores/Summary";
-import { ScrollView, Text } from "react-native";
-import { View } from "react-native";
 import { TeamStats } from "../components/scores/TeamStats";
 import { GameStats } from "../components/scores/GameStats";
+import { windowHeight, windowWidth } from "../utils/dimensions";
+import logos from "../logoManager";
+import { getGameDetails } from "../api";
+import { colorScheme } from "../constants";
+import type { GameSummaryType } from "../types/gameSummary";
+import type { GameRouteType } from "../types";
 // import { MotiView, MotiText } from "moti";
 
 
 const ExtendedGame = ({ route }: { route: GameRouteType }) => {
 
-  const [gameInfo, setGameInfo] = useState({});
+  const [gameInfo, setGameInfo] = useState<GameSummaryType | {}>({});
   const { itemId, scoreInfo } = route.params;
   const gameDate = scoreInfo.gameUrlCode.slice(0, 4);
   const gameTeams = scoreInfo.gameUrlCode.slice(-6);
@@ -31,12 +30,12 @@ const ExtendedGame = ({ route }: { route: GameRouteType }) => {
         .then((res) => {
           return res.data.g;
         })
-        .then((res) => {
-          setGameInfo((prevState) => ({
-            ...prevState,
-            res
-          }));
+        .then((res: GameSummaryType) => {
+          // for (const [key, value] of Object.entries(res.hls.tstsg)) { console.log(`  ${key}: ${value}`) }
+          //  console.log(res.offs);
+          setGameInfo(res);
         });
+      //     for (const [key, value] of Object.entries(gameInfo)) { console.log(`  ${key}: ${value}`); };
     }
     initData();
   }, []);
@@ -50,19 +49,19 @@ const ExtendedGame = ({ route }: { route: GameRouteType }) => {
       bg={colorScheme.foreground}
       key={itemId + "_extendedPage"}
     >
-      {gameInfo.res != undefined
+      {Object.prototype.hasOwnProperty.call(gameInfo, 'lpla')
         ? <>
           <Header
             gameId={scoreInfo.gameId}
-            arenaName={gameInfo.res.an}
-            arenaCity={gameInfo.res.ac}
-            arenaState={gameInfo.res.as}
+            arenaName={gameInfo["an"]}
+            arenaCity={gameInfo["ac"]}
+            arenaState={gameInfo["as"]}
             awayTeam={awayTeam}
             awayLogo={awayLogo}
-            awayScore={gameInfo.res.lpla.vs}
+            awayScore={gameInfo["lpla"].vs}
             homeTeam={homeTeam}
             homeLogo={homeLogo}
-            homeScore={gameInfo.res.lpla.hs}
+            homeScore={gameInfo["lpla"].hs}
             key="header"
           />
           <ScrollView>
@@ -76,18 +75,17 @@ const ExtendedGame = ({ route }: { route: GameRouteType }) => {
               borderRadius={32}
               key="extgamebody"
             >
-              <GameSummary game={gameInfo.res} />
+              <GameSummary game={gameInfo} />
               <HStack>
-                <TeamStats team={gameInfo.res.vls} />
-                <TeamStats team={gameInfo.res.hls} />
+                <TeamStats team={gameInfo["vls"]} />
+                <TeamStats team={gameInfo["hls"]} />
               </HStack>
-              <GameStats game={gameInfo.res} />
-              {/* <View>
-                <ScrollView>
+              <GameStats game={gameInfo} />
+              <Box>
+                <ScrollView mb={3}>
                   <Text>{JSON.stringify(gameInfo ? null : 'No data')}</Text>
                 </ScrollView>
-              </View>
-              */}
+              </Box>
             </Box>
           </ScrollView>
         </>

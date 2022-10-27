@@ -1,10 +1,11 @@
 import React from 'react';
-import { Box, VStack, HStack, Text, ScrollView } from 'native-base';
+import { VStack, ScrollView, Text } from 'native-base';
 import { Grid, GridHead, GridItem } from '../Grid';
+import type { PlayerStatsType, TeamInfoType } from '../../../types/gameSummary';
 
-export const TeamStats = ({ team }: any) => {
+export const TeamStats = ({ team }: { team: TeamInfoType }) => {
   return (
-    <Grid height="full" alignSelf="center">
+    <Grid>
       <ScrollView>
         <VStack>
           <Text>
@@ -18,7 +19,7 @@ export const TeamStats = ({ team }: any) => {
               <GridItem>Ast</GridItem>
               <GridItem>Pts</GridItem>
             </GridHead>
-            {team.pstsg.map((player: any) => (
+            {team.pstsg.map((player: PlayerStatsType) => (
               <GridHead key={player.fn[0] + player.ln}>
                 <GridItem>
                   {player.fn[0]}. {player.ln}

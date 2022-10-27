@@ -1,9 +1,16 @@
 import React from "react";
 import { Box, HStack, Text, VStack } from "native-base";
 import { Grid, GridItem } from "../Grid";
+import type { GameSummaryType } from "../../../types/gameSummary";
+
+type StatType = {
+  label: string;
+  homeStatistic: number | string;
+  visitorStatistic: number | string;
+}
 
 const Statistic = ({ homeStatistic, visitorStatistic, label,
-}: any) => {
+}: StatType) => {
   return (
     <HStack>
       <GridItem>{visitorStatistic}</GridItem>
@@ -13,7 +20,7 @@ const Statistic = ({ homeStatistic, visitorStatistic, label,
   );
 };
 
-export const GameStats = ({ game }: any) => {
+export const GameStats = ({ game }: { game: GameSummaryType }) => {
   return (
     <Box>
       <Text>Team Stats</Text>

@@ -5,8 +5,9 @@ import logos from "../../../logoManager";
 import { colorScheme } from "../../../constants";
 import InfoButton from "../InfoButton";
 import { windowWidth } from "../../../utils/dimensions";
-import type { GameType } from "../../../types/scores";
 import { getGameDetails } from "../../../api";
+import type { GameType } from "../../../types/scores";
+import type { GameSummaryType } from "../../../types/gameSummary";
 
 // WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
@@ -23,14 +24,14 @@ const ScoreCard = ({ game }: { game: GameType }) => {
     async function initData() {
       await getGameDetails(gameYear, game.gameId)
         .then((res) => {
-          return res.data;
+          return res.data.g;
         })
-        .then((res) => {
+        .then((res: GameSummaryType) => {
           setScores({
-            awayScore: res.g.lpla.vs,
-            homeScore: res.g.lpla.hs
+            awayScore: res.lpla.vs,
+            homeScore: res.lpla.hs
           });
-          setFinish(res.g.stt);
+          setFinish(res.stt);
         });
     }
     initData();

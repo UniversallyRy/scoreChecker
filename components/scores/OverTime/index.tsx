@@ -1,7 +1,8 @@
 import React from 'react';
 import { GridItem } from '../Grid';
+import type { TeamInfoType } from '../../../types/gameSummary';
 
-export const OvertimeHead = ({ period }: any) => {
+export const OvertimeHead = ({ period }: { period: number }) => {
   return period > 4 ? (
     <>
       {Array(period - 4)
@@ -13,7 +14,7 @@ export const OvertimeHead = ({ period }: any) => {
   ) : null;
 };
 
-export const OvertimeScore = ({ period, team }: any) => {
+export const OvertimeScore = ({ period, team }: { period: number; team: TeamInfoType }) => {
   return period > 4 ? (
     <>
       {Array(period - 4)

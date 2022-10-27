@@ -1,6 +1,6 @@
 import React from "react";
-import type { ImageSourcePropType } from "react-native";
 import { HStack, Image, Text, VStack, Heading } from "native-base";
+import type { ImageSourcePropType } from "react-native";
 import { colorScheme } from "../../../constants";
 
 type Props = {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Stack, HStack, Heading, Text, IBoxProps } from "native-base";
 
-export const Grid = ({ children }: any) => {
+export const Grid = ({ children }: React.PropsWithChildren<{}>) => {
   return (
     <Stack
       my={2}
