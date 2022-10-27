@@ -14,12 +14,11 @@ const ScoreCard = ({ game }: { game: GameType }) => {
 
   const splitAt = (index: number) => (x: string) => [x.slice(0, index), x.slice(index)];
   const [scores, setScores] = useState({ awayScore: 0, homeScore: 0 });
-  const [test, setTest] = useState('');
+  const [isFinished, setFinish] = useState('');
   let comp = game.gameUrlCode.slice(-6);
   let gameYear = game.gameUrlCode.slice(0, 4);
   let [awayTeam, homeTeam] = splitAt(3)(comp);
   let [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
-
   useEffect(() => {
     async function initData() {
       await getGameDetails(gameYear, game.gameId)
@@ -31,7 +30,7 @@ const ScoreCard = ({ game }: { game: GameType }) => {
             awayScore: res.g.lpla.vs,
             homeScore: res.g.lpla.hs
           });
-          setTest(res.g.stt);
+          setFinish(res.g.stt);
         });
     }
     initData();
@@ -137,14 +136,14 @@ const ScoreCard = ({ game }: { game: GameType }) => {
       />
       <VStack alignItems="center">
         <Text>
-          {test && test != null
-            ? test
+          {isFinished && isFinished != null
+            ? isFinished
             : null}
-          {test == ''
+          {isFinished == ''
             ? game.startTimeEastern
             : null}
         </Text>
-        <InfoButton game={game} />
+        <InfoButton isFinished={isFinished} game={game} />
       </VStack>
     </VStack>
   );

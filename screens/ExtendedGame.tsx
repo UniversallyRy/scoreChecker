@@ -70,7 +70,8 @@ const ExtendedGame = ({ route }: { route: GameRouteType }) => {
               bg={colorScheme.title}
               mt={1}
               w={windowWidth}
-              h={windowHeight}
+              h="full"
+              mb={40}
               alignItems="center"
               borderRadius={32}
               key="extgamebody"
@@ -81,11 +82,12 @@ const ExtendedGame = ({ route }: { route: GameRouteType }) => {
                 <TeamStats team={gameInfo.res.hls} />
               </HStack>
               <GameStats game={gameInfo.res} />
-              <View>
+              {/* <View>
                 <ScrollView>
                   <Text>{JSON.stringify(gameInfo ? null : 'No data')}</Text>
                 </ScrollView>
-              </View>)
+              </View>
+              */}
             </Box>
           </ScrollView>
         </>

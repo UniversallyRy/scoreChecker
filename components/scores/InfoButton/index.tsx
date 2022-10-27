@@ -1,17 +1,15 @@
 import React, { useContext } from "react";
 import { InfoIcon, Pressable } from "native-base";
-import moment from "moment";
 import { colorScheme } from "../../../constants";
 import { ScreenNavContext } from "../../../GameContext";
 import type { GameType } from "../../../types/scores";
 
 type Props = {
   game: GameType;
+  isFinished: string;
 }
 
-const InfoButton = ({ game }: Props) => {
-
-  const currentDate = moment().format('YYYYMMDD');
+const InfoButton = ({ game, isFinished }: Props) => {
   const navContext = useContext(ScreenNavContext);
   return (
     <Pressable>
@@ -21,7 +19,7 @@ const InfoButton = ({ game }: Props) => {
         onPress={() => {
           // When game status is still showing a start/current time, postponed, no routing and returns null
 
-          if ((Number(game.homeStartDate) >= Number(currentDate)) && game.isGameActivated) {
+          if (!isFinished || isFinished == '') {
             return null;
           } else {
             // Navigate to the Extended Score route with params
