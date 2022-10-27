@@ -1,26 +1,33 @@
 import React from "react";
-import { Text } from "react-native";
-import { Box, Heading } from "native-base";
+import { Box, Stack, HStack, Heading, Text, IBoxProps } from "native-base";
 
 export const Grid = ({ children }: any) => {
   return (
-    <Box
-      borderColor='green'
-      minW="full"
-      minH="20%"
+    <Stack
+      my={2}
+      textAlign="center"
+      maxW="full"
+      minH="10%"
+      borderColor="orange.700"
       borderWidth={2}
-      flexDirection="column"
-      alignItems="center"
     >
-      {children}
-    </Box>
+      <HStack>
+        {children}
+      </HStack>
+    </Stack>
   );
 };
 
-export const GridItem = ({ children }: React.PropsWithChildren<{ className?: string }>) => {
+export const GridItem = ({ children, ...props }: IBoxProps<any>) => {
   return (
-    <Box bgColor="grey" borderColor="black" borderWidth={1}>
-      <Text style={{ padding: 4, fontSize: 18 }}>
+    <Box bgColor="grey" {...props}>
+      <Text
+        borderColor="blue"
+        borderWidth={1}
+        px={2}
+        py={1}
+        style={{ fontSize: 12 }}
+      >
         {children}
       </Text>
     </Box>
@@ -28,5 +35,5 @@ export const GridItem = ({ children }: React.PropsWithChildren<{ className?: str
 };
 
 export const GridHead = ({ children }: React.PropsWithChildren<{}>) => {
-  return <Heading bgColor="bg-slate-900">{children}</Heading>;
+  return <Heading>{children}</Heading>;
 };

@@ -1,8 +1,8 @@
 import React from "react";
 import { Text, Divider, VStack } from "native-base";
-import DatePicker from "./DatePicker";
-import { colorScheme } from "../../constants";
-import { windowHeight, windowWidth } from "../../utils/dimensions";
+import DatePicker from "../DatePicker";
+import { colorScheme } from "../../../constants";
+import { windowHeight, windowWidth } from "../../../utils/dimensions";
 
 type HeaderProps = {
   todaysDate: string;

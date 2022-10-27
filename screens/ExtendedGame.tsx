@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Box, VStack } from "native-base";
-import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../constants";
+import { Box, HStack, VStack } from "native-base";
+import { colorScheme } from "../constants";
 import Header from "../components/scores/extended/Header";
 import logos from "../logoManager";
-import QuarterLogs from "../components/scores/extended/QuarterLogs";
 import { windowHeight, windowWidth } from "../utils/dimensions";
 import { GameRouteType } from "../types";
 import { getGameDetails } from "../api";
 import { GameSummary } from "../components/scores/Summary";
 import { ScrollView, Text } from "react-native";
 import { View } from "react-native";
+import { TeamStats } from "../components/scores/TeamStats";
+import { GameStats } from "../components/scores/GameStats";
 // import { MotiView, MotiText } from "moti";
 
 
@@ -64,23 +65,29 @@ const ExtendedGame = ({ route }: { route: GameRouteType }) => {
             homeScore={gameInfo.res.lpla.hs}
             key="header"
           />
-
-          <Box
-            bg={colorScheme.title}
-            mt={1}
-            w={windowWidth}
-            h={windowHeight}
-            alignItems="center"
-            borderRadius={32}
-            key="extgamebody"
-          >
-            <GameSummary game={gameInfo.res} />
-            <View>
-              <ScrollView>
-                <Text>{JSON.stringify(gameInfo ? gameInfo.res : 'No data')}</Text>
-              </ScrollView>
-            </View>)
-          </Box>
+          <ScrollView>
+            <Box
+              bg={colorScheme.title}
+              mt={1}
+              w={windowWidth}
+              h={windowHeight}
+              alignItems="center"
+              borderRadius={32}
+              key="extgamebody"
+            >
+              <GameSummary game={gameInfo.res} />
+              <HStack>
+                <TeamStats team={gameInfo.res.vls} />
+                <TeamStats team={gameInfo.res.hls} />
+              </HStack>
+              <GameStats game={gameInfo.res} />
+              <View>
+                <ScrollView>
+                  <Text>{JSON.stringify(gameInfo ? null : 'No data')}</Text>
+                </ScrollView>
+              </View>)
+            </Box>
+          </ScrollView>
         </>
         : null}
     </VStack>

@@ -1,6 +1,6 @@
 import React from "react";
 import { VStack, FlatList, Text } from "native-base";
-import ScoreItem from "./ScoreItem";
+import ScoreCard from "./ScoreCard";
 import ScoresLoading from "./ScoresLoading";
 import { colorScheme } from "../../constants";
 import { windowWidth } from "../../utils/dimensions";
@@ -9,7 +9,7 @@ import type { GameType } from "../../types/scores";
 const Scores = ({ games }: { games: GameType[] }) => {
   const numOfGames = games.length;
   const renderGame = ({ item }: { item: GameType }) => (
-    <ScoreItem key={item.gameId} game={item} />
+    <ScoreCard key={item.gameId} game={item} />
   );
 
   return (

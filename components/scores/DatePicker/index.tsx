@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Platform } from "react-native";
 import { Box, Text } from "native-base";
 import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker";
-import { SubmitButton } from "../Buttons";
-import { colorScheme } from "../../constants";
+import { SubmitButton } from "../../Buttons";
+import { colorScheme } from "../../../constants";
 
 type DateProps = {
   todaysDate: string;

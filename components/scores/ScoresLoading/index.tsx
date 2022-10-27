@@ -1,8 +1,8 @@
 import React from "react";
 import { Heading } from "native-base";
 import { MotiView } from "moti";
-import { LoadingButton } from "../Buttons";
-import { colorScheme } from "../../constants";
+import { LoadingButton } from "../../Buttons";
+import { colorScheme } from "../../../constants";
 
 const ScoresLoading = () => {
   return (

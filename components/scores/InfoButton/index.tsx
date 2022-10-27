@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { InfoIcon, Pressable } from "native-base";
-import { colorScheme } from "../../constants";
-import { ScreenNavContext } from "../../GameContext";
-import type { GameType } from "../../types/scores";
 import moment from "moment";
+import { colorScheme } from "../../../constants";
+import { ScreenNavContext } from "../../../GameContext";
+import type { GameType } from "../../../types/scores";
 
 type Props = {
   game: GameType;

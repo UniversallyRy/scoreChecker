@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Image, Divider, VStack, HStack, Heading } from "native-base";
+import { Text, Image, Divider, VStack, HStack, Heading } from "native-base";
 import { MotiView } from "moti";
-import logos from "../../logoManager";
-import { colorScheme } from "../../constants";
-import InfoButton from "./InfoButton";
-import { windowWidth } from "../../utils/dimensions";
-import type { GameType } from "../../types/scores";
-import { getGameDetails } from "../../api";
-import { ScrollView, View, Text } from "react-native";
+import logos from "../../../logoManager";
+import { colorScheme } from "../../../constants";
+import InfoButton from "../InfoButton";
+import { windowWidth } from "../../../utils/dimensions";
+import type { GameType } from "../../../types/scores";
+import { getGameDetails } from "../../../api";
 
 // WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
-const ScoreItem = ({ game, todaysDate }: { game: GameType, todaysDate: string }) => {
+const ScoreCard = ({ game }: { game: GameType }) => {
 
   const splitAt = (index: number) => (x: string) => [x.slice(0, index), x.slice(index)];
   const [scores, setScores] = useState({ awayScore: 0, homeScore: 0 });
@@ -33,7 +32,6 @@ const ScoreItem = ({ game, todaysDate }: { game: GameType, todaysDate: string })
             homeScore: res.g.lpla.hs
           });
           setTest(res.g.stt);
-          console.log(res.g.stt);
         });
     }
     initData();
@@ -51,6 +49,7 @@ const ScoreItem = ({ game, todaysDate }: { game: GameType, todaysDate: string })
       bottom={0}
       shadow="5"
       p={1}
+      key={'listItem:' + game.gameId}
     >
       <HStack alignItems="center" my={3}>
         <VStack>
@@ -151,4 +150,4 @@ const ScoreItem = ({ game, todaysDate }: { game: GameType, todaysDate: string })
   );
 };
 
-export default ScoreItem;
+export default ScoreCard;
