@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, Image, Divider, VStack, HStack, Heading } from "native-base";
+import { Image, Divider, VStack, HStack, Heading } from "native-base";
 import { MotiView } from "moti";
 import logos from "../../logoManager";
 import { colorScheme } from "../../constants";
@@ -7,6 +7,7 @@ import InfoButton from "./InfoButton";
 import { windowWidth } from "../../utils/dimensions";
 import type { GameType } from "../../types/scores";
 import { getGameDetails } from "../../api";
+import { ScrollView, View, Text } from "react-native";
 
 // WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
@@ -14,6 +15,7 @@ const ScoreItem = ({ game, todaysDate }: { game: GameType, todaysDate: string })
 
   const splitAt = (index: number) => (x: string) => [x.slice(0, index), x.slice(index)];
   const [scores, setScores] = useState({ awayScore: 0, homeScore: 0 });
+  const [test, setTest] = useState('');
   let comp = game.gameUrlCode.slice(-6);
   let gameYear = game.gameUrlCode.slice(0, 4);
   let [awayTeam, homeTeam] = splitAt(3)(comp);
@@ -23,7 +25,15 @@ const ScoreItem = ({ game, todaysDate }: { game: GameType, todaysDate: string })
     async function initData() {
       await getGameDetails(gameYear, game.gameId)
         .then((res) => {
-          console.log(res.data[0]);
+          return res.data;
+        })
+        .then((res) => {
+          setScores({
+            awayScore: res.g.lpla.vs,
+            homeScore: res.g.lpla.hs
+          });
+          setTest(res.g.stt);
+          console.log(res.g.stt);
         });
     }
     initData();
@@ -42,8 +52,8 @@ const ScoreItem = ({ game, todaysDate }: { game: GameType, todaysDate: string })
       shadow="5"
       p={1}
     >
-      <HStack alignItems="center" my={5}>
-        <VStack alignItems="center">
+      <HStack alignItems="center" my={3}>
+        <VStack>
           <MotiView
             from={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -64,6 +74,7 @@ const ScoreItem = ({ game, todaysDate }: { game: GameType, todaysDate: string })
             </Heading>
             {/* Team Logos */}
             <Image
+              alignSelf="center"
               accessibilityLabel={awayTeam}
               source={awayLogo}
               w={50}
@@ -83,7 +94,7 @@ const ScoreItem = ({ game, todaysDate }: { game: GameType, todaysDate: string })
           @
         </Heading>
 
-        <VStack alignItems="center">
+        <VStack>
           <MotiView
             from={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -103,6 +114,7 @@ const ScoreItem = ({ game, todaysDate }: { game: GameType, todaysDate: string })
               {scores.homeScore == 0 ? "" : "-  " + scores.homeScore}
             </Heading>
             <Image
+              alignSelf="center"
               accessibilityLabel={homeTeam}
               source={homeLogo}
               w={50}
@@ -114,14 +126,8 @@ const ScoreItem = ({ game, todaysDate }: { game: GameType, todaysDate: string })
         </VStack>
       </HStack>
       {/* Game Status(Shows postponed, game times in EST and info is selectable only if game is already played ) */}
-      <Text
-        color={colorScheme.text}
-        alignSelf="center"
-        fontSize="lg"
-        fontWeight={500}
-        fontStyle="italic"
-      >
-        {game.gameStatusText != "PPD" ? game.gameStatusText : "Postponed"}
+      <Text>
+        {null}
       </Text>
       <Divider
         bg={colorScheme.divider}
@@ -131,12 +137,13 @@ const ScoreItem = ({ game, todaysDate }: { game: GameType, todaysDate: string })
         mb={5}
       />
       <VStack alignItems="center">
-        <Text alignSelf="center" fontSize="md" fontWeight="light">
-          {!game.isGameActivated &&
-            (Number(game.homeStartDate) >= Number(todaysDate)) &&
-            (game.homeStartDate = todaysDate)
+        <Text>
+          {test && test != null
+            ? test
+            : null}
+          {test == ''
             ? game.startTimeEastern
-            : ""}
+            : null}
         </Text>
         <InfoButton game={game} />
       </VStack>
