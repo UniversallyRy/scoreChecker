@@ -16,6 +16,7 @@ const ScoreCard = ({ game }: { game: GameType }) => {
   const splitAt = (index: number) => (x: string) => [x.slice(0, index), x.slice(index)];
   const [scores, setScores] = useState({ awayScore: 0, homeScore: 0 });
   const [isFinished, setFinish] = useState('');
+  const [gameClock, setClock] = useState('');
   let comp = game.gameUrlCode.slice(-6);
   let gameYear = game.gameUrlCode.slice(0, 4);
   let [awayTeam, homeTeam] = splitAt(3)(comp);
@@ -31,6 +32,7 @@ const ScoreCard = ({ game }: { game: GameType }) => {
             awayScore: res.lpla.vs,
             homeScore: res.lpla.hs
           });
+          setClock(res.cl);
           setFinish(res.stt);
         });
     }
@@ -136,9 +138,9 @@ const ScoreCard = ({ game }: { game: GameType }) => {
         mb={5}
       />
       <VStack alignItems="center">
-        <Text>
+        <Text textAlign="center">
           {isFinished && isFinished != null
-            ? isFinished
+            ? isFinished + '\n' + gameClock
             : null}
           {isFinished == ''
             ? game.startTimeEastern
