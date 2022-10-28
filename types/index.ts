@@ -1,4 +1,4 @@
-import { GameType } from "./scores";
+import type { GameType } from "./scores";
 
 export type ACTIONTYPE =
   | { type: "FETCH_SUCCESS"; payload: any }

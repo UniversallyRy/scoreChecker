@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { InfoIcon, Pressable } from "native-base";
 import { colorScheme } from "../../../constants";
 import { ScreenNavContext } from "../../../GameContext";
-import type { GameType } from "../../../types/scores";
+import { ScoreCardType } from "../../../types/gameSummary";
 
 type Props = {
-  game: GameType;
+  game: ScoreCardType;
   isFinished: string;
 }
 
@@ -24,7 +24,7 @@ const InfoButton = ({ game, isFinished }: Props) => {
           } else {
             // Navigate to the Extended Score route with params
             navContext.navigate("Extended Game", {
-              itemId: game.gameId,
+              itemId: game["gameId"],
               scoreInfo: game,
             });
           }

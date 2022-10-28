@@ -9,7 +9,6 @@ import Scores from "../components/scores";
 import ScoresLoading from "../components/scores/ScoresLoading";
 import { colorScheme } from "../constants";
 import { ScreenNavContext } from "../GameContext";
-import type { ScoreBoardType } from "../types";
 
 // todos: possible team screen component/team standings, make card transition into extended game screen
 
@@ -18,13 +17,6 @@ export interface ContextInterface {
 }
 
 const ScoreScreen = ({ navigation }: any) => {
-  const [state, setState] = useState([
-    {
-      gamecode: "Games Loading",
-      gameStatusText: "",
-      livePeriodTimeBcast: "",
-    },
-  ]);
   const [newObj, setNewObj] = useState([]);
   const [todaysDate, setTodaysDate] = useState(moment().format("YYYYMMDD"));
   const [loading, setLoading] = useState(true);
@@ -32,14 +24,14 @@ const ScoreScreen = ({ navigation }: any) => {
   useEffect(() => {
     async function initData() {
       await getGamesByDate(todaysDate)
-        .then((res) => {
-          setNewObj(res.data.games);
+        .then(({ data }) => {
+          setNewObj(data);
         });
     }
     initData();
   }, [todaysDate]);
+
   const loader = () => {
-    setState(newObj);
     setLoading(false);
   };
   setTimeout(() => {
@@ -49,16 +41,9 @@ const ScoreScreen = ({ navigation }: any) => {
   // callback for date changes
   const onSubmit = useCallback(
     (item) => {
-      setNewObj(Object.create({}));
       let changedDate = item;
-      async function newDay() {
-        await getGamesByDate(changedDate)
-          .then((res) => {
-            setTodaysDate(changedDate);
-            setLoading(true);
-          });
-      }
-      newDay();
+      setTodaysDate(changedDate);
+      setLoading(true);
     }
     , [todaysDate]
   );
@@ -94,7 +79,7 @@ const ScoreScreen = ({ navigation }: any) => {
           <ScreenNavContext.Provider value={navigation}>
             <Scores
               key="scores"
-              games={state}
+              games={newObj}
               todaysDate={todaysDate}
             />
           </ScreenNavContext.Provider>

@@ -6,24 +6,25 @@ import { colorScheme } from "../../../constants";
 import InfoButton from "../InfoButton";
 import { windowWidth } from "../../../utils/dimensions";
 import { getGameDetails } from "../../../api";
-import type { GameType } from "../../../types/scores";
-import type { GameSummaryType } from "../../../types/gameSummary";
+import type { GameSummaryType, ScoreCardType } from "../../../types/gameSummary";
 
 // WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
-const ScoreCard = ({ game }: { game: GameType }) => {
+const ScoreCard = ({ game }: { game: ScoreCardType }) => {
+  // console.log(game);
 
   const splitAt = (index: number) => (x: string) => [x.slice(0, index), x.slice(index)];
   const [scores, setScores] = useState({ awayScore: 0, homeScore: 0 });
   const [isFinished, setFinish] = useState('');
   const [gameClock, setClock] = useState('');
-  let comp = game.gameUrlCode.slice(-6);
-  let gameYear = game.gameUrlCode.slice(0, 4);
+  let comp = game["gameUrlCode"].slice(-6);
+  let gameYear = game["gameUrlCode"].slice(0, 4);
   let [awayTeam, homeTeam] = splitAt(3)(comp);
   let [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
+
   useEffect(() => {
     async function initData() {
-      await getGameDetails(gameYear, game.gameId)
+      await getGameDetails(gameYear, game["gameId"])
         .then((res) => {
           return res.data.g;
         })
@@ -37,7 +38,7 @@ const ScoreCard = ({ game }: { game: GameType }) => {
         });
     }
     initData();
-  }, [game.gameId]);
+  }, [game["gameId"]]);
 
   return (
     <VStack
@@ -51,7 +52,7 @@ const ScoreCard = ({ game }: { game: GameType }) => {
       bottom={0}
       shadow="5"
       p={1}
-      key={'listItem:' + game.gameId}
+      key={'listItem:' + game["gameId"]}
     >
       <HStack alignItems="center" my={3}>
         <VStack>
@@ -143,7 +144,7 @@ const ScoreCard = ({ game }: { game: GameType }) => {
             ? isFinished + '\n' + gameClock
             : null}
           {isFinished == ''
-            ? game.startTimeEastern
+            ? game["startTimeEastern"]
             : null}
         </Text>
         <InfoButton isFinished={isFinished} game={game} />

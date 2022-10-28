@@ -4,12 +4,18 @@ import ScoreCard from "./ScoreCard";
 import ScoresLoading from "./ScoresLoading";
 import { colorScheme } from "../../constants";
 import { windowWidth } from "../../utils/dimensions";
-import type { GameType } from "../../types/scores";
+import { ScoreCardType } from "../../types/gameSummary";
 
-const Scores = ({ games }: { games: GameType[] }) => {
-  const numOfGames = games.length;
-  const renderGame = ({ item }: { item: GameType }) => (
-    <ScoreCard key={item.gameId} game={item} />
+const Scores = ({ games }: { games: ScoreCardType[] }) => {
+  const numOfGames = Object.keys(games).length;
+  const gameArray: Object[] = [];
+
+  for (const game in games) {
+    gameArray.push([games[game]]);
+  }
+
+  const renderGame = ({ item }) => (
+    <ScoreCard key={item[0].gameId} game={item[0]} />
   );
 
   return (
@@ -35,9 +41,9 @@ const Scores = ({ games }: { games: GameType[] }) => {
           <ScoresLoading />
         )}
         <FlatList
-          data={games}
+          data={gameArray}
           renderItem={renderGame}
-          keyExtractor={(item) => item.gameId.toString()}
+          keyExtractor={(item) => item[0].gameId.toString()}
         />
       </VStack>
     </VStack>
