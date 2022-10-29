@@ -78,9 +78,8 @@ const ScoreScreen = ({ navigation }: any) => {
         {!loading && (
           <ScreenNavContext.Provider value={navigation}>
             <Scores
-              key="scores"
+              key="scoresContainer"
               games={newObj}
-              todaysDate={todaysDate}
             />
           </ScreenNavContext.Provider>
         )}

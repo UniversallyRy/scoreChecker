@@ -29,16 +29,20 @@ const ScoreCard = ({ game }: { game: ScoreCardType }) => {
           return res.data.g;
         })
         .then((res: GameSummaryType) => {
-          setScores({
-            awayScore: res.lpla.vs,
-            homeScore: res.lpla.hs
-          });
-          setClock(res.cl);
-          setFinish(res.stt);
+          if (res.lpla == undefined) {
+            return null;
+          } else {
+            setScores({
+              awayScore: res.lpla.vs,
+              homeScore: res.lpla.hs
+            });
+            setClock(res.cl);
+            setFinish(res.stt);
+          }
         });
     }
     initData();
-  }, [game["gameId"]]);
+  }, []);
 
   return (
     <VStack
@@ -72,7 +76,7 @@ const ScoreCard = ({ game }: { game: ScoreCardType }) => {
               mb={2}
             >
               {awayTeam}{" "}
-              {scores.awayScore == undefined ? "" : "-  " + scores.awayScore}
+              {scores.awayScore == 0 ? "" : "-  " + scores.awayScore}
             </Heading>
             {/* Team Logos */}
             <Image
@@ -113,7 +117,7 @@ const ScoreCard = ({ game }: { game: ScoreCardType }) => {
               fontWeight={700}
             >
               {homeTeam}{" "}
-              {scores.homeScore == undefined ? "" : "-  " + scores.homeScore}
+              {scores.homeScore == 0 ? "" : "-  " + scores.homeScore}
             </Heading>
             <Image
               alignSelf="center"
@@ -142,6 +146,9 @@ const ScoreCard = ({ game }: { game: ScoreCardType }) => {
         <Text textAlign="center">
           {isFinished && isFinished != null
             ? isFinished + '\n' + gameClock
+            : null}
+          {isFinished != null
+            ? gameClock
             : null}
           {isFinished == ''
             ? game["startTimeEastern"]
