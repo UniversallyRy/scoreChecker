@@ -2,10 +2,22 @@ import NBA from "nba";
 import { DEFAULT_PLAYER_INFO } from "../constants";
 import type { ExtendedInfoType, PlayerResType, ACTIONTYPE } from "../types";
 
+/**
+ * initialState object with playerInfo default id/name as Obi Toppin's 
+ * @property playerInfo
+ */
+
 export const initialState = {
   // Obi Toppin as default profile
   playerInfo: DEFAULT_PLAYER_INFO,
 };
+
+/**
+ * Method that returns an object for requested datewidth
+ * @param state - initial state object
+ * @param action - object containing type and payload
+ * @returns switch statement returns success, error or default state
+ */
 
 export const reducer = (state: typeof initialState, action: ACTIONTYPE) => {
   switch (action.type) {
@@ -24,6 +36,13 @@ export const reducer = (state: typeof initialState, action: ACTIONTYPE) => {
   }
 };
 
+
+/**
+ * Method that checks singular/plural years of experience and returns Rookie if none found
+ * @param item - years in nba number value
+ * @returns string based on years in NBA
+ */
+
 const experience = (item: number) => {
   if (item < 1) return "Rookie";
   if (typeof item === "number" && item > 1) {
@@ -32,15 +51,28 @@ const experience = (item: number) => {
 };
 
 
-export const collegeCheck = (item: string, itemData: string | number) => {
-  // changes school title if no college(future needed for euroleaguers?)
+/**
+ * Method that checks if college property contains HS in it's string value
+ * @param key - college property name
+ * @param value - college property value 
+ * @returns 'High School' if 'HS' is found, else returns prop as is
+ */
+
+export const collegeCheck = (key: string, value: string | number) => {
   if (
-    !itemData ||
-    (typeof itemData === "string" && itemData.includes("HS"))
+    !value ||
+    (typeof value === "string" && value.includes("HS"))
   ) {
     return "High School";
-  } else return item;
+  } else return key;
 };
+
+
+/**
+ * Method that grabs param properties and returns new implicit object
+ * @param player - college property name
+ * @returns object containing selected properties from param
+ */
 
 export const getPlayerInfo = (player: ExtendedInfoType) => {
   return {
@@ -62,6 +94,14 @@ export const getPlayerInfo = (player: ExtendedInfoType) => {
   };
 };
 
+
+/**
+ * Method that loads player info from NBA api 
+ * @param playerName - First and Last name
+ * @param dispatch - dispatch hook
+ * @returns a fetched object
+ */
+
 export const loadPlayerInfo = (playerName: string, dispatch: (value: ACTIONTYPE) => void) => {
   NBA.stats
     .playerInfo({ PlayerID: NBA.findPlayer(playerName).playerId })
@@ -79,6 +119,12 @@ export const loadPlayerInfo = (playerName: string, dispatch: (value: ACTIONTYPE)
     });
 };
 
+/**
+ * Method that handles form input, checks if player string is found and sends value to loadPlayerInfo method  
+ * @param item - object containing player name to player prop
+ * @param dispatch - dispatch hook
+ * @returns a call to loadPlayerInfo if input is found else sends an alert to user
+ */
 
 export const handleInput = (item: { player: string }, dispatch: (value: ACTIONTYPE) => void) => {
   // regex to test if 2 words were submitted

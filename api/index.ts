@@ -27,7 +27,7 @@ export const getStandings = async () => {
 };
 
 /**
- * Method that returns an object for requested date
+ * Method that returns an object for requested datewidth
  * @param date - format YYYYMMDD
  * @returns response object's json
  */
