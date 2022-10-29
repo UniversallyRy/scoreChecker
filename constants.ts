@@ -3,9 +3,11 @@ export const PROFILE_PIC_URL_PREFIX =
 export const TEAM_PIC_URL_PREFIX =
   "https://stats.nba.com/media/img/teams/logos";
 export const DEFAULT_PLAYER_INFO = {
-  playerId: 1630167,
+  firstName: "Obi",
+  lastName: "Toppin",
+  personId: 1630167,
+  temporaryDisplayName: "Toppin, Obi",
   fullName: "Obi Toppin",
-  teamAbbreviation: "NYK",
 };
 
 export const colorScheme = {

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { InfoIcon, Pressable } from "native-base";
 import { colorScheme } from "../../../constants";
 import { ScreenNavContext } from "../../../GameContext";
-import { ScoreCardType } from "../../../types/gameSummary";
+import type { ScoreCardType } from "../../../types/gameSummary";
 
 type Props = {
   game: ScoreCardType;

@@ -6,6 +6,7 @@ import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../../constants";
 import logos from "../../logoManager";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 import type { PlayerProfileType } from "../../types";
+import { getPlayer } from "../../api";
 
 type ProfileProps = {
   playerInfo: PlayerProfileType;
@@ -16,15 +17,16 @@ type ProfileProps = {
 
 const Profile = ({ playerInfo, navigation }: ProfileProps) => {
   const [loading, setLoading] = useState(true);
+  console.log(playerInfo);
 
   const infoList = {
-    "Team:": `${playerInfo.teamCity} ${playerInfo.teamName}`,
-    "Height:": `${playerInfo.height}`,
-    "Weight:": `${playerInfo.weight}`,
-    "PPG:": `${playerInfo.pts}`,
-    "APG:": `${playerInfo.ast}`,
-    "RPG:": `${playerInfo.reb}`,
-  };
+    "Team:": `${playerInfo.pl.tc} ${playerInfo.pl.tn}`,
+    "Height:": `${playerInfo.ht}`,
+    "Weight:": `${playerInfo.pl.ca.wt}`,
+    "PPG:": `${playerInfo.pl.ca.pts}`,
+    "APG:": `${playerInfo.pl.ca.ast}`,
+    "RPG:": `${playerInfo.pl.ca.reb}`,
+  }
 
   useEffect(() => {
     const checkInfo = () => {
@@ -87,7 +89,7 @@ const Profile = ({ playerInfo, navigation }: ProfileProps) => {
               w={100}
               key={playerInfo.playerName + "_img"}
               source={{
-                uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`,
+                uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.personId}.png`,
               }}
               alt={playerInfo.playerName}
             />

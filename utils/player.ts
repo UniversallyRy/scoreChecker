@@ -1,6 +1,8 @@
 import NBA from "nba";
+import { findPlayer } from "../api";
 import { DEFAULT_PLAYER_INFO } from "../constants";
 import type { ExtendedInfoType, PlayerResType, ACTIONTYPE } from "../types";
+import { NBARoster } from "./playerlist";
 
 /**
  * initialState object with playerInfo default id/name as Obi Toppin's 
@@ -130,14 +132,19 @@ export const handleInput = (item: { player: string }, dispatch: (value: ACTIONTY
   // regex to test if 2 words were submitted
   const regNameTest = /^[a-zA-Z]+ [a-zA-Z]+$/;
   let trimmedInput = item.player.trim();
-  let newPlayer = NBA.findPlayer(trimmedInput);
+  let [firstName, lastName] = item.player.split(" ");
+  const playerSearch = NBARoster.find(item => {
+    if (item.firstName == firstName && item.lastName == lastName) {
+      return item;
+    }
+  });
 
   if (!regNameTest.test(trimmedInput)) {
     alert("Please enter the full name of the player.");
     return false;
   } else {
-    if (newPlayer != undefined) {
-      loadPlayerInfo(trimmedInput, dispatch);
+    if (playerSearch != undefined) {
+      findPlayer(playerSearch, dispatch);
     } else {
       alert("Player not found, Try again.");
     }

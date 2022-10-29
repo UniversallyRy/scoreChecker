@@ -1,5 +1,6 @@
-import type { ScoreBoardType } from "../types";
+import type { ACTIONTYPE, ScoreBoardType } from "../types";
 import type { GameSummaryType } from "../types/gameSummary";
+import { NBARoster } from "../utils/playerlist";
 
 /**
  * API object constant
@@ -10,12 +11,41 @@ import type { GameSummaryType } from "../types/gameSummary";
 export const API_URL = {
   base: 'http://data.nba.net/prod/',
   details: 'https://data.nba.com/',
+  player: 'http://data.nba.net/data/10s/prod/v2/2022/players.json',
+  playerDetails: 'http://data.nba.net/v2015/json/mobile_teams/nba/2022/players'
+};
+
+export const getPlayer = async () => {
+  const response = await fetch(API_URL.player);
+  const data = await response.json();
+  return {
+    data: data.league.standard,
+    status: response.status
+  };
+};
+
+export const findPlayer = async (playerObj: any, dispatch: (value: ACTIONTYPE) => void) => {
+  const response = await fetch(`${API_URL.playerDetails}/playercard_${playerObj.personId}_02.json`);
+  const data = await response.json();
+  dispatch({
+    type: "FETCH_SUCCESS",
+    payload: Object.assign(
+      data
+    ),
+  });
+  //playercard_2544_02.json
+  //return firstName + lastName;
+  return {
+    data,
+    status: response.status,
+  };
 };
 
 /**
  * Method that returns teams standing object
  * @returns response object's json
  */
+
 
 export const getStandings = async () => {
   const response = await fetch(`${API_URL.base}v1/current/standings_all.json`);

@@ -28,7 +28,6 @@ const ExtendedGame = ({ route }: { route: GameRouteType }) => {
       // on initial render, async call for more game data using gameId
       await getGameDetails(gameDate, scoreInfo.gameId)
         .then((res) => {
-          for (const [key, value] of Object.entries(res)) { console.log(`  ${key}: ${value}`) }
           return res.data.g;
         })
         .then((res: GameSummaryType) => {
@@ -36,7 +35,6 @@ const ExtendedGame = ({ route }: { route: GameRouteType }) => {
           //  console.log(res.offs);
           setGameInfo(res);
         });
-      //     for (const [key, value] of Object.entries(gameInfo)) { console.log(`  ${key}: ${value}`); };
     }
     initData();
   }, []);

@@ -5,6 +5,8 @@ import PlayerProfile from "../components/players/PlayerProfile";
 import PlayerSearch from "../components/players/PlayerSearch";
 import { handleInput, initialState, loadPlayerInfo, reducer } from "../utils/player";
 import { colorScheme } from "../constants";
+import { findPlayer } from "../api";
+import { NBARoster } from "../utils/playerlist";
 
 const PlayerScreen = ({ navigation }: {
   navigation: StackNavigationProp<{ item: object }>
@@ -13,8 +15,9 @@ const PlayerScreen = ({ navigation }: {
   const [state, dispatch] = useReducer(reducer, initialState);
   // initial api call to set Toppin profile
   useEffect(() => {
-    const initData = loadPlayerInfo(initialState.playerInfo.fullName, dispatch);
+    const initData = findPlayer(initialState.playerInfo, dispatch);
     return () => {
+      console.log(initData);
       initData;
     };
   }, []);

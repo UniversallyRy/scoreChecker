@@ -4,7 +4,7 @@ import ScoreCard from "./ScoreCard";
 import ScoresLoading from "./ScoresLoading";
 import { colorScheme } from "../../constants";
 import { windowWidth } from "../../utils/dimensions";
-import { ScoreCardType } from "../../types/gameSummary";
+import type { ScoreCardType } from "../../types/gameSummary";
 
 const Scores = ({ games }: { games: ScoreCardType[] }) => {
   const numOfGames = Object.keys(games).length;
