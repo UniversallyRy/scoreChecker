@@ -17,16 +17,16 @@ type ProfileProps = {
 
 const Profile = ({ playerInfo, navigation }: ProfileProps) => {
   const [loading, setLoading] = useState(true);
-  console.log(playerInfo);
+  //console.log(playerInfo);
 
   const infoList = {
     "Team:": `${playerInfo.pl.tc} ${playerInfo.pl.tn}`,
-    "Height:": `${playerInfo.ht}`,
+    "Height:": `${playerInfo.pl.ht}`,
     "Weight:": `${playerInfo.pl.ca.wt}`,
     "PPG:": `${playerInfo.pl.ca.pts}`,
     "APG:": `${playerInfo.pl.ca.ast}`,
     "RPG:": `${playerInfo.pl.ca.reb}`,
-  }
+  };
 
   useEffect(() => {
     const checkInfo = () => {
@@ -140,7 +140,7 @@ const Profile = ({ playerInfo, navigation }: ProfileProps) => {
               onPress={() => {
                 /* Navigate to the Extended Profile route with params */
                 navigation.navigate("Extended Profile", {
-                  playerInfo: playerInfo,
+                  playerInfo
                 });
               }}
             >
