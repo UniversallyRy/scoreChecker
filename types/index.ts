@@ -1,125 +1,125 @@
 import type { GameType } from "./scores";
 
-export type FindPLayerType = {
-  "error": "",
+export type FindPlayerType = {
+  "error": string | object,
   "playerInfo": {
     "pl": {
       "ca": {
-        "ast": 0.8,
-        "blk": 0.36,
-        "dreb": 2.32,
-        "fgp": 0.521,
-        "ftp": 0.753,
-        "gp": 134,
-        "gs": 10,
-        "min": 14.3,
-        "oreb": 0.71,
-        "pf": 1.17,
-        "pts": 6.7,
-        "reb": 3.03,
+        "ast": number;
+        "blk": number;
+        "dreb": number;
+        "fgp": number;
+        "ftp": number;
+        "gp": number;
+        "gs": number;
+        "min": number;
+        "oreb": number;
+        "pf": number;
+        "pts": number;
+        "reb": number;
         "sa": {
-          "ast": 0.5,
-          "blk": 0.24,
-          "dreb": 1.8,
-          "fgp": 0.498,
-          "ftp": 0.731,
-          "gp": 62,
-          "gs": 0,
-          "min": 11,
-          "oreb": 0.4,
-          "pf": 0.89,
-          "pts": 4.1,
-          "reb": 2.2,
+          "ast": number;
+          "blk": number;
+          "dreb": number;
+          "fgp": number;
+          "ftp": number;
+          "gp": number;
+          "gs": number;
+          "min": number;
+          "oreb": number;
+          "pf": number;
+          "pts": number;
+          "reb": number;
           "spl": [],
-          "stl": 0.27,
-          "ta": "NYK",
-          "tc": "New York",
-          "tid": 1610612752,
-          "tn": "Knicks",
-          "tov": 0.37,
-          "tpp": 0.306,
-          "val": "2020-21",
+          "stl": number;
+          "ta": string;
+          "tc": string;
+          "tid": string;
+          "tn": string;
+          "tov": number;
+          "tpp": number;
+          "val": string;
         }[]
         "spl": [],
-        "stl": 0.31,
-        "tov": 0.59,
-        "tpp": 0.307,
+        "stl": number;
+        "tov": number;
+        "tpp": number;
       },
       "ct": {
-        "ast": 106,
-        "blk": 48,
-        "dreb": 311,
-        "fga": 682,
-        "fgm": 355,
-        "fta": 150,
-        "ftm": 113,
-        "gp": 134,
-        "gs": 10,
-        "min": 1913,
-        "oreb": 95,
-        "pf": 157,
-        "pts": 901,
-        "reb": 406,
+        "ast": number;
+        "blk": number;
+        "dreb": number;
+        "fga": number;
+        "fgm": number;
+        "fta": number;
+        "ftm": number;
+        "gp": number;
+        "gs": number;
+        "min": number;
+        "oreb": number;
+        "pf": number;
+        "pts": number;
+        "reb": number;
         "spl": [],
         "st": {
-          "ast": 29,
-          "blk": 15,
-          "dreb": 112,
-          "fga": 209,
-          "fgm": 104,
-          "fta": 26,
-          "ftm": 19,
-          "gp": 62,
-          "gs": 0,
-          "min": 683,
-          "oreb": 26,
-          "pf": 55,
-          "pts": 253,
-          "reb": 138,
+          "ast": number;
+          "blk": number;
+          "dreb": number;
+          "fga": number;
+          "fgm": number;
+          "fta": number;
+          "ftm": number;
+          "gp": number;
+          "gs": number;
+          "min": number;
+          "oreb": number;
+          "pf": number;
+          "pts": number;
+          "reb": number;
           "spl": [],
-          "stl": 17,
-          "ta": "NYK",
-          "tc": "New York",
-          "tid": 1610612752,
-          "tn": "Knicks",
-          "tov": 23,
-          "tpa": 85,
-          "tpm": 26,
-          "val": "2020-21",
+          "stl": number;
+          "ta": string;
+          "tc": string;
+          "tid": number;
+          "tn": string;
+          "tov": number;
+          "tpa": number;
+          "tpm": number;
+          "val": string;
         }[]
-        "stl": 42,
-        "tov": 79,
-        "tpa": 254,
-        "tpm": 78,
+        "stl": number;
+        "tov": number;
+        "tpa": number;
+        "tpm": number;
       },
-      "dob": "1998-03-04",
-      "dy": "2020",
-      "fn": "Obi",
+      "dob": string;
+      "dy": string;
+      "fn": string;
       "gls": {
         "glt": [],
       },
-      "hcc": "Dayton/USA",
-      "ht": "6-9",
-      "ln": "Toppin",
+      "hcc": string;
+      "ht": string;
+      "ln": string;
       "ng": {
-        "etm": "2022-10-19T19:30:00",
-        "gdte": "2022-10-19",
-        "gid": "0022200009",
-        "ota": "MEM",
-        "otc": "Memphis",
-        "otid": 1610612763,
-        "otn": "Grizzlies",
+        "etm": string;
+        "gdte": string;
+        "gid": string;
+        "ota": string;
+        "otc": string;
+        "otid": number;
+        "otn": string;
       },
-      "num": "1",
-      "pc": "obi_toppin",
-      "pid": 1630167,
-      "pos": "F",
-      "ta": "NYK",
-      "tc": "New York",
-      "tid": 1610612752,
-      "tn": "Knicks",
-      "wt": 220,
-      "y": 2,
+      "num": string;
+      "pc": string;
+      "pid": number;
+      "pos": string;
+      "ta": string;
+      "tc": string;
+      "tid": number;
+      "tn": number;
+      "wt": number;
+      "y": number;
     },
   },
 }
