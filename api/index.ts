@@ -1,6 +1,4 @@
 import type { ACTIONTYPE, ScoreBoardType } from "../types";
-import type { GameSummaryType } from "../types/gameSummary";
-import { NBARoster } from "../utils/playerlist";
 
 /**
  * API object constant
@@ -35,10 +33,6 @@ export const findPlayer = async (playerObj: any, dispatch: (value: ACTIONTYPE) =
   });
   //playercard_2544_02.json
   //return firstName + lastName;
-  return {
-    data,
-    status: response.status,
-  };
 };
 
 /**

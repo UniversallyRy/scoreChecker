@@ -144,10 +144,10 @@ const ScoreCard = ({ game }: { game: ScoreCardType }) => {
       />
       <VStack alignItems="center">
         <Text textAlign="center">
-          {isFinished && isFinished != null
-            ? isFinished + '\n' + gameClock
+          {isFinished !== ''
+            ? isFinished 
             : null}
-          {isFinished != null
+          {isFinished == null
             ? gameClock
             : null}
           {isFinished == ''

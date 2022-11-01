@@ -2,7 +2,7 @@ import NBA from "nba";
 import { findPlayer } from "../api";
 import { DEFAULT_PLAYER_INFO } from "../constants";
 import type { ExtendedInfoType, PlayerResType, ACTIONTYPE } from "../types";
-import { NBARoster } from "./playerlist";
+import { NBARoster } from "./playerList";
 
 /**
  * initialState object with playerInfo default id/name as Obi Toppin's 
