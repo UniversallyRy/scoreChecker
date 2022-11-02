@@ -1,10 +1,10 @@
 import React from "react";
-import { VStack, FlatList, Text } from "native-base";
+import { VStack, FlatList } from "native-base";
 import ScoreCard from "./ScoreCard";
 import ScoresLoading from "./ScoresLoading";
-import { colorScheme } from "../../constants";
 import { windowWidth } from "../../utils/dimensions";
 import type { ScoreCardType } from "../../types/gameSummary";
+import GamesCounter from "./GamesCounter";
 
 const Scores = ({ games }: { games: ScoreCardType[] }) => {
   const numOfGames = Object.keys(games).length;
@@ -27,16 +27,9 @@ const Scores = ({ games }: { games: ScoreCardType[] }) => {
     >
       <VStack safeArea>
         {numOfGames >= 1 ? (
-          <Text
-            alignSelf="center"
-            fontSize="md"
-            fontWeight={100}
-            fontStyle="italic"
-            mb={4}
-            color={colorScheme.text}
-          >
-            {numOfGames + " Games"}
-          </Text>
+          <GamesCounter
+            numOfGames={numOfGames}
+          />
         ) : (
           <ScoresLoading />
         )}
