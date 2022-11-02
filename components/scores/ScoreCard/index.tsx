@@ -143,9 +143,9 @@ const ScoreCard = ({ game }: { game: ScoreCardType }) => {
         mb={5}
       />
       <VStack alignItems="center">
-        <Text textAlign="center">
+        <Text color={colorScheme.text} textAlign="center">
           {isFinished !== ''
-            ? isFinished 
+            ? isFinished
             : null}
           {isFinished == null
             ? gameClock
