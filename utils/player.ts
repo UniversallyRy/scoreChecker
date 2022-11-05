@@ -1,11 +1,10 @@
-import NBA from "nba";
 import { findPlayer } from "../api";
 import { DEFAULT_PLAYER_INFO } from "../constants";
 import type { ExtendedInfoType, PlayerResType, ACTIONTYPE } from "../types";
 import { NBARoster } from "./playerList";
 
 /**
- * initialState object with playerInfo default id/name as Obi Toppin's 
+ * initialState object with playerInfo default id/name as Obi Toppin's
  * @property playerInfo
  */
 
@@ -15,13 +14,13 @@ export const initialState = {
 };
 
 /**
- * Method that returns an object for requested datewidth
+ * useReducer reducer method that finds dipatch's action.type that mamtches switch case
  * @param state - initial state object
  * @param action - object containing type and payload
  * @returns switch statement returns success, error or default state
  */
 
-export const reducer = (state: typeof initialState, action: ACTIONTYPE) => {
+export const playerReducer = (state: typeof initialState, action: ACTIONTYPE) => {
   switch (action.type) {
     case "FETCH_SUCCESS":
       return {
@@ -56,7 +55,7 @@ const experience = (item: number) => {
 /**
  * Method that checks if college property contains HS in it's string value
  * @param key - college property name
- * @param value - college property value 
+ * @param value - college property value
  * @returns 'High School' if 'HS' is found, else returns prop as is
  */
 
@@ -96,33 +95,8 @@ export const getPlayerInfo = (player: ExtendedInfoType) => {
   };
 };
 
-
 /**
- * Method that loads player info from NBA api 
- * @param playerName - First and Last name
- * @param dispatch - dispatch hook
- * @returns a fetched object
- */
-
-export const loadPlayerInfo = (playerName: string, dispatch: (value: ACTIONTYPE) => void) => {
-  NBA.stats
-    .playerInfo({ PlayerID: NBA.findPlayer(playerName).playerId })
-    .then((res: PlayerResType) => {
-      dispatch({
-        type: "FETCH_SUCCESS",
-        payload: Object.assign(
-          res.commonPlayerInfo[0],
-          res.playerHeadlineStats[0]
-        ),
-      });
-    })
-    .catch((error: string) => {
-      dispatch({ type: "FETCH_ERROR", payload: error });
-    });
-};
-
-/**
- * Method that handles form input, checks if player string is found and sends value to loadPlayerInfo method  
+ * Method that handles form input, checks if player string is found and sends value to loadPlayerInfo method
  * @param item - object containing player name to player prop
  * @param dispatch - dispatch hook
  * @returns a call to loadPlayerInfo if input is found else sends an alert to user
@@ -131,11 +105,12 @@ export const loadPlayerInfo = (playerName: string, dispatch: (value: ACTIONTYPE)
 export const handleInput = (item: { player: string }, dispatch: (value: ACTIONTYPE) => void) => {
   // regex to test if 2 words were submitted
   const regNameTest = /^[a-zA-Z]+ [a-zA-Z]+$/;
+  console.log(item);
   let trimmedInput = item.player.trim();
   let [firstName, lastName] = item.player.split(" ");
   const playerSearch = NBARoster.find(item => {
     if (item.firstName == firstName && item.lastName == lastName) {
-      return item;
+      findPlayer(item, dispatch);
     }
   });
 

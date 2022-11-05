@@ -2,7 +2,7 @@ import type { ACTIONTYPE, ScoreBoardType } from "../types";
 
 /**
  * API object constant
- * @property base - for summary-like teams json 
+ * @property base - for summary-like teams json
  * @property details - for more statistics and larger object return
  */
 
@@ -27,9 +27,7 @@ export const findPlayer = async (playerObj: any, dispatch: (value: ACTIONTYPE) =
   const data = await response.json();
   dispatch({
     type: "FETCH_SUCCESS",
-    payload: Object.assign(
-      data
-    ),
+    payload: { ...data }
   });
   //playercard_2544_02.json
   //return firstName + lastName;
@@ -68,7 +66,7 @@ export const getGamesByDate = async (date: string | undefined) => {
 
 /**
  * Method that fetches more game data than base api's url
- * @param year - year of requested game 
+ * @param year - year of requested game
  * @param gameId - ID string of requested game
  * @returns object with data and response properties
  */
@@ -86,4 +84,3 @@ export const getGameDetails = async (
     status: response.status,
   };
 };
-

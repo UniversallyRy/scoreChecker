@@ -5,11 +5,10 @@ import { SubmitButton, LoadingButton } from "../Buttons";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../../constants";
 import logos from "../../logoManager";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
-import type { PlayerProfileType } from "../../types";
-import { getPlayer } from "../../api";
+import type { PlayerInfoType } from "../../types";
 
 type ProfileProps = {
-  playerInfo: PlayerProfileType;
+  playerInfo: PlayerInfoType;
   navigation: {
     navigate: (arg0: string, arg1: object) => void;
   }
@@ -17,25 +16,25 @@ type ProfileProps = {
 
 const Profile = ({ playerInfo, navigation }: ProfileProps) => {
   const [loading, setLoading] = useState(true);
-  //console.log(playerInfo);
+  const { pl } = playerInfo;
 
   const infoList = {
-    "Team:": `${playerInfo.pl.tc} ${playerInfo.pl.tn}`,
-    "Height:": `${playerInfo.pl.ht}`,
-    "Weight:": `${playerInfo.pl.ca.wt}`,
-    "PPG:": `${playerInfo.pl.ca.pts}`,
-    "APG:": `${playerInfo.pl.ca.ast}`,
-    "RPG:": `${playerInfo.pl.ca.reb}`,
+    "Team:": `${pl.tc} ${pl.tn}`,
+    "Height:": `${pl.ht}`,
+    "Weight:": `${pl.wt}`,
+    "PPG:": `${pl.ca.pts}`,
+    "APG:": `${pl.ca.ast}`,
+    "RPG:": `${pl.ca.reb}`,
   };
 
   useEffect(() => {
     const checkInfo = () => {
-      return playerInfo !== undefined ? setLoading(false) : setLoading(true);
+      return playerInfo.pl !== undefined ? setLoading(false) : setLoading(true);
     };
     return () => {
       checkInfo();
     };
-  }, [playerInfo]);
+  }, [pl]);
 
   return (
     <Box
@@ -87,11 +86,11 @@ const Profile = ({ playerInfo, navigation }: ProfileProps) => {
               alignSelf="center"
               h={100}
               w={100}
-              key={playerInfo.playerName + "_img"}
+              alt={pl.pc + ''}
+              key={pl.pc + "_img"}
               source={{
-                uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.personId}.png`,
+                uri: `${PROFILE_PIC_URL_PREFIX}/${pl.pid}.png`,
               }}
-              alt={playerInfo.playerName}
             />
             <Text
               alignSelf="center"
@@ -99,16 +98,17 @@ const Profile = ({ playerInfo, navigation }: ProfileProps) => {
               fontWeight={700}
               color={colorScheme.text}
             >
-              {`${playerInfo.playerName}`}
+              {`${pl.fn} `}
+              {`${pl.ln}`}
             </Text>
             <Image
               w={50}
               h={50}
               mb={10}
               alignSelf="center"
-              source={logos[playerInfo.teamAbbreviation]}
-              key={playerInfo.teamAbbreviation + "_logoKey"}
-              alt={playerInfo.teamName}
+              source={logos[pl.ta]}
+              key={pl.tn + "_logoKey"}
+              alt={pl.tn + 'logo'}
             />
             {Object.entries(infoList).map(([item, value]) => (
               <HStack
@@ -140,7 +140,7 @@ const Profile = ({ playerInfo, navigation }: ProfileProps) => {
               onPress={() => {
                 /* Navigate to the Extended Profile route with params */
                 navigation.navigate("Extended Profile", {
-                  playerInfo
+                  pl
                 });
               }}
             >

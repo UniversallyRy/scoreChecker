@@ -1,5 +1,126 @@
 import type { GameType } from "./scores";
 
+export type PlayerInfoType = {
+  "pl": {
+    "ca": {
+      "ast": number;
+      "blk": number;
+      "dreb": number;
+      "fgp": number;
+      "ftp": number;
+      "gp": number;
+      "gs": number;
+      "min": number;
+      "oreb": number;
+      "pf": number;
+      "pts": number;
+      "reb": number;
+      "sa": {
+        "ast": number;
+        "blk": number;
+        "dreb": number;
+        "fgp": number;
+        "ftp": number;
+        "gp": number;
+        "gs": number;
+        "min": number;
+        "oreb": number;
+        "pf": number;
+        "pts": number;
+        "reb": number;
+        "spl": [],
+        "stl": number;
+        "ta": string;
+        "tc": string;
+        "tid": string;
+        "tn": string;
+        "tov": number;
+        "tpp": number;
+        "val": string;
+      }[]
+      "spl": [],
+      "stl": number;
+      "tov": number;
+      "tpp": number;
+    },
+    "ct": {
+      "ast": number;
+      "blk": number;
+      "dreb": number;
+      "fga": number;
+      "fgm": number;
+      "fta": number;
+      "ftm": number;
+      "gp": number;
+      "gs": number;
+      "min": number;
+      "oreb": number;
+      "pf": number;
+      "pts": number;
+      "reb": number;
+      "spl": [],
+      "st": {
+        "ast": number;
+        "blk": number;
+        "dreb": number;
+        "fga": number;
+        "fgm": number;
+        "fta": number;
+        "ftm": number;
+        "gp": number;
+        "gs": number;
+        "min": number;
+        "oreb": number;
+        "pf": number;
+        "pts": number;
+        "reb": number;
+        "spl": [],
+        "stl": number;
+        "ta": string;
+        "tc": string;
+        "tid": number;
+        "tn": string;
+        "tov": number;
+        "tpa": number;
+        "tpm": number;
+        "val": string;
+      }[]
+      "stl": number;
+      "tov": number;
+      "tpa": number;
+      "tpm": number;
+    },
+    "dob": string;
+    "dy": string;
+    "fn": string;
+    "gls": {
+      "glt": [],
+    },
+    "hcc": string;
+    "ht": string;
+    "ln": string;
+    "ng": {
+      "etm": string;
+      "gdte": string;
+      "gid": string;
+      "ota": string;
+      "otc": string;
+      "otid": number;
+      "otn": string;
+    },
+    "num": string;
+    "pc": string;
+    "pid": number;
+    "pos": string;
+    "ta": string;
+    "tc": string;
+    "tid": number;
+    "tn": number;
+    "wt": number;
+    "y": number;
+  },
+}
+
 export type FindPlayerType = {
   "error": string | object,
   "playerInfo": {
@@ -162,7 +283,7 @@ export type ExtendedInfoType = {
   country: string;
 }
 
-export type PlayerInfoType = {
+export type PlayerType = {
   "birthdate": string;
   "country": string;
   "displayFiLast": string;
@@ -312,4 +433,3 @@ export type ScoreBoardType = {
     "wPct": number;
   }[]
 }
-

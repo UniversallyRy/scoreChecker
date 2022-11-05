@@ -4,11 +4,11 @@ import { Button, IButtonProps, IIconProps } from "native-base";
 import { colorScheme } from "../constants";
 
 type SubmitButtonProps = {
-  onPress: ((e?: FormEvent<HTMLFormElement>) => void) & ((event: GestureResponderEvent) => void)
+  onPress: (e?: FormEvent<HTMLFormElement>) => void;
   children: ReactElement | IIconProps;
 }
 
-type Props = SubmitButtonProps & IButtonProps
+type Props = SubmitButtonProps
 
 export const SubmitButton = ({ onPress, children, ...props }: Props) => {
   return (
