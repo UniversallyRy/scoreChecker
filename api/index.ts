@@ -1,4 +1,4 @@
-import type { ACTIONTYPE, ScoreBoardType } from "../types";
+import type { ScoreBoardType, ACTIONTYPE } from "../types";
 
 /**
  * API object constant
@@ -22,6 +22,13 @@ export const getPlayer = async () => {
   };
 };
 
+/**
+ * Method that fetches data from nba's apis, dispatch function sends data to connected state object
+ * @param playerObj - playerobj containing basic player data
+ * @param dispatch - second parameter in reducer HOC, accepts obj with type and payload props
+ * @dispatches fetched api data to state playerObj
+ */
+
 export const findPlayer = async (playerObj: any, dispatch: (value: ACTIONTYPE) => void) => {
   const response = await fetch(`${API_URL.playerDetails}/playercard_${playerObj.personId}_02.json`);
   const data = await response.json();
@@ -37,7 +44,6 @@ export const findPlayer = async (playerObj: any, dispatch: (value: ACTIONTYPE) =
  * Method that returns teams standing object
  * @returns response object's json
  */
-
 
 export const getStandings = async () => {
   const response = await fetch(`${API_URL.base}v1/current/standings_all.json`);

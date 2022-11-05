@@ -1,6 +1,6 @@
 import { findPlayer } from "../api";
 import { DEFAULT_PLAYER_INFO } from "../constants";
-import type { ExtendedInfoType, PlayerResType, ACTIONTYPE } from "../types";
+import type { ExtendedInfoType, ACTIONTYPE } from "../types";
 import { NBARoster } from "./playerList";
 
 /**
