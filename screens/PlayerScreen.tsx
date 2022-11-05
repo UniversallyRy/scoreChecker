@@ -12,7 +12,7 @@ const PlayerScreen = ({ navigation }: {
 }) => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  // initial api call to set Toppin profile
+
   useEffect(() => {
     findPlayer(state.playerInfo, dispatch);
   }, []);
