@@ -3,10 +3,10 @@ import { Keyboard } from "react-native";
 import { Input, InputGroup, InputLeftAddon, Flex, Stack } from "native-base";
 import { Formik } from "formik";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { SubmitButton } from "../Buttons";
-import { colorScheme } from "../../constants";
-import { windowHeight } from "../../utils/dimensions";
-import type { ACTIONTYPE } from "../../types";
+import { SubmitButton } from "../../Buttons";
+import { colorScheme } from "../../../constants";
+import { windowHeight } from "../../../utils/dimensions";
+import type { ACTIONTYPE } from "../../../types";
 
 type InputProp = {
   handleInput: (item: { player: string; }, dispatch: (value: ACTIONTYPE) => void) => boolean;

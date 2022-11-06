@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Box, Image, Text } from "native-base";
 import { MotiView, AnimatePresence } from "moti";
-import Info from "./ExtendedInfo";
-import { SubmitButton, LoadingButton } from "../Buttons";
-import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../../constants";
-import logos from "../../logoManager";
-import { windowHeight, windowWidth } from "../../utils/dimensions";
-import type { PlayerInfoType } from "../../types";
+import Info from "../ExtendedInfo";
+import { SubmitButton, LoadingButton } from "../../Buttons";
+import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../../../constants";
+import logos from "../../../logoManager";
+import { windowHeight, windowWidth } from "../../../utils/dimensions";
+import type { PlayerInfoType } from "../../../types";
 
 type ProfileProps = {
   playerInfo: PlayerInfoType;
