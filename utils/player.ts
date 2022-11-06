@@ -1,7 +1,7 @@
 import { findPlayer } from "../api";
 import { NBARoster } from "./playerList";
 import { DEFAULT_PLAYER_INFO } from "../constants";
-import type { ACTIONTYPE, PlayerInfoType } from "../types";
+import type { ACTIONTYPE } from "../types";
 
 /**
  * initialState object with playerInfo default id/name as Obi Toppin's
@@ -11,6 +11,33 @@ import type { ACTIONTYPE, PlayerInfoType } from "../types";
 export const initialState = {
   // Obi Toppin as default profile
   playerInfo: DEFAULT_PLAYER_INFO,
+};
+
+const gameInitialState = {
+  games: [],
+};
+/**
+ * useReducer reducer method that finds dipatch's action.type that mamtches switch case
+ * @param state - initial state object
+ * @param action - object containing type and payload
+ * @returns switch statement returns success, error or default state
+ */
+
+export const gamesReducer = (state: typeof gameInitialState, action: ACTIONTYPE) => {
+  switch (action.type) {
+    case "FETCH_SUCCESS":
+      return {
+        games: action.payload,
+        error: "",
+      };
+    case "FETCH_ERROR":
+      return {
+        games: {},
+        error: "Something went wrong",
+      };
+    default:
+      return state;
+  }
 };
 
 /**
