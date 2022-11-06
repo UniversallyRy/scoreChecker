@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useReducer} from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { ParamListBase } from "@react-navigation/native";
 import { MotiView, AnimatePresence } from "moti";
@@ -9,24 +9,24 @@ import Scores from "../components/scores";
 import ScoresLoading from "../components/scores/ScoresLoading";
 import { colorScheme } from "../constants";
 import { ScreenNavContext } from "../GameContext";
-
+import { gamesReducer } from "../utils/player";
 // todos: possible team screen component/team standings, make card transition into extended game screen
-
 export interface ContextInterface {
   navigation: StackNavigationProp<ParamListBase, string, undefined>;
 }
 
+const initialState = {
+  games: [],
+};
+
 const ScoreScreen = ({ navigation }: any) => {
-  const [newObj, setNewObj] = useState([]);
+  const [state, dispatch] = useReducer(gamesReducer, initialState);
   const [todaysDate, setTodaysDate] = useState(moment().format("YYYYMMDD"));
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function initData() {
-      await getGamesByDate(todaysDate)
-        .then(({ data }) => {
-          setNewObj(data);
-        });
+      await getGamesByDate(todaysDate, dispatch);
     }
     initData();
   }, [todaysDate]);
@@ -36,7 +36,7 @@ const ScoreScreen = ({ navigation }: any) => {
   };
   setTimeout(() => {
     loader();
-  }, 600);
+  }, 500);
 
   // callback for date changes
   const onSubmit = useCallback(
@@ -79,7 +79,7 @@ const ScoreScreen = ({ navigation }: any) => {
           <ScreenNavContext.Provider value={navigation}>
             <Scores
               key="scoresContainer"
-              games={newObj}
+              games={state.games}
             />
           </ScreenNavContext.Provider>
         )}
@@ -89,4 +89,3 @@ const ScoreScreen = ({ navigation }: any) => {
 };
 
 export default ScoreScreen;
-

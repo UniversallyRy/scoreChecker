@@ -1,4 +1,5 @@
-import type { ScoreBoardType, ACTIONTYPE } from "../types";
+import type { ACTIONTYPE } from "../types";
+import type { GameSummaryType } from "../types/gameSummary";
 
 /**
  * API object constant
@@ -63,10 +64,14 @@ export const getStandings = async () => {
  * @returns response object's json
  */
 
-export const getGamesByDate = async (date: string | undefined) => {
+export const getGamesByDate = async (date: string, dispatch: any) => {
   const response = await fetch(`${API_URL.base}v2/${date}/scoreboard.json`);
   const dataJson = await response.json();
-  const { games }: { games: ScoreBoardType } = dataJson;
+  const { games }: { games: GameSummaryType[] } = dataJson;
+  dispatch({
+    type: "FETCH_SUCCESS",
+    payload: { ...games }
+  });
   return {
     data: games,
     status: response.status,

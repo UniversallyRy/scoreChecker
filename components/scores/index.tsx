@@ -7,6 +7,7 @@ import type { ScoreCardType } from "../../types/gameSummary";
 import GamesCounter from "./GamesCounter";
 
 const Scores = ({ games }: { games: ScoreCardType[] }) => {
+
   const numOfGames = Object.keys(games).length;
   const gameArray: Object[] = [];
 
