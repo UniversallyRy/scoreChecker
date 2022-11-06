@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Image, Text, HStack, Box } from "native-base";
+import { Box, Image, Text } from "native-base";
 import { MotiView, AnimatePresence } from "moti";
+import Info from "./ExtendedInfo";
 import { SubmitButton, LoadingButton } from "../Buttons";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../../constants";
 import logos from "../../logoManager";
@@ -111,30 +112,12 @@ const Profile = ({ playerInfo, navigation }: ProfileProps) => {
               alt={pl.tn + 'logo'}
             />
             {Object.entries(infoList).map(([item, value]) => (
-              <HStack
-                key={item + "_key"}
-                textAlign="auto"
-                alignItems="center"
-                mb={2}
-              >
-                <Text
-                  color={colorScheme.title}
-                  lineHeight="lg"
-                  fontSize="xl"
-                  fontWeight={900}
-                >
-                  {item}
-                </Text>
-                <Text
-                  color={colorScheme.text}
-                  ml={1}
-                  lineHeight="lg"
-                  fontSize="lg"
-                  fontWeight={400}
-                >
-                  {value}
-                </Text>
-              </HStack>
+              <Info
+                name={item}
+                value={value}
+                colorScheme={colorScheme}
+                key={value + 'key'}
+              />
             ))}
             <SubmitButton
               onPress={() => {
