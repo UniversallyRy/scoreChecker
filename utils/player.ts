@@ -1,7 +1,7 @@
 import { findPlayer } from "../api";
-import { DEFAULT_PLAYER_INFO } from "../constants";
-import type { ExtendedInfoType, ACTIONTYPE } from "../types";
 import { NBARoster } from "./playerList";
+import { DEFAULT_PLAYER_INFO } from "../constants";
+import type { ACTIONTYPE, PlayerInfoType } from "../types";
 
 /**
  * initialState object with playerInfo default id/name as Obi Toppin's
@@ -61,7 +61,6 @@ const experience = (item: number) => {
 
 export const collegeCheck = (key: string, value: string | number) => {
   if (
-    !value ||
     (typeof value === "string" && value.includes("HS"))
   ) {
     return "High School";
@@ -75,23 +74,22 @@ export const collegeCheck = (key: string, value: string | number) => {
  * @returns object containing selected properties from param
  */
 
-export const getPlayerInfo = (player: ExtendedInfoType) => {
+export const getPlayerInfo = (player: any) => {
   return {
-    Team: player.teamCity + " " + player.teamName,
-    Height: player.height,
-    Weight: player.weight,
-    PPG: player.pts,
-    RPG: player.reb,
-    APG: player.ast,
-    Season: player.timeFrame,
-    Experience: experience(player.seasonExp),
-    Position: player.position,
-    "Jersey #": player.jersey,
-    College: player.school,
-    "Draft Round": player.draftRound,
-    "Draft Number": player.draftNumber,
-    "Draft Year": player.draftYear,
-    Country: player.country
+    Team: player.tc + " " + player.tn,
+    Height: player.ht,
+    Weight: player.wt,
+    PPG: player.ca.pts,
+    RPG: player.ca.reb,
+    APG: player.ca.ast,
+    Experience: experience(player.y),
+    Position: player.pos,
+    "Jersey #": player.num,
+    College: player.hcc,
+ //   "Draft Round": player.dr,
+ //   "Draft Number": player.dn,
+    "Draft Year": player.dy,
+ //   Country: player.country
   };
 };
 
@@ -105,12 +103,13 @@ export const getPlayerInfo = (player: ExtendedInfoType) => {
 export const handleInput = (item: { player: string }, dispatch: (value: ACTIONTYPE) => void) => {
   // regex to test if 2 words were submitted
   const regNameTest = /^[a-zA-Z]+ [a-zA-Z]+$/;
-  console.log(item);
   let trimmedInput = item.player.trim();
   let [firstName, lastName] = item.player.split(" ");
   const playerSearch = NBARoster.find(item => {
     if (item.firstName == firstName && item.lastName == lastName) {
-      findPlayer(item, dispatch);
+      return item;
+    }else {
+      return undefined;
     }
   });
 

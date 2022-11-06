@@ -123,7 +123,6 @@ export type PlayerInfoType = {
 
 export type FindPlayerType = {
   "error": string | object,
-  "playerInfo": {
     "pl": {
       "ca": {
         "ast": number;
@@ -242,7 +241,6 @@ export type FindPlayerType = {
       "wt": number;
       "y": number;
     },
-  },
 }
 
 export type ACTIONTYPE =
@@ -342,48 +340,7 @@ export type ExtendedStatsType = {
   "key": string;
   "name": string;
   "params": {
-    "playerInfo": {
-      "ast": number;
-      "birthdate": string;
-      "country": string;
-      "displayFiLast": string;
-      "displayFirstLast": string;
-      "displayLastCommaFirst": string;
-      "dleagueFlag": string;
-      "draftNumber": string;
-      "draftRound": string;
-      "draftYear": string;
-      "firstName": string;
-      "fromYear": number;
-      "gamesPlayedCurrentSeasonFlag": string
-      "gamesPlayedFlag": string;
-      "greatest75Flag": string;
-      "height": string;
-      "jersey": number;
-      "lastAffiliation": string;
-      "lastName": string;
-      "nbaFlag": string;
-      "personId": number;
-      "pie": number;
-      "playerId": number;
-      "playerName": string;
-      "playerSlug": string;
-      "playercode": string;
-      "position": string;
-      "pts": number;
-      "reb": number;
-      "rosterstatus": string;
-      "school": string;
-      "seasonExp": number;
-      "teamAbbreviation": string;
-      "teamCity": string;
-      "teamCode": string;
-      "teamId": number;
-      "teamName": string;
-      "timeFrame": string;
-      "toYear": number;
-      "weight": string;
-    },
+    "pl": PlayerInfoType
   },
   "path": undefined,
 }

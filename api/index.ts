@@ -30,7 +30,10 @@ export const getPlayer = async () => {
  */
 
 export const findPlayer = async (playerObj: any, dispatch: (value: ACTIONTYPE) => void) => {
-  const response = await fetch(`${API_URL.playerDetails}/playercard_${playerObj.personId}_02.json`);
+  if(Object.prototype.hasOwnProperty.call(playerObj, 'personId')){
+    playerObj.pid = playerObj.personId;
+  }
+  const response = await fetch(`${API_URL.playerDetails}/playercard_${playerObj.pid}_02.json`);
   const data = await response.json();
   dispatch({
     type: "FETCH_SUCCESS",

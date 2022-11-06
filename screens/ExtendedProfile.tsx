@@ -9,7 +9,7 @@ import type { ExtendedStatsType } from "../types";
 
 // todos: better list styling, better shared element screen transition
 const ExtendedProfile = ({ route }: { route: ExtendedStatsType }) => {
-  const { playerInfo } = route.params;
+  const { pl } = route.params;
 
   return (
     <Box h={windowHeight} bg={colorScheme.background}>
@@ -33,10 +33,10 @@ const ExtendedProfile = ({ route }: { route: ExtendedStatsType }) => {
           h={100}
           w={100}
           source={{
-            uri: `${PROFILE_PIC_URL_PREFIX}/${playerInfo.playerId}.png`,
+            uri: `${PROFILE_PIC_URL_PREFIX}/${pl["pid"]}.png`,
           }}
-          key={playerInfo.playerName + "_imgKey"}
-          alt={playerInfo.playerName + " image"}
+          key={pl["ln"] + "_imgKey"}
+          alt={pl["ln"] + " image"}
         />
         <Text
           alignSelf="center"
@@ -44,18 +44,18 @@ const ExtendedProfile = ({ route }: { route: ExtendedStatsType }) => {
           fontWeight={700}
           color={colorScheme.text}
         >
-          {`${playerInfo.playerName}`}
+          {`${pl["ln"]}`}
         </Text>
         <Image
           w={50}
           h={50}
           mb={10}
           alignSelf="center"
-          source={logos[playerInfo.teamAbbreviation]}
-          key={playerInfo.teamAbbreviation + "_logoKey"}
-          alt={playerInfo.teamName}
+          source={logos[pl["ta"]]}
+          key={pl["ta"] + "_logoKey"}
+          alt={pl["tn"]}
         />
-        {Object.entries(getPlayerInfo(playerInfo)).map(([key, data]) => (
+        {Object.entries(getPlayerInfo(pl)).map(([key, data]) => (
           <HStack m={1} textAlign="auto" key={key}>
             <MotiText
               from={{ opacity: 0.4, scale: 0.7 }}

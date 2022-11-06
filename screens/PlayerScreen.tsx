@@ -23,7 +23,7 @@ const PlayerScreen = ({ navigation }: {
 
   useEffect(() => {
     loader();
-  }, [state]);
+  }, []);
 
   return (
     <Box bg={colorScheme.background}>
