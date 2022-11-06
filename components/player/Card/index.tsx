@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Box, Text } from "native-base";
 import { MotiView, AnimatePresence } from "moti";
-import PlayerHeader from "../PlayerHeader";
-import Info from "../ExtendedInfo";
+import PlayerHeader from "../Header";
+import PlayerInfo from "../Info";
 import { SubmitButton, LoadingButton } from "../../Buttons";
 import { colorScheme } from "../../../constants";
 import { windowHeight, windowWidth } from "../../../utils/dimensions";
 import type { PlayerInfoType } from "../../../types";
 
-type ProfileProps = {
+type CardProps = {
   playerInfo: PlayerInfoType;
   navigation: {
     navigate: (arg0: string, arg1: object) => void;
   }
 }
 
-const Profile = ({ playerInfo, navigation }: ProfileProps) => {
+const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
   const [loading, setLoading] = useState(true);
   const { pl } = playerInfo;
 
@@ -79,7 +79,7 @@ const Profile = ({ playerInfo, navigation }: ProfileProps) => {
           >
             <PlayerHeader pl={pl} />
             {Object.entries(infoList).map(([item, value]) => (
-              <Info
+              <PlayerInfo
                 name={item}
                 value={value}
                 colorScheme={colorScheme}
@@ -105,4 +105,4 @@ const Profile = ({ playerInfo, navigation }: ProfileProps) => {
   );
 };
 
-export default Profile;
+export default PlayerCard;

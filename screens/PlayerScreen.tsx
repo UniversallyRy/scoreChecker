@@ -1,8 +1,8 @@
 import React, { useEffect, useReducer } from "react";
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Box, ScrollView, KeyboardAvoidingView } from "native-base";
-import PlayerProfile from "../components/players/PlayerProfile";
-import SearchBar from "../components/players/SearchBar";
+import PlayerCard from "../components/player/Card";
+import SearchBar from "../components/player/SearchBar";
 import { handleInput, initialState, playerReducer } from "../utils/player";
 import { colorScheme } from "../constants";
 import { findPlayer } from "../api";
@@ -30,7 +30,7 @@ const PlayerScreen = ({ navigation }: {
       <ScrollView>
         <KeyboardAvoidingView>
           {Object.prototype.hasOwnProperty.call(state.playerInfo, 'pl')
-            ? <PlayerProfile
+            ? <PlayerCard
               playerInfo={state.playerInfo}
               navigation={navigation}
             />
