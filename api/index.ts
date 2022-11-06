@@ -59,23 +59,20 @@ export const getStandings = async () => {
 };
 
 /**
- * Method that returns an object for requested datewidth
+ * Method that fetches data and dispatches it to state object
  * @param date - format YYYYMMDD
+ * @param dispatch - dispatch function from useDispatch
  * @returns response object's json
  */
 
 export const getGamesByDate = async (date: string, dispatch: any) => {
   const response = await fetch(`${API_URL.base}v2/${date}/scoreboard.json`);
-  const dataJson = await response.json();
-  const { games }: { games: GameSummaryType[] } = dataJson;
+  const data = await response.json();
+  const { games }: { games: GameSummaryType[] } = data;
   dispatch({
     type: "FETCH_SUCCESS",
     payload: { ...games }
   });
-  return {
-    data: games,
-    status: response.status,
-  };
 };
 
 /**
