@@ -19,7 +19,7 @@ type KeyboardRefProps = {
   }
 }
 
-const PlayerSearch = ({ handleInput, dispatch }: InputProp) => {
+const SearchBar = ({ handleInput, dispatch }: InputProp) => {
   const [keyboardOffset, setKeyboardOffset] = useState(0);
   const onKeyboardShow = (event: any) => {
     if (event.endCoordinates) {
@@ -95,4 +95,4 @@ const PlayerSearch = ({ handleInput, dispatch }: InputProp) => {
   );
 };
 
-export default PlayerSearch;
+export default SearchBar;

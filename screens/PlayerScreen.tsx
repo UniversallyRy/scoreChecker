@@ -2,7 +2,7 @@ import React, { useEffect, useReducer } from "react";
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Box, ScrollView, KeyboardAvoidingView } from "native-base";
 import PlayerProfile from "../components/players/PlayerProfile";
-import PlayerSearch from "../components/players/PlayerSearch";
+import SearchBar from "../components/players/SearchBar";
 import { handleInput, initialState, playerReducer } from "../utils/player";
 import { colorScheme } from "../constants";
 import { findPlayer } from "../api";
@@ -36,7 +36,7 @@ const PlayerScreen = ({ navigation }: {
             />
             : null
           }
-          <PlayerSearch
+          <SearchBar
             handleInput={handleInput}
             dispatch={dispatch}
           />

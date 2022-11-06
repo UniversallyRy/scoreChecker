@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Box, Image, Text } from "native-base";
+import { Box, Text } from "native-base";
 import { MotiView, AnimatePresence } from "moti";
+import PlayerHeader from "../PlayerHeader";
 import Info from "../ExtendedInfo";
 import { SubmitButton, LoadingButton } from "../../Buttons";
-import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../../../constants";
-import logos from "../../../logoManager";
+import { colorScheme } from "../../../constants";
 import { windowHeight, windowWidth } from "../../../utils/dimensions";
 import type { PlayerInfoType } from "../../../types";
 
@@ -77,40 +77,7 @@ const Profile = ({ playerInfo, navigation }: ProfileProps) => {
             }}
             exit={{ opacity: 0 }}
           >
-            <Image
-              mt={1}
-              borderWidth={2}
-              overflow="hidden"
-              borderColor={colorScheme.title}
-              borderRadius={50}
-              alignItems="center"
-              alignSelf="center"
-              h={100}
-              w={100}
-              alt={pl.pc + ''}
-              key={pl.pc + "_img"}
-              source={{
-                uri: `${PROFILE_PIC_URL_PREFIX}/${pl.pid}.png`,
-              }}
-            />
-            <Text
-              alignSelf="center"
-              fontSize="xl"
-              fontWeight={700}
-              color={colorScheme.text}
-            >
-              {`${pl.fn} `}
-              {`${pl.ln}`}
-            </Text>
-            <Image
-              w={50}
-              h={50}
-              mb={10}
-              alignSelf="center"
-              source={logos[pl.ta]}
-              key={pl.tn + "_logoKey"}
-              alt={pl.tn + 'logo'}
-            />
+            <PlayerHeader pl={pl} />
             {Object.entries(infoList).map(([item, value]) => (
               <Info
                 name={item}
@@ -120,12 +87,8 @@ const Profile = ({ playerInfo, navigation }: ProfileProps) => {
               />
             ))}
             <SubmitButton
-              onPress={() => {
                 /* Navigate to the Extended Profile route with params */
-                navigation.navigate("Extended Profile", {
-                  pl
-                });
-              }}
+              onPress={() => { navigation.navigate("Extended Profile", { pl });}}
             >
               <Text
                 color={colorScheme.text}
