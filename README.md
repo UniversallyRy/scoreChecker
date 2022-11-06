@@ -12,7 +12,7 @@
 - [NodeJS](https://nodejs.org/en/download/)
 - [expo](https://expo.io/)
 - [native-base](https://nativebase.io/)
-- [NBA api's Github](https://github.com/bttmly/nba)
+- [moti](https://moti.fyi/)
 
 ## Install
 
@@ -40,9 +40,9 @@ npm start
 
 ## About
 
-React native app created with Expo and styled with native-base. Made for my friends, and I, to keep up with the NBA. Feel free to use and take anything for your own sports app.:thumbsup::thumbsup:
+React Native app created with Expo, animated using Moti and styled with native-base. Made for my friends, and I, to keep up with the NBA. Feel free to use and take anything for your own sports app.:thumbsup::thumbsup:
 
-Only previewed/used in Expo, so no idea on how the NBA api handles in production. Paths sometimes change due to official API changes/bugs.
+Only developed in Expo/Android so no idea on how the NBA api handles in production. Paths sometimes changes due to request to NBA's official api.
 
 Bugs- No Preseason support(Team scores, game stats, playerstats).
 
