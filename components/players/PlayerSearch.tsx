@@ -13,6 +13,12 @@ type InputProp = {
   dispatch: React.Dispatch<ACTIONTYPE>
 }
 
+type KeyboardRefProps = {
+"current"?:  {
+    "remove": () => void;
+  }
+}
+
 const PlayerSearch = ({ handleInput, dispatch }: InputProp) => {
   const [keyboardOffset, setKeyboardOffset] = useState(0);
   const onKeyboardShow = (event: any) => {
@@ -23,8 +29,8 @@ const PlayerSearch = ({ handleInput, dispatch }: InputProp) => {
     }
   };
   const onKeyboardHide = () => setKeyboardOffset(0);
-  const keyboardDidShowListener = useRef();
-  const keyboardDidHideListener = useRef();
+  const keyboardDidShowListener: KeyboardRefProps = useRef();
+  const keyboardDidHideListener: KeyboardRefProps = useRef();
 
   //event listeners for keyboard controls
   useEffect(() => {
