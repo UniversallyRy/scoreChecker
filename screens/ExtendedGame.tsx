@@ -5,7 +5,7 @@ import { GameSummary } from "../components/scores/Summary";
 import { TeamStats } from "../components/scores/TeamStats";
 import { GameStats } from "../components/scores/GameStats";
 import { windowHeight, windowWidth } from "../utils/dimensions";
-import logos from "../logoManager";
+import logos from "../utils/logoManager";
 import { getGameDetails } from "../api";
 import { colorScheme } from "../constants";
 import type { GameSummaryType } from "../types/gameSummary";

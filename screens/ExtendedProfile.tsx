@@ -4,7 +4,7 @@ import { MotiText } from "moti";
 import { windowHeight, windowWidth } from "../utils/dimensions";
 import { getPlayerInfo, collegeCheck } from "../utils/player";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../constants";
-import logos from "../logoManager";
+import logos from "../utils/logoManager";
 import type { ExtendedStatsType } from "../types";
 
 // todos: better list styling, better shared element screen transition

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Text, Image, Divider, VStack, HStack, Heading } from "native-base";
 import { MotiView } from "moti";
-import logos from "../../../logoManager";
 import { colorScheme } from "../../../constants";
 import InfoButton from "../InfoButton";
+import logos from "../../../utils/logoManager";
 import { windowWidth } from "../../../utils/dimensions";
 import { getGameDetails } from "../../../api";
 import type { GameSummaryType, ScoreCardType } from "../../../types/gameSummary";

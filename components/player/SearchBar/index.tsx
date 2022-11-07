@@ -23,7 +23,7 @@ const SearchBar = ({ handleInput, dispatch }: InputProp) => {
     if (event.endCoordinates) {
       setKeyboardOffset(event.endCoordinates.height);
     } else {
-      return keyboardOffset;
+                   return keyboardOffset;
     }
   };
   const onKeyboardHide = () => setKeyboardOffset(0);
