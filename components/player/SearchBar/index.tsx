@@ -18,14 +18,17 @@ type KeyboardRefProps = {
 }
 
 const SearchBar = ({ handleInput, dispatch }: InputProp) => {
+
   const [keyboardOffset, setKeyboardOffset] = useState(0);
+
   const onKeyboardShow = (event: any) => {
     if (event.endCoordinates) {
       setKeyboardOffset(event.endCoordinates.height);
     } else {
-                   return keyboardOffset;
+      return keyboardOffset;
     }
   };
+
   const onKeyboardHide = () => setKeyboardOffset(0);
   const keyboardDidShowListener: KeyboardRefProps = useRef();
   const keyboardDidHideListener: KeyboardRefProps = useRef();

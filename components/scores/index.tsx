@@ -1,13 +1,13 @@
 import React from "react";
 import { VStack, FlatList } from "native-base";
+import { MotiPressable } from "moti/interactions";
 import ScoreCard from "./ScoreCard";
 import ScoresLoading from "./ScoresLoading";
+import GamesCounter from "./GamesCounter";
 import { windowWidth } from "../../utils/dimensions";
 import type { ScoreCardType } from "../../types/gameSummary";
-import GamesCounter from "./GamesCounter";
 
 const Scores = ({ games }: { games: ScoreCardType[] }) => {
-
   const numOfGames = Object.keys(games).length;
   const gameArray: Object[] = [];
 
@@ -16,7 +16,9 @@ const Scores = ({ games }: { games: ScoreCardType[] }) => {
   }
 
   const renderGame = ({ item }) => (
-    <ScoreCard key={item[0].gameId} game={item[0]} />
+    <MotiPressable>
+      <ScoreCard key={item[0].gameId} game={item[0]} />
+    </MotiPressable >
   );
 
   return (
@@ -27,13 +29,14 @@ const Scores = ({ games }: { games: ScoreCardType[] }) => {
       justifyContent="center"
     >
       <VStack safeArea>
-        {numOfGames >= 1 ? (
-          <GamesCounter
-            numOfGames={numOfGames}
-          />
-        ) : (
-          <ScoresLoading />
-        )}
+        {numOfGames >= 1
+          ? (
+            <GamesCounter
+              numOfGames={numOfGames}
+            />
+          ) : (
+            <ScoresLoading />
+          )}
         <FlatList
           data={gameArray}
           renderItem={renderGame}
