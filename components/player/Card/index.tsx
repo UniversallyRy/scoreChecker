@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Box, Text } from "native-base";
-import { MotiView, AnimatePresence } from "moti";
+import { MotiView } from "moti";
 import PlayerHeader from "../Header";
 import PlayerInfo from "../Info";
-import { SubmitButton, LoadingButton } from "../../Buttons";
+import { SubmitButton } from "../../Buttons";
 import { colorScheme } from "../../../constants";
 import { windowHeight, windowWidth } from "../../../utils/dimensions";
 import type { PlayerInfoType } from "../../../types";
@@ -48,7 +48,6 @@ const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
       bg={colorScheme.foreground}
       shadow="4"
     >
-      <AnimatePresence exitBeforeEnter>
         {!loading && (
           <MotiView
             from={{ opacity: 0, scale: 0.7 }}
@@ -83,7 +82,6 @@ const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
             </SubmitButton>
           </MotiView>
         )}
-      </AnimatePresence>
     </Box>
   );
 };

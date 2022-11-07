@@ -7,6 +7,7 @@ import SearchBar from "../components/player/SearchBar";
 import { initialState, handleInput, playerReducer } from "../utils/player";
 import { colorScheme } from "../constants";
 import { findPlayer } from "../api";
+import { AnimatePresence } from "moti";
 
 const PlayerScreen = ({ navigation }: {
   navigation: StackNavigationProp<{ item: object }>
@@ -29,13 +30,15 @@ const PlayerScreen = ({ navigation }: {
     <Box bg={colorScheme.background}>
       <ScrollView>
         <KeyboardAvoidingView>
-          {Object.prototype.hasOwnProperty.call(state.playerInfo, 'pl')
-            ? <PlayerCard
-              playerInfo={state.playerInfo}
-              navigation={navigation}
-            />
-            : <PlaceHolder />
-          }
+          <AnimatePresence exitBeforeEnter>
+            {Object.prototype.hasOwnProperty.call(state.playerInfo, 'pl')
+              ? <PlayerCard
+                playerInfo={state.playerInfo}
+                navigation={navigation}
+              />
+              : <PlaceHolder/>
+            }
+          </AnimatePresence>
           <SearchBar
             handleInput={handleInput}
             dispatch={dispatch}

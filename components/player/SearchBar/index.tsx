@@ -14,9 +14,7 @@ type InputProp = {
 }
 
 type KeyboardRefProps = {
-"current"?:  {
-    "remove": () => void;
-  }
+  "current"?: { "remove": () => void }
 }
 
 const SearchBar = ({ handleInput, dispatch }: InputProp) => {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Heading } from "native-base";
-import { AnimatePresence, MotiView } from "moti";
+import { MotiView } from "moti";
 import { LoadingButton } from "../../Buttons";
 import { colorScheme } from "../../../constants";
 import { windowHeight, windowWidth } from "../../../utils/dimensions";
@@ -18,7 +18,6 @@ const PlaceHolder = () => (
     bg={colorScheme.foreground}
     shadow="4"
   >
-    <AnimatePresence exitBeforeEnter>
       <MotiView
         from={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -45,7 +44,6 @@ const PlaceHolder = () => (
         </Heading>
         <LoadingButton />
       </MotiView>
-    </AnimatePresence>
   </Box>
 );
 
