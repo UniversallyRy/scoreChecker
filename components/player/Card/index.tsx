@@ -49,23 +49,6 @@ const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
       shadow="4"
     >
       <AnimatePresence exitBeforeEnter>
-        {loading && (
-          <MotiView
-            key="loading"
-            from={{ opacity: 0.4, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              type: "timing",
-              duration: 150,
-              delay: 50,
-            }}
-            exit={{
-              opacity: 0,
-            }}
-          >
-            <LoadingButton />
-          </MotiView>
-        )}
         {!loading && (
           <MotiView
             from={{ opacity: 0, scale: 0.7 }}
