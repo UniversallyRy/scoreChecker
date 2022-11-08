@@ -14,7 +14,7 @@ import {
   Rubik_900Black_Italic,
 } from "@expo-google-fonts/rubik";
 import BottomTabs from "./components/navigation/BottomTabs";
-
+import StorybookUIRoot from './.storybook/Storybook';
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
@@ -30,7 +30,7 @@ const theme = extendTheme({
   fonts: { heading: "Rubik", body: "Rubik", mono: "Rubik" },
 });
 
-const App = () => {
+export const App = () => {
 
   const [fontsLoaded] = useFonts({
     Rubik_400Regular,
@@ -62,6 +62,7 @@ const App = () => {
           onLayout={onLayoutRootView}
         >
           <StatusBar style="auto" />
+          <StorybookUIRoot />
           <BottomTabs />
         </Flex>
       </NavigationContainer>

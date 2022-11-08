@@ -1,23 +1,39 @@
+import { findPlayer, getGamesByDate, getGameDetails } from '.';
 
-import API from '.';
+const playerObj = {
+  pid: 1630167
+};
 
-describe('API', () => {
-  it('should return success for getStandings()', async () => {
-    const response = await API.getStandings();
+const dispatch = () => {
+  return "FETCH_SUCCESS";
+
+};
+
+describe('findPlayer', () => {
+  it('should return success for findPlayer(playerObj, dispatch)', async () => {
+    global.fetch = jest.fn(() => {
+      Promise.resolve();
+    });
+    const response = await findPlayer(playerObj, dispatch);
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(response).toBe(false);
+    // expect(response.data).toHaveProperty('pl');
+    // expect(response.status).toBe(200);
+  });
+});
+
+describe('getGamesByDate', () => {
+  it('should return success for getGamesByDate(date, dispatch)', async () => {
+    const response = await getGamesByDate('20220304', dispatch);
 
     expect(response.data).toHaveProperty('games');
     expect(response.status).toBe(200);
   });
+});
 
-  it('should return success for getGamesByDate(date)', async () => {
-    const response = await API.getGamesByDate('20220304');
-
-    expect(response.data).toHaveProperty('games');
-    expect(response.status).toBe(200);
-  });
-
-  it('should return success for getGameDetails(date, gameId)', async () => {
-    const response = await API.getGameDetails('20220304', 'game_id');
+describe('getGameDetails', () => {
+  it('should return success for getGameDetails(date, gameid)', async () => {
+    const response = await getGameDetails('20220304', 'gameid');
 
     expect(response.data).toHaveProperty('league');
     expect(response.status).toBe(200);

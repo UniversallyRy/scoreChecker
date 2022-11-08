@@ -31,7 +31,7 @@ export const getPlayer = async () => {
  */
 
 export const findPlayer = async (playerObj: any, dispatch: (value: ACTIONTYPE) => void) => {
-  if(Object.prototype.hasOwnProperty.call(playerObj, 'personId')){
+  if (Object.prototype.hasOwnProperty.call(playerObj, 'personId')) {
     playerObj.pid = playerObj.personId;
   }
   const response = await fetch(`${API_URL.playerDetails}/playercard_${playerObj.pid}_02.json`);
@@ -40,6 +40,10 @@ export const findPlayer = async (playerObj: any, dispatch: (value: ACTIONTYPE) =
     type: "FETCH_SUCCESS",
     payload: { ...data }
   });
+  return {
+    data,
+    status: response.status,
+  };
   //playercard_2544_02.json
   //return firstName + lastName;
 };
@@ -73,6 +77,10 @@ export const getGamesByDate = async (date: string, dispatch: any) => {
     type: "FETCH_SUCCESS",
     payload: { ...games }
   });
+  return {
+    data,
+    status: response.status,
+  };
 };
 
 /**
