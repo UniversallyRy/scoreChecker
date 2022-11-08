@@ -1,38 +1,15 @@
-import React from "react";
-import { Button } from "native-base";
-import { ComponentStory, ComponentMeta } from '@storybook/react-native';
+import * as React from 'react';
+import { Box, Text } from "native-base";
+import { storiesOf } from '@storybook/react-native';
+import { action } from '@storybook/addon-actions';
+import { SubmitButton, LoadingButton } from "./Buttons";
 
-import { colorScheme } from "../constants";
+export const actions = {
+  onPinTask: action('onPinTask'),
+};
 
-export default {
-  title: 'Buttons',
-  component: Button
-} as ComponentMeta<typeof Button>;
+storiesOf('Buttons', module)
+  .addDecorator((story) => <Box flexDirection="row" justifyContent="center" paddingTop={300}>{story()}</Box>)
+  .add('Submit Button', () => <SubmitButton onPress={actions.onPinTask}>Test</SubmitButton>)
+  .add('Loading Button', () => <LoadingButton {...actions} />)
 
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
-
-export const SubmitButton = Template.bind({});
-SubmitButton.args = {
-  h: 50,
-  w: 200,
-  bg: colorScheme.title,
-  borderRadius: 5,
-  margin: 2,
-  mb: 9,
-  key: "submitButton",
-  alignSelf: "center",
-  shadow: "5",
-  onPress: () => null
-}
-
-export const LoadingButton = Template.bind({});
-LoadingButton.args = {
-  bg: colorScheme.title,
-  borderRadius: 5,
-  margin: 2,
-  mb: 9,
-  isLoading: true,
-  isLoadingText: "Loading. .",
-  mt: 275,
-  shadow: "3"
-}

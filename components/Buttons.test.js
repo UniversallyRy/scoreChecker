@@ -10,7 +10,7 @@ describe('<SubmitButton />', () => {
         <SubmitButton> Test </SubmitButton>
       </NativeBaseProvider>
     );
-    console.log(tree.root)
+    console.log(tree.root);
     expect(tree.root.child.length).toBe(1);
   });
 });

@@ -13,8 +13,8 @@ import {
   Rubik_900Black,
   Rubik_900Black_Italic,
 } from "@expo-google-fonts/rubik";
+import StorybookUIRoot from './storybook';
 import BottomTabs from "./components/navigation/BottomTabs";
-import StorybookUIRoot from './.storybook/Storybook';
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
@@ -63,7 +63,6 @@ export const App = () => {
         >
           <StatusBar style="auto" />
           <StorybookUIRoot />
-          <BottomTabs />
         </Flex>
       </NavigationContainer>
     </NativeBaseProvider>

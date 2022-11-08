@@ -6,7 +6,6 @@
   "plugins": [
     "react",
     "react-native",
-    "eslint-plugin-react-native"
   ],
   "ecmaFeatures": {
     "jsx": true,
