@@ -39,7 +39,6 @@ const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
 
   return (
     <Box
-      alignSelf="center"
       w={windowWidth * 0.98}
       h={windowHeight * 0.65}
       borderRadius={3}
@@ -48,40 +47,42 @@ const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
       bg={colorScheme.foreground}
       shadow="4"
     >
-        {!loading && (
-          <MotiView
-            from={{ opacity: 0, scale: 0.7 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              type: "timing",
-              duration: 250,
-              delay: 200,
-            }}
-            exit={{ opacity: 0 }}
+      {!loading && (
+        <MotiView
+          from={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            type: "timing",
+            duration: 250,
+            delay: 200,
+          }}
+          exit={{ opacity: 0 }}
+        >
+          <PlayerHeader pl={pl} />
+          {Object.entries(infoList).map(([item, value]) => (
+            <PlayerInfo
+              name={item}
+              value={value}
+              colorScheme={colorScheme}
+              key={value + 'key'}
+            />
+          ))}
+          <SubmitButton
+            /* Navigate to the Extended Profile route with params */
+            onPress={() => { navigation.navigate("Extended Profile", { pl }); }}
+            mt={20}
+            alignSelf="center"
           >
-            <PlayerHeader pl={pl} />
-            {Object.entries(infoList).map(([item, value]) => (
-              <PlayerInfo
-                name={item}
-                value={value}
-                colorScheme={colorScheme}
-                key={value + 'key'}
-              />
-            ))}
-            <SubmitButton
-                /* Navigate to the Extended Profile route with params */
-              onPress={() => { navigation.navigate("Extended Profile", { pl });}}
+            <Text
+              color={colorScheme.text}
+              fontStyle="italic"
+              fontWeight={300}
             >
-              <Text
-                color={colorScheme.text}
-                fontStyle="italic"
-                fontWeight={300}
-              >
-                CLICK FOR MORE INFO{" "}
-              </Text>
-            </SubmitButton>
-          </MotiView>
-        )}
+              CLICK FOR MORE INFO{" "}
+            </Text>
+          </SubmitButton>
+        </MotiView>
+      )}
     </Box>
   );
 };

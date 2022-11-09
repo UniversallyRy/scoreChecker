@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Platform } from "react-native";
-import { Box, Text } from "native-base";
+import { Box, Flex, Stack, Text } from "native-base";
 import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 import { SubmitButton } from "../../Buttons";
 import { colorScheme } from "../../../constants";
@@ -43,15 +43,13 @@ const DatePicker = ({ todaysDate, onSubmit, loading }: DateProps) => {
   };
 
   return (
-    <Box>
+    <>
       <SubmitButton
-        alignSelf="center"
-        borderRadius={3}
-        h={9}
+        alignItems="center"
         onPress={showMode}
         isDisabled={loading}
       >
-        <Text color={colorScheme.text} fontFamily="heading" fontWeight={600}>
+        <Text color={colorScheme.text} fontWeight={600}>
           CHANGE DATE
         </Text>
       </SubmitButton>
@@ -64,7 +62,7 @@ const DatePicker = ({ todaysDate, onSubmit, loading }: DateProps) => {
           minimumDate={new Date(1980, 0, 1)}
         />
       )}
-    </Box>
+    </>
   );
 };
 

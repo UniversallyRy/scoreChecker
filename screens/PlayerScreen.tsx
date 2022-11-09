@@ -27,7 +27,7 @@ const PlayerScreen = ({ navigation }: {
   }, []);
 
   return (
-    <Box bg={colorScheme.background}>
+    <Box alignItems="center" bg={colorScheme.background}>
       <ScrollView>
         <KeyboardAvoidingView>
           <AnimatePresence exitBeforeEnter>
@@ -36,7 +36,7 @@ const PlayerScreen = ({ navigation }: {
                 playerInfo={state.playerInfo}
                 navigation={navigation}
               />
-              : <PlaceHolder/>
+              : <PlaceHolder />
             }
           </AnimatePresence>
           <SearchBar
