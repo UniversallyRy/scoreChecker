@@ -1,5 +1,14 @@
 {
   "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    files: ["*.ts", "*.tsx"],
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 2018,
+    sourceType: "module",
+    project: "./tsconfig.json",
+  },
   "env": {
     "browser": true
   },
@@ -7,11 +16,7 @@
     "react",
     "react-native",
   ],
-  "ecmaFeatures": {
-    "jsx": true,
-    "js": true,
-  },
-  "extends": ["eslint:recommended"],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
     "react/no-did-mount-set-state": 2,
     "react/no-direct-mutation-state": 2,

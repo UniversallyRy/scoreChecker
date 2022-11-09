@@ -13,12 +13,14 @@ import {
   Rubik_900Black,
   Rubik_900Black_Italic,
 } from "@expo-google-fonts/rubik";
+// Swap in App component to check stories or just run app
 import StorybookUIRoot from './storybook';
 import BottomTabs from "./components/navigation/BottomTabs";
+
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
-// Todos: more hook usage, better animations, extend theme further added basic sizes for fonts, containers, buttons, etc
+// Todos: better animations, extend theme further added basic sizes for fonts, containers, etc
 const theme = extendTheme({
   fontConfig: {
     Rubik: {
@@ -62,7 +64,7 @@ export const App = () => {
           onLayout={onLayoutRootView}
         >
           <StatusBar style="auto" />
-          <StorybookUIRoot />
+          <BottomTabs />
         </Flex>
       </NavigationContainer>
     </NativeBaseProvider>
