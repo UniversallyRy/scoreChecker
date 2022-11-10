@@ -11,6 +11,7 @@ type Props = {
 
 const InfoButton = ({ game, isFinished }: Props) => {
   const navContext = useContext(ScreenNavContext);
+  console.log(navContext);
   return (
     <Pressable>
       <InfoIcon
@@ -23,10 +24,12 @@ const InfoButton = ({ game, isFinished }: Props) => {
             return null;
           } else {
             // Navigate to the Extended Score route with params
-            navContext.navigate("Extended Game", {
-              itemId: game["gameId"],
-              scoreInfo: game,
-            });
+            if (navContext) {
+              navContext.navigate("Extended Game", {
+                gameId: game["gameId"],
+                scoreInfo: game,
+              });
+            }
           }
         }}
       />

@@ -3,14 +3,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { ScoreScreens, PlayerScreens } from "../navigation/Stacks";
 import { colorScheme } from "../../constants";
-import type { StackScreenProps } from '@react-navigation/stack';
-
-type RootStackParamList = {
-  "Scores": { gameId: string };
-  ["Player Info"]: { userId: string };
-};
-
-type Props = StackScreenProps<RootStackParamList, 'Scores'>;
 
 const Tab = createBottomTabNavigator();
 

@@ -1,10 +1,9 @@
 import { createContext } from "react";
-import { ParamListBase } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import type { StackScreenProps } from "@react-navigation/stack";
+import type { ScoreStackParams } from "./components/navigation/Stacks";
 
-interface ContextInterface {
-  navigation: StackNavigationProp<ParamListBase>;
-  navigate: (name: string, object: {}) => void;
-}
+type ScoreStackProps = StackScreenProps<ScoreStackParams, 'Extended Game'>;
 
+// Context's value is navigation prop from react-navigation/stack
+export type ContextInterface = ScoreStackProps['navigation'];
 export const ScreenNavContext = createContext<ContextInterface | null>(null);

@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useCallback, useReducer} from "react";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { ParamListBase } from "@react-navigation/native";
+import React, { useState, useEffect, useCallback, useReducer } from "react";
 import { MotiView, AnimatePresence } from "moti";
 import moment from "moment";
 import { getGamesByDate } from "../api";
@@ -8,44 +6,38 @@ import Header from "../components/scores/Header";
 import Scores from "../components/scores";
 import ScoresLoading from "../components/scores/ScoresLoading";
 import { colorScheme } from "../constants";
-import { ScreenNavContext } from "../GameContext";
+import { ContextInterface, ScreenNavContext } from "../GameContext";
 import { gamesReducer } from "../utils/player";
 // todos: possible team screen component/team standings, make card transition into extended game screen
-export interface ContextInterface {
-  navigation: StackNavigationProp<ParamListBase, string, undefined>;
-}
+//
+const ScoreScreen = ({ navigation }: { navigation: ContextInterface }) => {
 
-const initialState = {
-  games: [],
-};
-
-const ScoreScreen = ({ navigation }: any) => {
-  const [state, dispatch] = useReducer(gamesReducer, initialState);
-  const [todaysDate, setTodaysDate] = useState(moment().format("YYYYMMDD"));
+  const [state, dispatch] = useReducer(gamesReducer, { games: [] });
+  const [dayOfGames, setDate] = useState(moment().format("YYYYMMDD"));
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function initData() {
-      await getGamesByDate(todaysDate, dispatch);
+      await getGamesByDate(dayOfGames, dispatch);
     }
     initData();
-  }, [todaysDate]);
+  }, [dayOfGames]);
 
   const loader = () => {
     setLoading(false);
   };
   setTimeout(() => {
     loader();
-  }, 500);
+  }, 400);
 
   // callback for date changes
   const onSubmit = useCallback(
-    (item) => {
+    (item: string) => {
       let changedDate = item;
-      setTodaysDate(changedDate);
+      setDate(changedDate);
       setLoading(true);
     }
-    , [todaysDate]
+    , []
   );
 
   return (
@@ -64,7 +56,7 @@ const ScoreScreen = ({ navigation }: any) => {
           height: "100%",
         }}
       >
-        <Header loading={loading} onSubmit={onSubmit} todaysDate={todaysDate} />
+        <Header loading={loading} onSubmit={onSubmit} todaysDate={dayOfGames} />
         {loading && (
           <MotiView
             key="scoresLoading"

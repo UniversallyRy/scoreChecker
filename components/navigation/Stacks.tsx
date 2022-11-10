@@ -5,17 +5,25 @@ import ExtendedGame from "../../screens/ExtendedGame";
 import PlayerScreen from "../../screens/PlayerScreen";
 import ExtendedProfile from "../../screens/ExtendedProfile";
 import { colorScheme } from "../../constants";
+import { ScoreCardType } from "../../types/gameSummary";
+import { PlayerInfoType } from "../../types";
 
 const name = "NBA Check-Up";
 
-type ScoreStackParams = {
+export type ScoreStackParams = {
   [name]: { name: string };
-  ["Extended Game"]: { playerId: string };
+  ["Extended Game"]: {
+    gameId: string;
+    scoreInfo: ScoreCardType;
+  };
 }
 
 type PlayerStackParams = {
   [name]: { playerId: string };
-  ["Extended Profile"]: { playerId: string };
+  ["Extended Profile"]: {
+    playerId: string
+    playerInfo: PlayerInfoType;
+  };
 }
 
 const ScoreStack = createStackNavigator<ScoreStackParams>();
