@@ -8,8 +8,8 @@ import logos from "../utils/logoManager";
 import { windowHeight, windowWidth } from "../utils/dimensions";
 import { colorScheme } from "../constants";
 import { getGameDetails } from "../api";
-import type { GameSummaryType } from "../types/gameSummary";
-import type { GameRouteType } from "../types";
+import type { GameSummaryType } from "../types/scoreTypes";
+import type { GameRouteType } from "../types/routeTypes";
 // import { MotiView, MotiText } from "moti";
 
 const ExtendedGame = ({ route }: { route: GameRouteType }) => {
