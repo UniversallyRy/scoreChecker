@@ -45,31 +45,32 @@ const ExtendedProfile = ({ route }: { route: StatsRouteType }) => {
           fontWeight={700}
           color={colorScheme.text}
         >
-          {`${pl["ln"]}`}
+          {`${pl["fn"]}  ${pl["ln"]}`}
         </Text>
         <Image
           w={50}
           h={50}
-          mb={10}
+          mb={20}
           alignSelf="center"
           source={logos[pl["ta"]]}
           key={pl["ta"] + "_logoKey"}
           alt={pl["ta"] + ' Logo Img'}
         />
         {Object.entries(getPlayerInfo(pl)).map(([key, data]) => (
-          <HStack m={1} textAlign="left" key={key}>
-            <MotiText
-              from={{ opacity: 0.4, scale: 0.7 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                type: "timing",
-                duration: 350,
-                scale: {
-                  type: "spring",
-                  delay: 200,
-                },
-              }}
-            >
+          <MotiText
+            key={key}
+            from={{ opacity: 0.4, scale: 0.7 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              type: "timing",
+              duration: 350,
+              scale: {
+                type: "spring",
+                delay: 200,
+              },
+            }}
+          >
+            <HStack p={2} textAlign="left" key={key}>
               <Text
                 color={colorScheme.title}
                 mr={1}
@@ -81,8 +82,8 @@ const ExtendedProfile = ({ route }: { route: StatsRouteType }) => {
               <Text color={colorScheme.text} fontSize="lg" fontWeight={400}>
                 {`${data}`}
               </Text>
-            </MotiText>
-          </HStack>
+            </HStack>
+          </MotiText>
         ))}
       </Flex>
     </Box>

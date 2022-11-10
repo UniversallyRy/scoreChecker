@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Text } from "native-base";
+import { VStack, Text, Spacer } from "native-base";
 import { MotiView } from "moti";
 import PlayerHeader from "../Header";
 import PlayerInfo from "../Info";
@@ -11,14 +11,16 @@ import type { PlayerStackParams } from "../../navigation/Stacks";
 import type { PlayerInfoType } from "../../../types/playerTypes";
 
 type PlayerStackProps = StackScreenProps<PlayerStackParams, 'Extended Profile'>;
+
 type NavInterface = PlayerStackProps['navigation'];
+
 type CardProps = {
   playerInfo: PlayerInfoType;
   navigation: NavInterface;
 }
 
-
 const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
+
   const [loading, setLoading] = useState(true);
   const { pl } = playerInfo;
 
@@ -41,35 +43,38 @@ const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
   }, [pl]);
 
   return (
-    <Box
-      w={windowWidth * 0.98}
-      h={windowHeight * 0.65}
-      borderRadius={3}
-      px={5}
-      mt={2}
-      bg={colorScheme.foreground}
-      shadow="4"
+
+    <MotiView
+      from={{ opacity: 0, scale: 0.7 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        type: "timing",
+        duration: 250,
+        delay: 200,
+      }}
+      exit={{ opacity: 0 }}
     >
       {!loading && (
-        <MotiView
-          from={{ opacity: 0, scale: 0.7 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            type: "timing",
-            duration: 250,
-            delay: 200,
-          }}
-          exit={{ opacity: 0 }}
+        <VStack
+          w={windowWidth * 0.98}
+          h={windowHeight * 0.65}
+          borderRadius={3}
+          px={5}
+          mt={1}
+          bg={colorScheme.foreground}
+          shadow={3}
         >
           <PlayerHeader pl={pl} />
+          <Spacer />
           {Object.entries(infoList).map(([item, value]) => (
             <PlayerInfo
-              name={item}
+              propKey={item}
               value={value}
               colorScheme={colorScheme}
               key={value + 'key'}
             />
           ))}
+          <Spacer />
           <SubmitButton
             /* Navigate to the Extended Profile route with params */
             onPress={() => {
@@ -78,8 +83,6 @@ const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
                 playerInfo: playerInfo
               })
             }}
-            mt={20}
-            alignSelf="center"
           >
             <Text
               color={colorScheme.text}
@@ -89,9 +92,9 @@ const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
               CLICK FOR MORE INFO{" "}
             </Text>
           </SubmitButton>
-        </MotiView>
+        </VStack>
       )}
-    </Box>
+    </MotiView>
   );
 };
 

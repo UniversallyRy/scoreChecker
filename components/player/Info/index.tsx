@@ -2,16 +2,16 @@ import React from 'react';
 import { HStack, Text } from 'native-base';
 
 type InfoProps = {
-  name: string;
+  propKey: string;
   value: string;
   colorScheme: {
     text: string;
   }
 }
 
-const Info = ({ name, value, colorScheme }: InfoProps) => (
+const Info = ({ propKey, value, colorScheme }: InfoProps) => (
   <HStack
-    key={name + "_key"}
+    key={propKey + "_key"}
     alignItems="center"
     mb={2}
   >
@@ -21,7 +21,7 @@ const Info = ({ name, value, colorScheme }: InfoProps) => (
       fontWeight={900}
       color={colorScheme.text}
     >
-      {name}
+      {propKey}
     </Text>
     <Text
       ml={1}
