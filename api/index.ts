@@ -1,5 +1,5 @@
-import type { ACTIONTYPE } from "../types";
-import type { GameSummaryType } from "../types/gameSummary";
+import type { ACTIONTYPE } from "../types/routeTypes";
+import type { GameSummaryType } from "../types/scoreTypes";
 
 /**
  * API object constant
@@ -30,7 +30,7 @@ export const getPlayer = async () => {
  * @dispatches fetched api data to state playerObj
  */
 
-export const findPlayer = async (playerObj: any, dispatch: (value: ACTIONTYPE) => void) => {
+export const findPlayer = async (playerObj: any, dispatch: (_value: ACTIONTYPE) => void) => {
   if (Object.prototype.hasOwnProperty.call(playerObj, 'personId')) {
     playerObj.pid = playerObj.personId;
   }
