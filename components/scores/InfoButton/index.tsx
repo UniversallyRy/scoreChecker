@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import { InfoIcon, Pressable } from "native-base";
 import { colorScheme } from "../../../constants";
 import { ScreenNavContext } from "../../../GameContext";
-import type { ScoreCardType } from "../../../types/gameSummary";
+import type { GameType } from "../../../types/scoreTypes";
 
-const InfoButton = ({ game, isFinished }: { game: ScoreCardType; isFinished: string }) => {
+const InfoButton = ({ game, isFinished }: { game: GameType; isFinished: string }) => {
 
   const navContext = useContext(ScreenNavContext);
 

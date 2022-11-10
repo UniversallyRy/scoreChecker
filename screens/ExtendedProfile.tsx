@@ -5,7 +5,7 @@ import { windowHeight, windowWidth } from "../utils/dimensions";
 import { getPlayerInfo, collegeCheck } from "../utils/player";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../constants";
 import logos from "../utils/logoManager";
-import type { StatsRouteType } from "../types/routes";
+import type { StatsRouteType } from "../types/routeTypes";
 
 // todos: better list styling, better shared element screen transition
 const ExtendedProfile = ({ route }: { route: StatsRouteType }) => {

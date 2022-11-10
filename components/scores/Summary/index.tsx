@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import { Flex, HStack, VStack } from 'native-base';
 import { Grid, GridItem } from "../Grid";
 import { OvertimeHead, OvertimeScore } from '../OverTime';
-import type { GameSummaryType } from '../../../types/gameSummary';
+import type { GameSummaryType } from '../../../types/scoreTypes';
 
 export const GameSummary = ({ game }: { game: GameSummaryType }) => {
   return (

@@ -7,11 +7,11 @@ import InfoButton from "../InfoButton";
 import logos from "../../../utils/logoManager";
 import { windowWidth } from "../../../utils/dimensions";
 import { getGameDetails } from "../../../api";
-import type { GameSummaryType, ScoreCardType } from "../../../types/gameSummary";
+import type { GameSummaryType, GameType } from "../../../types/scoreTypes";
 
 // WebP only images currently, todo: png/jpeg backups
 // logo 35 x 50
-const ScoreCard = ({ game }: { game: ScoreCardType }) => {
+const ScoreCard = ({ game }: { game: GameType }) => {
   // console.log(game);
 
   const splitAt = (index: number) => (x: string) => [x.slice(0, index), x.slice(index)];

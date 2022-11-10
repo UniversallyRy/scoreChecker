@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer } from "react";
-import { StackNavigationProp } from '@react-navigation/stack';
+import { StackScreenProps } from '@react-navigation/stack';
 import { Box, ScrollView, KeyboardAvoidingView } from "native-base";
 import PlayerCard from "../components/player/Card";
 import PlaceHolder from "../components/player/Placeholder";
@@ -8,10 +8,15 @@ import { initialState, handleInput, playerReducer } from "../utils/player";
 import { colorScheme } from "../constants";
 import { findPlayer } from "../api";
 import { AnimatePresence } from "moti";
+import { PlayerStackParams } from "../components/navigation/Stacks";
 
-const PlayerScreen = ({ navigation }: {
-  navigation: StackNavigationProp<{ item: object }>
-}) => {
+
+type ScoreStackProps = StackScreenProps<PlayerStackParams, 'Extended Profile'>;
+
+// Context's value is navigation prop from react-navigation/stack
+export type ProfileInterface = ScoreStackProps['navigation'];
+
+const PlayerScreen = ({ navigation }: { navigation: ProfileInterface }) => {
 
   const [state, dispatch] = useReducer(playerReducer, initialState);
 

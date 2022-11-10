@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, HStack, Text, VStack } from "native-base";
 import { Grid, GridItem } from "../Grid";
-import type { GameSummaryType } from "../../../types/gameSummary";
+import { GameSummaryType } from "../../../types/scoreTypes";
 
 type StatType = {
   label: string;

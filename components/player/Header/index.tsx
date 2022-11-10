@@ -3,7 +3,7 @@ import { Box, Image, Text } from "native-base";
 import { MotiView } from "moti";
 import logos from "../../../utils/logoManager";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../../../constants";
-import type { PlayerInfoType } from "../../../types";
+import type { PlayerInfoType } from "../../../types/playerTypes";
 
 const PlayerHeader = ({ pl }: PlayerInfoType) => {
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { VStack, ScrollView, Text } from 'native-base';
 import { Grid, GridHead, GridItem } from '../Grid';
-import type { PlayerStatsType, TeamInfoType } from '../../../types/gameSummary';
+import type { PlayerStatsType, TeamInfoType } from '../../../types/scoreTypes';
 
 export const TeamStats = ({ team }: { team: TeamInfoType }) => {
   return (

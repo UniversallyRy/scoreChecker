@@ -6,9 +6,9 @@ import PlayerInfo from "../Info";
 import { SubmitButton } from "../../Buttons";
 import { colorScheme } from "../../../constants";
 import { windowHeight, windowWidth } from "../../../utils/dimensions";
-import type { PlayerInfoType } from "../../../types";
-import { StackScreenProps } from "@react-navigation/stack";
-import { PlayerStackParams } from "../../navigation/Stacks";
+import type { StackScreenProps } from "@react-navigation/stack";
+import type { PlayerStackParams } from "../../navigation/Stacks";
+import type { PlayerInfoType } from "../../../types/playerTypes";
 
 type PlayerStackProps = StackScreenProps<PlayerStackParams, 'Extended Profile'>;
 type NavInterface = PlayerStackProps['navigation'];

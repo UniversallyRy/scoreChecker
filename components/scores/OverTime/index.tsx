@@ -1,6 +1,6 @@
 import React from 'react';
 import { GridItem } from '../Grid';
-import type { TeamInfoType } from '../../../types/gameSummary';
+import type { TeamInfoType } from '../../../types/scoreTypes';
 
 export const OvertimeHead = ({ period }: { period: number }) => {
   return period > 4 ? (

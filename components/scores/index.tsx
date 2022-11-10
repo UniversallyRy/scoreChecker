@@ -5,9 +5,9 @@ import ScoreCard from "./ScoreCard";
 import ScoresLoading from "./ScoresLoading";
 import GamesCounter from "./GamesCounter";
 import { windowWidth } from "../../utils/dimensions";
-import type { ScoreCardType } from "../../types/gameSummary";
+import type { GameType } from "../../types/scoreTypes";
 
-const Scores = ({ games }: { games: ScoreCardType[] }) => {
+const Scores = ({ games }: { games: GameType }) => {
   const numOfGames = Object.keys(games).length;
   const gameArray: Object[] = [];
 

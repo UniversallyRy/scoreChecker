@@ -1,16 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Keyboard } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
 import { Input, InputGroup, InputLeftAddon, Flex, Stack } from "native-base";
 import { Formik } from "formik";
-import Icon from "react-native-vector-icons/FontAwesome";
 import { SubmitButton } from "../../Buttons";
 import { colorScheme } from "../../../constants";
 import { windowHeight } from "../../../utils/dimensions";
-import { ACTIONTYPE } from "../../../types/routes";
+import type { ACTIONTYPE } from "../../../types/routeTypes";
+
+type DispatchType = {
+  dispatch: React.Dispatch<ACTIONTYPE>
+}
 
 type InputProp = {
-  handleInput: (_item: { player: string; }, _dispatch: (_value: ACTIONTYPE) => void) => boolean;
-  dispatch: React.Dispatch<ACTIONTYPE>
+  dispatch: DispatchType;
+  handleInput: (_item: { player: string; }, _dispatch: DispatchType) => boolean | undefined;
 }
 
 type KeyboardRefProps = {
