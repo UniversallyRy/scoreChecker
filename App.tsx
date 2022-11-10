@@ -64,7 +64,7 @@ export const App = () => {
           onLayout={onLayoutRootView}
         >
           <StatusBar style="auto" />
-          <BottomTabs />
+          <StorybookUIRoot />
         </Flex>
       </NavigationContainer>
     </NativeBaseProvider>
