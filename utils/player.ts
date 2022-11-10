@@ -1,7 +1,7 @@
 import { findPlayer } from "../api";
 import { NBARoster } from "./playerList";
 import { DEFAULT_PLAYER_INFO } from "../constants";
-import type { ACTIONTYPE } from "../types";
+import type { ACTIONTYPE } from "../types/routeTypes";
 
 /**
  * initialState object with playerInfo default id/name as Obi Toppin's
@@ -113,10 +113,10 @@ export const getPlayerInfo = (player: any) => {
     Position: player.pos,
     "Jersey #": player.num,
     College: player.hcc,
- //   "Draft Round": player.dr,
- //   "Draft Number": player.dn,
+    //   "Draft Round": player.dr,
+    //   "Draft Number": player.dn,
     "Draft Year": player.dy,
- //   Country: player.country
+    //   Country: player.country
   };
 };
 
@@ -127,7 +127,7 @@ export const getPlayerInfo = (player: any) => {
  * @returns a call to loadPlayerInfo if input is found else sends an alert to user
  */
 
-export const handleInput = (item: { player: string }, dispatch: (value: ACTIONTYPE) => void) => {
+export const handleInput = (item: { player: string }, dispatch: (_value: ACTIONTYPE) => void) => {
   // regex to test if 2 words were submitted
   const regNameTest = /^[a-zA-Z]+ [a-zA-Z]+$/;
   let trimmedInput = item.player.trim();
@@ -135,7 +135,7 @@ export const handleInput = (item: { player: string }, dispatch: (value: ACTIONTY
   const playerSearch = NBARoster.find(item => {
     if (item.firstName == firstName && item.lastName == lastName) {
       return item;
-    }else {
+    } else {
       return undefined;
     }
   });

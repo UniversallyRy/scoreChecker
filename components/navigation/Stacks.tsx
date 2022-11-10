@@ -5,8 +5,8 @@ import ExtendedGame from "../../screens/ExtendedGame";
 import PlayerScreen from "../../screens/PlayerScreen";
 import ExtendedProfile from "../../screens/ExtendedProfile";
 import { colorScheme } from "../../constants";
-import { ScoreCardType } from "../../types/gameSummary";
-import { PlayerInfoType } from "../../types";
+import { GameType } from "../../types/scoreTypes";
+import { PlayerInfoType } from "../../types/playerTypes";
 
 const name = "NBA Check-Up";
 
@@ -14,7 +14,7 @@ export type ScoreStackParams = {
   [name]: { name: string };
   ["Extended Game"]: {
     gameId: string;
-    scoreInfo: ScoreCardType;
+    scoreInfo: GameType;
   };
 }
 
