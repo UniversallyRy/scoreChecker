@@ -7,13 +7,16 @@ import { SubmitButton } from "../../Buttons";
 import { colorScheme } from "../../../constants";
 import { windowHeight, windowWidth } from "../../../utils/dimensions";
 import type { PlayerInfoType } from "../../../types";
+import { StackScreenProps } from "@react-navigation/stack";
+import { PlayerStackParams } from "../../navigation/Stacks";
 
+type PlayerStackProps = StackScreenProps<PlayerStackParams, 'Extended Profile'>;
+type NavInterface = PlayerStackProps['navigation'];
 type CardProps = {
   playerInfo: PlayerInfoType;
-  navigation: {
-    navigate: (arg0: string, arg1: object) => void;
-  }
+  navigation: NavInterface;
 }
+
 
 const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
   const [loading, setLoading] = useState(true);
@@ -69,7 +72,12 @@ const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
           ))}
           <SubmitButton
             /* Navigate to the Extended Profile route with params */
-            onPress={() => { navigation.navigate("Extended Profile", { pl }); }}
+            onPress={() => {
+              navigation.navigate("Extended Profile", {
+                playerId: pl.pid,
+                playerInfo: playerInfo
+              })
+            }}
             mt={20}
             alignSelf="center"
           >

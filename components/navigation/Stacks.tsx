@@ -18,11 +18,11 @@ export type ScoreStackParams = {
   };
 }
 
-type PlayerStackParams = {
+export type PlayerStackParams = {
   [name]: { playerId: string };
   ["Extended Profile"]: {
-    playerId: string
-    playerInfo: PlayerInfoType;
+    playerId: number | string
+    playerInfo: PlayerInfoType
   };
 }
 

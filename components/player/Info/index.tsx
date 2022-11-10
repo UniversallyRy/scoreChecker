@@ -1,5 +1,5 @@
-import { HStack, Text } from 'native-base';
 import React from 'react';
+import { HStack, Text } from 'native-base';
 
 type InfoProps = {
   name: string;
@@ -12,7 +12,6 @@ type InfoProps = {
 const Info = ({ name, value, colorScheme }: InfoProps) => (
   <HStack
     key={name + "_key"}
-    textAlign="auto"
     alignItems="center"
     mb={2}
   >

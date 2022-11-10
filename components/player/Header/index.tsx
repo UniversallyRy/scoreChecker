@@ -1,9 +1,9 @@
 import React from "react";
 import { Box, Image, Text } from "native-base";
-import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../../../constants";
-import logos from "../../../utils/logoManager";
-import type { PlayerInfoType } from "../../../types";
 import { MotiView } from "moti";
+import logos from "../../../utils/logoManager";
+import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../../../constants";
+import type { PlayerInfoType } from "../../../types";
 
 const PlayerHeader = ({ pl }: PlayerInfoType) => {
   return (

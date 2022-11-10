@@ -6,15 +6,15 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { SubmitButton } from "../../Buttons";
 import { colorScheme } from "../../../constants";
 import { windowHeight } from "../../../utils/dimensions";
-import type { ACTIONTYPE } from "../../../types";
+import { ACTIONTYPE } from "../../../types/routes";
 
 type InputProp = {
-  handleInput: (item: { player: string; }, dispatch: (value: ACTIONTYPE) => void) => boolean;
+  handleInput: (_item: { player: string; }, _dispatch: (_value: ACTIONTYPE) => void) => boolean;
   dispatch: React.Dispatch<ACTIONTYPE>
 }
 
 type KeyboardRefProps = {
-  "current"?: { "remove": () => void }
+  "current": { "remove": () => void } | undefined
 }
 
 const SearchBar = ({ handleInput, dispatch }: InputProp) => {
@@ -35,6 +35,7 @@ const SearchBar = ({ handleInput, dispatch }: InputProp) => {
 
   //event listeners for keyboard controls
   useEffect(() => {
+
     keyboardDidShowListener.current = Keyboard.addListener(
       "keyboardWillShow",
       onKeyboardShow
@@ -43,10 +44,12 @@ const SearchBar = ({ handleInput, dispatch }: InputProp) => {
       "keyboardWillHide",
       onKeyboardHide
     );
+
     return () => {
-      keyboardDidShowListener.current.remove();
-      keyboardDidHideListener.current.remove();
-    };
+      keyboardDidShowListener?.current?.remove();
+      keyboardDidHideListener?.current?.remove();
+    }
+
   }, []);
 
   return (

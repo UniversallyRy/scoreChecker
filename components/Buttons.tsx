@@ -1,8 +1,10 @@
 import React, { ReactElement } from "react";
-import { Button, IButtonProps } from "native-base";
+import { Button } from "native-base";
+import { InterfaceButtonProps } from "native-base/lib/typescript/components/primitives/Button/types";
 import { colorScheme } from "../constants";
 
-export const SubmitButton = ({ children, ...props }: { children: ReactElement }) => {
+export const SubmitButton = ({ children, onPress, ...props }:
+  { children: ReactElement; onPress: () => void; props?: InterfaceButtonProps | null }) => {
   return (
     <Button
       bg={colorScheme.title}
@@ -13,6 +15,7 @@ export const SubmitButton = ({ children, ...props }: { children: ReactElement })
       shadow={5}
       key="clickablebuttonkey"
       _text={{ color: colorScheme.text }}
+      onPress={onPress}
       {...props}
     >
       {children}
@@ -20,7 +23,7 @@ export const SubmitButton = ({ children, ...props }: { children: ReactElement })
   );
 };
 
-export const LoadingButton = (props: IButtonProps) => {
+export const LoadingButton = (props?: InterfaceButtonProps | null) => {
   return (
     <Button
       isLoading

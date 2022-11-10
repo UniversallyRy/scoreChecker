@@ -5,11 +5,12 @@ import { windowHeight, windowWidth } from "../utils/dimensions";
 import { getPlayerInfo, collegeCheck } from "../utils/player";
 import { PROFILE_PIC_URL_PREFIX, colorScheme } from "../constants";
 import logos from "../utils/logoManager";
-import type { ExtendedStatsType } from "../types";
+import type { StatsRouteType } from "../types/routes";
 
 // todos: better list styling, better shared element screen transition
-const ExtendedProfile = ({ route }: { route: ExtendedStatsType }) => {
-  const { pl } = route.params;
+const ExtendedProfile = ({ route }: { route: StatsRouteType }) => {
+
+  const { pl } = route.params.playerInfo;
 
   return (
     <Box h={windowHeight} bg={colorScheme.background}>
@@ -53,10 +54,10 @@ const ExtendedProfile = ({ route }: { route: ExtendedStatsType }) => {
           alignSelf="center"
           source={logos[pl["ta"]]}
           key={pl["ta"] + "_logoKey"}
-          alt={pl["tn"]}
+          alt={pl["ta"] + ' Logo Img'}
         />
         {Object.entries(getPlayerInfo(pl)).map(([key, data]) => (
-          <HStack m={1} textAlign="auto" key={key}>
+          <HStack m={1} textAlign="left" key={key}>
             <MotiText
               from={{ opacity: 0.4, scale: 0.7 }}
               animate={{ opacity: 1, scale: 1 }}

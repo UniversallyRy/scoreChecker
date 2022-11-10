@@ -1,5 +1,3 @@
-import type { GameType } from "./scores";
-
 export type PlayerInfoType = {
   "pl": {
     "ca": {
@@ -243,10 +241,6 @@ export type FindPlayerType = {
   },
 }
 
-export type ACTIONTYPE =
-  | { type: "FETCH_SUCCESS"; payload: any }
-  | { type: "FETCH_ERROR"; payload: string };
-
 export type PlayerProfileType = {
   playerName?: string;
   playerId: number;
@@ -334,25 +328,6 @@ export type PlayerResType = {
   }[],
   "commonPlayerInfo"?: PlayerInfoType
   "playerHeadlineStats"?: PlayerStatsType
-}
-
-export type ExtendedStatsType = {
-  "key": string;
-  "name": string;
-  "params": {
-    "pl": PlayerInfoType
-  },
-  "path": undefined,
-}
-
-export type GameRouteType = {
-  "key": string;
-  "name": string;
-  "params": {
-    "gameId": string;
-    "scoreInfo": GameType
-  },
-  "path": undefined
 }
 
 export type ScoreBoardType = {
