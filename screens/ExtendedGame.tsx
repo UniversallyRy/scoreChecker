@@ -4,40 +4,40 @@ import Header from "../components/scores/extended/Header";
 import { GameSummary } from "../components/scores/Summary";
 import { TeamStats } from "../components/scores/TeamStats";
 import { GameStats } from "../components/scores/GameStats";
-import { windowHeight, windowWidth } from "../utils/dimensions";
 import logos from "../utils/logoManager";
-import { getGameDetails } from "../api";
+import { windowHeight, windowWidth } from "../utils/dimensions";
 import { colorScheme } from "../constants";
+import { getGameDetails } from "../api";
 import type { GameSummaryType } from "../types/gameSummary";
 import type { GameRouteType } from "../types";
 // import { MotiView, MotiText } from "moti";
 
-
 const ExtendedGame = ({ route }: { route: GameRouteType }) => {
 
-  const [gameInfo, setGameInfo] = useState<GameSummaryType | {}>({});
-  const { itemId, scoreInfo } = route.params;
+  const { gameId, scoreInfo } = route.params;
   const gameDate = scoreInfo.gameUrlCode.slice(0, 4);
   const gameTeams = scoreInfo.gameUrlCode.slice(-6);
   const splitAt = (index: number) => (x: string) => [x.slice(0, index), x.slice(index)];
   const [awayTeam, homeTeam] = splitAt(3)(gameTeams);
   const [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
+  const [gameInfo, setGameInfo] = useState<GameSummaryType | undefined>(undefined);
 
   useEffect(() => {
     async function initData() {
-      // on initial render, async call for more game data using gameId
       await getGameDetails(gameDate, scoreInfo.gameId)
         .then((res) => {
           return res.data.g;
         })
         .then((res: GameSummaryType) => {
-          // for (const [key, value] of Object.entries(res.hls.tstsg)) { console.log(`  ${key}: ${value}`) }
-          //  console.log(res.offs);
           setGameInfo(res);
         });
     }
     initData();
   }, []);
+
+  if (!gameInfo) {
+    return null;
+  }
 
   return (
     <VStack
@@ -46,9 +46,9 @@ const ExtendedGame = ({ route }: { route: GameRouteType }) => {
       alignItems="center"
       alignSelf="center"
       bg={colorScheme.foreground}
-      key={itemId + "_extendedPage"}
+      key={gameId + "_extendedPage"}
     >
-      {Object.prototype.hasOwnProperty.call(gameInfo, 'lpla')
+      {gameInfo.lpla != undefined
         ? <>
           <Header
             gameId={scoreInfo.gameId}

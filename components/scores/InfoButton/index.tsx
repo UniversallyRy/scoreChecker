@@ -4,14 +4,10 @@ import { colorScheme } from "../../../constants";
 import { ScreenNavContext } from "../../../GameContext";
 import type { ScoreCardType } from "../../../types/gameSummary";
 
-type Props = {
-  game: ScoreCardType;
-  isFinished: string;
-}
+const InfoButton = ({ game, isFinished }: { game: ScoreCardType; isFinished: string }) => {
 
-const InfoButton = ({ game, isFinished }: Props) => {
   const navContext = useContext(ScreenNavContext);
-  console.log(navContext);
+
   return (
     <Pressable>
       <InfoIcon
