@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import { Platform } from "react-native";
-import { Box, Flex, Stack, Text } from "native-base";
 import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker";
+import { Text } from "native-base";
 import { SubmitButton } from "../../Buttons";
 import { colorScheme } from "../../../constants";
 
 type DateProps = {
   todaysDate: string;
-  onSubmit: (item: string) => void;
+  onSubmit: (_item: string) => void;
   loading: boolean
 }
 
 const DatePicker = ({ todaysDate, onSubmit, loading }: DateProps) => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
-  const showMode = () => {
-    setShow(true);
-  };
+  const showMode = () => { setShow(true) };
 
   const onChange = (event: DateTimePickerEvent, selectedDate: Date) => {
     if (event.type == "set") {
@@ -44,11 +42,7 @@ const DatePicker = ({ todaysDate, onSubmit, loading }: DateProps) => {
 
   return (
     <>
-      <SubmitButton
-        alignItems="center"
-        onPress={showMode}
-        isDisabled={loading}
-      >
+      <SubmitButton onPress={showMode} isDisabled={loading}>
         <Text color={colorScheme.text} fontWeight={600}>
           CHANGE DATE
         </Text>
