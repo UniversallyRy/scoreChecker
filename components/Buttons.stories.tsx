@@ -10,6 +10,5 @@ export const actions = {
 
 storiesOf('Buttons', module)
   .addDecorator((story) => <Box flexDirection="row" justifyContent="center" paddingTop={300}>{story()}</Box>)
-  .add('Submit Button', () => <SubmitButton onPress={actions.onPinTask}>Test</SubmitButton>)
+  .add('Submit Button', () => <SubmitButton onPress={actions.onPinTask}><Text>Test</Text></SubmitButton>)
   .add('Loading Button', () => <LoadingButton {...actions} />)
-

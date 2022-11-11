@@ -58,13 +58,9 @@ export const App = () => {
   return (
     <NativeBaseProvider theme={theme}>
       <NavigationContainer>
-        <Flex
-          height="full"
-          width="full"
-          onLayout={onLayoutRootView}
-        >
+        <Flex h="full" w="full" onLayout={onLayoutRootView}>
           <StatusBar style="auto" />
-          <BottomTabs />
+          <StorybookUIRoot />
         </Flex>
       </NavigationContainer>
     </NativeBaseProvider>

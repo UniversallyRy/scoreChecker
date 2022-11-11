@@ -5,8 +5,8 @@ import ExtendedGame from "../../screens/ExtendedGame";
 import PlayerScreen from "../../screens/PlayerScreen";
 import ExtendedProfile from "../../screens/ExtendedProfile";
 import { colorScheme } from "../../constants";
-import { GameType } from "../../types/scoreTypes";
-import { PlayerInfoType } from "../../types/playerTypes";
+import type { GameType } from "../../types/scoreTypes";
+import type { PlayerInfoType } from "../../types/playerTypes";
 
 const name = "NBA Check-Up";
 
