@@ -1,12 +1,12 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { ScoreScreens, PlayerScreens } from "../navigation/Stacks";
+import { ScoreScreens, PlayerScreens } from "../navigation/Screens";
 import { colorScheme } from "../../constants";
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabs = () => (
+const ScreensWithNav = () => (
   <Tab.Navigator
     initialRouteName="Scores"
     screenOptions={{
@@ -40,4 +40,4 @@ const BottomTabs = () => (
   </Tab.Navigator>
 );
 
-export default BottomTabs;
+export default ScreensWithNav;

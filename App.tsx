@@ -15,12 +15,11 @@ import {
 } from "@expo-google-fonts/rubik";
 // Swap in App component to check stories or just run app
 import StorybookUIRoot from './storybook';
-import BottomTabs from "./components/navigation/BottomTabs";
+import ScreensWithNav from "./components/navigation/ScreenWithNav";
 
-// Keep the splash screen visible while we fetch resources
+// Keeps the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
-
-// Todos: better animations, extend theme further added basic sizes for fonts, containers, etc
+// Todos: better animations, extend theme further added basic sizes for fonts
 const theme = extendTheme({
   fontConfig: {
     Rubik: {
@@ -60,7 +59,7 @@ export const App = () => {
       <NavigationContainer>
         <Flex h="full" w="full" onLayout={onLayoutRootView}>
           <StatusBar style="auto" />
-          <StorybookUIRoot />
+          <ScreensWithNav />
         </Flex>
       </NavigationContainer>
     </NativeBaseProvider>

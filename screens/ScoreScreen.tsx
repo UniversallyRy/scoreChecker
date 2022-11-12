@@ -8,8 +8,8 @@ import ScoresLoading from "../components/scores/ScoresLoading";
 import { colorScheme } from "../constants";
 import { ContextInterface, ScreenNavContext } from "../GameContext";
 import { gamesReducer } from "../utils/player";
+
 // todos: possible team screen component/team standings, make card transition into extended game screen
-//
 const ScoreScreen = ({ navigation }: { navigation: ContextInterface }) => {
 
   const [state, dispatch] = useReducer(gamesReducer, { games: [] });
