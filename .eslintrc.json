@@ -20,7 +20,7 @@
     },
     "plugins": [
         "react",
-        "react-native",
+        "react-native"
     ],
     "rules": {
       "no-use-before-define": "off",
@@ -31,7 +31,8 @@
       {
         "files": ["*.js", "*.ts", "*.tsx"],
         "rules": {
-          "no-undef": "off"
+          "no-undef": "off",
+          "no-unused-vars": "off"
         }
       }
     ],
