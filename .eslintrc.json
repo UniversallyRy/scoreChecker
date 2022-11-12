@@ -19,12 +19,13 @@
       "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-native",
     ],
     "rules": {
       "no-use-before-define": "off",
       "react/jsx-filename-extension": [ "warn", {"extensions": [".tsx"]} ],
-      "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
+      "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
     },
    "overrides": [
       {
