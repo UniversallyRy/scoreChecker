@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState, useEffect, useRef, Dispatch } from "react";
 import { Keyboard } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Input, InputGroup, InputLeftAddon, Flex, Stack } from "native-base";
@@ -8,13 +8,9 @@ import { colorScheme } from "../../../constants";
 import { windowHeight } from "../../../utils/dimensions";
 import type { ACTIONTYPE } from "../../../types/routeTypes";
 
-type DispatchType = {
-  dispatch: React.Dispatch<ACTIONTYPE>
-}
-
 type InputProp = {
-  dispatch: DispatchType;
-  handleInput: (_item: { player: string; }, _dispatch: DispatchType) => boolean | undefined;
+  dispatch: Dispatch<ACTIONTYPE>;
+  handleInput: (_item: { player: string; }, _dispatch: Dispatch<ACTIONTYPE>) => boolean | undefined;
 }
 
 type KeyboardRefProps = {

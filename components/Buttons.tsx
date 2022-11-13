@@ -1,9 +1,9 @@
-import React, { ReactElement } from "react";
-import { Button, IButtonProps } from "native-base";
+import React, { ReactNode } from "react";
+import { Button, Text, StyledProps } from "native-base";
 import { colorScheme } from "../constants";
 
 export const SubmitButton = ({ children, onPress, ...props }:
-  { children: ReactElement; onPress: () => void; props?: IButtonProps | null }) => {
+  { children: ReactNode; onPress: () => void; props?: StyledProps | null }) => {
   return (
     <Button
       bg={colorScheme.title}
@@ -14,16 +14,17 @@ export const SubmitButton = ({ children, onPress, ...props }:
       shadow={5}
       alignSelf="center"
       key="clickablebuttonkey"
-      _text={{ color: colorScheme.text }}
       onPress={onPress}
       {...props}
     >
-      {children}
+      <Text color={colorScheme.text} fontWeight={600}>
+        {children}
+      </Text>
     </Button>
   );
 };
 
-export const LoadingButton = (props?: IButtonProps | null) => {
+export const LoadingButton = (props?: StyledProps | null) => {
   return (
     <Button
       isLoading

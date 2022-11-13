@@ -8,11 +8,9 @@ import { initialState, handleInput, playerReducer } from "../utils/player";
 import { colorScheme } from "../constants";
 import { findPlayer } from "../api";
 import { AnimatePresence } from "moti";
-import { PlayerStackParams } from "../components/navigation/Stacks";
-
+import type { PlayerStackParams } from "../components/navigation/Screens";
 
 type ScoreStackProps = StackScreenProps<PlayerStackParams, 'Extended Profile'>;
-
 // Context's value is navigation prop from react-navigation/stack
 export type ProfileInterface = ScoreStackProps['navigation'];
 

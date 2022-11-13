@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { VStack, Text, Spacer } from "native-base";
+import { VStack, Spacer } from "native-base";
 import { MotiView } from "moti";
 import PlayerHeader from "../Header";
 import PlayerInfo from "../Info";
@@ -7,7 +7,7 @@ import { SubmitButton } from "../../Buttons";
 import { colorScheme } from "../../../constants";
 import { windowHeight, windowWidth } from "../../../utils/dimensions";
 import type { StackScreenProps } from "@react-navigation/stack";
-import type { PlayerStackParams } from "../../navigation/Stacks";
+import type { PlayerStackParams } from "../../navigation/Screens";
 import type { PlayerInfoType } from "../../../types/playerTypes";
 
 type PlayerStackProps = StackScreenProps<PlayerStackParams, 'Extended Profile'>;
@@ -84,13 +84,7 @@ const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
               })
             }}
           >
-            <Text
-              color={colorScheme.text}
-              fontStyle="italic"
-              fontWeight={300}
-            >
-              CLICK FOR MORE INFO{" "}
-            </Text>
+            CLICK FOR MORE INFO{" "}
           </SubmitButton>
         </VStack>
       )}
