@@ -8,29 +8,29 @@ import ScoresLoading from "../components/scores/ScoresLoading";
 import { colorScheme } from "../constants";
 import { ContextInterface, ScreenNavContext } from "../GameContext";
 import { gamesReducer } from "../utils/player";
+import { Box, Text } from "native-base";
 
 // todos: possible team screen component/team standings, make card transition into extended game screen
 const ScoreScreen = ({ navigation }: { navigation: ContextInterface }) => {
 
-  const [state, dispatch] = useReducer(gamesReducer, { games: [] });
+  const [state, dispatch] = useReducer(gamesReducer, { games: [], noData: true });
   const [dayOfGames, setDate] = useState(moment().format("YYYYMMDD"));
   const [loading, setLoading] = useState(true);
 
+  const loader = () => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 400);
+  }
   useEffect(() => {
     async function initData() {
       await getGamesByDate(dayOfGames, dispatch);
     }
     initData();
+    loader();
   }, [dayOfGames]);
 
-  const loader = () => {
-    setLoading(false);
-  };
-  setTimeout(() => {
-    loader();
-  }, 400);
-
-  // callback for date changes
+  // callback to watch date string changes
   const onSubmit = useCallback(
     (item: string) => {
       let changedDate = item;
@@ -57,7 +57,12 @@ const ScoreScreen = ({ navigation }: { navigation: ContextInterface }) => {
         }}
       >
         <Header loading={loading} onSubmit={onSubmit} todaysDate={dayOfGames} />
-        {loading && (
+        {state.noData && (
+          <Box alignItems="center" bg="blue.50" w={400} h={400}>
+            <Text>No Data</Text>
+          </Box>
+        )}
+        {loading && !state.noData && (
           <MotiView
             key="scoresLoading"
             exit={{
@@ -67,7 +72,7 @@ const ScoreScreen = ({ navigation }: { navigation: ContextInterface }) => {
             <ScoresLoading />
           </MotiView>
         )}
-        {!loading && (
+        {!state.noData && (
           <ScreenNavContext.Provider value={navigation}>
             <Scores
               key="scoresContainer"

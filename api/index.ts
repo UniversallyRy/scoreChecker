@@ -72,15 +72,19 @@ export const getStandings = async () => {
 export const getGamesByDate = async (date: string, dispatch: any) => {
   const response = await fetch(`${API_URL.base}v2/${date}/scoreboard.json`);
   const data = await response.json();
+  const res = response.status
   const { games }: { games: GameSummaryType[] } = data;
-  dispatch({
-    type: "FETCH_SUCCESS",
-    payload: { ...games }
-  });
-  return {
-    data,
-    status: response.status,
-  };
+
+  if (res == 200 && games != undefined) {
+    dispatch({
+      type: "FETCH_SUCCESS",
+      payload: { ...games }
+    })
+  } else {
+    dispatch({
+      type: "FETCH_ERROR"
+    })
+  }
 };
 
 /**

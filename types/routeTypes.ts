@@ -1,5 +1,5 @@
-import { PlayerInfoType } from ".";
-import { GameType } from "./scores";
+import type { GameType } from "./scoreTypes";
+import type { PlayerInfoType } from "./playerTypes";
 
 
 export type ACTIONTYPE =

@@ -15,6 +15,7 @@ export const initialState = {
 
 const gameInitialState = {
   games: [],
+  noData: true
 };
 /**
  * useReducer reducer method that finds dipatch's action.type that mamtches switch case
@@ -28,11 +29,13 @@ export const gamesReducer = (state: typeof gameInitialState, action: ACTIONTYPE)
     case "FETCH_SUCCESS":
       return {
         games: action.payload,
+        noData: false,
         error: "",
       };
     case "FETCH_ERROR":
       return {
-        games: {},
+        games: [],
+        noData: true,
         error: "Something went wrong",
       };
     default:
