@@ -24,7 +24,7 @@ export const GridRow = ({ data }: { data: string[] }) => {
       {data.map((value: string | number, i: number) => {
         if (i == 0) {
           return (
-            <GridCell w="100px" key={i}>
+            <GridCell alignItems="center" w="100px" key={i}>
               {value}
             </GridCell>
           )
@@ -59,10 +59,14 @@ export const GridItem = ({ children, ...props }: IBoxProps<any>) => {
 
 export const GridCell = ({ children, ...props }: IBoxProps<any>) => {
   return (
-    <Flex w={10} bgColor="grey" {...props}>
+    <Flex
+      w={10}
+      bgColor="grey"
+      borderWidth={1}
+      {...props}
+    >
       <Text
         flex={1}
-        borderWidth={1}
         px={2}
         py={1}
         style={{ fontSize: 12 }}
@@ -75,9 +79,7 @@ export const GridCell = ({ children, ...props }: IBoxProps<any>) => {
 
 export const GridHead = ({ children }: React.PropsWithChildren<{}>) => {
   return (
-    <Heading
-      justifyContent="space-around" alignItems="center"
-    >
+    <Heading alignItems="center">
       {children}
     </Heading>
   )

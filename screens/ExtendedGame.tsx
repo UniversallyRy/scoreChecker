@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Box, VStack, ScrollView, Text } from "native-base";
 import Header from "../components/scores/extended/Header";
-import { GameSummary } from "../components/scores/Summary";
-import { TeamStats } from "../components/scores/TeamStats";
+import QuarterLogs from "../components/scores/QuarterLogs";
+import TeamStats from "../components/scores/TeamStats";
 import { GameStats } from "../components/scores/GameStats";
 import logos from "../utils/logoManager";
 import { windowHeight, windowWidth } from "../utils/dimensions";
@@ -74,7 +74,7 @@ const ExtendedGame = ({ route }: { route: GameRouteType }) => {
               borderRadius={32}
               key="extgamebody"
             >
-              <GameSummary game={gameInfo} />
+              <QuarterLogs game={gameInfo} />
               <VStack>
                 <TeamStats team={gameInfo["vls"]} />
                 <TeamStats team={gameInfo["hls"]} />

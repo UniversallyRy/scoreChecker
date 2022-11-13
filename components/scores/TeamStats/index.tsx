@@ -4,13 +4,11 @@ import { Grid, GridRow } from '../Grid';
 import { colorScheme } from '../../../constants';
 import type { PlayerStatsType, TeamInfoType } from '../../../types/scoreTypes';
 
-export const TeamStats = ({ team }: { team: TeamInfoType }) => {
+const TeamStats = ({ team }: { team: TeamInfoType }) => {
   const gridProp = ["Player", "Min", "Reb", "Ast", "Pts"];
   const teamStatRows: any[][] = [];
 
-
   team.pstsg.map((player: PlayerStatsType) => {
-
     teamStatRows.push([
       `${player.fn[0]} ${player.ln}`,
       player.min,
@@ -23,7 +21,7 @@ export const TeamStats = ({ team }: { team: TeamInfoType }) => {
   return (
     <Grid>
       <ScrollView>
-        <VStack alignItems="stretch">
+        <VStack>
           <Text alignSelf="center" color={colorScheme.text}>
             {team.tc} {team.tn}
           </Text>
@@ -40,3 +38,5 @@ export const TeamStats = ({ team }: { team: TeamInfoType }) => {
     </Grid >
   );
 };
+
+export default TeamStats;
