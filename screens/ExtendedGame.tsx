@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, HStack, VStack, ScrollView, Text } from "native-base";
+import { Box, VStack, ScrollView, Text } from "native-base";
 import Header from "../components/scores/extended/Header";
 import { GameSummary } from "../components/scores/Summary";
 import { TeamStats } from "../components/scores/TeamStats";
@@ -15,8 +15,8 @@ import type { GameRouteType } from "../types/routeTypes";
 const ExtendedGame = ({ route }: { route: GameRouteType }) => {
 
   const { gameId, scoreInfo } = route.params;
-  const gameDate = scoreInfo.gameUrlCode.slice(0, 4);
-  const gameTeams = scoreInfo.gameUrlCode.slice(-6);
+  const gameDate = scoreInfo["gameUrlCode"].slice(0, 4);
+  const gameTeams = scoreInfo["gameUrlCode"].slice(-6);
   const splitAt = (index: number) => (x: string) => [x.slice(0, index), x.slice(index)];
   const [awayTeam, homeTeam] = splitAt(3)(gameTeams);
   const [awayLogo, homeLogo] = [logos[awayTeam], logos[homeTeam]];
@@ -24,7 +24,7 @@ const ExtendedGame = ({ route }: { route: GameRouteType }) => {
 
   useEffect(() => {
     async function initData() {
-      await getGameDetails(gameDate, scoreInfo.gameId)
+      await getGameDetails(gameDate, scoreInfo["gameId"])
         .then((res) => {
           return res.data.g;
         })
@@ -51,7 +51,7 @@ const ExtendedGame = ({ route }: { route: GameRouteType }) => {
       {gameInfo.lpla != undefined
         ? <>
           <Header
-            gameId={scoreInfo.gameId}
+            gameId={scoreInfo["gameId"]}
             arenaName={gameInfo["an"]}
             arenaCity={gameInfo["ac"]}
             arenaState={gameInfo["as"]}
@@ -75,10 +75,10 @@ const ExtendedGame = ({ route }: { route: GameRouteType }) => {
               key="extgamebody"
             >
               <GameSummary game={gameInfo} />
-              <HStack>
+              <VStack>
                 <TeamStats team={gameInfo["vls"]} />
                 <TeamStats team={gameInfo["hls"]} />
-              </HStack>
+              </VStack>
               <GameStats game={gameInfo} />
               <Box>
                 <ScrollView mb={3}>

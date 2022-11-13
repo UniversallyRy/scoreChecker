@@ -1,38 +1,42 @@
 import React from 'react';
 import { VStack, ScrollView, Text } from 'native-base';
-import { Grid, GridHead, GridItem } from '../Grid';
+import { Grid, GridRow } from '../Grid';
+import { colorScheme } from '../../../constants';
 import type { PlayerStatsType, TeamInfoType } from '../../../types/scoreTypes';
 
 export const TeamStats = ({ team }: { team: TeamInfoType }) => {
+  const gridProp = ["Player", "Min", "Reb", "Ast", "Pts"];
+  const teamStatRows: any[][] = [];
+
+
+  team.pstsg.map((player: PlayerStatsType) => {
+
+    teamStatRows.push([
+      `${player.fn[0]} ${player.ln}`,
+      player.min,
+      player.reb,
+      player.ast,
+      player.pts,
+    ])
+  })
+
   return (
     <Grid>
       <ScrollView>
-        <VStack>
-          <Text>
+        <VStack alignItems="stretch">
+          <Text alignSelf="center" color={colorScheme.text}>
             {team.tc} {team.tn}
           </Text>
-          <VStack>
-            <GridHead>
-              <GridItem>Player</GridItem>
-              <GridItem>Min</GridItem>
-              <GridItem>Reb</GridItem>
-              <GridItem>Ast</GridItem>
-              <GridItem>Pts</GridItem>
-            </GridHead>
-            {team.pstsg.map((player: PlayerStatsType) => (
-              <GridHead key={player.fn[0] + player.ln}>
-                <GridItem>
-                  {player.fn[0]}. {player.ln}
-                </GridItem>
-                <GridItem>{player.min}</GridItem>
-                <GridItem>{player.reb}</GridItem>
-                <GridItem>{player.ast}</GridItem>
-                <GridItem>{player.pts}</GridItem>
-              </GridHead>
-            ))}
-          </VStack>
+          <GridRow data={gridProp} />
+          {team.pstsg.map((_player, i) => {
+            if (i == 0) {
+              return <GridRow key={i} data={teamStatRows[i]} />
+            } else {
+              return <GridRow key={i} data={teamStatRows[i]} />
+            }
+          })}
         </VStack>
       </ScrollView>
-    </Grid>
+    </Grid >
   );
 };
