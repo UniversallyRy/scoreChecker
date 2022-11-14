@@ -5,9 +5,8 @@ import { windowWidth } from "../../../utils/dimensions";
 export const Grid = ({ children }: React.PropsWithChildren<{}>) => {
   return (
     <Flex
-      my={2}
+      my={4}
       maxWidth={windowWidth}
-      minH="10%"
       borderColor="orange.200"
       borderWidth={2}
     >
@@ -18,20 +17,28 @@ export const Grid = ({ children }: React.PropsWithChildren<{}>) => {
   );
 };
 
-export const GridRow = ({ data }: { data: string[] }) => {
+export const GridRow = ({ data }: { data: (string | number)[] }) => {
   return (
     <HStack>
       {data.map((value: string | number, i: number) => {
-        if (i == 0) {
+        // data.length added for
+        if (data.length >= 4 && i >= 1) {
           return (
-            <GridCell alignItems="center" w="100px" key={i}>
+            <GridCell key={i}>
+              {value}
+            </GridCell>
+          )
+        }
+        else if (data.length < 4) {
+          return (
+            <GridCell w="140px" key={i}>
               {value}
             </GridCell>
           )
         }
         else {
           return (
-            <GridCell textAlign="center" key={i}>
+            <GridCell w="100px" key={i}>
               {value}
             </GridCell>
           )
@@ -60,13 +67,14 @@ export const GridItem = ({ children, ...props }: IBoxProps<any>) => {
 export const GridCell = ({ children, ...props }: IBoxProps<any>) => {
   return (
     <Flex
-      w={10}
+      w={20}
+      justifyContent="center"
       bgColor="grey"
       borderWidth={1}
       {...props}
     >
       <Text
-        flex={1}
+        textAlign="center"
         px={2}
         py={1}
         style={{ fontSize: 12 }}

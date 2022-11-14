@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Box, VStack, ScrollView, Text } from "native-base";
+import { Box, VStack, ScrollView, Text, Flex } from "native-base";
 import Header from "../components/scores/extended/Header";
 import QuarterLogs from "../components/scores/QuarterLogs";
+import PlayerStats from "../components/scores/PlayerStats";
 import TeamStats from "../components/scores/TeamStats";
-import { GameStats } from "../components/scores/GameStats";
 import logos from "../utils/logoManager";
 import { windowHeight, windowWidth } from "../utils/dimensions";
 import { colorScheme } from "../constants";
@@ -43,8 +43,8 @@ const ExtendedGame = ({ route }: { route: GameRouteType }) => {
     <VStack
       h={windowHeight}
       w={windowWidth}
+      pb={50}
       alignItems="center"
-      alignSelf="center"
       bg={colorScheme.foreground}
       key={gameId + "_extendedPage"}
     >
@@ -64,28 +64,27 @@ const ExtendedGame = ({ route }: { route: GameRouteType }) => {
             key="header"
           />
           <ScrollView>
-            <Box
+            <Flex
               bg={colorScheme.title}
-              mt={1}
               w={windowWidth}
               h="full"
-              mb={40}
               alignItems="center"
               borderRadius={32}
               key="extgamebody"
             >
               <QuarterLogs game={gameInfo} />
-              <VStack>
-                <TeamStats team={gameInfo["vls"]} />
-                <TeamStats team={gameInfo["hls"]} />
-              </VStack>
-              <GameStats game={gameInfo} />
+              <Text alignSelf="center" color={colorScheme.text}>
+                Player Stats
+              </Text>
+              <PlayerStats team={gameInfo["vls"]} />
+              <PlayerStats team={gameInfo["hls"]} />
+              <TeamStats game={gameInfo} />
               <Box>
                 <ScrollView mb={3}>
                   <Text>{JSON.stringify(gameInfo ? null : 'No data')}</Text>
                 </ScrollView>
               </Box>
-            </Box>
+            </Flex>
           </ScrollView>
         </>
         : null}

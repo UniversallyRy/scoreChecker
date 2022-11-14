@@ -11,7 +11,7 @@ const QuarterLogs = ({ game }: { game: GameSummaryType }) => {
   const awayQs = [`${game.vls.ta}`, `${game.vls.q1}`, `${game.vls.q2}`, `${game.vls.q3}`, `${game.vls.q4}`];
 
   return (
-    <Flex pt={5} minW="full" alignItems="center">
+    <Flex mt={5} mb={10} minW="full" alignItems="center">
       <Text color={colorScheme.text}>Quarter Logs</Text>
       <Flex overflowX="auto">
         <Grid>
