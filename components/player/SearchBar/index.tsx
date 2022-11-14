@@ -90,7 +90,7 @@ const SearchBar = ({ handleInput, dispatch }: InputProp) => {
               />
             </InputGroup>
             <SubmitButton onPress={handleSubmit}>
-              <Icon name="search" size={28} color={colorScheme.text} />
+              <Icon name="search" size={22} color={colorScheme.text} />
             </SubmitButton>
           </Stack>
         )}
