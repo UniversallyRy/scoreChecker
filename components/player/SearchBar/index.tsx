@@ -33,7 +33,6 @@ const SearchBar = ({ handleInput, dispatch }: InputProp) => {
   const keyboardDidShowListener: KeyboardRefProps = useRef();
   const keyboardDidHideListener: KeyboardRefProps = useRef();
 
-  //event listeners for keyboard controls
   useEffect(() => {
 
     keyboardDidShowListener.current = Keyboard.addListener(

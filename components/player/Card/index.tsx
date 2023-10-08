@@ -21,9 +21,8 @@ type CardProps = {
 
 const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
 
+  const { pl: player } = playerInfo;
   const [loading, setLoading] = useState(true);
-  const { pl } = playerInfo;
-  const player = pl
 
   const infoList = {
     "Team:": `${player.tc} ${player.tn}`,
@@ -35,13 +34,13 @@ const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
   };
 
   useEffect(() => {
-    const checkInfo = () => {
+    const playerInfoCheck = () => {
       return playerInfo.pl !== undefined ? setLoading(false) : setLoading(true);
     };
     return () => {
-      checkInfo();
+      playerInfoCheck();
     };
-  }, [player]);
+  }, [playerInfo]);
 
   return (
 
@@ -77,7 +76,6 @@ const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
           ))}
           <Spacer />
           <SubmitButton
-            /* Navigate to the Extended Profile route with params */
             onPress={() => {
               navigation.navigate("Extended Profile", {
                 playerId: player.pid,

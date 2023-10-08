@@ -8,12 +8,12 @@ import type { ACTIONTYPE } from "../types/routeTypes";
  * @property playerInfo
  */
 
-export const initialState = {
+export const initialPlayerState = {
   // Obi Toppin as default profile
   playerInfo: DEFAULT_PLAYER_INFO,
 };
 
-const gameInitialState = {
+const initialGameState = {
   games: [],
   noData: true
 };
@@ -24,7 +24,7 @@ const gameInitialState = {
  * @returns switch statement returns success, error or default state
  */
 
-export const gamesReducer = (state: typeof gameInitialState, action: ACTIONTYPE) => {
+export const gamesReducer = (state: typeof initialGameState, action: ACTIONTYPE) => {
   switch (action.type) {
     case "FETCH_SUCCESS":
       return {
@@ -50,7 +50,7 @@ export const gamesReducer = (state: typeof gameInitialState, action: ACTIONTYPE)
  * @returns switch statement returns success, error or default state
  */
 
-export const playerReducer = (state: typeof initialState, action: ACTIONTYPE) => {
+export const playerReducer = (state: typeof initialPlayerState, action: ACTIONTYPE) => {
   switch (action.type) {
     case "FETCH_SUCCESS":
       return {

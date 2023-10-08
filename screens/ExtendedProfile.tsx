@@ -10,7 +10,7 @@ import type { StatsRouteType } from "../types/routeTypes";
 // todos: better list styling, better shared element screen transition
 const ExtendedProfile = ({ route }: { route: StatsRouteType }) => {
 
-  const { pl } = route.params.playerInfo;
+  const { pl: player } = route.params.playerInfo;
 
   return (
     <Box h={windowHeight} bg={colorScheme.background}>
@@ -34,10 +34,10 @@ const ExtendedProfile = ({ route }: { route: StatsRouteType }) => {
           h={100}
           w={100}
           source={{
-            uri: `${PROFILE_PIC_URL_PREFIX}/${pl["pid"]}.png`,
+            uri: `${PROFILE_PIC_URL_PREFIX}/${player["pid"]}.png`,
           }}
-          key={pl["ln"] + "_imgKey"}
-          alt={pl["ln"] + " image"}
+          key={player["ln"] + "_imgKey"}
+          alt={player["ln"] + " image"}
         />
         <Text
           alignSelf="center"
@@ -45,18 +45,18 @@ const ExtendedProfile = ({ route }: { route: StatsRouteType }) => {
           fontWeight={700}
           color={colorScheme.text}
         >
-          {`${pl["fn"]}  ${pl["ln"]}`}
+          {`${player["fn"]}  ${player["ln"]}`}
         </Text>
         <Image
           w={50}
           h={50}
           mb={20}
           alignSelf="center"
-          source={logos[pl["ta"]]}
-          key={pl["ta"] + "_logoKey"}
-          alt={pl["ta"] + ' Logo Img'}
+          source={logos[player["ta"]]}
+          key={player["ta"] + "_logoKey"}
+          alt={player["ta"] + ' Logo Img'}
         />
-        {Object.entries(getPlayerInfo(pl)).map(([key, data]) => (
+        {Object.entries(getPlayerInfo(player)).map(([key, data]) => (
           <MotiText
             key={key}
             from={{ opacity: 0.4, scale: 0.7 }}

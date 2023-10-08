@@ -18,15 +18,16 @@ const PlayerScreen = ({ navigation }: { navigation: ProfileInterface }) => {
 
   const [state, dispatch] = useReducer(playerReducer, initialState);
 
-  const loader = () => {
+  const loadPlayerInfo = () => {
     findPlayer(state.playerInfo, dispatch);
   };
+
   setTimeout(() => {
-    loader();
+    loadPlayerInfo();
   }, 300);
 
   useEffect(() => {
-    loader();
+    loadPlayerInfo();
   }, []);
 
   return (
