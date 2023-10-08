@@ -23,14 +23,15 @@ const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
 
   const [loading, setLoading] = useState(true);
   const { pl } = playerInfo;
+  const player = pl
 
   const infoList = {
-    "Team:": `${pl.tc} ${pl.tn}`,
-    "Height:": `${pl.ht}`,
-    "Weight:": `${pl.wt}`,
-    "PPG:": `${pl.ca.pts}`,
-    "APG:": `${pl.ca.ast}`,
-    "RPG:": `${pl.ca.reb}`,
+    "Team:": `${player.tc} ${player.tn}`,
+    "Height:": `${player.ht}`,
+    "Weight:": `${player.wt}`,
+    "PPG:": `${player.ca.pts}`,
+    "APG:": `${player.ca.ast}`,
+    "RPG:": `${player.ca.reb}`,
   };
 
   useEffect(() => {
@@ -40,7 +41,7 @@ const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
     return () => {
       checkInfo();
     };
-  }, [pl]);
+  }, [player]);
 
   return (
 
@@ -64,7 +65,7 @@ const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
           bg={colorScheme.foreground}
           shadow={3}
         >
-          <PlayerHeader pl={pl} />
+          <PlayerHeader pl={player} />
           <Spacer />
           {Object.entries(infoList).map(([item, value]) => (
             <PlayerInfo
@@ -79,7 +80,7 @@ const PlayerCard = ({ playerInfo, navigation }: CardProps) => {
             /* Navigate to the Extended Profile route with params */
             onPress={() => {
               navigation.navigate("Extended Profile", {
-                playerId: pl.pid,
+                playerId: player.pid,
                 playerInfo: playerInfo
               })
             }}

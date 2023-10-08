@@ -18,7 +18,7 @@ const gameInitialState = {
   noData: true
 };
 /**
- * useReducer reducer method that finds dipatch's action.type that mamtches switch case
+ * useReducer reducer method that finds dipatch's action.type that matches switch case
  * @param state - initial state object
  * @param action - object containing type and payload
  * @returns switch statement returns success, error or default state
