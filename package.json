@@ -32,7 +32,7 @@
     "@react-navigation/bottom-tabs": "^6.4.0",
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/stack": "^6.3.4",
-    "expo": "^47.0.0",
+    "expo": "^52.0.41",
     "expo-font": "~11.0.1",
     "expo-splash-screen": "~0.17.4",
     "expo-status-bar": "~1.4.2",

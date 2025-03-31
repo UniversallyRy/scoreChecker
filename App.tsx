@@ -1,9 +1,9 @@
-import 'react-native-gesture-handler';
+import "react-native-gesture-handler";
 import React, { useCallback } from "react";
 import { NativeBaseProvider, Flex, extendTheme } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import * as SplashScreen from 'expo-splash-screen';
+import * as SplashScreen from "expo-splash-screen";
 import {
   useFonts,
   Rubik_400Regular,
@@ -14,7 +14,7 @@ import {
   Rubik_900Black_Italic,
 } from "@expo-google-fonts/rubik";
 // Swap in App component to check stories or just run app
-import StorybookUIRoot from './storybook';
+// import StorybookUIRoot from './storybook';
 import ScreensWithNav from "./components/navigation/ScreenWithNav";
 
 // Keeps the splash screen visible while we fetch resources
@@ -32,7 +32,6 @@ const theme = extendTheme({
 });
 
 export const App = () => {
-
   const [fontsLoaded] = useFonts({
     Rubik_400Regular,
     Rubik_400Regular_Italic,
